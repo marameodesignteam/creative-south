@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Filter Map Listing By ViewPort\n"
+"POT-Creation-Date: 2020-05-26 15:41+0530\n"
+"PO-Revision-Date: 2020-05-26 15:42+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr;esc_attr__;"
+"esc_attr_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: filter-map-listing-by-viewport.php:85
+msgid "WP Google Maps Pro"
+msgstr ""
+
+#: filter-map-listing-by-viewport.php:85
+msgid ""
+" is required for Filter Map Listing By ViewPort. Please install and "
+"configure WP Google Maps Pro first."
+msgstr ""
+
+#: views/addon-settings.php:15
+msgid "Filters Maps Listing By Viewport"
+msgstr ""
+
+#: views/addon-settings.php:32
+msgid ""
+"Please check this checkbox to apply viewport filter on this google map "
+"listing."
+msgstr ""
+
+#: views/addon-settings.php:39
+msgid "Enable Viewport Filter "
+msgstr ""

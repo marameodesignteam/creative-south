@@ -1,0 +1,139 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: User Locations On Google Maps\n"
+"POT-Creation-Date: 2020-05-28 15:41+0530\n"
+"PO-Revision-Date: 2020-05-28 15:41+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html;esc_html__;esc_html_e;esc_attr;"
+"esc_attr__;esc_attr_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: user-locations-on-google-maps.php:60
+msgid "Submit"
+msgstr ""
+
+#: user-locations-on-google-maps.php:61
+msgid "None"
+msgstr ""
+
+#: user-locations-on-google-maps.php:62 user-locations-on-google-maps.php:84
+msgid "Icon"
+msgstr ""
+
+#: user-locations-on-google-maps.php:63
+msgid "Category Title"
+msgstr ""
+
+#: user-locations-on-google-maps.php:64
+msgid "Choose"
+msgstr ""
+
+#: user-locations-on-google-maps.php:65
+msgid "Assign category to"
+msgstr ""
+
+#: user-locations-on-google-maps.php:66
+msgid "Back"
+msgstr ""
+
+#: user-locations-on-google-maps.php:67
+msgid "Assign Role Category"
+msgstr ""
+
+#: user-locations-on-google-maps.php:68
+msgid "Assign Role Marker Category"
+msgstr ""
+
+#: user-locations-on-google-maps.php:69
+msgid "Address"
+msgstr ""
+
+#: user-locations-on-google-maps.php:71
+msgid "Your Current Location - "
+msgstr ""
+
+#: user-locations-on-google-maps.php:74
+msgid "List Of User Roles With Associated Marker Category"
+msgstr ""
+
+#: user-locations-on-google-maps.php:76
+msgid "Marker category updated successfully."
+msgstr ""
+
+#: user-locations-on-google-maps.php:77
+msgid "Marker category"
+msgstr ""
+
+#: user-locations-on-google-maps.php:78
+msgid "Marker categories"
+msgstr ""
+
+#: user-locations-on-google-maps.php:81
+msgid "WP User ID"
+msgstr ""
+
+#: user-locations-on-google-maps.php:82
+msgid "WP User Role"
+msgstr ""
+
+#: user-locations-on-google-maps.php:83
+msgid "WPGMP Category Assigned"
+msgstr ""
+
+#: user-locations-on-google-maps.php:188
+msgid "WP Google Maps Pro"
+msgstr ""
+
+#: user-locations-on-google-maps.php:188
+msgid ""
+" is required for User Locations On Google Maps Add-On plugin to work. Please "
+"install and configure WP Google Maps pro first."
+msgstr ""
+
+#: user-locations-on-google-maps.php:541
+msgid "User Locations on Google Maps ( Addon Settings )"
+msgstr ""
+
+#: user-locations-on-google-maps.php:549
+msgid "Please check to enable User's on map."
+msgstr ""
+
+#: user-locations-on-google-maps.php:557
+msgid "Enable Addon"
+msgstr ""
+
+#: user-locations-on-google-maps.php:575
+msgid "Please select roles to show on map."
+msgstr ""
+
+#: user-locations-on-google-maps.php:582 user-locations-on-google-maps.php:596
+msgid "Select Roles's to Display"
+msgstr ""
+
+#: user-locations-on-google-maps.php:589
+msgid "Enter No of days to ask user location"
+msgstr ""
+
+#: user-locations-on-google-maps.php:604
+msgid "Ask Location After Days"
+msgstr ""
+
+#: user-locations-on-google-maps.php:625
+msgid "Infowindow Message"
+msgstr ""
+
+#: user-locations-on-google-maps.php:627
+msgid "Enter message."
+msgstr ""
+
+#: user-locations-on-google-maps.php:638
+msgid "Infowindow for Message"
+msgstr ""

@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: gd mylist\n"
+"Language: de\n"
+
+#: 
+msgid "Done! Your document has been deleted."
+msgstr "Getan! Ihr Dokument wurde gelöscht."
+
+#: [count_label] in ../template/box-list.html
+msgid "Total items"
+msgstr "Gesamtanzahl"
+
+#: [empty_label] in ../template/box-list.html
+msgid "Sorry! Your don't have documents."
+msgstr "Es tut uns leid! Sie haben keine Dokumente."
+
+#: [share_label] in ../template/box-list.html
+msgid "Share your list"
+msgstr "Teilen Sie Ihre Liste"
+
+#: 
+msgid "add My List"
+msgstr "Meine Liste hinzufügen"
+
+#: 
+msgid "Please login first"
+msgstr "Bitte loggen Sie sich zuerst ein"
+
+#: 
+msgid "remove My List"
+msgstr "Meine Liste entfernen"
+
+#: 
+msgid "view My List"
+msgstr "Meine Liste anzeigen"
+
+#: Settings Panel
+msgid "Anonymous user allowed"
+msgstr "Anonymer Benutzer erlaubt"
+
+#: Settings Panel
+msgid "Use anonymous user"
+msgstr "Verwenden Sie einen anonymen Benutzer"
+
+#: Settings Panel
+msgid "Availability to choose if not logged user can use it or not"
+msgstr "Verfügbarkeit zur Auswahl, ob nicht angemeldete Benutzer es verwenden können oder nicht"
+
+#: Settings Panel
+msgid "Mylist cookie will be expired after 30 days"
+msgstr "Mylist-Cookie läuft nach 30 Tagen ab"
+
+#: 
+msgid "Yes"
+msgstr "Ja"
+
+#: 
+msgid "Preview"
+msgstr "Vorschau"
+
+#: 
+msgid "Use Fontawesome icon"
+msgstr "Verwenden Sie das Fontawesome-Symbol"
+
+#: 
+msgid "Add Mylist button"
+msgstr "Mylist-Schaltfläche hinzufügen"
+
+#: 
+msgid "Add to Mylist icon"
+msgstr "Zum Mylist-Symbol hinzufügen"
+
+#: 
+msgid "css class name"
+msgstr "CSS-Klassenname"
+
+#: 
+msgid "Remove to Mylist icon"
+msgstr "Zum Mylist-Symbol entfernen"
+
+#: 
+msgid "default"
+msgstr "Standard"
+
+#: 
+msgid "Loading icon"
+msgstr "Ladesymbol"
+
+#: 
+msgid "Add GD Mylist button"
+msgstr "Schaltfläche GD Mylist hinzufügen"
+
+#: 
+msgid "Add GD Mylist button directly to the post/article list and detail page."
+msgstr "Fügen Sie die Schaltfläche GD Mylist direkt zur Post- / Artikelliste und zur Detailseite hinzu."
+
+#: 
+msgid "<strong>Please note:</strong> this feature is depends on of which template you use, in case of issue you can disable it and use Short Code instead. <a href=\"https://wordpress.org/plugins/gd-mylist/\" target=\"_blank\">More information in the FAQ section</a>"
+msgstr "<strong> Bitte beachten Sie: </ strong> Diese Funktion hängt davon ab, welche Vorlage Sie verwenden. Im Falle eines Problems können Sie sie deaktivieren und stattdessen den Funktionscode verwenden. <a href=\"https://wordpress.org/plugins/gd-mylist/\" target=\"_blank\"> Weitere Informationen im FAQ-Bereich </a>"
+
+#: 
+msgid "Load Fontawesome CSS in order to use icon class name"
+msgstr "Laden Sie Fontawesome CSS, um den Namen der Symbolklasse zu verwenden"
+
+#: 
+msgid "complete icon\\'s list"
+msgstr "vollständige Liste der Symbole"
+

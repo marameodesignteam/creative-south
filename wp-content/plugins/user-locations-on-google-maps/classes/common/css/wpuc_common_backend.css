@@ -1,0 +1,23 @@
+	
+	table{border:1px solid}
+	table.roles-with-marker{background-color:ivory;width:100%;margin-top: 20px;}  
+	table.roles-with-marker td, table.fc-placeholders-listing th {padding: 5px;}
+	table.roles-with-marker th {background-color: #212F3D;color:#f1c40f;}
+	table.roles-with-marker tr:nth-child(even) {background-color: #f1f1f1;}
+	table.roles-with-marker tr td:first-child { width:10%; }
+	.roles-with-marker tr td{text-align: center; vertical-align: middle;}
+	
+	.fc-form-group{margin-top:25px;}
+
+	.fc-title-blue {
+		background: #fff;
+		border-left: solid 1px #f1c40f;
+		color: rgba(33, 47, 61, .87);
+		padding: 8px 10px;
+    	margin-bottom: 20px;
+    	font-size: 16px;
+    	line-height: 1.3;
+    	position: relative;
+    	clear: both;
+    	margin: 15px 0 15px;
+	}
