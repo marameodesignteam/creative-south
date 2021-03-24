@@ -6,6 +6,78 @@
 (function($, window, document, undefined) {
     "use strict";
 
+    var BUTTON = "#mylist_btn_",
+        uriAjax = gdMyListAjax.ajaxurl,
+        boxList = gdMyListAjax.boxList,
+        loading_icon = gdMyListAjax.loading_icon,
+        button = gdMyListAjax.button,
+        nonce = gdMyListAjax.nonce,
+        buttonHtml = "";
+
+    function createBtn() {
+        $( document ).ready(function() {
+            0 < $(".js-item-mylist").length && $.get(button, function(source) {
+                buttonHtml = source, $(".js-item-mylist").each(function() {
+                    var itemId = BUTTON + $(this).data("id"),
+                        nameVar = "myListButton" + $(this).data("id"),
+                        data = eval(nameVar);
+                    renderTemplate(itemId, source, data)
+                })
+            });
+        });
+    }
+
+    function showLoading(t) {
+        var data = $.parseJSON('{"showLoading": {"icon": "' + loading_icon + '"}}'); 
+        renderTemplate(t, buttonHtml, data);
+    }
+
+    function renderTemplate(t, a, n) {
+        n = Handlebars.compile(a)(n);
+        $(t).html(n)
+    }
+    "undefined" != typeof myListData && $.get(boxList, function(t) {
+        renderTemplate("#myList_list", t, myListData)
+    }), 
+    createBtn(), 
+    $("body").on("click", ".js-gd-add-mylist", function() {
+        var t = $(this).data("postid"),
+            a = $(this).data("userid"),
+            n = BUTTON + t;
+        showLoading(n), $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: uriAjax,
+            data: {
+                action: "gd_add_mylist",
+                itemId: t,
+                userId: a,
+                nonce: nonce
+            }
+        }).done(function(t) {
+            renderTemplate(n, buttonHtml, t)
+        })
+    }), 
+    $("body").on("click", ".js-gd-remove-mylist", function() {
+        var a = $(this).data("postid"),
+            t = $(this).data("userid"),
+            n = $(this).data("styletarget"),
+            e = BUTTON + a;
+        showLoading(e), $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: uriAjax,
+            data: {
+                action: "gd_remove_mylist",
+                itemId: a,
+                userId: t,
+                nonce: nonce
+            }
+        }).done(function(t) {
+            "mylist" == n ? $("#mylist-" + a).closest(".gd-mylist-box").fadeOut(500) : renderTemplate(e, buttonHtml, t)
+        })
+    })
+
     var Map_Control = function(options) {
         this.options = options;
     }
@@ -3154,6 +3226,9 @@
             content = '<div class="fc-' + map_obj.map_data.map_data.listing.list_item_skin.type + '-' + map_obj.map_data.map_data.listing.list_item_skin.name + ' fc-wait"><div data-page="2" class="fc-component-6" data-layout="' + map_obj.map_data.map_data.listing.list_item_skin.name + '" >' + content + '</div></div>';
 
             $(listing_container).find(".wpgmp_categories").html(content);
+            $( document ).ready(function() {
+                createBtn();
+            }); 
             $(listing_container).find(".wpgmp_extra_field:contains('wpgmp_empty')").remove();
             $(listing_container).find(".wpgmp_empty").prev().remove();
             $(listing_container).find(".wpgmp_empty").remove();

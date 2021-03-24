@@ -16,7 +16,7 @@ class gd_mylist_asset extends gd_mylist_plugin
         wp_register_script('gd_mylist_handelbar', plugins_url() . '/gd-mylist/lib/handlebars.min.js', array('jquery'));
         wp_register_script('gd_mylist_script', plugins_url() . '/gd-mylist/js/gd-script.js', array('jquery'));
         wp_localize_script(
-            'gd_mylist_script',
+            'gd_mylist_handelbar',
             'gdMyListAjax',
             array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
