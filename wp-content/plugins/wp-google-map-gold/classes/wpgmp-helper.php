@@ -288,8 +288,7 @@ class WPGMP_Helper{
 
 			$scripts[] = array(
 				'handle' => 'wpgmp-google-map-main',
-				//'src'    => WPGMP_JS . 'maps.min.js',
-				'src'    => WPGMP_JS . 'maps.js',
+				'src'    => WPGMP_JS . 'maps.min.js',
 				'deps'   => array( 'wpgmp-google-api', 'jquery-masonry', 'imagesloaded' ),
 			);	
 

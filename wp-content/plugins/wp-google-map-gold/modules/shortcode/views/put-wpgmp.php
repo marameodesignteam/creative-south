@@ -637,7 +637,6 @@ if ( isset( $map_locations ) && is_array( $map_locations ) ) {
 				'zoom'                    => 5,
 				'extra_fields'            => $extra_fields,
 			),
-			//'dont_miss'		 => $location->location_dont_miss,
 			'categories'     => $location_categories,
 			'custom_filters' => $extra_fields_filters,
 		);
@@ -806,8 +805,6 @@ if ( ! empty( $filter_array ) ) {
 						'p'              => $post->ID,
 						'post_type'      => $key,
 						'posts_per_page' => -1,
-						'orderby' 		 => 'dont_miss',
-        				'order' 		 => 'DESC',
 						'meta_query'     => array( $custom_meta_keys ),
 						'post_status'    => array( 'publish' ),
 					);
@@ -815,8 +812,6 @@ if ( ! empty( $filter_array ) ) {
 					$args = array(
 						'post_type'      => $key,
 						'posts_per_page' => -1,
-						'orderby' 		 => 'dont_miss',
-        				'order' 		 => 'DESC',
 						'meta_query'     => array( $custom_meta_keys ),
 						'post_status'    => array( 'publish' ),
 					);
@@ -922,7 +917,6 @@ if ( ! empty( $filter_array ) ) {
 											$meta_value                                  = get_post_meta( $post->ID, $post_meta_key, true ) ? get_post_meta( $post->ID, $post_meta_key, true ) : '';
 											$replace_data[ '%' . $post_meta_key . '%' ]  = $meta_value;
 											$custom_fields[ '%' . $post_meta_key . '%' ] = $meta_value;
-											//if($post_meta_key == 'favourite_link') { $custom_fields[ '%' . $post_meta_key . '%' ] = wpfp_link(1); }
 								}
 							}
 						}
@@ -1080,10 +1074,7 @@ if ( ! empty( $filter_array ) ) {
 									}
 								}
 							}
-							//$custom_fields['%favourite_link%'] = wpfp_link(1);
-							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );//'[show_gd_mylist_btn]';
 						}
-						//echo "<pre>";print_r($custom_fields);echo "</pre>";
 						$post_taxonomies = get_post_taxonomies( $post->ID );
 						if ( $post_taxonomies ) {
 							foreach ( $post_taxonomies as $k => $tax ) {
@@ -1740,7 +1731,6 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 		'sorting_options'                  => $sorting_array,
 		'default_sorting'                  => array(
 			'orderby' => $map->map_all_control['wpgmp_categorydisplaysort'],
-			//'orderby' => 'dont_miss',
 			'inorder' => $map->map_all_control['wpgmp_categorydisplaysortby'],
 		),
 		'listing_container'                => '.location_listing' . $map->map_id,
@@ -2030,7 +2020,6 @@ if ( isset( $map->map_all_control['hide_map'] ) && $map->map_all_control['hide_m
 	$height = '0px';
 }
 
-// FILTER
 $filters_div = '<div class="wpgmp_filter_wrappers"></div>';
 
 if(!class_exists('Listing_Designs_For_Google_Maps') || wp_is_mobile() ){
@@ -2059,7 +2048,6 @@ if(!class_exists('Listing_Designs_For_Google_Maps') || wp_is_mobile() ){
 
 $map_div .= apply_filters( 'wpgmp_after_map', '', $map );
 
-// Listing
 $listing_div = apply_filters( 'wpgmp_before_listing', '', $map );
 
 if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_control['display_listing'] == true ) {
@@ -2075,7 +2063,7 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 
 $listing_div .= apply_filters( 'wpgmp_after_listing', '', $map );
 
-$output = "<div class='row'><div class='col-6'>{$listing_div}</div><div class='col-6'>{$map_div}</div></div>";
+$output = $map_div . $listing_div;
 
 if(class_exists('Listing_Designs_For_Google_Maps')){ 
 	$map_output .= apply_filters( 'wpgmp_map_output', $output, $map_div, $filters_div, $listing_div, $map->map_id );
