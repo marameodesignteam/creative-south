@@ -94,15 +94,15 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $isShowListPage = true;
         $output = '';
         $listAr = [];
-        if (isset($_GET['wish'])) {
-            $user_id_share = $_GET['wish'];
+        if (isset($_GET['itinerary'])) {
+            $user_id_share = $_GET['itinerary'];
         } else {
             $user_id_share = null;
         }
 
         //whatsapp get id
         $url = $_SERVER['REQUEST_URI'];
-        $arUrl = explode('wish_', $url);
+        $arUrl = explode('itinerary_', $url);
         if (isset($arUrl[1])) {
             $user_id_share = $arUrl[1];
         }
