@@ -41,6 +41,7 @@ $url_parameters = array(
 	array( 'zoom', esc_html__( 'Zoom Level.', 'wpgmp-google-map' ) ),
 	array( 'hide_map', esc_html__( 'To hide the map. Filters & listing will be visible if enabled.', 'wpgmp-google-map' ) ),
 	array( 'maps_only', esc_html__( 'To show only maps. Tabs, filters, listing will be hide.', 'wpgmp-google-map' ) ),
+	array( 'regions', esc_html__( 'Region Name.', 'wpgmp-google-map' ) ),
 );
 
 $form->add_element(

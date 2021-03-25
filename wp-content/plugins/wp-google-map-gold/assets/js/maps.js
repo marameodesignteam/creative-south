@@ -6,6 +6,7 @@
 (function($, window, document, undefined) {
     "use strict";
 
+    /*Javascript to add favourites button*/
     var BUTTON = "#mylist_btn_",
         uriAjax = gdMyListAjax.ajaxurl,
         boxList = gdMyListAjax.boxList,
@@ -76,7 +77,8 @@
         }).done(function(t) {
             "mylist" == n ? $("#mylist-" + a).closest(".gd-mylist-box").fadeOut(500) : renderTemplate(e, buttonHtml, t)
         })
-    })
+    });
+    /*Javascript to add favourites button ends*/
 
     var Map_Control = function(options) {
         this.options = options;

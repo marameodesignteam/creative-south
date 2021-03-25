@@ -1226,7 +1226,32 @@ $render_shortcode = apply_filters( 'wpgmp_render_shortcode', true, $map );
 if ( is_array( $map_data['places'] ) ) {
 
 	foreach ( $map_data['places'] as $place ) {
-		$use_me = true;
+		$use_me = $use_region = true;
+
+		// Region filter here.
+		if ( $map->map_all_control['url_filter'] == 'true' ) {
+
+			if ( isset( $_GET['region'] ) and $_GET['region'] != '' ) {
+				$shortcode_filters['region'] = sanitize_text_field( $_GET['region'] );
+			}
+		}
+
+		if ( isset( $shortcode_filters['region'] ) ) {
+			$found_region       = false;
+			$show_regions_only = strtolower( $shortcode_filters['region'] );
+
+			if( isset($place['location']['extra_fields']['%regions%']) ) {
+
+				if ( strtolower( $place['location']['extra_fields']['%regions%'] ) == $show_regions_only ) {
+					$found_region = true;
+				}
+				
+			}
+			if ( false == $found_region ) {
+				$use_region = false;
+			}
+		}
+
 
 		// Category filter here.
 		if ( $map->map_all_control['url_filter'] == 'true' ) {
@@ -1244,10 +1269,10 @@ if ( is_array( $map_data['places'] ) ) {
 			if( isset($place['categories']) ) {
 
 				foreach ( $place['categories'] as $cat ) {
-				if ( in_array( strtolower( $cat['name'] ), $show_categories_only ) or in_array( strtolower( $cat['id'] ), $show_categories_only ) ) {
-					$found_category = true;
+					if ( in_array( strtolower( $cat['name'] ), $show_categories_only ) or in_array( strtolower( $cat['id'] ), $show_categories_only ) ) {
+						$found_category = true;
+					}
 				}
-			}
 				
 			}
 			
@@ -1257,14 +1282,12 @@ if ( is_array( $map_data['places'] ) ) {
 			}
 		}
 
-
 		if ( true == $render_shortcode ) {
 			$place['content'] = do_shortcode( $place['content'] );
 		}
 
 		$use_me = apply_filters( 'wpgmp_show_place', $use_me, $place, $map );
-
-		if ( true == $use_me ) {
+		if ( true == $use_me && true == $use_region ) {
 			$filterd_places[] = $place;
 		}
 	}
