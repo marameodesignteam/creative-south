@@ -637,7 +637,6 @@ if ( isset( $map_locations ) && is_array( $map_locations ) ) {
 				'zoom'                    => 5,
 				'extra_fields'            => $extra_fields,
 			),
-			//'dont_miss'		 => $location->location_dont_miss,
 			'categories'     => $location_categories,
 			'custom_filters' => $extra_fields_filters,
 		);
@@ -763,7 +762,7 @@ if ( ! empty( $filter_array ) ) {
 					$custom_meta_keys['relation'] = 'OR';
 					$custom_meta_keys[0]          = array(
 						'key'     => $value['acf_key'],
-						'value'   => '',
+						'value'   => '0',
 						'compare' => '!=',
 					);
 					if ( ! empty( $value['latitude'] ) ) {
@@ -815,7 +814,8 @@ if ( ! empty( $filter_array ) ) {
 					$args = array(
 						'post_type'      => $key,
 						'posts_per_page' => -1,
-						'orderby' 		 => 'dont_miss',
+						'meta_key'			=> 'dont_miss',
+						'orderby'			=> 'meta_value',
         				'order' 		 => 'DESC',
 						'meta_query'     => array( $custom_meta_keys ),
 						'post_status'    => array( 'publish' ),
@@ -1080,10 +1080,9 @@ if ( ! empty( $filter_array ) ) {
 									}
 								}
 							}
-							//$custom_fields['%favourite_link%'] = wpfp_link(1);
-							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );//'[show_gd_mylist_btn]';
+							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 						}
-						//echo "<pre>";print_r($custom_fields);echo "</pre>";
+						
 						$post_taxonomies = get_post_taxonomies( $post->ID );
 						if ( $post_taxonomies ) {
 							foreach ( $post_taxonomies as $k => $tax ) {
@@ -1762,8 +1761,8 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 		'filters'                          => array( 'place_category' ),
 		'sorting_options'                  => $sorting_array,
 		'default_sorting'                  => array(
-			'orderby' => $map->map_all_control['wpgmp_categorydisplaysort'],
-			//'orderby' => 'dont_miss',
+			//'orderby' => $map->map_all_control['wpgmp_categorydisplaysort'],
+			'orderby' => 'dont_miss',
 			'inorder' => $map->map_all_control['wpgmp_categorydisplaysortby'],
 		),
 		'listing_container'                => '.location_listing' . $map->map_id,
