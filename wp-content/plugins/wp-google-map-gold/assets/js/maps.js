@@ -6,6 +6,21 @@
 (function($, window, document, undefined) {
     "use strict";
 
+    /*Set query parameters to the filters*/
+    function getQueryStringValue (key) {  
+        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    }
+    $( document ).ready(function() {
+        var category_val = getQueryStringValue('category');
+        var region_val = getQueryStringValue('region');
+        if(category_val != '') {
+            $('select[name="place_category"]').val(category_val);
+        }
+        if(region_val != '') {
+            $('select[name="place_%regions%"]').val(region_val);
+        }
+    });
+
     /*Javascript to add favourites button*/
     var BUTTON = "#mylist_btn_",
         uriAjax = gdMyListAjax.ajaxurl,
