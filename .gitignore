@@ -57,3 +57,7 @@ Thumbs.db
 .sass-cache
 .idea
 wp-config.php
+
+*.css.map
+node_modules/
+.htaccess
