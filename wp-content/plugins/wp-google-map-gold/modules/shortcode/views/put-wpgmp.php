@@ -1225,7 +1225,7 @@ $render_shortcode = apply_filters( 'wpgmp_render_shortcode', true, $map );
 if ( is_array( $map_data['places'] ) ) {
 
 	foreach ( $map_data['places'] as $place ) {
-		$use_me = $use_region = true;
+		$use_me = $use_region= $use_dont_miss = true;
 
 		// Region filter here.
 		if ( $map->map_all_control['url_filter'] == 'true' ) {
@@ -1248,6 +1248,30 @@ if ( is_array( $map_data['places'] ) ) {
 			}
 			if ( false == $found_region ) {
 				$use_region = false;
+			}
+		}
+
+		// Don't Miss filter here.
+		if ( $map->map_all_control['url_filter'] == 'true' ) {
+
+			if ( isset( $_GET['dont_miss'] ) and $_GET['dont_miss'] != '' ) {
+				$shortcode_filters['dont_miss'] = sanitize_text_field( $_GET['dont_miss'] );
+			}
+		}
+
+		if ( isset( $shortcode_filters['dont_miss'] ) ) {
+			$found_dont_miss       = false;
+			$show_dont_miss_only = strtolower( $shortcode_filters['dont_miss'] );
+
+			if( isset($place['location']['extra_fields']['%dont_miss%']) ) {
+
+				if ( strtolower( $place['location']['extra_fields']['%dont_miss%'] ) == $show_dont_miss_only ) {
+					$found_dont_miss = true;
+				}
+				
+			}
+			if ( false == $found_dont_miss ) {
+				$use_dont_miss = false;
 			}
 		}
 
@@ -1286,7 +1310,7 @@ if ( is_array( $map_data['places'] ) ) {
 		}
 
 		$use_me = apply_filters( 'wpgmp_show_place', $use_me, $place, $map );
-		if ( true == $use_me && true == $use_region ) {
+		if ( true == $use_me && true == $use_region && true == $use_dont_miss ) {
 			$filterd_places[] = $place;
 		}
 	}
