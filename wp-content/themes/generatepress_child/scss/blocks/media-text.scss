@@ -1,0 +1,61 @@
+.media-text-blocks {
+    &.machslide {
+        padding: 4rem 0 3rem;
+        @include media(1200px) {
+            padding: 6rem 0 5rem;
+        }
+    }
+    .row {
+        align-items: center;
+    }
+    .main-title {
+        font-size: 2.6rem;
+        margin-bottom: 2rem;
+    }
+    .copy {
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        letter-spacing: -0.1px;
+        margin-bottom: 3rem;
+        font-weight: 300;
+        @include media(1400px) {
+            font-size: 1.8rem;
+            line-height: 2.8rem;
+        }
+    }
+    .media-image {
+        position: relative;
+        margin-bottom: 3rem;
+        z-index: 1;
+        img {
+            max-width: 100%;
+            height: auto;
+            width: 100%;
+            border-radius: 10px;
+            max-height: 50rem;
+            object-fit: cover;
+        }
+        &.contain {
+            img {
+                object-fit: contain;
+            }
+        }
+    }
+    .order-left {
+        margin-bottom: 3rem;
+        @include media(992px) {
+            margin-bottom: 0;
+        }
+    }
+    .row {
+        .order-right {
+            order: 0;
+            @include media(1200px) {
+                order: 1;
+            }
+            &.col-full {
+                order: 0;
+            }
+        }
+    }
+}

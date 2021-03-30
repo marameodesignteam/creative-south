@@ -1,0 +1,26 @@
+.search-form-404 {
+    padding-bottom: 3rem;
+    margin-top: 3rem;
+}
+
+.content-404 {
+    h2 {
+        font-weight: 700;
+    }
+}
+
+.inside-article-404,
+.no-results.not-found {
+    padding: 3rem 0;
+}
+
+.no-results {
+    form[role=search] {
+        [type=submit] {
+            position: static;
+        }
+        [type=search] {
+            width: 20rem;
+        }
+    }
+}

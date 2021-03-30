@@ -1,0 +1,31 @@
+.single-page {
+    padding-bottom: 3rem;
+    @include media(1200px) {
+        padding-bottom: 6rem;
+    }
+    .col-normal {
+        .full-width {
+            position: static;
+            margin: 0 -15px;
+            width: 100%;
+        }
+        .framed-width {
+            width: auto;
+        }
+        .custom-blocks {
+            .container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+.single a {
+    color: $color-7;
+    text-decoration: underline;
+    &:hover,
+    &:focus {
+        color: $color-1;
+    }
+}

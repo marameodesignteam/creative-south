@@ -1,0 +1,79 @@
+.serp .paging-navigation {
+    margin: 5rem 0 7rem;
+}
+
+.page-numbers {
+    margin: 0 0 .5rem;
+    min-width: 3.5rem;
+    height: 3.5rem;
+    padding: .2rem 0.5rem;
+    text-align: center;
+    color: #fff;
+    background-color: $color-2;
+    display: inline-block;
+    font-weight: 400;
+    vertical-align: middle;
+    font-size: 1.6rem;
+    line-height: 3rem;
+    border: 1px solid #5B6681;
+    text-decoration: none;
+    &:hover,
+    &.current,
+    &:focus {
+        background: #E7EBF3;
+        color: $color-2;
+    }
+}
+
+.nav-previous,
+.nav-next {
+    display: none;
+}
+
+.control-post i,
+.paging-navigation i {
+    font-size: 2.2rem;
+    line-height: 2.8rem;
+}
+
+//Facet pagination
+.facetwp-pager {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    .facetwp-page {
+        border: none;
+        border-right: none;
+        width: 3.5rem;
+        height: 3.5rem;
+        padding: 0;
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin: 0;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 50%;
+        margin: 0 0.5rem;
+        color: rgba($color-4, 0.7);
+        &:hover {
+            background: #E7EBF3;
+            color: $color-1;
+        }
+        &:focus {
+            background: $color-1;
+            color: #fff;
+        }
+        &.active {
+            background: $color-1;
+            color: #fff;
+            font-weight: 400;
+        }
+        &.prev,
+        &.next {
+            border: none;
+        }
+    }
+}

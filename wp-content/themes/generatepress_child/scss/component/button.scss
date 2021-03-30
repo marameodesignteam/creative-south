@@ -1,0 +1,154 @@
+.button,
+.wp-block-button__link {
+    font-family: $main-font;
+    font-size: 1.4rem;
+    line-height: 20px;
+    font-weight: 600;
+    //height: 4.2rem;
+    display: inline-block;
+    text-align: left;
+    border-radius: $b-radius;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    padding: 1.2rem 5.5rem 1.2rem 2rem;
+    @include media(1200px) {
+        padding: 1.2rem 5.5rem 1.2rem 2rem;
+        font-size: 1.4rem;
+    }
+    @include media(1400px) {
+        padding: 1.5rem 6rem 1.5rem 2.5rem;
+        font-size: 1.6rem;
+    }
+    &,
+    &:focus,
+    &:hover {
+        text-decoration: none;
+    }
+    &.button-full {
+        width: 100%;
+    }
+}
+
+.wp-block-button__link {
+    padding: 1.2rem 2em 1.2rem 2rem;
+    @include media(1200px) {
+        padding: 1.2rem 2rem 1.2rem 2rem;
+    }
+    @include media(1400px) {
+        padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+    }
+}
+
+.button {
+    position: relative;
+    span {
+        position: relative;
+        &:after {
+            content: "";
+            position: absolute;
+            background-repeat: no-repeat;
+            width: 1.6rem;
+            height: 1.2rem;
+            right: 0;
+            top: 50%;
+            transform: translate(3rem, -50%);
+            -webkit-transform: translate(3rem, -50%);
+            -o-transform: translate(3rem, -50%);
+            transition: 0.5s;
+            // background-image: url($blue-arrow);
+            background-size: 100%;
+        }
+    }
+    &.violet,
+    &.full {
+        @include violetGradient;
+        text-decoration: none;
+        color: #fff;
+        &:hover,
+        &:focus {
+            color: #fff;
+        }
+        span {
+            &:after {
+                //background-image: url($white-arrow);
+            }
+        }
+    }
+    &:hover,
+    &:focus {
+        color: #fff;
+    }
+    &:hover,
+    &:focus {
+        span:after {
+            -webkit-transform: translate(4rem, -50%);
+            -o-transform: translate(4rem, -50%);
+            transform: translate(4rem, -50%);
+        }
+    }
+    &.full {
+        width: 100%;
+        text-align: center;
+    }
+    &.outlines {
+        border: 1px solid #8F9BC5;
+        background: #fff;
+        color: $color-2;
+    }
+}
+
+.buttons {
+    >div {
+        margin-bottom: 2rem;
+    }
+}
+
+.readmore {
+    color: $color-2;
+    font-size: 1.4rem;
+    font-weight: 400;
+    position: relative;
+    display: inline-block;
+    padding-left: 3rem;
+    text-decoration: none;
+    @include transition;
+    @include media(1400px) {
+        font-size: 1.6rem;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        //background-image: url($blue-arrow);
+        background-repeat: no-repeat;
+        width: 1.5rem;
+        height: 1.2rem;
+        left: 0;
+        top: 0.5rem;
+        @include transition;
+        background-size: 100%;
+    }
+    &:before {
+        content: "";
+        position: absolute;
+        width: calc(100% - 3rem);
+        height: 0.1rem;
+        background-color: rgba($color-2, 0.5);
+        bottom: -5px;
+        @include transition;
+    }
+    &:hover,
+    &:focus {
+        -webkit-transform: translateX(-1rem);
+        -o-transform: translateX(-1rem);
+        transform: translateX(-1rem);
+    }
+    &:hover:before,
+    &:focus:before {
+        background-color: $color-2;
+    }
+}
+
+p.read-more {
+    margin-bottom: 0;
+}
