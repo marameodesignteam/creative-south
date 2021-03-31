@@ -43,6 +43,7 @@ if (! function_exists('generate_construct_footer')) {
       </div>
     </div>
     </footer><!-- .site-info -->
+    <?php if(is_front_page()) : ?>
     <div class="modal fade modalcustom" id="wellcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fas fa-times" aria-hidden="true"></i>
@@ -57,6 +58,7 @@ if (! function_exists('generate_construct_footer')) {
       </div>
       </div>
     </div>
+    <?php endif; ?>
     <?php
     }
 }

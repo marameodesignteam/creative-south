@@ -1,0 +1,20 @@
+.region-selection {
+    padding: 4rem 0;
+    .region-selection-list {
+        ul {
+            @include ulReset;
+            li {
+                a {
+                    font-weight: 800;
+                    color: $color-5;
+                    font-size: 4.4rem;
+                    line-height: 100%;
+                    text-decoration: none;
+                    &:hover {
+                        color: $color-1;
+                    }
+                }
+            }
+        }
+    }
+}
