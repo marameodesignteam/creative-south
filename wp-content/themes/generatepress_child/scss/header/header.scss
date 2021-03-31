@@ -8,21 +8,23 @@
         display: -webkit-flex;
         flex-wrap: nowrap;
         align-items: center;
-        padding: 2rem 0;
+        padding: 0 0 2rem;
         .site-logo {
-            max-width: 23rem;
-            flex: 0 0 23rem;
+            max-width: 18rem;
+            flex: 0 0 18rem;
+            margin-left: 2rem;
+            z-index: 999;
             @include media(375px) {
-                max-width: 26rem;
-                flex: 0 0 26rem;
+                max-width: 22rem;
+                flex: 0 0 22rem;
             }
             @include media(1200px) {
-                max-width: 28rem;
-                flex: 0 0 28rem;
+                max-width: 24rem;
+                flex: 0 0 24rem;
             }
             @include media(1400px) {
-                max-width: 36.6rem;
-                flex: 0 0 36.6rem;
+                max-width: 28rem;
+                flex: 0 0 28rem;
             }
             h1 {
                 margin-bottom: 0;
@@ -83,5 +85,48 @@
     display: inline-block;
     @include media(1200px) {
         display: none;
+    }
+}
+
+#wellcomeModal {
+    background-image: url(images/overlay.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 99;
+}
+
+.modalcustom {
+    .welcome-modal-content {
+        text-align: center;
+        p {
+            font-size: 2.2rem;
+            @include media(768px) {
+                font-size: 2.6rem;
+            }
+            @include media(1200px) {
+                font-size: 3rem;
+            }
+            color: $color-1;
+            font-weight: 700;
+            line-height: 3.4rem;
+        }
+    }
+    .modal-content {
+        background: transparent;
+        border: none;
+    }
+}
+
+button.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4rem;
+    height: 4rem;
+    background: $color-1;
+    opacity: 1;
+    i {
+        color: #fff;
+        font-size: 2.6rem;
     }
 }

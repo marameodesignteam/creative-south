@@ -43,6 +43,20 @@ if (! function_exists('generate_construct_footer')) {
       </div>
     </div>
     </footer><!-- .site-info -->
+    <div class="modal fade modalcustom" id="wellcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      <div class="modal-dialog modal-dialog-centered" role="document">
+      
+      <div class="modal-content">
+        <div class="welcome-modal-content">
+          <p>We acknowledge the Traditional Owners of the land on which we stand. We pay our respects to Elders past, present and emerging.</p>
+          <p>We respect Aboriginal peoples as the First Peoples and custodians of NSW.</p>
+        </div>
+      </div>
+      </div>
+    </div>
     <?php
     }
 }

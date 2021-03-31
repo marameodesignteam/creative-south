@@ -15,10 +15,9 @@
 
 
     $(document).ready(function($) {
-        modal_searchForm();
-        facetWP();
-        facetReset();
         $('.post-list .description .read-more').remove();
+        $('#wellcomeModal').modal('show');
+        modal_searchForm();
     });
 
     $(window).resize(function() {
@@ -100,13 +99,13 @@
             $('body').removeClass('open');
         });
 
-        if (windowWidth < 1200) {
-            $("body").on("click", ".main-navigation ul li a", function() {
-                $('html,body').removeClass('hidden');
-                $('.mega-indicator-button').attr("aria-expanded", "false");
-                $('body, #menu-mobile').removeClass('open');
-            });
-        }
+        // if (windowWidth < 1200) {
+        //     $("body").on("click", ".main-navigation ul li a", function() {
+        //         $('html,body').removeClass('hidden');
+        //         $('.mega-indicator-button').attr("aria-expanded", "false");
+        //         $('body, #menu-mobile').removeClass('open');
+        //     });
+        // }
 
         function closeAccordion() {
             $(".mega-indicator-button").attr("aria-expanded", "false");
@@ -164,123 +163,6 @@
                 }, 600);
             }
         }
-    }
-    //Facet
-    function facetWP() {
-        $(document).on('facetwp-loaded', function() {
-
-            //accessibility improvements for facet WP
-
-            //button
-            // add role, label, attr and move it after the input search
-            if (!($(".facetwp-btn").attr("role"))) {
-                $(".facetwp-btn").attr("role", "button").attr("tabindex", "0").prepend("<span class='sr-only'>Search</span>").appendTo($(".facetwp-btn").parent());
-            }
-
-            //add keyboard func
-            $(".facetwp-btn").on("keydown", function(e) {
-
-                if (e.which == 32 || e.which == 13) {
-                    e.preventDefault();
-                    FWP.autoload();
-                }
-
-            });
-
-            //add pagination
-            if ($(".facetwp-pager").length > 0) {
-
-                $(".facetwp-pager").find(".facetwp-page.active").attr("aria-current", "page");
-            }
-
-            //disabled to checkbox
-            $(".facetwp-checkbox").removeAttr("aria-disabled");
-            $(".facetwp-checkbox.disabled").attr("aria-disabled", "true");
-
-
-            // add labels to select
-            $(".find-keyword .facetwp-search-wrap .facetwp-search").wrapAll("<label class='search-label'></label>")
-            $('.find-keyword .search-label').prepend("<span class='sr-only'>Search by keyword</span>");
-
-
-            $(".find-state .facetwp-dropdown").wrapAll("<label class='search-label'></label>")
-            $('.find-state .search-label').prepend("<span class='sr-only'>Search by state</span>");
-
-            $(".find-experience .facetwp-dropdown").wrapAll("<label class='search-label'></label>")
-            $('.find-experience .search-label').prepend("<span class='sr-only'>Search by experience</span>");
-
-
-            //custom selections in order to rewrite
-            var selections = '';
-            $.each(FWP.facets, function(key, val) {
-                if (val.length < 1 || 'undefined' === typeof FWP.settings.labels[key]) {
-                    return true; // skip this facet
-                }
-
-                var choices = val;
-                var facet_type = $('.facetwp-facet-' + key).attr('data-type');
-                choices = FWP.hooks.applyFilters('facetwp/selections/' + facet_type, choices, {
-                    'el': $('.facetwp-facet-' + key),
-                    'selected_values': choices
-                });
-
-                if ('string' === typeof choices) {
-                    choices = [{
-                        value: '',
-                        label: choices
-                    }];
-                } else if ('undefined' === typeof choices[0].label) {
-                    choices = [{
-                        value: '',
-                        label: choices[0]
-                    }];
-                }
-
-                var values = '';
-                $.each(choices, function(idx, choice) {
-                    values += '<button type="button" class="facetwp-selection-value" data-value="' + choice.value + '"><span class="sr-only">Remove the filter </span>' + FWP.helper.escape_html(choice.label) + '</span>';
-                });
-
-                selections += '<li data-facet="' + key + '"> ' + values + '</li>';
-            });
-
-            if ('' !== selections) {
-                selections = '<ul>' + selections + '</ul>';
-            }
-
-            $('.facetwp-custom-selections').html(selections);
-
-            // Click on a user selection
-            $(document).on('click', '.facetwp-custom-selections button', function() {
-                if (FWP.is_refresh) {
-                    return;
-                }
-
-                var facet_name = $(this).closest('li').attr('data-facet');
-                var facet_value = $(this).attr('data-value');
-
-                if ('' != facet_value) {
-                    var obj = {};
-                    obj[facet_name] = facet_value;
-                    FWP.reset(obj);
-                } else {
-                    FWP.reset(facet_name);
-                }
-            });
-
-        });
-
-    }
-    //facetReset
-    function facetReset() {
-        $(document).on('facetwp-loaded', function() {
-            var queryString = FWP.build_query_string();
-            if ('' === queryString) { // no facets are selected
-                $('.facet-reset').hide();
-            } else {
-                $('.facet-reset').show();
-            }
-        });
     }
 
 })(jQuery);

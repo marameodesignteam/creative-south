@@ -116,9 +116,10 @@ if (! function_exists('generate_construct_header')) {
         ?>
    <header id="masthead" <?php generate_do_element_classes('header'); ?> <?php generate_do_microdata('header'); ?>>
      <div <?php generate_do_element_classes('inside_header'); ?>>
-     <div class="container insideHeader">
+     <!-- <div class="container insideHeader"> -->
+     <div class="insideHeader">
         <div class="in_header">
-          <button class="menu-toggle d-flex d-xl-none justify-content-center align-items-center"
+          <button class="menu-toggle justify-content-center align-items-center"
                 aria-controls="menu-mobile" aria-expanded="false">
                 <i class="fas fa-bars" aria-hidden="true"></i>
                 <i class="fas fa-times" aria-hidden="true"></i>
@@ -140,9 +141,6 @@ if (! function_exists('generate_construct_header')) {
             <div class="overlay" aria-hidden="true"></div>
             <div id="menu-mobile">
               <div class="in_menu-mobile">
-                <!-- <div class="d-lg-none d-block search-form-mobile d-form-search">
-                    <?php get_search_form(); ?>
-                </div> -->
                 <nav aria-labelledby="primarymenutitle" id="site-navigation" itemtype="https://schema.org/SiteNavigationElement" itemscope="itemscope" class="navbar navbar-expand-lg main-navigation">
                     <h2 class="sr-only" id="primarymenutitle">Primary menu</h2> 
                     <?php wp_nav_menu(array('menu'=>'primary-menu', 'theme_location'=> "primary-menu")); ?>
