@@ -3,6 +3,16 @@
     @include media(768px) {
         border-bottom: none;
     }
+    .custom-fixed-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 98;
+        &.fixed {
+            background: #000;
+        }
+    }
     .in_header {
         display: flex;
         display: -webkit-flex;

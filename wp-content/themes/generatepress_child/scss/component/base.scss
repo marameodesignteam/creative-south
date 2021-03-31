@@ -120,24 +120,6 @@ main {
     }
 }
 
-.readmore {
-    color: $color-7;
-    text-decoration: none;
-    &:hover,
-    &:focus {
-        color: $color-7;
-        text-decoration: none;
-    }
-    &:hover:before,
-    &:focus:before {
-        background: #FCBF1C;
-    }
-}
-
-.single a.readmore {
-    text-decoration: none;
-}
-
 //focus
 a[href],
 area[href],
@@ -154,90 +136,6 @@ embed,
         outline: 2px solid $color-1;
         outline-offset: 2px;
     }
-}
-
-.main-title {
-    font-weight: 600;
-    font-size: 2.4rem;
-    color: $color-2;
-    letter-spacing: 0;
-    line-height: 3rem;
-    @include media(768px) {
-        font-size: 2.4rem;
-        line-height: 3rem;
-    }
-    @include media(1400px) {
-        font-size: 3.2rem;
-        line-height: 3.6rem;
-    }
-}
-
-.description {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    color: $body-text;
-    @include media(1400px) {
-        font-size: 1.8rem;
-        line-height: 2.8rem;
-    }
-}
-
-.title-featured {
-    font-size: 2.8rem;
-    color: $color-2;
-    line-height: 3.4rem;
-    @include media(1400px) {
-        font-size: 3.6rem;
-        line-height: 4.5rem;
-    }
-}
-
-.text-featured {
-    font-size: 1.8rem;
-    line-height: 2.8rem;
-    font-weight: 400;
-    @include media(1400px) {
-        font-size: 2rem;
-        line-height: 3rem;
-    }
-}
-
-.copy-bottom {
-    margin-bottom: 3rem;
-}
-
-.copy {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    letter-spacing: -0.1px;
-    margin-bottom: 3rem;
-    //white-space: pre-line;
-    @include media(1400px) {
-        font-size: 1.8rem;
-        line-height: 2.8rem;
-    }
-}
-
-.text {
-    font-size: 1.6rem;
-    color: $color-2;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.small-text {
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #666666;
-    letter-spacing: 0.88px;
-}
-
-.title-item {
-    font-size: 1.4rem;
-    color: $color-2;
-    margin-bottom: 1.5rem;
-    letter-spacing: 1.27px;
-    font-weight: 700;
 }
 
 .custom-blocks {
@@ -315,16 +213,6 @@ p:empty {
     margin-bottom: 4rem;
 }
 
-.box-with-shadow {
-    border-radius: 25px;
-    padding: 2rem;
-    @include boxShadow;
-    background: #fff;
-    @include media(1440px) {
-        padding: 3rem;
-    }
-}
-
 .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -366,4 +254,8 @@ img.alignleft {
 
 .wp-caption.aligncenter {
     margin: 15px auto;
+}
+
+.background-black {
+    background: #000;
 }

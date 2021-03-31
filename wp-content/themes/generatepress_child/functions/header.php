@@ -114,7 +114,9 @@ if (! function_exists('generate_construct_header')) {
     function generate_construct_header()
     {
         ?>
+    <div class="the-header">
    <header id="masthead" <?php generate_do_element_classes('header'); ?> <?php generate_do_microdata('header'); ?>>
+      <div class="custom-fixed-header">
      <div <?php generate_do_element_classes('inside_header'); ?>>
      <!-- <div class="container insideHeader"> -->
      <div class="insideHeader">
@@ -184,7 +186,9 @@ if (! function_exists('generate_construct_header')) {
         </div>
       </div>
      </div><!-- .inside-header -->
+     </div>
    </header><!-- #masthead -->
+   </div>    
    <?php
     }
 }

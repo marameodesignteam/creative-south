@@ -25,7 +25,7 @@
     });
 
     $(window).scroll(function() {
-
+        menu_fixed()
     });
 
     function modal_searchForm() {
@@ -163,6 +163,11 @@
                 }, 600);
             }
         }
+    }
+
+    function menu_fixed() {
+        if ($(window).scrollTop() > $('.site-header').offset().top) $('.custom-fixed-header').addClass('fixed');
+        else $('.custom-fixed-header').removeClass('fixed')
     }
 
 })(jQuery);
