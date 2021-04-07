@@ -60,21 +60,6 @@
             background-size: 100%;
         }
     }
-    &.violet,
-    &.full {
-        @include violetGradient;
-        text-decoration: none;
-        color: #fff;
-        &:hover,
-        &:focus {
-            color: #fff;
-        }
-        span {
-            &:after {
-                //background-image: url($white-arrow);
-            }
-        }
-    }
     &:hover,
     &:focus {
         color: #fff;

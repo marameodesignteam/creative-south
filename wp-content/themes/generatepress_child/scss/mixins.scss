@@ -82,18 +82,16 @@
     box-shadow: 0 0 16px 2px rgba(0, 0, 0, .2);
 }
 
-@mixin bgBlueGradient {
-    background-image: linear-gradient(180deg, #449DD1 0%, #41C2EB 100%);
-    -webkit-background-image: linear-gradient(180deg, #449DD1 0%, #41C2EB 100%);
-    -moz-background-image: linear-gradient(180deg, #449DD1 0%, #41C2EB 100%);
-}
-
-@mixin violetGradient {
-    background-image: linear-gradient(135deg, #6B52A6 0%, #286291 100%);
-    -webkit-background-image: linear-gradient(135deg, #6B52A6 0%, #286291 100%);
-    -moz-background-image: linear-gradient(135deg, #6B52A6 0%, #286291 100%);
-}
-
+// @mixin bgBlueGradient {
+//     background-image: linear-gradient(180deg, #449DD1 0%, #41C2EB 100%);
+//     -webkit-background-image: linear-gradient(180deg, #449DD1 0%, #41C2EB 100%);
+//     -moz-background-image: linear-gradient(180deg, #449DD1 0%, #41C2EB 100%);
+// }
+// @mixin violetGradient {
+//     background-image: linear-gradient(135deg, #6B52A6 0%, #286291 100%);
+//     -webkit-background-image: linear-gradient(135deg, #6B52A6 0%, #286291 100%);
+//     -moz-background-image: linear-gradient(135deg, #6B52A6 0%, #286291 100%);
+// }
 @mixin box-item {
     background: #fff;
     box-shadow: 0 6px 46px 0 rgba(0, 0, 0, 0.09);
@@ -113,4 +111,14 @@
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+}
+
+@for $i from 1 through 10 {
+    #states #CS#{$i}.on {
+        fill: $color-1;
+    }
+}
+
+.list-of-states li a[data-state].on {
+    color: $color-1;
 }

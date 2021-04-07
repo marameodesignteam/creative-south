@@ -77,7 +77,7 @@
                     right: 3rem;
                 }
                 &[aria-expanded="true"] {
-                    @include violetGradient;
+                    //@include violetGradient;
                     color: #fff;
                     border: 1px solid #8F9BC5;
                 }
@@ -123,7 +123,7 @@
                 border: 1px solid #8F9BC5;
                 text-decoration: none;
                 &.active {
-                    @include violetGradient;
+                    //@include violetGradient;
                     color: #fff;
                     border: 1px solid #8F9BC5;
                 }
