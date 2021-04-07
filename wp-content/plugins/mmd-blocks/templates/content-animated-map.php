@@ -543,6 +543,10 @@ if( !empty($block['anchor']) ) {
 			$(this).on('touchstart touchend', function(e) {
 				$('#states #'+id).addClass('on');
 			});
+
+			$(this).on("tap",function(){
+				$('#states #'+id).removeClass('on');
+			});
 		});
 
 		$('#states .cs-map').each(function(){
