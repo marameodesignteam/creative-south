@@ -541,12 +541,15 @@ if( !empty($block['anchor']) ) {
 			});
 
 			$(this).on('touchstart touchend', function(e) {
+				$('#states .cs-map').removeClass('on');
 				$('#states #'+id).addClass('on');
 			});
 
 			$(this).on("tap",function(){
-				$('#states #'+id).removeClass('on');
+				$(this).removeClass('on');
+				$('#states .cs-map').removeClass('on');
 			});
+
 		});
 
 		$('#states .cs-map').each(function(){
@@ -555,9 +558,16 @@ if( !empty($block['anchor']) ) {
 				$(this).addClass('on');
 				$('.list-of-states li a[data-state='+id+']').addClass('on');
 			});
+
 			$(this).mouseleave(function(){
 				$(this).removeClass('on');
 				$('.list-of-states li a[data-state='+id+']').removeClass('on');
+			});
+
+			$(this).click(function(){
+				$('#states .cs-map').removeClass('on');
+				$(this).addClass('on');
+				$('.list-of-states li a[data-state='+id+']').addClass('on');
 			});
 
 			$(this).on('touchstart touchend', function(e) {
