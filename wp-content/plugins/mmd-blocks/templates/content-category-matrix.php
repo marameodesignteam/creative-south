@@ -6,6 +6,8 @@
  */
 
 $categories_matrix = get_field('categories_matrix');
+$title = get_field('title');
+$text = get_field('text');
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }else{
@@ -18,7 +20,7 @@ if($categories_matrix && count($categories_matrix) > 0) :
     <div class="in_custom-block">
        <div class="container">
             <div class="category-matrix-inner">
-                <h2 class="title-section">Choose the category you would like to explore</h2>
+                <h2 class="title-section"><?php echo $title;?></h2>
                 <div class="categories-matrix">
                     <?php foreach($categories_matrix as $key => $item) :
                         $title = $item['title'];     
@@ -49,6 +51,7 @@ if($categories_matrix && count($categories_matrix) > 0) :
                     <?php endforeach; ?>
                 </ul>
             </div> 
+            <div class="text-bottom"><?php echo $text;?></div>
        </div>
     </div>
 </div>
