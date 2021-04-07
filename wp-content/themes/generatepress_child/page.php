@@ -26,8 +26,7 @@ get_header();
 
 		
 			
-				while (have_posts()) : the_post();  ?>
-
+		while (have_posts()) : the_post();  ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> <?php generate_do_microdata( 'article' ); ?>>
             <div class="inside-article">
                 <div class="entry-content" itemprop="text">
@@ -48,30 +47,7 @@ get_header();
 				do_action('generate_after_main_content');
 		?>
 	<?php if (is_front_page()) :  ?>
-		<div class="region-selection full-width background-black">
-			<div class="container">
-				<h2 class="title-section">Choose the region you would like to explore</h2>
-				<div class="row">
-					<div class="col-md-6 region-selection-map">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/CSouth_Map_01.svg" alt="Southern Tablesands Arts">
-					</div>
-					<div class="col-md-6 region-selection-list">
-						<ul>
-							<li><a href="">Wollondilly</a></li>
-							<li><a href="">Upper Lachlan</a></li>
-							<li><a href="">Hilltops</a></li>
-							<li><a href="">Wingecarribee (Southern Highlands)</a></li>
-							<li><a href="">Goulburn Mulwaree</a></li>
-							<li><a href="">Yass Valley </a></li>
-							<li><a href="">Queanbeyan Palerang</a></li>
-							<li><a href="">Eurobodalla</a></li>
-							<li><a href="">Bega Valley</a></li>
-							<li><a href="">Snowy Monaro</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- Write something -->
 	<?php endif; ?>
     </main>
     <!-- #main -->

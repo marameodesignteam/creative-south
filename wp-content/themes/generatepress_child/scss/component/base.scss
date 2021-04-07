@@ -261,8 +261,15 @@ img.alignleft {
 }
 
 .title-section {
-    font-size: 5rem;
+    font-size: 3.4rem;
     font-weight: 800;
     color: $color-1;
     margin-bottom: 3rem;
+    line-height: 100%;
+    @include media(768px) {
+        font-size: 4rem;
+    }
+    @include media(1200px) {
+        font-size: 5rem;
+    }
 }

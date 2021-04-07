@@ -68,6 +68,30 @@ function mmd_acf_init() {
       'mode'      => 'edit',
       'supports' => array( 'mode' => false, 'anchor' => true ),
     ));
+
+    acf_register_block(array(
+      'name'				=> 'category-matrix',
+      'title'				=> __('Category Matrix Block'),
+      'description'		=> __('A Category Matrix Block'),
+      'render_callback'	=> 'mmd_blocks_acf_block_render_cb',
+      'category'			=> 'mmd-custom-blocks',
+      'icon'				=> 'align-left',
+      'keywords'			=> array( 'category', 'matrix' ),
+      'mode'      => 'edit',
+      'supports' => array( 'mode' => false, 'anchor' => true ),
+    )); 
+
+    acf_register_block(array(
+      'name'				=> 'animated-map',
+      'title'				=> __('Animated Map Block'),
+      'description'		=> __('A Animated Map Block'),
+      'render_callback'	=> 'mmd_blocks_acf_block_render_cb',
+      'category'			=> 'mmd-custom-blocks',
+      'icon'				=> 'align-left',
+      'keywords'			=> array( 'map', 'animated' ),
+      'mode'      => 'edit',
+      'supports' => array( 'mode' => false, 'anchor' => true ),
+    )); 
   }
 }
 add_action('acf/init', 'mmd_acf_init');
