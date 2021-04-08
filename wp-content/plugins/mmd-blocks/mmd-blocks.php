@@ -92,6 +92,18 @@ function mmd_acf_init() {
       'mode'      => 'edit',
       'supports' => array( 'mode' => false, 'anchor' => true ),
     )); 
+
+    acf_register_block(array(
+      'name'				=> 'southern-stories',
+      'title'				=> __('Southern Stories Block'),
+      'description'		=> __('A Southern Stories Block'),
+      'render_callback'	=> 'mmd_blocks_acf_block_render_cb',
+      'category'			=> 'mmd-custom-blocks',
+      'icon'				=> 'align-left',
+      'keywords'			=> array( 'southern stories' ),
+      'mode'      => 'edit',
+      'supports' => array( 'mode' => false, 'anchor' => true ),
+    )); 
   }
 }
 add_action('acf/init', 'mmd_acf_init');
