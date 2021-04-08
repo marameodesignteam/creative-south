@@ -14,49 +14,44 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-get_header(); 
+get_header(); ?>
 
-//get_template_part('template-parts/content/content', 'header_template');
+	<div id="primary" <?php generate_do_element_classes( 'content' ); ?>>
+		<main id="main" <?php generate_do_element_classes( 'main' ); ?>>
+			<?php
+			/**
+			 * generate_before_main_content hook.
+			 *
+			 * @since 0.1
+			 */
+			do_action( 'generate_before_main_content' );
 
-?>
+			while ( have_posts() ) : the_post();
 
-<div id="primary" <?php generate_do_element_classes( 'content' ); ?>>
-    <main id="main" <?php generate_do_element_classes( 'main' ); ?>>
-        <?php
+				get_template_part( 'content', 'page' );
 
-		
-			
-		while (have_posts()) : the_post();  ?>
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> <?php generate_do_microdata( 'article' ); ?>>
-            <div class="inside-article">
-                <div class="entry-content" itemprop="text">
-                    <?php the_content(); ?>
-                </div>
-            </div>
-        </article>
+				// If comments are open or we have at least one comment, load up the comment template.
+				if ( comments_open() || '0' != get_comments_number() ) : ?>
 
+					<div class="comments-area">
+						<?php comments_template(); ?>
+					</div>
 
-		<?php endwhile; ?>
-        <?php
+				<?php endif;
 
-				/**
-				 * generate_after_main_content hook.
-				 *
-				 * @since 0.1
-				 */
-				do_action('generate_after_main_content');
-		?>
-	<?php if (is_front_page()) :  ?>
-		<!-- Write something -->
-	<?php endif; ?>
-    </main>
-    <!-- #main -->
+			endwhile;
 
+			/**
+			 * generate_after_main_content hook.
+			 *
+			 * @since 0.1
+			 */
+			do_action( 'generate_after_main_content' );
+			?>
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
-    
-</div>
-<!-- #primary -->
-<?php
+	<?php
 	/**
 	 * generate_after_primary_content_area hook.
 	 *

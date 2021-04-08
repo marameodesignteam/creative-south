@@ -9,11 +9,14 @@
     .southern-stories-images {
         ul {
             @include ulReset;
-            padding-left: 3rem;
+            @include media(768px) {
+                padding-left: 3rem;
+            }
             li {
                 margin-right: 1rem;
                 img {
                     max-width: 40rem;
+                    width: 100%;
                     height: auto;
                 }
                 &:last-child {

@@ -8,7 +8,7 @@
             a {
                 font-size: 2.2rem;
                 font-weight: 600;
-                color: $color-2;
+                color: $color-5;
                 text-decoration: none;
                 @include media(1400px) {
                     font-size: 2.8rem;
@@ -41,32 +41,20 @@
             font-family: $main-font;
             font-size: 1.6rem;
             font-weight: 600;
-            padding: 1.1rem 6rem 1.1rem 2.5rem;
+            padding: 1.1rem 2.5rem 1.1rem 2.5rem;
             height: 4.2rem;
             text-align: left;
             border-radius: 10px;
             font-weight: 600;
             background: transparent;
-            border: 1px solid $color-2;
+            border: 1px solid $color-5;
             transition: 0.5s;
-            color: $color-2;
+            color: $color-5;
             position: relative;
-            &:after {
-                content: "";
-                position: absolute;
-                background-repeat: no-repeat;
-                width: 2.2rem;
-                height: 1.7rem;
-                right: 2rem;
-                top: 1.5rem;
-                transition: 0.5s;
-                //background-image: url($blue-arrow);
-            }
-            &:hover:after,
-            &:focus:after {
-                -webkit-transform: translateX(1rem);
-                -o-transform: translateX(1rem);
-                transform: translateX(1rem);
+            &:hover,
+            &:focus {
+                border: 1px solid $color-1;
+                color: $color-1;
             }
         }
     }
@@ -92,7 +80,7 @@
         }
         input {
             border: none;
-            border-bottom: 1px solid $color-2;
+            border-bottom: 1px solid $color-5;
             font-style: italic;
             font-weight: 600;
             color: $color-1;

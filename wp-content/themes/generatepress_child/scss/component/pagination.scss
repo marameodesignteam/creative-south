@@ -9,7 +9,7 @@
     padding: .2rem 0.5rem;
     text-align: center;
     color: #fff;
-    background-color: $color-2;
+    background-color: $color-5;
     display: inline-block;
     font-weight: 400;
     vertical-align: middle;
@@ -20,8 +20,8 @@
     &:hover,
     &.current,
     &:focus {
-        background: #E7EBF3;
-        color: $color-2;
+        background: $color-1;
+        color: #fff;
     }
 }
 
