@@ -1,3 +1,54 @@
+//Animated map
+.animated-map-blocks {
+    .row {
+        align-items: center;
+    }
+}
+
+.animated-map-image {
+    @include media(992px) {
+        // position: relative;
+        // height: 100%;
+        // bottom: -4rem;
+        min-height: 50rem;
+    }
+    @include media(1200px) {
+        min-height: 70rem;
+    }
+    @include media(1440px) {
+        min-height: 80rem;
+    }
+    @include media(1800px) {
+        min-height: 107rem;
+    }
+    svg {
+        height: auto;
+        width: 100%;
+        padding-bottom: 4rem;
+        @include media(992px) {
+            position: absolute;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            margin-bottom: 0;
+            top: 0;
+            left: auto;
+            bottom: 0;
+            right: 0;
+            max-width: none;
+            max-height: none;
+            padding-bottom: 0;
+            width: calc(((100vw - #{$container-small}) /2) + 100% + 2rem);
+        }
+        @include media(1200px) {
+            width: calc(((100vw - #{$container-width-lg}) /2) + 100% + 2rem);
+        }
+        @include media(1440px) {
+            width: calc(((100vw - #{$container-width}) /2) + 100% + 2rem);
+        }
+    }
+}
+
 .region-selection {
     padding: 4rem 0;
     .region-selection-list {
@@ -7,11 +58,23 @@
                 a {
                     font-weight: 800;
                     color: $color-5;
-                    font-size: 4.4rem;
+                    font-size: 2.8rem;
                     line-height: 100%;
                     text-decoration: none;
                     &:hover {
                         color: $color-1;
+                    }
+                    @include media(768px) {
+                        font-size: 3.4rem;
+                    }
+                    @include media(1200px) {
+                        font-size: 3.8rem;
+                    }
+                    @include media(1440px) {
+                        font-size: 4rem;
+                    }
+                    @include media(1600px) {
+                        font-size: 4.4rem;
                     }
                 }
             }
