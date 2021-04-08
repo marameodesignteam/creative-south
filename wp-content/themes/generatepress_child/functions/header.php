@@ -145,7 +145,7 @@ if (! function_exists('generate_construct_header')) {
               <div class="in_menu-mobile">
                 <nav aria-labelledby="primarymenutitle" id="site-navigation" itemtype="https://schema.org/SiteNavigationElement" itemscope="itemscope" class="navbar navbar-expand-lg main-navigation">
                     <h2 class="sr-only" id="primarymenutitle">Primary menu</h2> 
-                    <?php wp_nav_menu(array('menu'=>'primary-menu', 'theme_location'=> "primary-menu")); ?>
+                    <?php wp_nav_menu(array('menu'=>'main-menu', 'theme_location'=> "primary-menu")); ?>
                     
                   </nav>
               </div>
