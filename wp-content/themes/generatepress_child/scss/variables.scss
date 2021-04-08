@@ -9,7 +9,7 @@ $container-large-3: 124rem;
 $container-large-4: 120rem;
 $main-font:'Montserrat',
 sans-serif;
-$sub-font: 'Acumin';
+$sub-font: 'Oswald';
 $body-text: #000000;
 $color-1: #ee3897;
 $color-2:#4e757c;
@@ -22,6 +22,6 @@ $b-radius: 6px;
 $path-to-img: "images/";
 @font-face {
     font-family: $sub-font;
-    src: url('fonts/Acumin-Pro-Cond-Black.ttf');
+    src: url('fonts/Oswald-Bold.ttf');
     font-weight: 900;
 }

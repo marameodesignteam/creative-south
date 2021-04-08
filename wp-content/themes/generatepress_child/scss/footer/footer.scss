@@ -52,6 +52,10 @@
                 &:last-child {
                     margin-right: 0;
                 }
+                img {
+                    max-width: 12rem;
+                    height: auto;
+                }
             }
         }
     }
