@@ -7,23 +7,48 @@
         margin-bottom: 5rem;
     }
     .accordion>.card:not(:first-of-type) {
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
     .collapsible {
-        background-color: #fff;
-        border-radius: 6px !important;
+        background: transparent;
         border: none;
-        border-bottom: 0.5rem solid $color-1 !important;
         padding: 0;
         margin-bottom: 2rem;
-        @include boxShadow;
+        .collapse-body-wrapper {
+            border-bottom: 2px solid $color-5;
+            padding-bottom: 3rem;
+            @include media(768px) {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
         .collapse-body {
             margin-bottom: 0;
-            padding: 0 1.5rem;
-            color: #000;
+            padding: 1rem 3rem;
+            color: #fff;
             @include media(768px) {
-                padding: 1rem 3rem 3rem;
+                border-bottom: 2px solid $color-5;
+            }
+            a {
+                color: $color-1;
+                text-decoration: none;
+                &:hover,
+                &:focus {
+                    text-decoration: underline;
+                }
+            }
+            @include media(768px) {
+                padding: 2rem 5rem 3rem;
+            }
+        }
+        .collapse-image {
+            margin-top: 1rem;
+            @include media(768px) {
+                margin-top: 0;
+            }
+            img {
+                height: auto;
             }
         }
         .card-header {
@@ -37,41 +62,41 @@
                 cursor: pointer;
                 button {
                     cursor: pointer;
-                    font-size: 1.8rem;
-                    font-weight: 700;
-                    color: $color-2;
+                    @extend .title-item;
                     display: flex;
                     align-items: center;
                     position: relative;
                     background: 0 0;
                     border: 0;
-                    padding: 2rem 3rem 1.5rem 1.5rem;
-                    @include media(768px) {
-                        padding: 2rem 3rem 1.5rem;
-                    }
+                    padding: 0 2rem 0.2rem 0;
                     margin: 0;
                     width: 100%;
                     text-align: left;
                     &:focus {
                         box-shadow: none;
+                        outline: none;
+                    }
+                    &:hover {
+                        .fas {
+                            color: $color-1;
+                        }
                     }
                     .fas {
                         position: absolute;
-                        right: 2rem;
-                        top: 2.5rem;
-                        font-size: 1.8rem;
+                        right: 0;
+                        top: 0.3rem;
+                        font-size: 1.6rem;
+                        color: $color-5;
                         @include transition;
-                        @include media(576px) {
-                            right: 2rem;
-                            font-size: 1.6rem;
+                        @include media(768px) {
+                            font-size: 1.8rem;
+                            top: 1.5rem;
                         }
                     }
                     &[aria-expanded="true"] {
+                        color: $color-1;
                         .fas {
-                            transform: rotate(180deg);
-                            -webkit-transform: rotate(180deg);
-                            -ms-transform: rotate(180deg);
-                            -o-transform: rotate(180deg);
+                            color: $color-1;
                         }
                     }
                 }

@@ -65,7 +65,7 @@ if( !empty($block['anchor']) ) {
                 </div>
                 <div class="col-lg-6 region-selection-list">
                     <ul class="list-of-states">
-                        <li><a data-state="CS1" target="_blank" href="https://www.google.com.vn/">Wollondilly</a></li>
+                        <li><a data-state="CS1" href="">Wollondilly</a></li>
                         <li><a data-state="CS2" href="">Upper Lachlan</a></li>
                         <li><a data-state="CS3" href="">Hilltops</a></li>
                         <li><a data-state="CS4" href="">Wingecarribee (Southern Highlands)</a></li>

@@ -138,13 +138,6 @@ embed,
     }
 }
 
-.custom-blocks {
-    position: relative;
-    &.curved-none {
-        padding: 5rem 0;
-    }
-}
-
 body .wp-block-gallery {
     margin-bottom: 4rem;
 }
@@ -209,10 +202,6 @@ p:empty {
     }
 }
 
-.custom-blocks+.custom-blocks {
-    margin-bottom: 4rem;
-}
-
 .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -264,12 +253,36 @@ img.alignleft {
     font-size: 3.4rem;
     font-weight: 800;
     color: $color-1;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     line-height: 100%;
     @include media(768px) {
         font-size: 4rem;
     }
     @include media(1200px) {
         font-size: 5rem;
+        margin-bottom: 5rem;
+    }
+}
+
+.title-item {
+    font-weight: 800;
+    color: $color-5;
+    font-size: 2.8rem;
+    line-height: 100%;
+    text-decoration: none;
+    &:hover {
+        color: $color-1;
+    }
+    @include media(768px) {
+        font-size: 3.4rem;
+    }
+    @include media(1200px) {
+        font-size: 3.8rem;
+    }
+    @include media(1440px) {
+        font-size: 4rem;
+    }
+    @include media(1600px) {
+        font-size: 4.4rem;
     }
 }

@@ -45,7 +45,7 @@ if($categories_matrix && count($categories_matrix) > 0) :
                                 <h3 class="category-matrix-item__title"><?php echo $title; ?></h3>
                                 <div class="category-matrix-item__description"><?php echo $description; ?></div>
                             </div>
-                            <div class="bg-overlay" style="background-color: <?php echo $color_overlay; ?>"></div>
+                            <div class="bg-overlay" aria-hidden="true" style="background-color: <?php echo $color_overlay; ?>"></div>
                         </<?php echo $div; ?>>
                     </div>
                     <?php endforeach; ?>
