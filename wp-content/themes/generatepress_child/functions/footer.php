@@ -16,7 +16,7 @@ if (! function_exists('generate_construct_footer')) {
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-              <a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/logo-footer.png" alt=""></a>
+              <a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/logo-footer.png" alt="Creative South"></a>
           </div>
           <div class="col-md-4">
             <div class="menu-footer">
@@ -44,7 +44,7 @@ if (! function_exists('generate_construct_footer')) {
     </div>
     </footer><!-- .site-info -->
     <?php if(is_front_page()) : ?>
-    <div class="modal fade modalcustom" id="wellcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade modalcustom" id="wellcomeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fas fa-times" aria-hidden="true"></i>
         </button>
