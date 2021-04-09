@@ -20,6 +20,7 @@
     }
     img {
         max-width: 12rem;
+        height: auto;
         @include media(768px) {
             max-width: 20rem;
         }
