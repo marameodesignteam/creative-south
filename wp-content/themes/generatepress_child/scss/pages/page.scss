@@ -39,11 +39,11 @@
 }
 
 .entry-header {
-    padding-top: 2rem;
     .entry-title {
         display: none;
         &.show {
             display: block;
+            padding-top: 2rem;
         }
     }
 }
