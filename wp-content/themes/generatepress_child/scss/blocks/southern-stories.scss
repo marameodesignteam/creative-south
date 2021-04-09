@@ -17,8 +17,39 @@
                 @include media(768px) {
                     margin-right: 3rem;
                 }
+                .image-circle {
+                    width: 12rem;
+                    height: 12rem;
+                    @include media(375px) {
+                        width: 15rem;
+                        height: 15rem;
+                    }
+                    @include media(768px) {
+                        width: 20rem;
+                        height: 20rem;
+                    }
+                    @include media(1200px) {
+                        width: 40rem;
+                        height: 40rem;
+                    }
+                    background-color: $color-1;
+                    border-radius: 50%;
+                    display: flex;
+                    display: -webkit-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
                 img {
-                    max-width: 40rem;
+                    max-width: 8rem;
+                    @include media(375px) {
+                        max-width: 10rem;
+                    }
+                    @include media(375px) {
+                        max-width: 13rem;
+                    }
+                    @include media(1200px) {
+                        max-width: 25rem;
+                    }
                     width: 100%;
                     height: auto;
                 }

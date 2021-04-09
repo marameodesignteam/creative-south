@@ -23,8 +23,8 @@ if( !empty($block['anchor']) ) {
                 </p>
                 <div class="southern-stories-images">
                     <ul class="d-flex">
-                        <li><a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/southern1.png" alt="Southern Tablesands Arts"></a></li>
-                        <li><a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/southern2.png" alt="South East Arts"></a></li>
+                        <li><a class="image-circle" href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/southern-tablesands-arts.png" alt="Southern Tablesands Arts"></a></li>
+                        <li><a class="image-circle" href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/south-east-arts.png" alt="South East Arts"></a></li>
                     </ul>
                 </div>
             </div>
