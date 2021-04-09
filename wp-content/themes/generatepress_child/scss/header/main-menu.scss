@@ -45,9 +45,20 @@
             }
             a {
                 color: #fff;
-                font-size: 9rem;
-                margin-top: -10px;
-                letter-spacing: -3px;
+                font-size: 4rem;
+                margin-top: 0;
+                letter-spacing: -2px;
+                @include media(768px) {
+                    font-size: 6rem;
+                }
+                @include media(1440px) {
+                    font-size: 7rem;
+                }
+                @include media(1600px) {
+                    font-size: 9rem;
+                    letter-spacing: -3px;
+                    margin-top: -10px;
+                }
                 line-height: 100%;
                 text-transform: uppercase;
                 display: block;

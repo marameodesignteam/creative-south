@@ -25,13 +25,13 @@
         align-items: center;
         padding: 0 0 2rem;
         .site-logo {
-            max-width: 18rem;
-            flex: 0 0 18rem;
+            max-width: 16rem;
+            flex: 0 0 16rem;
             margin-left: 2rem;
             z-index: 999;
             @include media(375px) {
-                max-width: 22rem;
-                flex: 0 0 22rem;
+                max-width: 18rem;
+                flex: 0 0 18rem;
             }
             @include media(1200px) {
                 max-width: 24rem;
@@ -69,7 +69,7 @@
             padding: 0;
             @include ulReset;
             li {
-                margin: 0 2rem;
+                margin: 0;
                 &:last-child {
                     padding-right: 0;
                 }
