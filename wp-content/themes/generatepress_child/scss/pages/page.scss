@@ -5,8 +5,6 @@
         padding-left: $container-lateral-padding;
         padding-right: $container-lateral-padding;
         margin: 0 auto;
-        display: flex;
-        display: -webkit-flex;
         @include media(1440px) {
             max-width: $container-width;
         }
@@ -19,21 +17,25 @@
         margin-right: 3rem;
     }
     img {
-        max-width: 12rem;
-        height: 100%;
+        max-width: 15rem;
         @include media(768px) {
+            position: absolute;
+            z-index: 1;
             max-width: 20rem;
         }
         @include media(1920px) {
             max-width: 24rem;
             height: auto;
             position: absolute;
-            z-index: 1;
         }
     }
     .page-entry-title {
-        flex: 1;
-        margin-left: 1.5rem;
+        margin-left: 0;
+        margin-top: 1.5rem;
+        @include media(768px) {
+            margin-left: 22rem;
+            margin-top: 0;
+        }
         @include media(1920px) {
             margin-left: 0;
         }
@@ -41,8 +43,8 @@
             padding-left: 0;
             padding-right: 0;
             @include media(1920px) {
-                padding-left: 15px;
-                padding-right: 15px;
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
         }
     }
