@@ -20,14 +20,30 @@
     }
     img {
         max-width: 12rem;
-        height: auto;
+        height: 100%;
         @include media(768px) {
             max-width: 20rem;
         }
         @include media(1920px) {
             max-width: 24rem;
+            height: auto;
             position: absolute;
             z-index: 1;
+        }
+    }
+    .page-entry-title {
+        flex: 1;
+        margin-left: 1.5rem;
+        @include media(1920px) {
+            margin-left: 0;
+        }
+        .container {
+            padding-left: 0;
+            padding-right: 0;
+            @include media(1920px) {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
         }
     }
     .entry-title-section {
