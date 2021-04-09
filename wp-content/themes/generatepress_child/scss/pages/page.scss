@@ -17,11 +17,10 @@
         margin-right: 3rem;
     }
     img {
-        max-width: 15rem;
+        max-width: 20rem;
         @include media(768px) {
             position: absolute;
             z-index: 1;
-            max-width: 20rem;
         }
         @include media(1920px) {
             max-width: 24rem;
