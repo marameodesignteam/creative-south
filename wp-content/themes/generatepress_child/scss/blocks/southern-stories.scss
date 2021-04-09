@@ -13,7 +13,10 @@
                 padding-left: 3rem;
             }
             li {
-                margin-right: 1rem;
+                margin-right: 2rem;
+                @include media(768px) {
+                    margin-right: 3rem;
+                }
                 img {
                     max-width: 40rem;
                     width: 100%;
