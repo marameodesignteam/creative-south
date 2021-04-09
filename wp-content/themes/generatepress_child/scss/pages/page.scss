@@ -25,7 +25,9 @@
             max-width: 20rem;
         }
         @include media(1920px) {
+            max-width: 24rem;
             position: absolute;
+            z-index: 1;
         }
     }
     .entry-title-section {
