@@ -11,6 +11,11 @@
         z-index: 98;
         &.fixed {
             background: #000;
+            position: fixed;
+        }
+        &.no-fixed {
+            position: relative;
+            background: #000;
         }
     }
     .in_header {

@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				 */
 				do_action( 'generate_before_page_title' );
 
-				//the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' );
+				the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' );
 
 				/**
 				 * generate_after_page_title hook.

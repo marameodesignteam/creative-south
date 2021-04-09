@@ -1,0 +1,49 @@
+.header-block {
+    .header-block-inner {
+        padding: 2rem 3rem 0;
+        max-width: $container-width-lg;
+        padding-left: $container-lateral-padding;
+        padding-right: $container-lateral-padding;
+        margin: 0 auto;
+        display: flex;
+        display: -webkit-flex;
+        @include media(1440px) {
+            max-width: $container-width;
+        }
+        @include media(1920px) {
+            max-width: none;
+        }
+        position: relative;
+    }
+    .header-block-logo {
+        margin-right: 3rem;
+    }
+    img {
+        max-width: 12rem;
+        @include media(768px) {
+            max-width: 20rem;
+        }
+        @include media(1920px) {
+            position: absolute;
+        }
+    }
+    .entry-title-section {
+        font-size: 2.8rem;
+        @include media(768px) {
+            font-size: 3.4rem;
+        }
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 0;
+    }
+}
+
+.entry-header {
+    padding-top: 2rem;
+    .entry-title {
+        display: none;
+        &.show {
+            display: block;
+        }
+    }
+}

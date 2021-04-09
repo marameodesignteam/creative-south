@@ -26,7 +26,7 @@ $arrowBackgroundNext = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/
 if ( is_array( $slides ) && $num_slides > 0 ) :
 
     ?>
-<div  class="carousel-blocks custom-blocks full-width">
+<div class="carousel-blocks custom-blocks full-width">
     <div id="<?php echo $id; ?>" class="carousel slide" data-keyboard="true" data-ride="false" data-interval="false">
         <style>
             /* setting as inline style */
@@ -84,3 +84,13 @@ if ( is_array( $slides ) && $num_slides > 0 ) :
     </div>   
 </div>     
 <?php endif; ?>
+<div class="header-block full-width background-black">
+    <div class="header-block-inner">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main-logo.png" alt="Southern Tablesands Arts">
+        <div class="container">
+            <div class="page-entry-title d-flex">
+                <h2 class="entry-title-section"><?php the_title(); ?></h2>
+            </div>
+        </div>
+    </div>
+</div>
