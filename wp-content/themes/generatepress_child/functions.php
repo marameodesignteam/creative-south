@@ -10,8 +10,6 @@ include_once(get_stylesheet_directory(__FILE__) . '/helpers.php');
 include("functions/styles-script.php");
 include("functions/header.php");
 include("functions/footer.php");
-include("functions/custom-post-types.php");
-include("functions/custom-taxonomies.php");
 include("functions/image-sizes.php");
 
  //add menus programmatically
@@ -32,12 +30,8 @@ include("functions/image-sizes.php");
 //Add excerpt for page
 add_post_type_support( 'page', 'excerpt' );
 
-//add custom roles
-add_role('full-member', 'Full member', array('read' => true, 'edit_posts'   => false,));
-add_role('restricted', 'Restricted', array('read' => true, 'edit_posts'   => false,));
-
 ///Remove posts from side menu
-add_action('admin_menu', 'remove_default_post_type');
+//add_action('admin_menu', 'remove_default_post_type');
 function remove_default_post_type() {
   remove_menu_page('edit.php');
 }
