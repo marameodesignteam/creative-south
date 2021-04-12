@@ -72,16 +72,24 @@ function custom_style() {
 <?php }
 add_action( 'admin_footer', 'custom_style' );
 
-add_filter('acf/save_post', 'update_marker_id', 20);
-function update_marker_id($post_id) {
-    error_log('>>>>>>>>>>>');
-    error_log(get_post_type($post_id));
-  if ( get_post_type($post_id) != 'trip_locations' ) {
-    return;
+add_action( 'wp_ajax_update_marker_id', 'update_marker_id' );
+add_action( 'wp_ajax_nopriv_update_marker_id', 'update_marker_id' );
+
+function update_marker_id() {
+  $args = array(
+    'post_type' => 'trip_locations',
+    'posts_per_page' => -1
+  );
+  $query = new WP_Query($args);
+  if ($query->have_posts() ) {
+    while ( $query->have_posts() ) {
+      $query->the_post();
+      $post_id = get_the_ID();
+      $category_id = get_post_meta($post_id, 'category_id' );
+      update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( $category_id ) ) ;
+    }
+    wp_reset_postdata();
   }
-  $category_id = get_post_meta($post_id, 'category_id' );
-  error_log(print_r($category_id, 1));
-  error_log($post_id);
-  error_log('<<<<<<<');
-  update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( $category_id ) ) ;
+
+  wp_die();
 }
