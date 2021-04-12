@@ -24,6 +24,7 @@
             $('.entry-header .entry-title').addClass('sr-only');
         } else {
             $('.site-header .custom-fixed-header').addClass('no-fixed');
+            $('.the-header').addClass('active');
             $('.entry-header .entry-title').addClass('show');
         }
     });
