@@ -8,6 +8,7 @@
 **/
 
 function block_variation_enqueue() {
+  error_log(plugin_dir_path( __FILE__ ) . '/blocks.js');
   wp_enqueue_script(
     'block-variation-script',
     plugins_url( 'blocks.js', __FILE__ ),
