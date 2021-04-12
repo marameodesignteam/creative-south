@@ -1,61 +1,86 @@
-{{#if showList}}
-    {{#if share.showShare}}
-    <div class="col-sm-12 ml-share-bar">
-        {{share.share_label}}
-        <a href="https://twitter.com/share?url={{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} twitter" title="{{share.share_label}} twitter" target="_blank">
-            <i class="fab fa-twitter-square"></i>
-        </a>
-        <a href="whatsapp://send?text={{share.pageid}}itinerary_{{share.userid}}" data-action="share/whatsapp/share" aria-label="{{share.share_label}} whatsapp" title="{{share.share_label}} whatsapp" target="_blank">
-            <i class="fab fa-whatsapp-square"></i>
-        </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} facebook" title="{{share.share_label}} facebook" target="_blank">
-            <i class="fab fa-facebook-square"></i>
-        </a>
-        <a href="mailto:?body={{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} email" title="{{share.share_label}} email" target="_blank">
-            <i class="fas fa-envelope-square"></i>
-        </a>
-        <a href="{{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} link" title="{{share.share_label}} link" target="_blank">
-            <i class="fas fa-share-square"></i>
-        </a>
-    </div>
-    {{/if}}
-
-    {{#if count.showCount}}
-    <div class="col-sm-12">
-        {{count.count_label}}: {{count.count}}
-    </div>
-    {{/if}}
-
-    {{#each listitem}}
-    <div class="col-sm-12">
-        <div class="thumbnail gd-mylist-box">
-            {{#if postimage}}
-            <a href="{{posturl}}" aria-label="{{posttitle}}" title="{{posttitle}}">
-                <img src="{{postimage}}" class="img-book img-responsive" alt="{{posttitle}}">
-            </a>
-            {{/if}}
-            <div class="caption">
-                <h3><a href="{{posturl}}">{{posttitle}}</a></h3>
-                <p><small>{{postdate}} | {{postAuthorName}}</small></p>
-                <p>
-                    <a href="javascript:void();" 
-                            class="btn btn-default js-gd-remove-mylist" 
-                            id="mylist-{{showRemove.itemid}}" 
-                            data-postid="{{showRemove.itemid}}" 
-                            data-styletarget="{{showRemove.styletarget}}" 
-                            data-userid="{{showRemove.userid}}"
-                            aria-label="{{showRemove.label}}" title="{{showRemove.label}}" >
-                            <i class="{{showRemove.icon}}"></i> {{showRemove.label}}
-                    </a>
-                </p>
+{{#if showList}} {{#if share.showShare}}
+<div class="my-tour-actions">
+    <div class="container-small">
+        <div class="my-tour-actions-inner">
+            <div class="ml-share-bar">
+                <span class="share-text">{{share.share_label}}</span>
+                <a href="https://twitter.com/share?url={{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} twitter" title="{{share.share_label}} twitter" target="_blank">
+                    <span class="sr-only">Twitter</span><i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} facebook" title="{{share.share_label}} facebook" target="_blank">
+                    <span class="sr-only">Facebook</span><i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a href="mailto:?body={{share.pageid}}itinerary={{share.userid}}" aria-label="{{share.share_label}} email" title="{{share.share_label}} email" target="_blank">
+                    <span class="sr-only">Email</span><i class="far fa-envelope" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="copylink">
+                <a href="">Copy Link <i class="fas fa-link" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
-    {{/each}}
+</div>
 {{/if}}
-
-{{#if showEmpty}}
-    <div class="alert alert-dismissable alert-info">
-        {{showEmpty.empty_label}}
+<div class="my-tour-content">
+    <div class="container-small">
+        <div class="my-tour-label bg-pink">My Tour</div>
+        <ul class="tour-list">
+            {{#each listitem}}
+            <li>
+                <div class="tour-item">
+                    <div class="tour-item-cate bg-pink">{{postcategory}}</div>
+                    <div class="gd-mylist-box row">
+                        <!-- {{#if postimage}}
+                        <a href="{{posturl}}" aria-label="{{posttitle}}" title="{{posttitle}}">
+                            <img src="{{postimage}}" class="img-book img-responsive" alt="{{posttitle}}">
+                        </a>
+                        {{/if}} -->
+                        <div class="col-md-6">
+                            <div class="tour-item-carousel">
+                                <div id="carouselExampleSlidesOnly{{postId}}" class="carousel slide" data-ride="false">
+                                    <div class="carousel-inner">
+                                        {{#each postmediavideo}}
+                                        <div class="carousel-item {{class}}">
+                                            <video width="320" height="240" controls>
+                                                <source src="{{url}}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        {{/each}} {{#each postmediaimage}}
+                                        <div class="carousel-item {{class}}">
+                                            <img src="{{url}}" alt="">
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleSlidesOnly{{postId}}" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleSlidesOnly{{postId}}" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-tour-item-infor">
+                            <div class="tour-item-infor">
+                                <h3 class="tour-item-title"><a href="{{posturl}}">{{posttitle}}</a></h3>
+                                <p class="address">{{postaddress}}</p>
+                                <p class="address-link">{{postdigitaladdress}}</p>
+                                <div class="tour-item-actions">
+                                    <a href="https://maps.google.com/?q={{postaddress}}" target="_blank" class="btn-tour"><i class="fas fa-directions" aria-hidden="true"></i>Get Directions</a>
+                                    <a href="javascript:void();" class="btn-tour js-gd-remove-mylist" id="mylist-{{showRemove.itemid}}" data-postid="{{showRemove.itemid}}" data-styletarget="{{showRemove.styletarget}}" data-userid="{{showRemove.userid}}" aria-label="{{showRemove.label}}"
+                                        title="{{showRemove.label}}">
+                                        <i class="fas fa-plus-circle" aria-hidden="true"></i> {{showRemove.label}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
     </div>
+</div>
 {{/if}}

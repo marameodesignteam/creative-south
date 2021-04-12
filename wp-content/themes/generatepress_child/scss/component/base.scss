@@ -62,6 +62,13 @@ main {
     }
 }
 
+.container-small {
+    max-width: $container-width-small;
+    padding-left: $container-lateral-padding;
+    padding-right: $container-lateral-padding;
+    margin: 0 auto;
+}
+
 .container-element {
     padding-left: $container-lateral-padding;
     padding-right: $container-lateral-padding;
@@ -286,4 +293,9 @@ img.alignleft {
     @include media(1600px) {
         font-size: 4.4rem;
     }
+}
+
+.bg-pink {
+    background-color: $color-1;
+    color: #fff;
 }

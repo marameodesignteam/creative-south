@@ -23,13 +23,39 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
 
     public function list_item($post)
     {
-        $output = [];
+        $output = []; 
         $type = 'post_list';
         $postId = $post->posts_id;
         $postAuthorId = $post->authors_id;
         $postAuthorName = $post->authors_name;
         $postTitle = $post->posts_title;
         $portTitleLang = $this->extract_title($postTitle);
+        $postAddress = get_field('_wpgmp_location_address',$post->posts_id);
+        $postDigitalAddress = get_field('digital_adress',$post->posts_id);
+        $cateID = get_field('category_id',$post->posts_id);
+        $categs = [
+            1 => 'Festivals/Music & Performance',
+            2 => 'Galleries & Studios',
+            3 => 'Creative Retail & Markets',
+            4 => 'Public Art/Heritage',
+        ];
+        $postCategory = $categs[$cateID];
+        $mediaAttached = get_attached_media('', $post->posts_id); 
+        $imageArr = [];
+        $videoArr = [];
+        $set_first = FALSE;
+        foreach($mediaAttached as $item) : 
+            $type = $item->post_mime_type;
+            $url = $item->guid;
+            if($type == 'video/mp4') {
+                array_push($videoArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
+            }
+            else{
+                array_push($imageArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
+            }
+            $set_first = TRUE;
+        endforeach;
+
         $postUrl = get_permalink($postId);
         $user_id = $this->current_user_id();
         $args = array(
@@ -48,13 +74,18 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             'posturl' => $postUrl,
             'postimage' => wp_get_attachment_url(get_post_thumbnail_id($postId)),
             'posttitle' => $postTitle,
+            'postaddress' => $postAddress,
+            'postdigitaladdress' => $postDigitalAddress,
+            'postcategory' => $postCategory,
+            'postmediaimage' =>$imageArr,
+            'postmediavideo' =>$videoArr,
             'postdate' => get_the_date('F j, Y', $postId),
             'postAuthorName' => $postAuthorName,
             'showRemove' => [
                 'itemid' => $postId,
                 'styletarget' => 'mylist',
                 'userid' => $user_id,
-                'label' => __('remove My List', 'gd-mylist'),
+                'label' => __('Delete from tour', 'gd-mylist'),
                 'icon' => $this->stored_setting()['fontawesome_btn_remove'],
             ],
         ];
@@ -131,7 +162,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
                 }
                 $listAr['share'] = [
                     'showShare' => true,
-                    'share_label' => __('Share your list', 'gd-mylist'),
+                    'share_label' => __('Share your Tour', 'gd-mylist'),
                     'pageid' => $pageid,
                     'userid' => $user_id,
                 ];
