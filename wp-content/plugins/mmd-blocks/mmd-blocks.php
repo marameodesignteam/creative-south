@@ -7,18 +7,6 @@
 * Author: Marameo Design
 **/
 
-function block_variation_enqueue() {
-  error_log(plugin_dir_path( __FILE__ ) . 'blocks.js');
-  wp_enqueue_script(
-    'block-variation-script',
-    plugins_url( 'blocks.js', __FILE__ ),
-    array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
-    filemtime( plugin_dir_path( __FILE__ ) . 'blocks.js' )
-  );
-}
-add_action( 'enqueue_block_editor_assets', 'block_variation_enqueue' );
-
-
 function mmd_blocks_category($categories, $post) {
   array_unshift($categories, array(
     'slug' => 'mmd-custom-blocks',
