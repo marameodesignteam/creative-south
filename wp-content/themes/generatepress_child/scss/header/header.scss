@@ -14,7 +14,6 @@
             position: fixed;
         }
         &.no-fixed {
-            position: relative;
             background: #000;
         }
     }
@@ -143,5 +142,18 @@ button.close {
     i {
         color: #fff;
         font-size: 2.6rem;
+    }
+}
+
+.the-header.active {
+    height: 7.3rem;
+    @include media(375px) {
+        height: 8rem;
+    }
+    @include media(1200px) {
+        height: 10rem;
+    }
+    @include media(1400px) {
+        height: 12rem;
     }
 }
