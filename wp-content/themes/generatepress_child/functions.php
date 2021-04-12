@@ -83,5 +83,5 @@ function update_marker_id($post_id) {
   error_log(print_r($category_id, 1));
   error_log($post_id);
   error_log('<<<<<<<');
-  update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( [$category_id] ) ) ;
+  update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( $category_id ) ) ;
 }
