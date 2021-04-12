@@ -80,7 +80,7 @@ function update_marker_id($post_id) {
     return;
   }
   $category_id = get_post_meta($post_id, 'category_id' );
-  error_log($category_id);
+  error_log(print_r($category_id, 1));
   error_log($post_id);
   error_log('<<<<<<<');
   update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( [$category_id] ) ) ;
