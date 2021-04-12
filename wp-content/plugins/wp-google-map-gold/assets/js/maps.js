@@ -3000,7 +3000,7 @@
 
             var hide_locations = this.map_data.listing.hide_locations;
             var listing_header = this.map_data.listing.listing_header;
-            var content = '';
+            var content = search_by_keyword = '';
             if(listing_header != undefined) {
                 content += '<div class="wpgmp_before_listing">' + this.map_data.listing.listing_header + '</div>';
             }
@@ -3011,12 +3011,14 @@
                     autosuggest_class = "wpgmp_auto_suggest";
                 }
                 
-                content += '<div class="wpgmp_listing_header"><div class="wpgmp_search_form"><input type="text" rel="24" data-input="wpgmp-search-text" name="wpgmp_search_input" class="wpgmp_search_input ' + autosuggest_class + '" placeholder="' + wpgmp_local.search_placeholder + '"></div></div>';
+                search_by_keyword = '<div class="wpgmp_listing_header"><div class="wpgmp_search_form"><input type="text" rel="24" data-input="wpgmp-search-text" name="wpgmp_search_input" class="wpgmp_search_input ' + autosuggest_class + '" placeholder="' + wpgmp_local.search_placeholder + '"></div></div>';
                 
             }
 
 
-            content += '<div class="categories_filter">' + this.create_filters() + '</div><div data-container="wpgmp-filters-container"></div>';
+            var search_by_categories = '<div class="categories_filter">' + this.create_filters() + '</div>';
+            var search_by_region = '<div data-container="wpgmp-filters-container"></div>';
+            content = '<div class="col-6">' + search_by_categories + '</div><div class="col-6">' + search_by_region + search_by_keyword + '</div>';
 
             if (hide_locations != true)
                 content += this.create_sorting() + '';
