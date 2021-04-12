@@ -1083,7 +1083,7 @@ if ( ! empty( $filter_array ) ) {
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 							// Get Slide @Vinh
 //							$custom_fields['%slide%'] = get_slide($post->ID);
-							$custom_fields['%slide%'] = '<div id="demo" class="carousel slide" data-ride="carousel">
+							$custom_fields['%slide%'] = '<div id="demo-' . $post->ID . '" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators" style="z-index:1">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
     <li data-target="#demo" data-slide-to="1" class=""></li>
