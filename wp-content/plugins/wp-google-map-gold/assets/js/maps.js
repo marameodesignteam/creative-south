@@ -3015,7 +3015,8 @@
                 
             }
 
-            content += '<div class="categories_filter">' + this.create_filters() + '<div data-container="wpgmp-filters-container"></div>';
+
+            content += '<div class="categories_filter">' + this.create_filters() + '</div><div data-container="wpgmp-filters-container"></div>';
 
             if (hide_locations != true)
                 content += this.create_sorting() + '';
@@ -3039,7 +3040,7 @@
                 content += '<div class="categories_filter_reset"><input type="button" class="categories_filter_reset_btn" name="categories_filter_reset_btn" value="' + this.map_data.map_options.map_reset_button_text + '"></div>';
             }
 
-            content += '</div>';
+            // content += '</div>';
 
             return content;
         },
