@@ -19,6 +19,23 @@
         if(region_val != '') {
             $('select[name="place_%regions%"]').val(region_val);
         }
+        $('.categories_filter select').change(function() {
+            var cate = $( '.categories_filter select' ).val();
+            cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
+            var region = $( '.regions_filter select' ).val();
+            region = typeof region == 'undefined' || region == '' ? '' : region;
+
+            window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region;
+        });
+        $('.regions_filter select').change(function() {
+            var cate = $( '.categories_filter select' ).val();
+            cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
+            var region = $( '.regions_filter select' ).val();
+            region = typeof region == 'undefined' || region == '' ? '' : region;
+
+            window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region;
+        });
+
     });
 
     /*Javascript to add favourites button*/
@@ -962,6 +979,7 @@
             });
 
             var on_event = map_obj.settings.infowindow_open_event;
+
             $(map_obj.container).on(on_event, ".wpgmp_locations a[data-marker]", function() {
 
                 var current_marker = this;
@@ -3016,7 +3034,7 @@
             }
 
 
-            content += '<div class="categories_filter">' + this.create_filters() + '</div><div data-container="wpgmp-filters-container"></div>';
+            content += '<div class="categories_filter">' + this.create_filters() + '</div><div class="regions_filter" data-container="wpgmp-filters-container"></div>';
 
             if (hide_locations != true)
                 content += this.create_sorting() + '';
