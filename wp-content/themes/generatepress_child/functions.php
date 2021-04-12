@@ -74,9 +74,14 @@ add_action( 'admin_footer', 'custom_style' );
 
 add_filter('acf/save_post', 'update_marker_id', 20);
 function update_marker_id($post_id) {
+    error_log('>>>>>>>>>>>');
+    error_log(get_post_type($post_id));
   if ( get_post_type($post_id) != 'trip_locations' ) {
     return;
   }
   $category_id = get_post_meta($post_id, 'category_id' );
-  update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize(  [$category_id] ) ) ;
+  error_log($category_id);
+  error_log($post_id);
+  error_log('<<<<<<<');
+  update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( [$category_id] ) ) ;
 }
