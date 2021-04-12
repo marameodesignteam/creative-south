@@ -1081,6 +1081,32 @@ if ( ! empty( $filter_array ) ) {
 								}
 							}
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
+							// Get Slide @Vinh
+//							$custom_fields['%slide%'] = get_slide($post->ID);
+							$custom_fields['%slide%'] = '<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators" style="z-index:1">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1" class=""></li>
+    <li data-target="#demo" data-slide-to="2" class=""></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" style="width:100%;height:100%;">
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" style="width:100%;height:100%;">
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" style="width:100%;height:100%;">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>';
 						}
 						
 						$post_taxonomies = get_post_taxonomies( $post->ID );
