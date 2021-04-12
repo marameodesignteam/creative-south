@@ -2085,10 +2085,10 @@ if(!class_exists('Listing_Designs_For_Google_Maps') || wp_is_mobile() ){
 		
 		if($map->map_all_control['filters_position'] == 'top_map'){
 		
-		$map_div .= $filters_div.'<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>';
+		$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>';
 		}else{
 
-			$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>'.$filters_div;
+			$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>';
 			
 		}
 			
@@ -2121,7 +2121,7 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 
 $listing_div .= apply_filters( 'wpgmp_after_listing', '', $map );
 
-$output = "<div class='row'><div class='col-6'>{$listing_div}</div><div class='col-6'>{$map_div}</div></div>";
+$output = "<div class='row'><div class='col-auto'>{$filters_div}</div><div class='col-6'>{$listing_div}</div><div class='col-6'>{$map_div}</div></div>";
 
 if(class_exists('Listing_Designs_For_Google_Maps')){ 
 	$map_output .= apply_filters( 'wpgmp_map_output', $output, $map_div, $filters_div, $listing_div, $map->map_id );
