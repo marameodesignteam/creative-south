@@ -991,7 +991,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Pro' ) ) {
 			}
 
 			if ( ! defined( 'WPGMP_VERSION' ) ) {
-				define( 'WPGMP_VERSION', '5.2.8' );
+				define( 'WPGMP_VERSION', '5.2.8.' + time() );
 			}
 
 			if ( ! defined( 'WPGMP_FOLDER' ) ) {
