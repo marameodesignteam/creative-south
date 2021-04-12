@@ -71,3 +71,12 @@ function custom_style() {
     </style>
 <?php }
 add_action( 'admin_footer', 'custom_style' );
+
+add_filter('acf/save_post', 'update_marker_id', 20);
+function update_marker_id($post_id) {
+  if ( get_post_type($post_id) != 'trip_locations' ) {
+    return;
+  }
+  $category_id = get_post_meta($post_id, 'category_id' );
+  update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize(  [$category_id] ) ) ;
+}
