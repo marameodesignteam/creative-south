@@ -72,10 +72,10 @@ function custom_style() {
 <?php }
 add_action( 'admin_footer', 'custom_style' );
 
-add_action( 'wp_ajax_update_marker_id', 'update_marker_id' );
-add_action( 'wp_ajax_nopriv_update_marker_id', 'update_marker_id' );
+add_action( 'wp_ajax_update_map_params', 'update_map_params' );
+add_action( 'wp_ajax_nopriv_update_map_params', 'update_map_params' );
 
-function update_marker_id() {
+function update_map_params() {
   $args = array(
     'post_type' => 'trip_locations',
     'posts_per_page' => -1
@@ -87,6 +87,7 @@ function update_marker_id() {
       $post_id = get_the_ID();
       $category_id = get_post_meta($post_id, 'category_id' );
       update_post_meta( $post_id, '_wpgmp_metabox_marker_id', serialize( $category_id ) ) ;
+      update_post_meta( $post_id, '_wpgmp_map_id', serialize( [2] ) ) ;
     }
     wp_reset_postdata();
   }
