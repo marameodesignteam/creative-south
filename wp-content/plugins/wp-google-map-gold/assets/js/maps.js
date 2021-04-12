@@ -4665,6 +4665,12 @@
                             prev_place.infowindow.close();
                             prev_place.marker.setAnimation(null);
                         });
+
+                        // @Vinh
+                        // Close all location descriptions
+                        // Open location description here for place.id
+                        console.log(place.id);
+
                         map_obj.openInfoWindow(place);
                         if (bounce_on_event == 'click') {
                             map_obj.toggle_bounce(place.marker);
