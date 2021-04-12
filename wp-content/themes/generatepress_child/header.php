@@ -70,7 +70,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	//do_action( 'generate_after_header' );
 	?>
 
-	<div id="page" class="hfeed site grid-container container grid-parent">
+	<?php 
+		$page_style = get_field('page_style');
+		$containerClass = ($page_style == 'full-width') ? '' : 'container';
+	?>
+
+	<div id="page" class="hfeed site grid-container <?php echo $containerClass; ?> grid-parent">
 		<?php
 		/**
 		 * generate_inside_site_container hook.

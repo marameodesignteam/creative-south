@@ -8,7 +8,11 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+$hide_page_title = get_field('hide_page_title');
 ?>
+
+
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> <?php generate_do_microdata( 'article' ); ?>>
 	<div class="inside-article">
@@ -22,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 */
 		do_action( 'generate_before_content' );
 		if (!is_front_page()) : 
+		if(!$hide_page_title):
 		if ( generate_show_title() ) : ?>
 
 			<header class="entry-header">
@@ -44,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 			</header><!-- .entry-header -->
 
-		<?php endif;
+		<?php endif;endif;
 		endif;
 		/**
 		 * generate_after_entry_header hook.

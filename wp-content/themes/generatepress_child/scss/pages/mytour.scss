@@ -1,0 +1,184 @@
+.my-tour-actions {
+    background-color: $color-1;
+    color: #fff;
+    padding: 1rem 0;
+    a {
+        color: #fff;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+    .my-tour-actions-inner {
+        @include media(768px) {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+        }
+        .ml-share-bar {
+            margin-bottom: 2rem;
+            @include media(768px) {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .ml-share-bar {
+        .share-text {
+            font-size: 1.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 3rem;
+        }
+        a {
+            padding: 0;
+            margin-right: 2rem;
+            i {
+                font-size: 2.8rem;
+            }
+        }
+    }
+    .copylink {
+        font-size: 1.8rem;
+        font-weight: 500;
+        i {
+            font-size: 2.2rem;
+            margin-left: 1.5rem;
+        }
+    }
+}
+
+.my-tour-content {
+    padding: 2rem 0;
+    background-image: url(images/bg-map.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.my-tour-label {
+    width: 6rem;
+    height: 6rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 4rem;
+    margin-left: 5rem;
+}
+
+.tour-list {
+    @include ulReset;
+}
+
+.tour-item {
+    margin-bottom: 4rem;
+    display: block;
+    background-color: $light-grey;
+    position: relative;
+    .gd-mylist-box {
+        @media(min-width: 768px) {
+            height: 22rem;
+        }
+    }
+    &:before {
+        content: '';
+        background-color: $color-1;
+        position: absolute;
+        top: -4rem;
+        left: 7.5rem;
+        width: .5rem;
+        height: 4rem;
+    }
+}
+
+.tour-item-cate {
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.col-tour-item-infor {
+    padding-left: 25px;
+    @media(min-width: 768px) {
+        padding-left: 0;
+    }
+}
+
+.tour-item-infor {
+    padding: 1.5rem;
+    padding-left: 0.5rem;
+    .tour-item-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    .address,
+    .address-link {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+        font-weight: 400;
+        color: #1A1A1A;
+    }
+    .address-link {
+        font-weight: 700;
+        margin-bottom: 3.5rem;
+    }
+    .tour-item-actions {
+        display: flex;
+        display: -webkit-flex;
+        a.btn-tour {
+            background-color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            color: #1A1A1A;
+            padding: 0.5rem 1rem;
+            margin-right: 1rem;
+            width: 50%;
+            &:hover,
+            &:focus {
+                color: $color-1;
+                text-decoration: none;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+            i {
+                color: $color-1;
+                margin-right: 0.5rem;
+                font-size: 1.6rem;
+                vertical-align: -1px;
+            }
+        }
+    }
+}
+
+.tour-item {
+    .col-md-6 {
+        height: 100%;
+    }
+}
+
+.tour-item-carousel {
+    position: relative;
+    height: 100%;
+    .carousel {
+        height: 100%;
+        .carousel-inner {
+            height: 100%;
+            .carousel-item {
+                height: 24rem;
+                @include media(768px) {
+                    height: 100%;
+                }
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+        &:focus {
+            outline: none !important;
+        }
+    }
+}

@@ -10,8 +10,15 @@ if (! function_exists('generate_construct_footer')) {
      */
     function generate_construct_footer()
     {
-        ?>
+      // $mediaAttached = get_attached_media('', 41);  
+      
+      // foreach($mediaAttached as $item) : 
+      //   $type = $item->post_mime_type;
+      //   //guid
+      // endforeach;
+      ?>
     <footer class="site-info" <?php generate_do_microdata('footer'); ?>>
+    
     <div class="footer-block">
       <div class="container">
         <div class="row">
