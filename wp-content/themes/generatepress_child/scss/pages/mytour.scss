@@ -160,6 +160,13 @@
     .tour-item-title {
         font-size: 1.8rem;
         font-weight: 700;
+        height: 4.2rem;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
     }
     .address,
     .address-link {
