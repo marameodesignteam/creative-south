@@ -1080,6 +1080,10 @@ if ( ! empty( $filter_array ) ) {
 									}
 								}
 							}
+							// Custom fields
+                            $dont_miss = get_post_meta($post->ID, 'dont_miss');
+							$dont_miss = reset($dont_miss);
+							$custom_fields['%dont_miss_flag%'] = !empty($dont_miss) ? 'dont-miss' : '';
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 							// Get Slide @Vinh
 //							$custom_fields['%slide%'] = get_slide($post->ID);
