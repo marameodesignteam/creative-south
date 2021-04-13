@@ -13,29 +13,48 @@
     $( document ).ready(function() {
         var category_val = getQueryStringValue('category');
         var region_val = getQueryStringValue('region');
+        var keyword_val = getQueryStringValue('keyword');
         if(category_val != '') {
             $('select[name="place_category"]').val(category_val);
         }
         if(region_val != '') {
             $('select[name="place_%regions%"]').val(region_val);
         }
+        if(keyword_val != '') {
+            $('.wpgmp_search_form input').val(keyword_val);
+        }
         $('.categories_filter select').change(function() {
             var cate = $( '.categories_filter select' ).val();
             cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
             var region = $( '.regions_filter select' ).val();
             region = typeof region == 'undefined' || region == '' ? '' : region;
+            var keyword = $( '.wpgmp_search_form input' ).val();
+            keyword = typeof keyword == 'undefined' || keyword == '' ? '' : keyword;
 
-            window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region;
+            window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region + '&keyword=' + keyword;
         });
         $('.regions_filter select').change(function() {
             var cate = $( '.categories_filter select' ).val();
             cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
             var region = $( '.regions_filter select' ).val();
             region = typeof region == 'undefined' || region == '' ? '' : region;
+            var keyword = $( '.wpgmp_search_form input' ).val();
+            keyword = typeof keyword == 'undefined' || keyword == '' ? '' : keyword;
 
-            window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region;
+            window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region + '&keyword=' + keyword;
         });
+        $('.wpgmp_search_form input').on('keypress',function(e) {
+            if (e.which == 13) {
+                var cate = $( '.categories_filter select' ).val();
+                cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
+                var region = $( '.regions_filter select' ).val();
+                region = typeof region == 'undefined' || region == '' ? '' : region;
+                var keyword = $( '.wpgmp_search_form input' ).val();
+                keyword = typeof keyword == 'undefined' || keyword == '' ? '' : keyword;
 
+                window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region + '&keyword=' + keyword;
+            }
+        });
     });
 
     /*Javascript to add favourites button*/
@@ -3352,9 +3371,7 @@
                 if (this.map_data.listing.search_field_autosuggest === true) {
                     autosuggest_class = "wpgmp_auto_suggest";
                 }
-                
-                content += '<div class="wpgmp_listing_header"><div class="wpgmp_search_form"><input type="text" rel="24" data-input="wpgmp-search-text" name="wpgmp_search_input" class="wpgmp_search_input ' + autosuggest_class + '" placeholder="' + wpgmp_local.search_placeholder + '"></div></div>';
-                
+                content += '<div class="wpgmp_listing_header"><div class="wpgmp_search_form"><input type="text" rel="24" name="wpgmp_search_input" class="wpgmp_search_input"></div></div>';
             }
 
 

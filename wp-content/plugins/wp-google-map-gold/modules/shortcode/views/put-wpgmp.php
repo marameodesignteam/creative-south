@@ -1255,11 +1255,10 @@ $render_shortcode = apply_filters( 'wpgmp_render_shortcode', true, $map );
 if ( is_array( $map_data['places'] ) ) {
 
 	foreach ( $map_data['places'] as $place ) {
-		$use_me = $use_region= $use_dont_miss = true;
+		$use_me = $use_region = $use_dont_miss = $use_keyword = true;
 
 		// Region filter here.
 		if ( $map->map_all_control['url_filter'] == 'true' ) {
-
 			if ( isset( $_GET['region'] ) and $_GET['region'] != '' ) {
 				$shortcode_filters['region'] = sanitize_text_field( $_GET['region'] );
 			}
@@ -1269,12 +1268,10 @@ if ( is_array( $map_data['places'] ) ) {
 			$found_region       = false;
 			$show_regions_only = strtolower( $shortcode_filters['region'] );
 
-			if( isset($place['location']['extra_fields']['%regions%']) ) {
-
+			if ( isset($place['location']['extra_fields']['%regions%']) ) {
 				if ( strtolower( $place['location']['extra_fields']['%regions%'] ) == $show_regions_only ) {
 					$found_region = true;
 				}
-				
 			}
 			if ( false == $found_region ) {
 				$use_region = false;
@@ -1283,22 +1280,19 @@ if ( is_array( $map_data['places'] ) ) {
 
 		// Don't Miss filter here.
 		if ( $map->map_all_control['url_filter'] == 'true' ) {
-
 			if ( isset( $_GET['dont_miss'] ) and $_GET['dont_miss'] != '' ) {
 				$shortcode_filters['dont_miss'] = sanitize_text_field( $_GET['dont_miss'] );
 			}
 		}
 
 		if ( isset( $shortcode_filters['dont_miss'] ) ) {
-			$found_dont_miss       = false;
+			$found_dont_miss = false;
 			$show_dont_miss_only = strtolower( $shortcode_filters['dont_miss'] );
 
 			if( isset($place['location']['extra_fields']['%dont_miss%']) ) {
-
 				if ( strtolower( $place['location']['extra_fields']['%dont_miss%'] ) == $show_dont_miss_only ) {
 					$found_dont_miss = true;
 				}
-				
 			}
 			if ( false == $found_dont_miss ) {
 				$use_dont_miss = false;
@@ -1306,7 +1300,30 @@ if ( is_array( $map_data['places'] ) ) {
 		}
 
 
-		// Category filter here.
+		// Keyword filter here.
+		if ( $map->map_all_control['url_filter'] == 'true' ) {
+			if ( isset( $_GET['keyword'] ) and $_GET['keyword'] != '' ) {
+				$shortcode_filters['keyword'] = sanitize_text_field( $_GET['keyword'] );
+			}
+		}
+
+		if ( isset( $shortcode_filters['keyword'] ) ) {
+			$found_keyword = false;
+			$show_keyword_only = strtolower( $shortcode_filters['keyword'] );
+
+			// @Vinh add fields to be searched from here
+			$search_fields = ['post_title'];
+			foreach ($search_fields as $f) {
+				if ( strpos(strtolower( $place['location']['extra_fields'][$f] ), $show_keyword_only) !== FALSE ) {
+					$found_keyword = true;
+				}
+			}
+			if ( false == $found_keyword ) {
+				$use_keyword = false;
+			}
+		}
+
+        // Category filter here.
 		if ( $map->map_all_control['url_filter'] == 'true' ) {
 
 			if ( isset( $_GET['category'] ) and $_GET['category'] != '' ) {
@@ -1340,7 +1357,7 @@ if ( is_array( $map_data['places'] ) ) {
 		}
 
 		$use_me = apply_filters( 'wpgmp_show_place', $use_me, $place, $map );
-		if ( true == $use_me && true == $use_region && true == $use_dont_miss ) {
+		if ( true == $use_me && true == $use_region && true == $use_dont_miss && true == $use_keyword ) {
 			$filterd_places[] = $place;
 		}
 	}
