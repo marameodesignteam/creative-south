@@ -38,6 +38,9 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             2 => 'Galleries & Studios',
             3 => 'Creative Retail & Markets',
             4 => 'Public Art/Heritage',
+            8 => 'Museums & Heritage',
+            9 => 'Heritage',
+            10 => 'Public Art',
         ];
         $postCategory = $categs[$cateID];
         $mediaAttached = get_attached_media('', $post->posts_id); 
