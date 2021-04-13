@@ -24,13 +24,13 @@
         align-items: center;
         padding: 0 0 2rem;
         .site-logo {
-            max-width: 16rem;
+            max-width: 14rem;
             flex: 0 0 16rem;
             margin-left: 2rem;
             z-index: 999;
             @include media(375px) {
-                max-width: 18rem;
-                flex: 0 0 18rem;
+                max-width: 16rem;
+                flex: 0 0 16rem;
             }
             @include media(1200px) {
                 max-width: 24rem;
