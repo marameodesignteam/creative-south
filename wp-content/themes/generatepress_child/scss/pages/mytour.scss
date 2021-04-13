@@ -92,6 +92,12 @@
     font-size: 1.8rem;
     margin-bottom: 4rem;
     margin-left: 5rem;
+    .my-tour-content & {
+        display: none;
+        @include media(768px) {
+            display: block;
+        }
+    }
 }
 
 .tour-list {
@@ -108,14 +114,16 @@
             height: 22rem;
         }
     }
-    &:before {
-        content: '';
-        background-color: $color-1;
-        position: absolute;
-        top: -4rem;
-        left: 7.5rem;
-        width: .5rem;
-        height: 4rem;
+    @include media(768px) {
+        &:before {
+            content: '';
+            background-color: $color-1;
+            position: absolute;
+            top: -4rem;
+            left: 7.5rem;
+            width: .5rem;
+            height: 4rem;
+        }
     }
 }
 
@@ -186,9 +194,11 @@
         }
     }
     .tour-item-actions {
+        margin-top: 2rem;
         @include media(768px) {
             display: flex;
             display: -webkit-flex;
+            margin-top: 0;
         }
         a.btn-tour {
             background-color: rgba(255, 255, 255, 0.5);
@@ -258,6 +268,29 @@
     .carousel-control-next {
         &:focus {
             outline: none !important;
+        }
+    }
+}
+
+.nav-browse {
+    display: flex;
+    display: -webkit-flex;
+    .nav-browse-link {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #fff;
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        width: 50%;
+        i {
+            margin-right: 0.5rem;
+        }
+        &.browse-by-list {
+            background-color: #282828;
+        }
+        &.browse-by-map {
+            background-color: #5F5F5F;
         }
     }
 }
