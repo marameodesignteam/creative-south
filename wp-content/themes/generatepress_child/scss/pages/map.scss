@@ -1,0 +1,155 @@
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers {
+    padding: 0;
+    background: transparent;
+    float: none;
+    border-radius: 0;
+    display: flex;
+    display: -webkit-flex;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_before_listing {
+    display: none;
+    width: 0;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header {
+    float: none;
+    order: 1;
+    background: #777777;
+    width: 20%;
+    height: 4.1rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form {
+    float: none;
+    margin-top: 0;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form input {
+    background: #777777;
+    border-bottom: none;
+    color: #fff;
+    border: none;
+    padding: 0 5rem 0 2rem;
+    height: 4.1rem;
+    font-size: 1.8rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form:after {
+    content: "\f002";
+    height: auto;
+    width: auto;
+    background: transparent;
+    position: absolute;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    //font-family: "Font Awesome 5 Pro";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #fff;
+    font-size: 2.3rem;
+    pointer-events: none;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #fff;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #fff;
+    opacity: 1;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #fff;
+    opacity: 1;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form input:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #fff;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter {
+    background: #ee3897;
+    float: none;
+    width: 50%;
+    height: 4.1rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter {
+    background: #777777;
+    width: 30%;
+    height: 4.1rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter select {
+    float: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    background: url('../chevron-down-solid.svg');
+    max-width: 33rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    height: 4.1rem;
+    padding: 0 2rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter {
+    position: relative;
+    padding: 0 3rem 0 14rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter:before {
+    content: "Category";
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: absolute;
+    left: 3rem;
+    top: 0.6rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter select option {
+    color: #000;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter {
+    position: relative;
+    padding: 0 0 0 11rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter:before {
+    content: "Region";
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: absolute;
+    left: 2rem;
+    top: 0.6rem;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select {
+    height: 4.1rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 0 2rem;
+    font-weight: 500;
+    font-size: 1.8rem;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select option {
+    color: #000;
+}
