@@ -132,6 +132,16 @@
     padding: 1rem;
 }
 
+.basic-item {
+    background: $color-8;
+    color: #fff;
+}
+
+.dont-miss-item {
+    background: $color-1;
+    color: #fff;
+}
+
 .col-tour-item-infor {
     padding-left: 25px;
     @media(min-width: 768px) {

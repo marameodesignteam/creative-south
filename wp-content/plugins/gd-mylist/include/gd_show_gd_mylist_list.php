@@ -59,6 +59,8 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             $set_first = TRUE;
         endforeach;
 
+        $dont_miss = get_field('dont_miss', $post->posts_id);
+
         $postUrl = get_permalink($postId);
         $user_id = $this->current_user_id();
         $args = array(
@@ -80,10 +82,11 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             'postaddress' => $postAddress,
             'postdigitaladdress' => $postDigitalAddress,
             'postcategory' => $postCategory,
-            'postmediaimage' =>$imageArr,
-            'postmediavideo' =>$videoArr,
+            'postmediaimage' => $imageArr,
+            'postmediavideo' => $videoArr,
             'postdate' => get_the_date('F j, Y', $postId),
             'postAuthorName' => $postAuthorName,
+            'postdontmiss'=> !empty($dont_miss) ? 'dont-miss-item' : 'basic-item',
             'showRemove' => [
                 'itemid' => $postId,
                 'styletarget' => 'mylist',
