@@ -1081,6 +1081,32 @@ if ( ! empty( $filter_array ) ) {
 								}
 							}
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
+							// Get Slide @Vinh
+//							$custom_fields['%slide%'] = get_slide($post->ID);
+							$custom_fields['%slide%'] = '<div id="demo-' . $post->ID . '" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators" style="z-index:1">
+    <li data-target="#demo-' . $post->ID . '" data-slide-to="0" class="active"></li>
+    <li data-target="#demo-' . $post->ID . '" data-slide-to="1" class=""></li>
+    <li data-target="#demo-' . $post->ID . '" data-slide-to="2" class=""></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" style="width:100%;height:100%;">
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" style="width:100%;height:100%;">
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" style="width:100%;height:100%;">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo-' . $post->ID . '" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo-' . $post->ID . '" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>';
 						}
 						
 						$post_taxonomies = get_post_taxonomies( $post->ID );
@@ -2085,10 +2111,10 @@ if(!class_exists('Listing_Designs_For_Google_Maps') || wp_is_mobile() ){
 		
 		if($map->map_all_control['filters_position'] == 'top_map'){
 		
-		$map_div .= $filters_div.'<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>';
+		$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>';
 		}else{
 
-			$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>'.$filters_div;
+			$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map ' . apply_filters( 'wpgmp_map_class', '', $map ) . '" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div></div>';
 			
 		}
 			
@@ -2121,7 +2147,7 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 
 $listing_div .= apply_filters( 'wpgmp_after_listing', '', $map );
 
-$output = "<div class='row'><div class='col-6'>{$listing_div}</div><div class='col-6'>{$map_div}</div></div>";
+$output = "<div class='row'><div class='col-12'>{$filters_div}</div><div class='col-6'>{$listing_div}</div><div class='col-6'>{$map_div}</div></div>";
 
 if(class_exists('Listing_Designs_For_Google_Maps')){ 
 	$map_output .= apply_filters( 'wpgmp_map_output', $output, $map_div, $filters_div, $listing_div, $map->map_id );
