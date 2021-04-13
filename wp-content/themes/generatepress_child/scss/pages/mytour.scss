@@ -252,9 +252,9 @@
         .carousel-inner {
             height: 100%;
             .carousel-item {
-                height: 24rem;
+                height: 100%;
                 @include media(768px) {
-                    height: 100%;
+                    height: 24rem;
                 }
                 video {
                     width: 100% !important;
