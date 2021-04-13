@@ -92,6 +92,10 @@
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter select {
     float: none;
     background: url(images/chevron-down-solid.svg) rgba(255, 255, 255, 0.4);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: right 15px center;
     max-width: 33rem;
     font-size: 1.8rem;
     font-weight: 500;
@@ -138,7 +142,11 @@
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select {
     height: 4.1rem;
-    background: rgba(255, 255, 255, 0.4);
+    background: url(images/chevron-down-solid.svg) rgba(255, 255, 255, 0.4);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 1.5rem;
     border: none;
     color: #fff;
     width: 100%;
