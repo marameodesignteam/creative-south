@@ -42,9 +42,37 @@
     .copylink {
         font-size: 1.8rem;
         font-weight: 500;
+        position: relative;
         i {
             font-size: 2.2rem;
             margin-left: 1.5rem;
+        }
+        .copied {
+            background: #FFFFFF;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
+            padding: 0.5rem 1rem;
+            position: absolute;
+            font-size: 1rem;
+            color: #1A1A1A;
+            font-weight: 500;
+            border-radius: 6px;
+            top: 3.5rem;
+            display: none;
+            &:before {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-bottom: 8px solid #fff;
+                top: -0.8rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            &.active {
+                display: block;
+            }
         }
     }
 }
@@ -101,6 +129,21 @@
     @media(min-width: 768px) {
         padding-left: 0;
     }
+    @include mediamaxwidth(600px) {
+        .tour-item-infor {
+            margin-top: 2rem;
+            .row {
+                .col-8,
+                .col-4 {
+                    -webkit-box-flex: 0;
+                    -webkit-flex: 0 0 100%;
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
+        }
+    }
 }
 
 .tour-item-infor {
@@ -117,20 +160,48 @@
         font-weight: 400;
         color: #1A1A1A;
     }
+    .address {
+        max-height: 5rem;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
     .address-link {
         font-weight: 700;
-        margin-bottom: 3.5rem;
+        margin-bottom: 1rem;
+        @include media(768px) {
+            margin-bottom: 3.5rem;
+            margin-bottom: 2rem;
+            height: 4.8rem;
+        }
+    }
+    .more-info {
+        text-decoration: underline;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
     }
     .tour-item-actions {
-        display: flex;
-        display: -webkit-flex;
+        @include media(768px) {
+            display: flex;
+            display: -webkit-flex;
+        }
         a.btn-tour {
             background-color: rgba(255, 255, 255, 0.5);
             font-size: 1.2rem;
             color: #1A1A1A;
             padding: 0.5rem 1rem;
-            margin-right: 1rem;
-            width: 50%;
+            margin-bottom: 1rem;
+            width: 100%;
+            display: block;
+            @include media(768px) {
+                width: 50%;
+                margin-right: 1rem;
+                margin-bottom: 0;
+            }
             &:hover,
             &:focus {
                 color: $color-1;
@@ -166,6 +237,13 @@
                 height: 24rem;
                 @include media(768px) {
                     height: 100%;
+                }
+                video {
+                    width: 100% !important;
+                    //height: auto !important;
+                    width: 100%!important;
+                    height: 22rem !important;
+                    object-fit: fill;
                 }
             }
             img {

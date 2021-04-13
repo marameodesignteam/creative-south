@@ -15,7 +15,8 @@
                 </a>
             </div>
             <div class="copylink">
-                <a href="">Copy Link <i class="fas fa-link" aria-hidden="true"></i></a>
+                <a href="" class="clipboard" role="button">Copy Link <i class="fas fa-link" aria-hidden="true"></i></a>
+                <div class="copied">Link copied</div>
             </div>
         </div>
     </div>
@@ -30,12 +31,7 @@
                 <div class="tour-item">
                     <div class="tour-item-cate bg-pink">{{postcategory}}</div>
                     <div class="gd-mylist-box row">
-                        <!-- {{#if postimage}}
-                        <a href="{{posturl}}" aria-label="{{posttitle}}" title="{{posttitle}}">
-                            <img src="{{postimage}}" class="img-book img-responsive" alt="{{posttitle}}">
-                        </a>
-                        {{/if}} -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 d-md-block d-none">
                             <div class="tour-item-carousel">
                                 <div id="carouselExampleSlidesOnly{{postId}}" class="carousel slide" data-ride="false">
                                     <div class="carousel-inner">
@@ -64,15 +60,24 @@
                         </div>
                         <div class="col-md-6 col-tour-item-infor">
                             <div class="tour-item-infor">
-                                <h3 class="tour-item-title"><a href="{{posturl}}">{{posttitle}}</a></h3>
-                                <p class="address">{{postaddress}}</p>
-                                <p class="address-link">{{postdigitaladdress}}</p>
-                                <div class="tour-item-actions">
-                                    <a href="https://maps.google.com/?q={{postaddress}}" target="_blank" class="btn-tour"><i class="fas fa-directions" aria-hidden="true"></i>Get Directions</a>
-                                    <a href="javascript:void();" class="btn-tour js-gd-remove-mylist" id="mylist-{{showRemove.itemid}}" data-postid="{{showRemove.itemid}}" data-styletarget="{{showRemove.styletarget}}" data-userid="{{showRemove.userid}}" aria-label="{{showRemove.label}}"
-                                        title="{{showRemove.label}}">
-                                        <i class="fas fa-plus-circle" aria-hidden="true"></i> {{showRemove.label}}
-                                    </a>
+                                <div class="row">
+                                    <div class="col-md-12 col-8">
+                                        <h3 class="tour-item-title"><a href="{{posturl}}">{{posttitle}}</a></h3>
+                                        <p class="address">{{postaddress}}</p>
+                                        <p class="address-link">{{postdigitaladdress}}</p>
+                                        <div class="d-md-none d-block">
+                                            <a href="{{posturl}}" class="more-info">More info</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-4">
+                                        <div class="tour-item-actions">
+                                            <a href="https://maps.google.com/?q={{postaddress}}" target="_blank" class="btn-tour"><i class="fas fa-directions" aria-hidden="true"></i>Get Directions</a>
+                                            <a href="javascript:void();" class="btn-tour js-gd-remove-mylist" id="mylist-{{showRemove.itemid}}" data-postid="{{showRemove.itemid}}" data-styletarget="{{showRemove.styletarget}}" data-userid="{{showRemove.userid}}" aria-label="{{showRemove.label}}"
+                                                title="{{showRemove.label}}">
+                                                <i class="fas fa-plus-circle" aria-hidden="true"></i> {{showRemove.label}}
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

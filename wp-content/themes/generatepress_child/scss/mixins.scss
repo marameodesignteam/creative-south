@@ -4,6 +4,12 @@
     }
 }
 
+@mixin mediamaxwidth($max-width) {
+    @media (max-width: $max-width) {
+        @content;
+    }
+}
+
 @mixin ulReset {
     padding: 0;
     margin: 0;

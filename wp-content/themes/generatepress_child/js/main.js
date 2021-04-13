@@ -11,7 +11,9 @@
         internalAnchors();
         anchorHash();
         mobileMenu();
+        clipboard();
     });
+
 
 
     $(document).ready(function($) {
@@ -36,6 +38,22 @@
     $(window).scroll(function() {
         menu_fixed()
     });
+
+    function clipboard() {
+        var $temp = $("<input>");
+        var $url = $(location).attr('href');
+        $('.clipboard').on('click', function(e) {
+            e.preventDefault();
+            $("body").append($temp);
+            $temp.val($url).select();
+            document.execCommand("copy");
+            $temp.remove();
+            $(".copied").addClass('active');
+            setTimeout(function() {
+                $(".copied").removeClass('active');
+            }, 2000);
+        });
+    }
 
     function modal_searchForm() {
         $('.js-search-form').on('click', function() {
