@@ -109,7 +109,7 @@
     display: block;
     background-color: $light-grey;
     position: relative;
-    .gd-mylist-box {
+    .gd-mylist-box-inner {
         @media(min-width: 768px) {
             height: 22rem;
         }
