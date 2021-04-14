@@ -306,6 +306,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     border: none;
     background: #ee3897;
     color: #fff;
+    font-weight: 600;
     padding: 0.5rem 1rem;
     width: 100%;
     text-align: left;
@@ -374,9 +375,13 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter select,
     #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select {
         max-width: none;
-        background: url(images/chevron-down-solid-black.svg) rgba(255, 255, 255, 1);
+        background: url(images/chevron-down-solid-black.svg) #fff;
         width: 100%;
         color: #000;
+        background-position: right center;
+        background-repeat: no-repeat;
+        -webkit-background-size: 1.5rem 1.5rem;
+        background-position: right 15px center;
     }
     #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter {
         width: 100%;
@@ -476,5 +481,18 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     }
     #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header {
         margin-bottom: 4rem;
+    }
+}
+
+@media(max-width:768px) {
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter:before,
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter:before,
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header:before {
+        display: none;
+    }
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter,
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter,
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header {
+        padding: 0
     }
 }
