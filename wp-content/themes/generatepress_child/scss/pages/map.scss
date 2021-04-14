@@ -211,3 +211,40 @@
     font-size: 1.5rem !important;
     padding: 1rem !important;
 }
+
+.wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title {
+    height: 5rem;
+    text-transform: uppercase;
+}
+
+.wpgmp_listing_container .tour-item-infor {
+    padding: 1rem 1.5rem;
+}
+
+.wpgmp_listing_container .tour-item-infor .address-link {
+    margin-bottom: 1rem;
+    height: auto;
+}
+
+.wpgmp_listing_container .more-info-div {
+    margin-bottom: 2rem;
+}
+
+body .fc-item-default.fc-wait .wpgmp_locations img {
+    margin-right: 0 !important;
+    width: 100% !important;
+}
+
+body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
+    padding: 10px 0 15px 15px!important;
+    margin-bottom: 0 !important
+}
+
+@media (min-width: 768px) {
+    .wpgmp_listing_container .tour-item:before {
+        display: none;
+    }
+    .wpgmp_listing_container .tour-item-infor .tour-item-actions a.btn-tour i {
+        font-weight: 900;
+    }
+}

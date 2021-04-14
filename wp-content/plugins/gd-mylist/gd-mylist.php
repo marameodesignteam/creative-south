@@ -33,8 +33,8 @@ class gd_mylist_plugin
             'is_anonymous_allowed' => 'true',
             'is_add_btn' => 'true',
             'is_fontawesome' => 'true',
-            'fontawesome_btn_add' => 'far fa-heart',
-            'fontawesome_btn_remove' => 'fas fa-heart',
+            'fontawesome_btn_add' => 'fas fa-plus-circle',
+            'fontawesome_btn_remove' => 'fas fa-minus-circle',
             'fontawesome_loading' => 'fas fa-spinner fa-pulse',
             'settings_label' => 'gd_mylist_settings',
         ];
