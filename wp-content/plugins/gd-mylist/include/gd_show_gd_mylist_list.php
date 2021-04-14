@@ -32,6 +32,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $portTitleLang = $this->extract_title($postTitle);
         $postAddress = get_field('_wpgmp_location_address',$post->posts_id);
         $postDigitalAddress = get_field('digital_adress',$post->posts_id);
+        $postDescription = get_field('description',$post->posts_id);
         $cateID = get_field('category_id',$post->posts_id);
         $categs = [
             1 => 'Festivals/Music & Performance',
@@ -84,6 +85,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             'postcategory' => $postCategory,
             'postmediaimage' => $imageArr,
             'postmediavideo' => $videoArr,
+            'postdescription' => $postDescription,
             'postdate' => get_the_date('F j, Y', $postId),
             'postAuthorName' => $postAuthorName,
             'postdontmiss'=> !empty($dont_miss) ? 'dont-miss-item' : 'basic-item',
