@@ -186,7 +186,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             }
 
             foreach ($posts as $post) {
-                $listAr['listitem'][] = $this->list_item($post);
+                $listAr['listitem'][$post->posts_id] = $this->list_item($post);
             }
 
             $output .= '<script type="text/javascript">';
