@@ -4819,7 +4819,7 @@
 
                         // @Vinh
                         // Close all location descriptions
-                        $('.collapseTour-item').collapse('hide');
+                        // $('.collapseTour-item').collapse('hide');
                         // Open location description here for place.id
                         $('#collapseTour-' + place.id ).collapse('show');
 
