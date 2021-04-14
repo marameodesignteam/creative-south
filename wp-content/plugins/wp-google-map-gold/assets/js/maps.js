@@ -4819,7 +4819,22 @@
 
                         // @Vinh
                         // Close all location descriptions
+                        $('.collapseTour-item').collapse('hide');
                         // Open location description here for place.id
+                        $('#collapseTour-' + place.id ).collapse('show');
+
+                        // Auto scroll
+                        var position = $('#post-' + place.id + ' .position').text();
+                        var i;
+                        var top_position = 0;
+                        for (i = 1; i < position; i++) {
+                            if ($('#listing-item-' + i).length) {
+                                top_position += $('#listing-item-' + i).height() + 25;
+                            }
+                        }
+                        $('.listing-map').animate({
+                            scrollTop: top_position
+                        }, 500);
 
                         console.log(place.id);
 
