@@ -65,12 +65,14 @@
                                         <h3 class="tour-item-title"><a href="{{posturl}}">{{posttitle}}</a></h3>
                                         <p class="address">{{postaddress}}</p>
                                         <p class="address-link">{{postdigitaladdress}}</p>
+                                        {{#if postdescription}}
                                         <div class="d-md-none d-block">
                                             <a class="more-info" data-toggle="collapse" href="#collapseTour-{{postId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <span class="open-des">More info</span>
                                                 <span class="close-des">Less info</span>
                                             </a>
                                         </div>
+                                        {{/if}}
                                     </div>
                                     <div class="col-md-12 col-4">
                                         <div class="tour-item-actions">
@@ -85,9 +87,11 @@
                             </div>
                         </div>
                     </div>
+                    {{#if postdescription}}
                     <div class="collapse" id="collapseTour-{{postId}}">
-                        <div class="card card-body card-tour-description">{{description}}</div>
+                        <div class="card card-body card-tour-description">{{postdescription}}</div>
                     </div>
+                    {{/if}}
                 </div>
             </li>
             {{/each}}

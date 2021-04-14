@@ -1,7 +1,13 @@
 <?php
 
+
 //echo serialize( wp_unslash([3]));
 /*
+WORDPRESS:
+https://dev.creativesouth.com.au/wp-admin/
+Uname: marameodesign
+PWD: %97)j6R10dl$axdb8)
+
 U: support@marameodesign.com
 P: mara!MeO@!Des!gn
 
