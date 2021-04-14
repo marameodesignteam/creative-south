@@ -256,3 +256,16 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 .wpgmp_listing_container .tour-item-infor .tour-item-actions .js-item-mylist+div a {
     width: 100%;
 }
+
+.listing-map .wpgmp_pagination {
+    padding: 0;
+    margin: 0;
+}
+
+.card-body.card-tour-description {
+    background: #EAEAEA;
+    border: none;
+    padding: 1.5rem;
+    font-size: 16px;
+    color: #1A1A1A;
+}
