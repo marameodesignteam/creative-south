@@ -269,3 +269,19 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     font-size: 16px;
     color: #1A1A1A;
 }
+
+.wpgmp_listing_container .tour-item-infor .more-info-div .more-info {
+    &[aria-expanded="false"] {
+        .close-des {
+            display: none;
+        }
+    }
+    &[aria-expanded="true"] {
+        .open-des {
+            display: none;
+        }
+        .close-des {
+            display: block;
+        }
+    }
+}
