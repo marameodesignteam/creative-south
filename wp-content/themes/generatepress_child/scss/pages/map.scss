@@ -160,3 +160,14 @@
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select option {
     color: #000;
 }
+
+@media (min-width:1920px) {
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter {
+        max-width: 72rem;
+        flex: 0 0 72rem;
+    }
+    #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter {
+        max-width: 55rem;
+        flex: 0 0 55rem;
+    }
+}
