@@ -94,3 +94,12 @@ function update_map_params() {
 
   wp_die();
 }
+
+add_filter( 'body_class', 'itinerary_class_to_body' );
+function itinerary_class_to_body( $classes ) {
+    if (!empty($_GET['itinerary'])) {
+	    $classes[] = 'share-itinerary';
+    }
+
+	return $classes;
+}
