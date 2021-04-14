@@ -1081,35 +1081,53 @@ if ( ! empty( $filter_array ) ) {
 								}
 							}
 							// Custom fields
+							$custom_fields['%description%'] = get_field('description', $post->ID);
                             $dont_miss = get_field('dont_miss', $post->ID);
-							$custom_fields['%dont_miss_flag%'] = !empty($dont_miss) ? 'dont-miss-item' : 'basic-item';
+							$dont_miss_flag = !empty($dont_miss) ? 'dont-miss-item' : 'basic-item';
+							$custom_fields['%dont_miss_flag%'] = $dont_miss_flag;
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
-							// Get Slide @Vinh
-//							$custom_fields['%slide%'] = get_slide($post->ID);
-							$custom_fields['%slide%'] = '<div id="demo-' . $post->ID . '" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators" style="z-index:1">
-    <li data-target="#demo-' . $post->ID . '" data-slide-to="0" class="active"></li>
-    <li data-target="#demo-' . $post->ID . '" data-slide-to="1" class=""></li>
-    <li data-target="#demo-' . $post->ID . '" data-slide-to="2" class=""></li>
-  </ul>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" style="width:100%;height:100%;">
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" style="width:100%;height:100%;">
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" style="width:100%;height:100%;">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#demo-' . $post->ID . '" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo-' . $post->ID . '" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>';
+							$set_first = FALSE;
+							$video_render = $images_render = '';
+							$mediaAttached = get_attached_media('', $post->ID);
+							foreach ($mediaAttached as $item) {
+								$type = $item->post_mime_type;
+								$url  = $item->guid;
+								$class = $set_first == FALSE ? 'active' : '';
+								if ( $type == 'video/mp4' ) {
+								    $video_render .=
+                                        "<div class='carousel-item {$class}'>
+                                            <video width='320' height='240' controls>
+                                                <source src='{$url}' type='video/mp4'>
+                                            </video>
+                                        </div>";
+								}
+								else {
+								    if (empty($custom_fields['%first_image%'])) {
+									    $custom_fields['%first_image%'] = $url;
+                                    }
+									$images_render .=
+										"<div class='carousel-item {$class}'>
+                                            <img src='{$url}'>
+                                        </div>";
+								}
+								$set_first = TRUE;
+							}
+
+							$custom_fields['%slide%'] = "<div class='tour-item-carousel'>
+                                <div id='location-slide-{$post->ID}' class='carousel slide' data-ride='false'>
+                                    <div class='carousel-inner'>
+                                        {$video_render} {$images_render}
+                                    </div>
+                                </div>
+                                <a class='carousel-control-prev' href='#location-slide-{$post->ID}' role='button' data-slide='prev'>
+                                    <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+                                    <span class='sr-only'>Previous</span>
+                                </a>
+                                <a class='carousel-control-next' href='#location-slide-{$post->ID}' role='button' data-slide='next'>
+                                    <span class='carousel-control-next-icon' aria-hidden='true'></span>
+                                    <span class='sr-only'>Next</span>
+                                </a>
+                            </div>";
 						}
 						
 						$post_taxonomies = get_post_taxonomies( $post->ID );
