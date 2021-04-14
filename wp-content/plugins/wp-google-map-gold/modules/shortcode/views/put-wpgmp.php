@@ -1328,8 +1328,7 @@ if ( is_array( $map_data['places'] ) ) {
 			$found_keyword = false;
 			$show_keyword_only = strtolower( $shortcode_filters['keyword'] );
 
-			// @Vinh add fields to be searched from here
-			$search_fields = ['post_title'];
+			$search_fields = ['post_title', '%description%'];
 			foreach ($search_fields as $f) {
 				if ( strpos(strtolower( $place['location']['extra_fields'][$f] ), $show_keyword_only) !== FALSE ) {
 					$found_keyword = true;
