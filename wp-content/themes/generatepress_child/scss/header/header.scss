@@ -22,7 +22,7 @@
         display: -webkit-flex;
         flex-wrap: nowrap;
         align-items: center;
-        padding: 0 0 2rem;
+        padding: 0 0 2.117rem;
         .site-logo {
             max-width: 14rem;
             flex: 0 0 16rem;
@@ -154,6 +154,6 @@ button.close {
         height: 10rem;
     }
     @include media(1400px) {
-        height: 12rem;
+        height: 11.24rem;
     }
 }

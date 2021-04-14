@@ -39,6 +39,14 @@
         menu_fixed()
     });
 
+    var $item = $('.full-height');
+    var offsetHeader = $('.the-header').height();
+    console.log(offsetHeader);
+    //var cateHeight = $('.wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter').height();
+    var $wHeight = $(window).height() - 112.4 - 41;
+    console.log($wHeight);
+    $item.height($wHeight);
+
     function clipboard() {
         var $temp = $("<input>");
         var $url = $(location).attr('href');

@@ -5,6 +5,7 @@
     border-radius: 0;
     display: flex;
     display: -webkit-flex;
+    margin-bottom: 0;
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_before_listing {
@@ -182,4 +183,14 @@
         flex: 0 0 calc(100% - 72rem);
         max-width: calc(100% - 72rem);
     }
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_map_parent {
+    float: none;
+    margin-bottom: 0;
+    height: 100%;
+}
+
+#post-38 .wpgmp-map-2 .wpgmp_map_parent .wpgmp_map {
+    height: 100% !important;
 }
