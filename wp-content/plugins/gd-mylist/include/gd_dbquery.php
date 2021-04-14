@@ -17,6 +17,9 @@ class gd_dbQuery
         if (!wp_verify_nonce($_REQUEST['nonce'], 'gd_mylist')) {
             !exit('Error');
         }
+	    if ($this->isInMylist($obj) == 'true') {
+		    !exit('Error');
+	    }
         global $wpdb;
         $query = $wpdb->query(
             $wpdb->prepare('
