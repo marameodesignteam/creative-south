@@ -2143,7 +2143,8 @@ if ( isset( $map->map_all_control['hide_map'] ) && $map->map_all_control['hide_m
 }
 
 // FILTER
-$filters_div = '<div class="wpgmp_filter_wrappers"></div>';
+$filters_div = '<button type="button" data-toggle="collapse" aria-expanded="false" aria-controls="general-search" data-target="#general-search" class="button-toggle collapsed">
+    <i class="fas fa-minus" aria-hidden="true"></i><i class="fas fa-plus" aria-hidden="true"></i> Filter by Category, Region or Keyword</button><div id="general-search" class="collapse"><div class="wpgmp_filter_wrappers"></div></div>';
 
 if(!class_exists('Listing_Designs_For_Google_Maps') || wp_is_mobile() ){
 

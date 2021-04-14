@@ -303,3 +303,16 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor .tour-item-actions {
     margin-top: 2rem;
 }
+
+.button-toggle {
+    display: block;
+    @include media(992px) {
+        display: none;
+    }
+}
+
+#general-search.collapse {
+    @include media(992px) {
+        display: block !important;
+    }
+}
