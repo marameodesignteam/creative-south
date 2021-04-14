@@ -2167,7 +2167,7 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 
 $listing_div .= apply_filters( 'wpgmp_after_listing', '', $map );
 
-$output = "<div class='row'><div class='col-12'>{$filters_div}</div><div class='col-6'>{$listing_div}</div><div class='col-6'>{$map_div}</div></div>";
+$output = "<div class='row'><div class='col-12'>{$filters_div}</div><div class='col-lg-6 listing-map'>{$listing_div}</div><div class='col-lg-6 full-map'>{$map_div}</div></div>";
 
 if(class_exists('Listing_Designs_For_Google_Maps')){ 
 	$map_output .= apply_filters( 'wpgmp_map_output', $output, $map_div, $filters_div, $listing_div, $map->map_id );
