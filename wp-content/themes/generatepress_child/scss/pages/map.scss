@@ -248,3 +248,11 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
         font-weight: 900;
     }
 }
+
+.wpgmp_listing_container .tour-item-infor .tour-item-actions .js-item-mylist+div {
+    width: 50%;
+}
+
+.wpgmp_listing_container .tour-item-infor .tour-item-actions .js-item-mylist+div a {
+    width: 100%;
+}

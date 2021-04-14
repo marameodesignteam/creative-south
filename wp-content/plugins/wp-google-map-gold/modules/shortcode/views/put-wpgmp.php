@@ -1084,6 +1084,7 @@ if ( ! empty( $filter_array ) ) {
 							$custom_fields['%description%'] = get_field('description', $post->ID);
                             $dont_miss = get_field('dont_miss', $post->ID);
 							$dont_miss_flag = !empty($dont_miss) ? 'dont-miss-item' : 'basic-item';
+							$custom_fields['%post_id%'] = $post->ID;
 							$custom_fields['%dont_miss_flag%'] = $dont_miss_flag;
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 							$custom_fields['%post_address%'] = get_field('_wpgmp_location_address',$post->ID);
