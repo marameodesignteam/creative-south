@@ -8,8 +8,8 @@
 
     $(window).on("load", function() {
         removeAttrExpanedMenu();
-        internalAnchors();
-        anchorHash();
+        //internalAnchors();
+        //anchorHash();
         mobileMenu();
         clipboard();
     });
