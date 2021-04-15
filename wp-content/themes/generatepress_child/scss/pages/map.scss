@@ -207,10 +207,12 @@
     height: 5.1rem;
     text-transform: uppercase;
     cursor: pointer;
+    @include transition;
 }
 
-.wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title:focus {
-    outline: 2px solid $color-1;
+.wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title:focus,
+.wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title:hover {
+    color: #000;
 }
 
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title .place_title {
