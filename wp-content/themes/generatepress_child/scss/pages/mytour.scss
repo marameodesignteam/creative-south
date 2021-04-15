@@ -290,13 +290,6 @@
     }
 }
 
-.bottom-fixed-map {
-    display: block;
-    @include media(992px) {
-        display: none;
-    }
-}
-
 .nav-browse {
     display: flex;
     display: -webkit-flex;
@@ -320,6 +313,19 @@
         &.browse-by-map {
             background-color: #5F5F5F;
         }
+    }
+}
+
+.bottom-fixed-map {
+    display: flex;
+    display: -webkit-flex;
+    left: 0;
+    right: 0;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    @include media(992px) {
+        display: none;
     }
 }
 

@@ -9,7 +9,7 @@
     $(window).on("load", function() {
         removeAttrExpanedMenu();
         //internalAnchors();
-        //anchorHash();
+        anchorHash();
         mobileMenu();
         clipboard();
     });
@@ -54,9 +54,21 @@
     } else {
         var $wHeight = $(window).height() - 112.4 - 41;
     }
-
-    console.log($wHeight);
     $item.height($wHeight);
+
+
+    function mapMobile() {
+        $('.nav-browse-link').on('click', function(e) {
+            e.preventDefault();
+            var neo = $(this).attr('href');
+            var offsetTop = $(neo).offset().top;
+            var offsetHeader = $('#masthead').outerHeight();
+            var scrolltop = offsetTop - offsetHeader - 20;
+            $('html, body').animate({
+                scrollTop: scrolltop
+            }, 600);
+        });
+    }
 
     function clipboard() {
         var $temp = $("<input>");

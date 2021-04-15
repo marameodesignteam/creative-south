@@ -15,7 +15,10 @@
         }
     }
     .footer-block {
-        padding: 3rem 0;
+        padding: 3rem 0 6rem;
+        @include media(992px) {
+            padding: 3rem 0;
+        }
         position: relative;
         background: $color-5;
         .menu-footer {
@@ -56,9 +59,12 @@
                     margin-right: 0;
                 }
                 img {
-                    max-width: 12rem;
+                    max-width: 8rem;
                     width: 100%;
                     height: auto;
+                    @include media(992px) {
+                        max-width: 12rem;
+                    }
                 }
             }
         }
