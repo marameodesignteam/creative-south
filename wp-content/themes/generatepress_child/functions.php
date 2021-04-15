@@ -72,6 +72,48 @@ function custom_style() {
 <?php }
 add_action( 'admin_footer', 'custom_style' );
 
+function custom_style_login() {
+	?>
+    <style type="text/css">
+    body.login-action-login{
+      background: #000;
+    }
+		.login h1 a {
+			background-image: url( <?php echo get_stylesheet_directory_uri(); ?>/images/logo-header.png);
+			background-size: 100% auto;
+			height: 84px;
+			width: 239px;
+		}
+    .login #backtoblog a, .login #nav a, .login h1 a{
+      color: #fff;
+    }
+    .login #backtoblog a:hover, .login #nav a:hover, .login h1 a:hover{
+      color: #ee3897;
+    }
+    .wp-core-ui .button-primary{
+        background:#ee3897;
+        border-color: #ee3897;
+    }
+    .wp-core-ui .button-primary:hover,
+    .wp-core-ui .button-primary:focus{
+        border-color: #ee3897;
+        background: #fff;
+        color: #ee3897;
+    }
+		.wp-social-login-provider-list img {
+			max-width:100%;
+		}
+    .login form .input:focus, .login form input[type=checkbox]:focus, .login input[type=text]:focus{
+        border-color: #ee3897;
+        box-shadow: 0 0 0 1px #ee3897;
+    }
+    .login .button.wp-hide-pw .dashicons{
+        color: #ee3897;
+    }
+	</style>
+<?php }
+add_action( 'login_head', 'custom_style_login' );
+
 add_action( 'wp_ajax_update_map_params', 'update_map_params' );
 add_action( 'wp_ajax_nopriv_update_map_params', 'update_map_params' );
 
