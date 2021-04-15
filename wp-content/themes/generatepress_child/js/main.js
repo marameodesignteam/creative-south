@@ -29,7 +29,7 @@
             $('.the-header').addClass('active');
             $('.entry-header .entry-title').addClass('show');
         }
-        if (windowWidth < 992) {
+        if (windowWidth < 1199) {
             $('#post-38 .wpgmp-map-2 .listing-map').removeClass('full-height');
         }
 

@@ -290,6 +290,13 @@
     }
 }
 
+.bottom-fixed-map {
+    display: block;
+    @include media(992px) {
+        display: none;
+    }
+}
+
 .nav-browse {
     display: flex;
     display: -webkit-flex;
