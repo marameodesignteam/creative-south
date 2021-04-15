@@ -544,3 +544,14 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
         padding: 0
     }
 }
+
+.wpgmp_listing_container .carousel-control-prev,
+.wpgmp_listing_container .carousel-control-next {
+    width: 25px;
+}
+
+.wpgmp_listing_container .carousel-control-prev-icon,
+.wpgmp_listing_container .carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+}
