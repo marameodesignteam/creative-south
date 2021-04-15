@@ -1092,6 +1092,8 @@ if ( ! empty( $filter_array ) ) {
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 							$custom_fields['%post_address%'] = get_field('_wpgmp_location_address', $post->ID);
 							$custom_fields['%post_digital_address%'] = get_field('digital_adress', $post->ID);
+							$custom_fields['%post_lat%'] = get_field('_wpgmp_metabox_latitude', $post->ID);
+							$custom_fields['%post_long%'] = get_field('_wpgmp_metabox_longitude', $post->ID);
 							$set_first = FALSE;
 							$video_render = $images_render = '';
 							$mediaAttached = get_attached_media('', $post->ID);
