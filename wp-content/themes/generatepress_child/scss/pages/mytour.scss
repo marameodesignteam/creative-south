@@ -267,6 +267,7 @@
             }
             .carousel-item {
                 height: 100%;
+                transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out, -o-transform .3s ease-in-out;
                 video {
                     width: 100% !important;
                     //height: auto !important;
