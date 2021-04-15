@@ -262,6 +262,9 @@
         height: 100%;
         .carousel-inner {
             height: 100%;
+            @include media(768px) {
+                height: 24rem;
+            }
             .carousel-item {
                 height: 100%;
                 @include media(768px) {
