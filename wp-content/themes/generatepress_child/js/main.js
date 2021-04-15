@@ -169,7 +169,7 @@
             if (nav.length) {
                 var contentNav = nav.offset().top;
                 jQuery('html, body').animate({
-                    scrollTop: contentNav - offsetHeader - 20
+                    scrollTop: contentNav - offsetHeader - 120
                 }, 600);
             }
         }
