@@ -222,7 +222,13 @@ body .fc-item-default.fc-wait .wpgmp_locations img {
 
 body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     padding: 10px 0 15px 15px!important;
-    margin-bottom: 0 !important
+    margin-bottom: 0 !important;
+    @include mediamaxwidth(991px) {
+        body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
+            padding: 15px 15px 15px 15px!important;
+            margin-bottom: 0 !important
+        }
+    }
 }
 
 @media (min-width: 768px) {
@@ -235,11 +241,15 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 }
 
 .wpgmp_listing_container .tour-item-infor .tour-item-actions .js-item-mylist+div {
-    width: 50%;
+    width: 100%;
+    @include media(768px) {
+        width: 50%;
+    }
 }
 
 .wpgmp_listing_container .tour-item-infor .tour-item-actions .js-item-mylist+div a {
     width: 100%;
+    text-align: left;
 }
 
 .listing-map .wpgmp_pagination {
