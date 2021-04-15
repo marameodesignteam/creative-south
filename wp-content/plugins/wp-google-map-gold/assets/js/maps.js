@@ -4817,7 +4817,6 @@
                             prev_place.marker.setAnimation(null);
                         });
 
-                        // @Vinh
                         // Close all location descriptions
                         // $('.collapseTour-item').collapse('hide');
                         // Open location description here for place.id
@@ -4834,9 +4833,7 @@
                         }
                         $('.listing-map').animate({
                             scrollTop: top_position
-                        }, 500);
-
-                        console.log(place.id);
+                        }, 250);
 
                         map_obj.openInfoWindow(place);
                         if (bounce_on_event == 'click') {
