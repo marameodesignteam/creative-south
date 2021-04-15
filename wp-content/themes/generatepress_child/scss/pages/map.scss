@@ -295,15 +295,15 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 .more-info {
     &[aria-expanded="false"] {
         .close-des {
-            display: none;
+            display: none !important;
         }
     }
     &[aria-expanded="true"] {
         .open-des {
-            display: none;
+            display: none !important;
         }
         .close-des {
-            display: block;
+            display: block !important;
         }
     }
 }
