@@ -49,6 +49,11 @@ if (! function_exists('generate_construct_footer')) {
         </div>
       </div>
     </div>
+      <script>
+          function showOnMap(place_id) {
+            jQuery("#post-" + place_id + " .place_title").click();
+          }
+      </script>
     </footer><!-- .site-info -->
     <?php if(is_front_page()) : ?>
     <div class="modal fade modalcustom" id="wellcomeModal" tabindex="-1" role="dialog" aria-hidden="true">

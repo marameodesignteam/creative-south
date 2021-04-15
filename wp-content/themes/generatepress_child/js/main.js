@@ -69,9 +69,6 @@
         });
     }
 
-    function showOnMap(place_id) {
-        jQuery("#post-" + place_id + " .place_title").click();
-    }
 
     function clipboard() {
         var $temp = $("<input>");
