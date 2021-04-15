@@ -151,6 +151,12 @@
     overflow-x: hidden;
 }
 
+@media (min-width:1200px) {
+    #post-38 .wpgmp-map-2 .full-map {
+        padding-left: 0;
+    }
+}
+
 @media (min-width:1920px) {
     #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter,
     #post-38 .wpgmp-map-2 .listing-map {
