@@ -7,9 +7,9 @@
     }
 
     $(window).on("load", function() {
-        removeAttrExpanedMenu();
         //internalAnchors();
-        //anchorHash();
+        mapMobile();
+        anchorHash();
         mobileMenu();
         clipboard();
     });
@@ -29,6 +29,10 @@
             $('.the-header').addClass('active');
             $('.entry-header .entry-title').addClass('show');
         }
+        if (windowWidth < 1199) {
+            $('#post-38 .wpgmp-map-2 .listing-map').removeClass('full-height');
+        }
+
     });
 
     $(window).resize(function() {
@@ -43,9 +47,28 @@
     var offsetHeader = $('.the-header').height();
     console.log(offsetHeader);
     //var cateHeight = $('.wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter').height();
-    var $wHeight = $(window).height() - 112.4 - 41;
-    console.log($wHeight);
+    if (windowWidth < 375) {
+        var $wHeight = $(window).height() - 67 - 44;
+    } else if (windowWidth < 1199) {
+        var $wHeight = $(window).height() - 73.1 - 44;
+    } else {
+        var $wHeight = $(window).height() - 112.4 - 41;
+    }
     $item.height($wHeight);
+
+
+    function mapMobile() {
+        $('.nav-browse-link').on('click', function(e) {
+            e.preventDefault();
+            var neo = $(this).attr('href');
+            var offsetTop = $(neo).offset().top;
+            var offsetHeader = $('#masthead').outerHeight();
+            var scrolltop = offsetTop - offsetHeader - 20;
+            $('html, body').animate({
+                scrollTop: scrolltop
+            }, 600);
+        });
+    }
 
     function clipboard() {
         var $temp = $("<input>");
@@ -74,41 +97,6 @@
     }
 
     function mobileMenu() {
-        $("#menu-primary-menu > li.menu-item-has-children > a, #menu-primary-menu > li.menu-item-has-children li.menu-item-has-children > a").each(function() {
-            //unbind
-            $(this).unbind();
-            $(this).removeAttr("aria-expanded");
-            $(this).removeAttr("aria-haspopup");
-
-            var ul = $(this).next();
-
-            var li = $(this).closest("li")
-            var id = li.attr("id");
-
-            ul.attr("id", id + "_ul");
-
-            var button = $("<button class='mega-indicator mega-indicator-button top-level d-xl-none'><span class='sr-only'>" + $(this).text() + " submenu</span></button>");
-
-            button.attr("aria-controls", id + "_ul");
-            button.attr("aria-expanded", "false");
-
-            button.insertAfter($(this));
-            li.addClass("mega-with-button");
-            $(this).find(".mega-indicator:not(.mega-indicator-button)").remove();
-            li.addClass("js");
-
-        });
-
-
-        $("body").on("click", ".mega-indicator-button", function() {
-            // var paren = $(this).parent('.menu-item-has-children');
-            // paren.find('.menu-link').toggleClass('active');
-            $(this).parent('li').toggleClass('active');
-            if ($(this).attr("aria-expanded") == "false") $(this).attr("aria-expanded", "true");
-            else $(this).attr("aria-expanded", "false");
-            $(this).next('.sub-menu').slideToggle();
-        });
-
         //toggle
         $(".menu-toggle").on("click", function() {
             var menu = $("#menu-mobile");
@@ -134,14 +122,6 @@
             $('body').removeClass('open');
         });
 
-        // if (windowWidth < 1200) {
-        //     $("body").on("click", ".main-navigation ul li a", function() {
-        //         $('html,body').removeClass('hidden');
-        //         $('.mega-indicator-button').attr("aria-expanded", "false");
-        //         $('body, #menu-mobile').removeClass('open');
-        //     });
-        // }
-
         function closeAccordion() {
             $(".mega-indicator-button").attr("aria-expanded", "false");
             $('.sub-menu').hide();
@@ -149,11 +129,6 @@
         }
     }
 
-
-    //remove attr-expaned Menu
-    function removeAttrExpanedMenu() {
-        $('#mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link').removeAttr("aria-expanded");
-    }
     //https://css-tricks.com/snippets/jquery/smooth-scrolling/
     function internalAnchors() {
         $('a[href*="#"]')

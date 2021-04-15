@@ -316,6 +316,19 @@
     }
 }
 
+.bottom-fixed-map {
+    display: flex;
+    display: -webkit-flex;
+    left: 0;
+    right: 0;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    @include media(992px) {
+        display: none;
+    }
+}
+
 .share-itinerary .tour-item-actions .js-gd-remove-mylist {
     display: none;
 }
