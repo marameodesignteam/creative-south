@@ -296,14 +296,14 @@
     position: fixed;
     bottom: 0;
     z-index: 1;
+    display: flex;
+    display: -webkit-flex;
     @include media(992px) {
         display: none;
     }
 }
 
 .nav-browse {
-    display: flex;
-    display: -webkit-flex;
     .nav-browse-link {
         font-size: 1.3rem;
         font-weight: 700;
