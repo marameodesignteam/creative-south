@@ -258,8 +258,14 @@
 .tour-item-carousel {
     position: relative;
     height: 100%;
+    .wpgmp_listing_container & {
+        height: 100%;
+    }
     @include media(768px) {
         height: 24rem;
+        .wpgmp_listing_container & {
+            height: 24rem;
+        }
     }
     .carousel {
         height: 100%;
