@@ -1120,7 +1120,7 @@ if ( ! empty( $filter_array ) ) {
 							}
 
 							$custom_fields['%slide%'] = "<div class='tour-item-carousel'>
-                                <div id='location-slide-{$post->ID}' class='carousel slide' data-ride='false'>
+                                <div id='location-slide-{$post->ID}' class='carousel slide' data-interval='false'>
                                     <div class='carousel-inner'>
                                         {$video_render} {$images_render}
                                     </div>
