@@ -32,7 +32,6 @@
         if (windowWidth < 1199) {
             $('#post-38 .wpgmp-map-2 .listing-map').removeClass('full-height');
         }
-
     });
 
     $(window).resize(function() {
@@ -63,11 +62,15 @@
             var neo = $(this).attr('href');
             var offsetTop = $(neo).offset().top;
             var offsetHeader = $('#masthead').outerHeight();
-            var scrolltop = offsetTop - offsetHeader - 20;
+            var scrolltop = offsetTop - offsetHeader - 120;
             $('html, body').animate({
                 scrollTop: scrolltop
             }, 600);
         });
+    }
+
+    function showOnMap(place_id) {
+        jQuery("#post-" + place_id + " .place_title").click();
     }
 
     function clipboard() {
