@@ -33,7 +33,7 @@
                     <div class="gd-mylist-box-inner row">
                         <div class="col-md-6 d-md-block d-none">
                             <div class="tour-item-carousel">
-                                <div id="location-slide-{{postId}}" class="carousel slide" data-ride="false">
+                                <div id="location-slide-{{postId}}" class="carousel slide" data-interval="false">
                                     <div class="carousel-inner">
                                         {{#each postmediavideo}}
                                         <div class="carousel-item {{class}}">
@@ -62,7 +62,7 @@
                             <div class="tour-item-infor">
                                 <div class="row">
                                     <div class="col-md-12 col-8">
-                                        <h3 class="tour-item-title"><a href="{{posturl}}">{{posttitle}}</a></h3>
+                                        <h3 class="tour-item-title">{{posttitle}}</h3>
                                         <p class="address">{{postaddress}}</p>
                                         <p class="address-link">{{postdigitaladdress}}</p>
                                         {{#if postdescription}}
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="col-md-12 col-4">
                                         <div class="tour-item-actions">
-                                            <a href="https://maps.google.com/?q={{postaddress}}" target="_blank" class="btn-tour"><i class="fas fa-directions" aria-hidden="true"></i>Get Directions</a>
+                                            <a href="https://maps.google.com/?q={{postlat}},{{postlong}}" target="_blank" class="btn-tour"><i class="fas fa-directions" aria-hidden="true"></i>Get Directions</a>
                                             <a href="javascript:void();" class="btn-tour js-gd-remove-mylist" id="mylist-{{showRemove.itemid}}" data-postid="{{showRemove.itemid}}" data-styletarget="{{showRemove.styletarget}}" data-userid="{{showRemove.userid}}" aria-label="{{showRemove.label}}"
                                                 title="{{showRemove.label}}">
                                                 <i class="fas fa-minus-circle" aria-hidden="true"></i> {{showRemove.label}}

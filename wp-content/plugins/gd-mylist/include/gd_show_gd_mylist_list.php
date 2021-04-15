@@ -31,6 +31,8 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $postTitle = $post->posts_title;
         $portTitleLang = $this->extract_title($postTitle);
         $postAddress = get_field('_wpgmp_location_address',$post->posts_id);
+        $postLat = get_field('_wpgmp_metabox_latitude',$post->posts_id);
+        $postLong = get_field('_wpgmp_metabox_longitude',$post->posts_id);
         $postDigitalAddress = get_field('digital_adress',$post->posts_id);
         $postDescription = get_field('description',$post->posts_id);
         $cateID = get_field('category_id',$post->posts_id);
@@ -81,6 +83,8 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             'postimage' => wp_get_attachment_url(get_post_thumbnail_id($postId)),
             'posttitle' => $postTitle,
             'postaddress' => $postAddress,
+            'postlat' => $postLat,
+            'postlong' => $postLong,
             'postdigitaladdress' => $postDigitalAddress,
             'postcategory' => $postCategory,
             'postmediaimage' => $imageArr,
