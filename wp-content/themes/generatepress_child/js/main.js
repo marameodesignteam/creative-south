@@ -98,7 +98,8 @@
 
     function mobileMenu() {
         //toggle
-        $(".menu-toggle").on("click", function() {
+        $(".menu-toggle").on("click", function(e) {
+            e.preventDefault();
             var menu = $("#menu-mobile");
             if (menu.hasClass("open")) {
                 menu.removeClass("open");

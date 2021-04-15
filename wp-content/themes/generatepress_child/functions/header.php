@@ -121,12 +121,12 @@ if (! function_exists('generate_construct_header')) {
      <!-- <div class="container insideHeader"> -->
      <div class="insideHeader">
         <div class="in_header">
-          <button class="menu-toggle"
+          <a href="" role="button" class="menu-toggle"
                 aria-controls="menu-mobile" aria-expanded="false">
                 <i class="fas fa-bars" aria-hidden="true"></i>
                 <i class="fas fa-times" aria-hidden="true"></i>
                 <span class=" sr-only mobile-menu">Menu</span>
-          </button>
+          </a>
           <?php
                 /**
                  * generate_before_header_content hook.
