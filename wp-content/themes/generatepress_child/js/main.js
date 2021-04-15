@@ -7,8 +7,8 @@
     }
 
     $(window).on("load", function() {
-        removeAttrExpanedMenu();
         //internalAnchors();
+        mapMobile();
         anchorHash();
         mobileMenu();
         clipboard();
@@ -97,41 +97,6 @@
     }
 
     function mobileMenu() {
-        $("#menu-primary-menu > li.menu-item-has-children > a, #menu-primary-menu > li.menu-item-has-children li.menu-item-has-children > a").each(function() {
-            //unbind
-            $(this).unbind();
-            $(this).removeAttr("aria-expanded");
-            $(this).removeAttr("aria-haspopup");
-
-            var ul = $(this).next();
-
-            var li = $(this).closest("li")
-            var id = li.attr("id");
-
-            ul.attr("id", id + "_ul");
-
-            var button = $("<button class='mega-indicator mega-indicator-button top-level d-xl-none'><span class='sr-only'>" + $(this).text() + " submenu</span></button>");
-
-            button.attr("aria-controls", id + "_ul");
-            button.attr("aria-expanded", "false");
-
-            button.insertAfter($(this));
-            li.addClass("mega-with-button");
-            $(this).find(".mega-indicator:not(.mega-indicator-button)").remove();
-            li.addClass("js");
-
-        });
-
-
-        $("body").on("click", ".mega-indicator-button", function() {
-            // var paren = $(this).parent('.menu-item-has-children');
-            // paren.find('.menu-link').toggleClass('active');
-            $(this).parent('li').toggleClass('active');
-            if ($(this).attr("aria-expanded") == "false") $(this).attr("aria-expanded", "true");
-            else $(this).attr("aria-expanded", "false");
-            $(this).next('.sub-menu').slideToggle();
-        });
-
         //toggle
         $(".menu-toggle").on("click", function() {
             var menu = $("#menu-mobile");
@@ -157,14 +122,6 @@
             $('body').removeClass('open');
         });
 
-        // if (windowWidth < 1200) {
-        //     $("body").on("click", ".main-navigation ul li a", function() {
-        //         $('html,body').removeClass('hidden');
-        //         $('.mega-indicator-button').attr("aria-expanded", "false");
-        //         $('body, #menu-mobile').removeClass('open');
-        //     });
-        // }
-
         function closeAccordion() {
             $(".mega-indicator-button").attr("aria-expanded", "false");
             $('.sub-menu').hide();
@@ -172,11 +129,6 @@
         }
     }
 
-
-    //remove attr-expaned Menu
-    function removeAttrExpanedMenu() {
-        $('#mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link').removeAttr("aria-expanded");
-    }
     //https://css-tricks.com/snippets/jquery/smooth-scrolling/
     function internalAnchors() {
         $('a[href*="#"]')
