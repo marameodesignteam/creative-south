@@ -290,12 +290,20 @@
     }
 }
 
-.nav-browse {
-    display: flex;
-    display: -webkit-flex;
+.bottom-fixed-map {
+    left: 0;
+    right: 0;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
     @include media(992px) {
         display: none;
     }
+}
+
+.nav-browse {
+    display: flex;
+    display: -webkit-flex;
     .nav-browse-link {
         font-size: 1.3rem;
         font-weight: 700;
@@ -314,16 +322,6 @@
             background-color: #5F5F5F;
         }
     }
-}
-
-.bottom-fixed-map {
-    display: flex;
-    display: -webkit-flex;
-    left: 0;
-    right: 0;
-    position: fixed;
-    bottom: 0;
-    z-index: 1;
 }
 
 .share-itinerary .tour-item-actions .js-gd-remove-mylist {
