@@ -111,7 +111,7 @@
     position: relative;
     .gd-mylist-box-inner {
         @media(min-width: 768px) {
-            height: 22rem;
+            height: 24rem;
         }
     }
     @include media(768px) {
@@ -258,13 +258,13 @@
 .tour-item-carousel {
     position: relative;
     height: 100%;
+    @include media(768px) {
+        height: 24rem;
+    }
     .carousel {
         height: 100%;
         .carousel-inner {
             height: 100%;
-            @include media(768px) {
-                height: 24rem;
-            }
             .carousel-item {
                 height: 100%;
                 transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out, -o-transform .3s ease-in-out;
