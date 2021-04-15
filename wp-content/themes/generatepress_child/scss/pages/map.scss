@@ -221,6 +221,10 @@
     padding: 1rem 1.5rem;
 }
 
+.wpgmp_listing_container .tour-item-infor .place_title {
+    display: none;
+}
+
 @include mediamaxwidth(600px) {
     .wpgmp_listing_container .tour-item-infor {
         margin-top: 0;
@@ -341,6 +345,9 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     padding: 0.5rem 1rem;
     width: 100%;
     text-align: left;
+    @include mediamaxwidth(374px) {
+        font-size: 1.3rem;
+    }
 }
 
 .button-toggle i {

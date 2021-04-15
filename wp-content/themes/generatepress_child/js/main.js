@@ -47,7 +47,14 @@
     var offsetHeader = $('.the-header').height();
     console.log(offsetHeader);
     //var cateHeight = $('.wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter').height();
-    var $wHeight = $(window).height() - 112.4 - 41;
+    if (windowWidth < 375) {
+        var $wHeight = $(window).height() - 67 - 44;
+    } else if (windowWidth < 1199) {
+        var $wHeight = $(window).height() - 73.1 - 44;
+    } else {
+        var $wHeight = $(window).height() - 112.4 - 41;
+    }
+
     console.log($wHeight);
     $item.height($wHeight);
 

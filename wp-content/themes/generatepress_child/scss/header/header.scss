@@ -146,9 +146,9 @@ button.close {
 }
 
 .the-header.active {
-    height: 7.3rem;
+    height: 6.7rem;
     @include media(375px) {
-        height: 8rem;
+        height: 7.31
     }
     @include media(1200px) {
         height: 10rem;
