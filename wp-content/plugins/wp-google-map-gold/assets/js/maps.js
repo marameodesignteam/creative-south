@@ -2298,22 +2298,23 @@
                     }
                     break;
                 default:
-
                     var first_place = this.map_data.places[0];
-                    if (typeof first_place[order_by] != 'undefined') {
-                        this.map_data.places.sort(this.sortByPlace(order_by, data_type));
-                        this.show_places.sort(this.sortByPlace(order_by, data_type));
-                    } else if (typeof first_place.location[order_by] != 'undefined') {
-                        this.map_data.places.sort(this.sortByLocation(order_by, data_type));
-                        this.show_places.sort(this.sortByLocation(order_by, data_type));
-                    } else if (typeof first_place.location.extra_fields[order_by] != 'undefined') {
-                        this.map_data.places.sort(this.sortByExtraFields(order_by, data_type));
-                        this.show_places.sort(this.sortByExtraFields(order_by, data_type));
-                    }
+                    if (this.map_data.places.length) {
+                        if (typeof first_place[order_by] != 'undefined') {
+                            this.map_data.places.sort(this.sortByPlace(order_by, data_type));
+                            this.show_places.sort(this.sortByPlace(order_by, data_type));
+                        } else if (typeof first_place.location[order_by] != 'undefined') {
+                            this.map_data.places.sort(this.sortByLocation(order_by, data_type));
+                            this.show_places.sort(this.sortByLocation(order_by, data_type));
+                        } else if (typeof first_place.location.extra_fields[order_by] != 'undefined') {
+                            this.map_data.places.sort(this.sortByExtraFields(order_by, data_type));
+                            this.show_places.sort(this.sortByExtraFields(order_by, data_type));
+                        }
 
-                    if (in_order == 'desc') {
-                        this.places.reverse();
-                        this.show_places.reverse();
+                        if (in_order == 'desc') {
+                            this.places.reverse();
+                            this.show_places.reverse();
+                        }
                     }
             }
         },
@@ -3041,6 +3042,7 @@
             var wpgmp_listing_filter = this.map_data.listing;
             var wpgmp_alltfilter = wpgmp_listing_filter.display_taxonomies_all_filter;
 
+            /*
             $.each(places, function(index, place) {
                 if (typeof place.categories == 'undefined') {
                     place.categories = {};
@@ -3070,8 +3072,50 @@
 
                 });
             });
-            // now create select boxes
+             */
 
+            filters['category'] = {};
+            filters['category']['Creative Retail & Markets'] = {
+                'id': 3,
+                'order': 0,
+                'name': 'Creative Retail & Markets'
+            };
+            filters['category']['Festivals/Music & Performance'] = {
+                'id': 1,
+                'order': 1,
+                'name': 'Festivals/Music & Performance'
+            };            filters['category']['Creative Retail & Markets'] = {
+                'id': 3,
+                'order': 0,
+                'name': 'Creative Retail & Markets'
+            };
+            filters['category']['Festivals/Music & Performance'] = {
+                'id': 1,
+                'order': 1,
+                'name': 'Festivals/Music & Performance'
+            };
+            filters['category']['Galleries & Studios'] = {
+                'id': 2,
+                'order': 2,
+                'name': 'Galleries & Studios'
+            };
+            filters['category']['Heritage'] = {
+                'id': 9,
+                'order': 0,
+                'name': 'Heritage'
+            };
+            filters['category']['Museums & Heritage'] = {
+                'id': 10,
+                'order': 0,
+                'name': 'Museums & Heritage'
+            };
+            filters['category']['Public Art/Heritage'] = {
+                'id': 4,
+                'order': 0,
+                'name': 'Public Art/Heritage'
+            };
+
+            // now create select boxes
             var content = '',
                 by = 'name',
                 type = '',
@@ -3382,6 +3426,7 @@
                     }
                 }
             } else {
+                // content = "<div class='wpgmp_no_locations'>" + wpgmp_local.wpgmp_location_no_results + "</div>";
                 content = "<div class='wpgmp_no_locations'>" + wpgmp_local.wpgmp_location_no_results + "</div>";
             }
 
@@ -4818,27 +4863,30 @@
                         });
 
                         // Close all location descriptions
-                        // $('.collapseTour-item').collapse('hide');
-                        // Open location description here for place.id
-                        $('#collapseTour-' + place.id ).collapse('show');
+                        $('.collapseTour-item').collapse('hide');
 
-                        // Auto scroll
-                        var position = $('#post-' + place.id + ' .position').text();
-                        var i;
-                        var top_position = 0;
-                        for (i = 1; i < position; i++) {
-                            if ($('#listing-item-' + i).length) {
-                                top_position += $('#listing-item-' + i).height() + 25;
+                        setTimeout(function(){
+                            // Open location description here for place.id
+                            $('#collapseTour-' + place.id ).collapse('show');
+
+                            // Auto scroll
+                            var position = $('#post-' + place.id + ' .position').text();
+                            var i;
+                            var top_position = 0;
+                            for (i = 1; i < position; i++) {
+                                if ($('#listing-item-' + i).length) {
+                                    top_position += $('#listing-item-' + i).height() + 25;
+                                }
                             }
-                        }
-                        $('.listing-map').animate({
-                            scrollTop: top_position
-                        }, 250);
+                            $('.listing-map').animate({
+                                scrollTop: top_position
+                            }, 250);
 
-                        map_obj.openInfoWindow(place);
-                        if (bounce_on_event == 'click') {
-                            map_obj.toggle_bounce(place.marker);
-                        }
+                            map_obj.openInfoWindow(place);
+                            if (bounce_on_event == 'click') {
+                                map_obj.toggle_bounce(place.marker);
+                            }
+                        }, 1);
                     });
 
 
