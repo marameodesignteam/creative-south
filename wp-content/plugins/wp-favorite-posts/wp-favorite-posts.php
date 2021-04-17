@@ -170,6 +170,27 @@ function wpfp_link( $return = 0, $action = "", $show_span = 1, $args = array() )
     if ($return) { return $str; } else { echo $str; }
 }
 
+function wpfp_link_by_post( $post_id , $return = 0, $action = "", $show_span = 1, $args = array() ) {
+    extract($args);
+    $str = "";
+    if ($show_span)
+        $str = "<span class='wpfp-span'>";
+    $str .= wpfp_before_link_img();
+    $str .= wpfp_loading_img();
+    if ($action == "remove"):
+        $str .= wpfp_link_html($post_id, wpfp_get_option('remove_favorite'), "remove");
+    elseif ($action == "add"):
+        $str .= wpfp_link_html($post_id, wpfp_get_option('add_favorite'), "add");
+    elseif (wpfp_check_favorited($post_id)):
+        $str .= wpfp_link_html($post_id, wpfp_get_option('remove_favorite'), "remove");
+    else:
+        $str .= wpfp_link_html($post_id, wpfp_get_option('add_favorite'), "add");
+    endif;
+    if ($show_span)
+        $str .= "</span>";
+    if ($return) { return $str; } else { echo $str; }
+}
+
 function wpfp_link_html($post_id, $opt, $action) {
     $link = "<a class='wpfp-link' href='?wpfpaction=".$action."&amp;postid=". esc_attr($post_id) . "' title='". $opt ."' rel='nofollow'>". $opt ."</a>";
     $link = apply_filters( 'wpfp_link_html', $link );
