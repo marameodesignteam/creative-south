@@ -29,7 +29,7 @@ class gd_remove_mylist extends gd_mylist_plugin
         ];
         $removeMylist = $this->removeMylist($obj);
 
-        if ($removeMylist > 0) {
+        if (1 || $removeMylist > 0) {
             $result['showAdd'] = [
                 'itemid' => $item_id,
                 'styletarget' => null,
