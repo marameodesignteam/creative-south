@@ -54,10 +54,7 @@ if (! function_exists('generate_construct_footer')) {
             jQuery("#post-" + place_id + " .place_title").click();
           }
           jQuery(document).ready(function($) {
-              jQuery('.more-info-div .more-info').on('click',function(){
-                  var parenId = jQuery(this).parents('.tour-item').attr('id');
-                  jQuery("#" + parenId + " .place_title").click();
-              });
+              
           });
       </script>
     </footer><!-- .site-info -->
