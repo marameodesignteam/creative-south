@@ -204,7 +204,7 @@
 }
 
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title {
-    height: 5.1rem;
+    max-height: 5.1rem;
     text-transform: uppercase;
     cursor: pointer;
     @include transition;
@@ -298,6 +298,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     border: none;
     padding: 1.5rem;
     font-size: 16px;
+    line-height: 24px;
     color: #1A1A1A;
 }
 
