@@ -54,11 +54,10 @@ if (! function_exists('generate_construct_footer')) {
             jQuery("#post-" + place_id + " .place_title").click();
           }
           jQuery(document).ready(function($) {
-              $('.tour-item-infor .more-info').on('click',function(e){
-                e.preventDefault(); 
+              $('.tour-item-infor .more-info').on('click',function(){
                 var paren = $(this).parents('.tour-item');
                 $(this).toggleClass('active');
-                paren.find('.card-tour-description').slideToggle();
+                paren.find('.collapseTour-item').slideToggle();
               });
           });
       </script>

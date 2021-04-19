@@ -303,6 +303,15 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 }
 
 .more-info {
+    background: none;
+    border: none;
+    padding: 0;
+    color: $color-1;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
     &[aria-expanded="false"] {
         .close-des {
             display: none !important;
