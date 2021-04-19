@@ -4862,13 +4862,22 @@
                             prev_place.marker.setAnimation(null);
                         });
 
-                        // Close all location descriptions
-                        $('.collapseTour-item').collapse('hide');
+                        // Close all location descriptions except the opening one place.id
+                        $( ".collapseTour-item" ).each(function() {
+                            console.log(">>" + this.id + "<<");
+                            if (this.id != 'collapseTour-' + place.id) {
+                                console.log('hide');
+                                $('#collapseTour-' + place.id).slideUp();
+                                $('#collapseTour-' + place.id + ".more-info").removeClass('active');
+                            }
+                            else {
+                                console.log('show');
+                                $('#collapseTour-' + place.id).slideDown();
+                                $('#collapseTour-' + place.id + ".more-info").addClass('active');
+                            }
+                        });
 
                         setTimeout(function(){
-                            // Open location description here for place.id
-                            $('#collapseTour-' + place.id ).collapse('show');
-
                             // Auto scroll
                             var position = $('#post-' + place.id + ' .position').text();
                             var i;

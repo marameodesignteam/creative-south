@@ -52,19 +52,14 @@ if (! function_exists('generate_construct_footer')) {
       <script>
           function showOnMap(place_id) {
             jQuery("#post-" + place_id + " .place_title").click();
-            jQuery("#post-" + place_id + " .collapseTour-item").slideDown();
-            jQuery("#post-" + place_id + " .more-info").addClass('active');
+            // jQuery("#post-" + place_id + " .collapseTour-item").slideDown();
+            // jQuery("#post-" + place_id + " .more-info").addClass('active');
           }
 
           function showOnMapDes(place_id){
-              // var paren = jQuery(this).parents('.tour-item');
-              // var parenId = jQuery(this).parents('.tour-item').attr('id');
-              // jQuery(this).toggleClass('active');
-              // paren.find('.collapseTour-item').slideToggle();
-              // jQuery("#" + parenId + " .place_title").click();
               jQuery("#post-" + place_id + " .place_title").click();
-              jQuery("#post-" + place_id + " .more-info").toggleClass('active');
-              jQuery("#post-" + place_id + " .collapseTour-item").slideToggle();
+              // jQuery("#post-" + place_id + " .more-info").toggleClass('active');
+              // jQuery("#post-" + place_id + " .collapseTour-item").slideToggle();
           }
 
       </script>
