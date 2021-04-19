@@ -67,6 +67,23 @@ if (! function_exists('generate_construct_footer')) {
               // jQuery("#post-" + place_id + " .collapseTour-item").slideToggle();
           }
 
+          function clickFavourite(place_id) {
+            jQuery('#mylist-' + place_id).click();
+          }
+          jQuery('body').on('DOMSubtreeModified', '.mylist_btn', function(){
+            var elem_html = jQuery(this).html();
+            var fake_btn_class = '';
+            if (elem_html.indexOf('Add') !== -1) {
+              fake_btn_class = 'add-tour';
+            }
+            if (elem_html.indexOf('Delete') !== -1) {
+              fake_btn_class = 'delete-tour';
+            }
+            var fake_btn_id = '#' + this.id + '_fake';
+            jQuery(fake_btn_id).removeClass('add-tour');
+            jQuery(fake_btn_id).removeClass('delete-tour');
+            jQuery(fake_btn_id).addClass(fake_btn_class);
+          });
       </script>
     </footer><!-- .site-info -->
     <?php if(is_front_page()) : ?>

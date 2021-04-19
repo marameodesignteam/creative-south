@@ -78,7 +78,7 @@ class gd_show_mylist_btn extends gd_mylist_plugin
         $button .= (json_encode($buttonData));
         $button .= ('</script>');
         $button .= ('</div>');
-        $button .= ('<div id="mylist_btn_' . $item_id . '"></div>');
+	    $button .= ('<div id="mylist_btn_' . $item_id . '" class="mylist_btn"></div>');
         return $button;
     }
 

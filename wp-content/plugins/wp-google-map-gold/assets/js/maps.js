@@ -4879,6 +4879,20 @@
                             }
                         });
 
+                        // Class for fake favorite btn
+                        var elem_html = $('#mylist_btn_' + place.id).html();
+                        var fake_btn_class = '';
+                        if (elem_html.indexOf('Add') !== -1) {
+                            fake_btn_class = 'add-tour';
+                        }
+                        if (elem_html.indexOf('Delete') !== -1) {
+                            fake_btn_class = 'delete-tour';
+                        }
+                        var fake_btn_id = '#mylist_btn_' + place.id + '_fake';
+                        $(fake_btn_id).removeClass('add-tour');
+                        $(fake_btn_id).removeClass('delete-tour');
+                        $(fake_btn_id).addClass(fake_btn_class);
+
                         setTimeout(function(){
                             // Auto scroll
                             var position = $('#post-' + place.id + ' .position').text();
@@ -5134,7 +5148,17 @@
 
                 place.infowindow = map_obj.infobox;
                 place.infowindow.setOptions(infoboxOptions);
-                infoboxText.innerHTML = place.infowindow_data;
+
+                var elem_html = $('#mylist_btn_' + place.id).html();
+                var fake_btn_class = '';
+                if (elem_html.indexOf('Add') !== -1) {
+                    fake_btn_class = 'add-tour';
+                }
+                if (elem_html.indexOf('Delete') !== -1) {
+                    fake_btn_class = 'delete-tour';
+                }
+
+                infoboxText.innerHTML = place.infowindow_data.replace('mylist-btn-fake', 'mylist-btn-fake ' + fake_btn_class);
             } else {
                 place.infowindow = map_obj.infowindow_marker;
                 place.infowindow.setContent(place.infowindow_data);
