@@ -293,7 +293,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     margin: 0;
 }
 
-.card-body.card-tour-description {
+.card-tour-description {
     background: #EAEAEA;
     border: none;
     padding: 1.5rem;
@@ -574,4 +574,26 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 
 .wpgmp_listing_container .tour-item-infor .tour-item-actions {
     margin-right: 15px;
+}
+
+.wpgmp_locations {
+    .tour-item-infor {
+        .more-info {
+            .close-des {
+                display: none;
+            }
+            &.active {
+                .open-des {
+                    display: none;
+                }
+                .close-des {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.wpgmp_locations .tour-item .collapseTour-item {
+    display: none;
 }
