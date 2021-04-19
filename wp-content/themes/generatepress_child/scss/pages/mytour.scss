@@ -197,6 +197,7 @@
     .address-link {
         font-weight: 700;
         margin-bottom: 1rem;
+        display: block;
         @include breakText;
         @include media(768px) {
             margin-bottom: 3.5rem;
