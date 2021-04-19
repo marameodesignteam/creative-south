@@ -52,8 +52,11 @@ if (! function_exists('generate_construct_footer')) {
       <script type="text/javascript">
           function showOnMap(place_id) {
             jQuery("#post-" + place_id + " .place_title").click();
+            // jQuery("#post-" + place_id + " .collapseTour-item").slideDown();
+            // jQuery("#post-" + place_id + " .more-info").addClass('active');
           }
-          jQuery('.tour-item-infor .more-info').on('click', function() {
+
+          jQuery('.tour-item-infor .js-more-info').on('click', function() {
             var paren = jQuery(this).parents('.tour-item');
             var parenId = jQuery(this).parents('.tour-item').attr('id');
             jQuery(this).toggleClass('active');
