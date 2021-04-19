@@ -36,7 +36,6 @@
         $('.tour-item-infor .more-info').on('click', function() {
             var paren = $(this).parents('.tour-item');
             var parenId = $(this).parents('.tour-item').attr('id');
-            console.log(parenId);
             $(this).toggleClass('active');
             paren.find('.collapseTour-item').slideToggle();
             $("#" + parenId + " .place_title").click();
