@@ -4864,16 +4864,18 @@
 
                         // Close all location descriptions except the opening one place.id
                         $( ".collapseTour-item" ).each(function() {
-                            console.log(">>" + this.id + "<<");
-                            if (this.id != 'collapseTour-' + place.id) {
-                                console.log('hide');
-                                $('#collapseTour-' + place.id).slideUp();
-                                $('#collapseTour-' + place.id + ".more-info").removeClass('active');
+                            var current_id = this.id.replace('collapseTour-', '');
+                            if (current_id != place.id) {
+                                if ($('#post-' + current_id + ' .more-info.active').length) {
+                                    $('#collapseTour-' + current_id).slideUp();
+                                    $('#post-' + current_id + ' .more-info').removeClass('active');
+                                }
                             }
                             else {
-                                console.log('show');
-                                $('#collapseTour-' + place.id).slideDown();
-                                $('#collapseTour-' + place.id + ".more-info").addClass('active');
+                                if (!$('#post-' + current_id + ' .more-info.active').length) {
+                                    $('#collapseTour-' + current_id).slideDown();
+                                    $('#post-' + current_id + ' .more-info').addClass('active');
+                                }
                             }
                         });
 
@@ -4895,7 +4897,7 @@
                             if (bounce_on_event == 'click') {
                                 map_obj.toggle_bounce(place.marker);
                             }
-                        }, 1);
+                        }, 369);
                     });
 
 
