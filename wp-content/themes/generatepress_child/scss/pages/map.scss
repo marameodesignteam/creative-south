@@ -231,7 +231,8 @@
 }
 
 .wpgmp_listing_container .tour-item-infor {
-    padding: 1rem 1.5rem;
+    //padding: 1rem 1.5rem;
+    padding: 1.5rem 0 1rem;
 }
 
 .wpgmp_listing_container .tour-item-infor .place_title {
@@ -563,6 +564,13 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     color: $color-1;
 }
 
-.collapseTour-item.collapse {
-    height: unset;
+// .collapseTour-item.collapse {
+//     height: unset;
+// }
+.wpgmp_listing_container .wpgmp_locations .tour-item {
+    margin-bottom: 0;
+}
+
+.wpgmp_listing_container .tour-item-infor .tour-item-actions {
+    margin-right: 15px;
 }
