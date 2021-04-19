@@ -53,6 +53,13 @@ if (! function_exists('generate_construct_footer')) {
           function showOnMap(place_id) {
             jQuery("#post-" + place_id + " .place_title").click();
           }
+          jQuery('.tour-item-infor .more-info').on('click', function() {
+            var paren = jQuery(this).parents('.tour-item');
+            var parenId = jQuery(this).parents('.tour-item').attr('id');
+            jQuery(this).toggleClass('active');
+            paren.find('.collapseTour-item').slideToggle();
+            jQuery("#" + parenId + " .place_title").click();
+         });
       </script>
     </footer><!-- .site-info -->
     <?php if(is_front_page()) : ?>

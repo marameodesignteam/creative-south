@@ -32,14 +32,6 @@
         if (windowWidth < 1199) {
             $('#post-38 .wpgmp-map-2 .listing-map').removeClass('full-height');
         }
-
-        $('.tour-item-infor .more-info').on('click', function() {
-            var paren = $(this).parents('.tour-item');
-            var parenId = $(this).parents('.tour-item').attr('id');
-            $(this).toggleClass('active');
-            paren.find('.collapseTour-item').slideToggle();
-            $("#" + parenId + " .place_title").click();
-        });
     });
 
     $(window).resize(function() {
