@@ -71,13 +71,14 @@
 
 
     function clipboard() {
-        var $temp = $("<input>");
+        var temp = $("<input>");
         $('.clipboard').on('click', function() {
-            $("body").append($temp);
-            var $url = $(this).attr('href');
-            $temp.val($url).select();
+            console.log(1);
+            $("body").append(temp);
+            var url = $(this).attr('href');
+            temp.val(url).select();
             document.execCommand("copy");
-            $temp.remove();
+            temp.remove();
             $(".copied").addClass('active');
             setTimeout(function() {
                 $(".copied").removeClass('active');
