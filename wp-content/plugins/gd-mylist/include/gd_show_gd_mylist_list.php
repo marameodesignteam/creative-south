@@ -37,15 +37,15 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $postDescription = get_field('description',$post->posts_id);
         $cateID = get_field('category_id',$post->posts_id);
         $categs = [
-            1 => 'Creative Retail',
-            2 => 'Creative Retail & Markets',
-            3 => 'Festival',
-            4 => 'Heritage',
+            1 => 'Festivals/Music & Performance',
+            2 => 'Galleries & Studios',
+            3 => 'Creative Retail & Markets',
+            4 => 'Public Art/Heritage',
             8 => 'Museums & Heritage',
-            9 => 'Music & Performance/Heritage',
-            10 => 'Performance',
-            11 => 'Public Art',
-            12 => 'Public Art/Heritage'
+            9 => 'Heritage',
+            10 => 'Public Art',
+            11 => 'Festival',
+            12 => 'Performance',
         ];
         $postCategory = $categs[$cateID];
         $mediaAttached = get_attached_media('', $post->posts_id); 
