@@ -3084,7 +3084,8 @@
                 'id': 1,
                 'order': 1,
                 'name': 'Festivals/Music & Performance'
-            };            filters['category']['Creative Retail & Markets'] = {
+            };
+            filters['category']['Creative Retail & Markets'] = {
                 'id': 3,
                 'order': 0,
                 'name': 'Creative Retail & Markets'
@@ -4863,15 +4864,14 @@
                         });
 
                         // Close all location descriptions except the opening one place.id
-                        $( ".collapseTour-item" ).each(function() {
+                        $(".collapseTour-item").each(function() {
                             var current_id = this.id.replace('collapseTour-', '');
                             if (current_id != place.id) {
                                 if ($('#post-' + current_id + ' .more-info.active').length) {
                                     $('#collapseTour-' + current_id).slideUp();
                                     $('#post-' + current_id + ' .more-info').removeClass('active');
                                 }
-                            }
-                            else {
+                            } else {
                                 if (!$('#post-' + current_id + ' .more-info.active').length) {
                                     $('#collapseTour-' + current_id).slideDown();
                                     $('#post-' + current_id + ' .more-info').addClass('active');
@@ -4881,19 +4881,16 @@
 
                         // Class for fake favorite btn
                         var elem_html = $('#mylist_btn_' + place.id).html();
-                        var fake_btn_class = '';
+                        var fake_btn_id = '#mylist_btn_' + place.id + '_fake';
                         if (elem_html.indexOf('Add') !== -1) {
-                            fake_btn_class = 'add-tour';
+                            $(fake_btn_id).html('<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Tour</span>');
                         }
                         if (elem_html.indexOf('Delete') !== -1) {
-                            fake_btn_class = 'delete-tour';
+                            $(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Tour</span>');
                         }
-                        var fake_btn_id = '#mylist_btn_' + place.id + '_fake';
-                        $(fake_btn_id).removeClass('add-tour');
-                        $(fake_btn_id).removeClass('delete-tour');
-                        $(fake_btn_id).addClass(fake_btn_class);
 
-                        setTimeout(function(){
+
+                        setTimeout(function() {
                             // Auto scroll
                             var position = $('#post-' + place.id + ' .position').text();
                             var i;
@@ -5150,15 +5147,15 @@
                 place.infowindow.setOptions(infoboxOptions);
 
                 var elem_html = $('#mylist_btn_' + place.id).html();
-                var fake_btn_class = '';
+                var fake_btn_html = '';
                 if (elem_html.indexOf('Add') !== -1) {
-                    fake_btn_class = 'add-tour';
+                    fake_btn_html = '<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Tour</span>';
                 }
                 if (elem_html.indexOf('Delete') !== -1) {
-                    fake_btn_class = 'delete-tour';
+                    fake_btn_html = '<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Tour</span>';
                 }
 
-                infoboxText.innerHTML = place.infowindow_data.replace('mylist-btn-fake', 'mylist-btn-fake ' + fake_btn_class);
+                infoboxText.innerHTML = place.infowindow_data.replace('mylist_btn_html', fake_btn_html);
             } else {
                 place.infowindow = map_obj.infowindow_marker;
                 place.infowindow.setContent(place.infowindow_data);

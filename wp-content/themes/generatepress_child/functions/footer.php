@@ -72,17 +72,13 @@ if (! function_exists('generate_construct_footer')) {
           }
           jQuery('body').on('DOMSubtreeModified', '.mylist_btn', function(){
             var elem_html = jQuery(this).html();
-            var fake_btn_class = '';
+            var fake_btn_id = '#' + this.id + '_fake';
             if (elem_html.indexOf('Add') !== -1) {
-              fake_btn_class = 'add-tour';
+              jQuery(fake_btn_id).html('<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Tour</span>');
             }
             if (elem_html.indexOf('Delete') !== -1) {
-              fake_btn_class = 'delete-tour';
+              jQuery(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Tour</span>');
             }
-            var fake_btn_id = '#' + this.id + '_fake';
-            jQuery(fake_btn_id).removeClass('add-tour');
-            jQuery(fake_btn_id).removeClass('delete-tour');
-            jQuery(fake_btn_id).addClass(fake_btn_class);
           });
       </script>
     </footer><!-- .site-info -->

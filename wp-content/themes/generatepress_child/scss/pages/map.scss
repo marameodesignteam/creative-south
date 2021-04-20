@@ -615,9 +615,11 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
                 background: #eaeaea;
                 font-size: 1.2rem;
                 color: #1a1a1a;
-                padding: .5rem 1rem;
+                padding: .5rem .5rem;
                 width: 50%;
                 border: none;
+                height: 3.2rem;
+                text-align: left;
             }
             .mylist-btn-fake {
                 &button.btn-tour {
@@ -632,6 +634,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
                     color: $color-1;
                     margin-right: .5rem;
                     font-size: 1.6rem;
+                    vertical-align: -1px;
                 }
                 &.add-tour {
                     .add-text {
