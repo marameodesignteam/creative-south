@@ -72,10 +72,9 @@
 
     function clipboard() {
         var $temp = $("<input>");
-        var $url = $(location).attr('href');
-        $('.clipboard').on('click', function(e) {
-            e.preventDefault();
+        $('.clipboard').on('click', function() {
             $("body").append($temp);
+            var $url = $(this).attr('href');
             $temp.val($url).select();
             document.execCommand("copy");
             $temp.remove();
