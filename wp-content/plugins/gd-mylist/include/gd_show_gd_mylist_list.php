@@ -55,11 +55,12 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $set_first = FALSE;
         foreach($mediaAttached as $item) : 
             $type = $item->post_mime_type;
-            $url = $item->guid;
             if($type == 'video/mp4') {
+                $url = $item->guid;
                 array_push($videoArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
             }
             else{
+                $url  = wp_get_attachment_image_url($item->ID, 'large');
                 array_push($imageArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
             }
             $set_first = TRUE;

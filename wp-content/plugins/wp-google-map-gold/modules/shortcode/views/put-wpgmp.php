@@ -1099,9 +1099,9 @@ if ( ! empty( $filter_array ) ) {
 							$mediaAttached = get_attached_media('', $post->ID);
 							foreach ($mediaAttached as $item) {
 								$type = $item->post_mime_type;
-								$url  = $item->guid;
 								$class = $set_first == FALSE ? 'active' : '';
 								if ( $type == 'video/mp4' ) {
+									$url  = $item->guid;
 								    $video_render .=
                                         "<div class='carousel-item {$class}'>
                                             <video width='320' height='240' controls>
@@ -1110,6 +1110,7 @@ if ( ! empty( $filter_array ) ) {
                                         </div>";
 								}
 								else {
+									$url  = wp_get_attachment_image_url($item->ID, 'large');
 								    if (empty($custom_fields['%first_image%'])) {
 									    $custom_fields['%first_image%'] = $url;
                                     }
