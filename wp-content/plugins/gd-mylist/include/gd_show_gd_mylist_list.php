@@ -44,6 +44,15 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             8 => 'Museums & Heritage',
             9 => 'Heritage',
             10 => 'Public Art',
+            11 => 'Festival',
+            12 => 'Performance',
+            13 => 'Music & Performance/Heritage',
+            14 => 'Creative Retail',
+            15 => 'Music & Performance',
+            17 => 'Music/Performance',
+            18 => 'Festivals/Music & Performance/Don\'t Miss',
+            19 => 'Heritage & Museum',
+            20 => 'Museum & Heritage',
         ];
         $postCategory = $categs[$cateID];
         $mediaAttached = get_attached_media('', $post->posts_id); 
@@ -52,11 +61,12 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $set_first = FALSE;
         foreach($mediaAttached as $item) : 
             $type = $item->post_mime_type;
-            $url = $item->guid;
             if($type == 'video/mp4') {
+                $url = $item->guid;
                 array_push($videoArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
             }
             else{
+                $url  = wp_get_attachment_image_url($item->ID, 'large');
                 array_push($imageArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
             }
             $set_first = TRUE;
