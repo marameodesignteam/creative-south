@@ -2390,5 +2390,5 @@ if (!empty($map_data['places'])) {
 	return $map_output;
 }
 else {
-	return "NO PLACE";
+	return '<div class="no-results"><h2><strong>No results found </strong></h2><a class="no-result-link" href="/map" class="">Open the map with all locations</a></div>';
 }

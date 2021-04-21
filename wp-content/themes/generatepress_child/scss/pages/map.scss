@@ -674,3 +674,27 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     display: flex;
     display: -webkit-flex;
 }
+
+.no-results {
+    max-width: $container-width-lg;
+    padding: 2rem $container-lateral-padding 3rem;
+    margin: 0 auto;
+    @include media(1440px) {
+        max-width: $container-width;
+    }
+    h2 {
+        font-size: 3rem;
+        color: $body-text;
+        @include media(1200px) {
+            font-size: 3.5rem;
+        }
+    }
+    .no-result-link {
+        text-decoration: underline;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $color-1;
+        }
+    }
+}
