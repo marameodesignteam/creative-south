@@ -3076,45 +3076,35 @@
              */
 
             filters['category'] = {};
-            filters['category']['Creative Retail & Markets'] = {
-                'id': 3,
-                'order': 0,
-                'name': 'Creative Retail & Markets'
-            };
-            filters['category']['Festivals/Music & Performance'] = {
+            filters['category']['Festivals'] = {
                 'id': 1,
                 'order': 1,
-                'name': 'Festivals/Music & Performance'
+                'name': 'Festivals'
             };
             filters['category']['Creative Retail & Markets'] = {
                 'id': 3,
                 'order': 0,
                 'name': 'Creative Retail & Markets'
-            };
-            filters['category']['Festivals/Music & Performance'] = {
-                'id': 1,
-                'order': 1,
-                'name': 'Festivals/Music & Performance'
             };
             filters['category']['Galleries & Studios'] = {
                 'id': 2,
                 'order': 2,
                 'name': 'Galleries & Studios'
             };
-            filters['category']['Heritage'] = {
+            filters['category']['Music & Performance'] = {
                 'id': 9,
                 'order': 0,
-                'name': 'Heritage'
+                'name': 'Music & Performance'
             };
-            filters['category']['Museums & Heritage'] = {
-                'id': 10,
+            filters['category']['Museum & Heritage'] = {
+                'id': 8,
                 'order': 0,
-                'name': 'Museums & Heritage'
+                'name': 'Museum & Heritage'
             };
-            filters['category']['Public Art/Heritage'] = {
+            filters['category']['Public Art'] = {
                 'id': 4,
                 'order': 0,
-                'name': 'Public Art/Heritage'
+                'name': 'Public Art'
             };
 
             // now create select boxes
