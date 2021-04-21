@@ -121,26 +121,26 @@
 .search-form {
     input {
         &:focus {
-            border-bottom: 1px solid $color-7;
+            border-bottom: 1px solid $color-1;
             ;
         }
         &::-webkit-input-placeholder {
             /* WebKit browsers */
-            color: $color-7;
+            color: $color-1;
         }
         &:-moz-placeholder {
             /* Mozilla Firefox 4 to 18 */
-            color: $color-7;
+            color: $color-1;
             opacity: 1;
         }
         &::-moz-placeholder {
             /* Mozilla Firefox 19+ */
-            color: $color-7;
+            color: $color-1;
             opacity: 1;
         }
         &:-ms-input-placeholder {
             /* Internet Explorer 10+ */
-            color: $color-7;
+            color: $color-1;
         }
     }
 }
