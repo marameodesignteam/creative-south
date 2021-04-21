@@ -25,6 +25,9 @@
         @include media(1600px) {
             height: 70rem;
         }
+        @include media(1920px) {
+            height: 80rem;
+        }
         img {
             object-position: center;
             position: absolute;
