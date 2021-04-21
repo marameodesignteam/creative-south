@@ -2386,4 +2386,9 @@ if ( ! empty( $css_rules ) ) {
 	$map_output .= '<style>' . implode( ' ', $css_rules ) . '</style>';
 }
 
-return $map_output;
+if (!empty($map_data['places'])) {
+	return $map_output;
+}
+else {
+	return "NO PLACE";
+}
