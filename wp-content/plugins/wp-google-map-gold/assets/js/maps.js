@@ -2972,7 +2972,8 @@
                 });
 
                 //$(map_obj.container).find("."+template_shortcode).html(content);
-                $('body').find(wpgmp_filters.filters_container).append(content);
+                //$('body').find(wpgmp_filters.filters_container).append(content);
+                $('body').find(wpgmp_filters.filters_container).append('<select data-filter="dropdown"  name="place_%regions%" data-name = "%regions%"><option value="">Select Regions</option><option value="Macarthur">Macarthur</option><option value="Southern Highlands">Southern Highlands</option><option value="Southern Tablelands">Southern Tablelands</option></select>');
             });
 
 
