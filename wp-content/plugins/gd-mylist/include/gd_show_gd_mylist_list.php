@@ -66,7 +66,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
                 array_push($videoArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
             }
             else{
-                $url  = wp_get_attachment_image_url($item->ID, 'large');
+                $url  = wp_get_attachment_image_url($item->ID, 'card-tour');
                 array_push($imageArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
             }
             $set_first = TRUE;

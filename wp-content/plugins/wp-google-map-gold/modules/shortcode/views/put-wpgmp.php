@@ -1110,7 +1110,7 @@ if ( ! empty( $filter_array ) ) {
                                         </div>";
 								}
 								else {
-									$url  = wp_get_attachment_image_url($item->ID, 'large');
+									$url  = wp_get_attachment_image_url($item->ID, 'card-tour');
 								    if (empty($custom_fields['%first_image%'])) {
 									    $custom_fields['%first_image%'] = $url;
                                     }
