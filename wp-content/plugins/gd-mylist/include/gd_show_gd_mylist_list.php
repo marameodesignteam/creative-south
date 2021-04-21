@@ -47,6 +47,9 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             11 => 'Festival',
             12 => 'Performance',
             13 => 'Music & Performance/Heritage',
+            14 => 'Creative Retail',
+            15 => 'Music & Performance',
+            17 => 'Music/Performance',
         ];
         $postCategory = $categs[$cateID];
         $mediaAttached = get_attached_media('', $post->posts_id); 
