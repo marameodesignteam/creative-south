@@ -52,6 +52,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             17 => 'Music/Performance',
             18 => 'Festivals/Music & Performance/Don\'t Miss',
             19 => 'Heritage & Museum',
+            20 => 'Museum & Heritage',
         ];
         $postCategory = $categs[$cateID];
         $mediaAttached = get_attached_media('', $post->posts_id); 
