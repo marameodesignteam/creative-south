@@ -130,22 +130,12 @@ function update_map_params() {
 			$category_names = get_post_meta($post_id, 'category_names' );
 
 			$categs = [
-				1 => 'Festivals/Music & Performance',
+				1 => 'Festivals',
 				2 => 'Galleries & Studios',
 				3 => 'Creative Retail & Markets',
-				4 => 'Public Art/Heritage',
-				8 => 'Museums & Heritage',
-				9 => 'Heritage',
-				10 => 'Public Art',
-				11 => 'Festival',
-				12 => 'Performance',
-				13 => 'Music & Performance/Heritage',
-				14 => 'Creative Retail',
-				15 => 'Music & Performance',
-				17 => 'Music/Performance',
-				18 => 'Festivals/Music & Performance/Don\'t Miss',
-				19 => 'Heritage & Museum',
-				20 => 'Museum & Heritage',
+				4 => 'Public Art',
+				8 => 'Museum & Heritage',
+				9 => 'Music & Performance',
 			];
 
 			$category_id = [];
