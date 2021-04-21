@@ -24,6 +24,7 @@
             $('.wpgmp_search_form input').val(keyword_val);
         }
         $('.categories_filter select').change(function() {
+            $('.map-loader').addClass('active');
             var cate = $('.categories_filter select').val();
             cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
             var region = $('.regions_filter select').val();
@@ -34,6 +35,7 @@
             window.location.href = document.location.protocol + "//" + document.location.hostname + document.location.pathname + '?category=' + cate + '&region=' + region + '&keyword=' + keyword;
         });
         $('.regions_filter select').change(function() {
+            $('.map-loader').addClass('active');
             var cate = $('.categories_filter select').val();
             cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
             var region = $('.regions_filter select').val();
@@ -45,6 +47,7 @@
         });
         $('.wpgmp_search_form input').on('keypress', function(e) {
             if (e.which == 13) {
+                $('.map-loader').addClass('active');
                 var cate = $('.categories_filter select').val();
                 cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
                 var region = $('.regions_filter select').val();
@@ -56,6 +59,7 @@
             }
         });
         $('.apply-filters').on('click', function(e) {
+            $('.map-loader').addClass('active');
             var cate = $('.categories_filter select').val();
             cate = typeof cate == 'undefined' || cate == '' ? '' : cate;
             var region = $('.regions_filter select').val();
