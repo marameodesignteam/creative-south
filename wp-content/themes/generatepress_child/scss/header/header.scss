@@ -103,7 +103,8 @@
 }
 
 #wellcomeModal {
-    background-image: url(images/overlay.jpg);
+    background-image: url(images/welcome.png);
+    background-color: #000;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 99;
@@ -114,15 +115,16 @@
         text-align: center;
         p {
             font-size: 2.2rem;
+            color: $color-1;
+            font-weight: 700;
+            line-height: 3.4rem;
             @include media(768px) {
                 font-size: 2.6rem;
             }
             @include media(1200px) {
                 font-size: 3rem;
+                line-height: 3.6rem;
             }
-            color: $color-1;
-            font-weight: 700;
-            line-height: 3.4rem;
         }
     }
     .modal-content {
