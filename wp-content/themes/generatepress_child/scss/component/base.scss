@@ -282,17 +282,17 @@ img.alignleft {
         color: $color-1;
     }
     @include media(768px) {
-        font-size: 3.4rem;
+        font-size: 3.2rem;
     }
     @include media(1200px) {
-        font-size: 3.8rem;
+        font-size: 3.5rem;
     }
-    @include media(1440px) {
-        font-size: 4rem;
-    }
-    @include media(1600px) {
-        font-size: 4.4rem;
-    }
+    // @include media(1440px) {
+    //     font-size: 4rem;
+    // }
+    // @include media(1600px) {
+    //     font-size: 4.4rem;
+    // }
 }
 
 .bg-pink {

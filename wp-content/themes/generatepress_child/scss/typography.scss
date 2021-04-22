@@ -1,7 +1,7 @@
 /* TYPOGRAPHY */
 
 $line-height-base: 1.535;
-$font-size-base: 1.8rem;
+$font-size-base: 1.5rem;
 $font-size-h1: 3.6rem;
 $font-size-h2: 2.4rem;
 $font-size-h3: 2rem;
@@ -13,13 +13,10 @@ html {
 }
 
 body {
-    font-size: 1.5rem;
+    font-size: $font-size-base;
     font-family: $main-font;
     line-height: $line-height-base;
-    font-weight: 300;
-    @include media(1400px) {
-        font-size: $font-size-base;
-    }
+    font-weight: 400;
 }
 
 h1,
