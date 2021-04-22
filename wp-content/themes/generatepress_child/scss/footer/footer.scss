@@ -27,6 +27,7 @@
                         font-size: 1.4rem;
                         line-height: 2rem;
                         text-decoration: none;
+                        @include transition;
                         &:hover,
                         &:focus {
                             text-decoration: none;
