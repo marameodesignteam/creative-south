@@ -17,7 +17,7 @@ if( !empty($block['anchor']) ) {
        <div class="container">
             <h2 class="title-section">Choose the region you would like to explore</h2>
             <div class="row">
-                <div class="col-lg-6 region-selection-map">
+                <div class="col-lg-7 region-selection-map">
 					<div class="animated-map-image">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 705.71 598.7"><defs>
 					<style type="text/css">
@@ -63,7 +63,7 @@ if( !empty($block['anchor']) ) {
 			</div>
                 <!-- <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/CSouth_Map_01.svg" alt="Southern Tablesands Arts"> -->
                 </div>
-                <div class="col-lg-6 region-selection-list">
+                <div class="col-lg-5 region-selection-list">
                     <ul class="list-of-states">
                         <li><a data-state="CS1" href="">Wollondilly</a></li>
                         <li><a data-state="CS2" href="">Upper Lachlan</a></li>

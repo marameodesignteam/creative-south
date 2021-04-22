@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<!-- https://csswizardry.com/2020/05/the-fastest-google-fonts/ -->
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap"
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&display=swap"
 	  media="print" onload="this.media='all'" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
 	<link rel="profile" href="https://gmpg.org/xfn/11">
