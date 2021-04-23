@@ -2977,7 +2977,7 @@
 
                 //$(map_obj.container).find("."+template_shortcode).html(content);
                 //$('body').find(wpgmp_filters.filters_container).append(content);
-                $('body').find(wpgmp_filters.filters_container).append('<select data-filter="dropdown"  name="place_%regions%" data-name = "%regions%"><option value="">Select Regions</option><option value="Macarthur">Macarthur</option><option value="Southern Highlands">Southern Highlands</option><option value="Southern Tablelands">Southern Tablelands</option></select>');
+                $('body').find(wpgmp_filters.filters_container).append('<select data-filter="dropdown"  name="place_%regions%" data-name = "%regions%"><option value="">Select Regions</option><option value="Macarthur">Macarthur</option><option value="Riverina">Riverina</option><option value="SEA">SEA</option><option value="Southern Highlands">Southern Highlands</option><option value="Southern Tablelands">Southern Tablelands</option></select>');
             });
 
 
@@ -3109,6 +3109,11 @@
                 'id': 4,
                 'order': 0,
                 'name': 'Public Art'
+            };
+            filters['category']['Performing Arts Venue'] = {
+                'id': 21,
+                'order': 0,
+                'name': 'Performing Arts Venue'
             };
 
             // now create select boxes
