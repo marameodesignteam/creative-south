@@ -1091,7 +1091,12 @@ if ( ! empty( $filter_array ) ) {
 							$custom_fields['%dont_miss_flag%'] = $dont_miss_flag;
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 							$custom_fields['%post_address%'] = get_field('_wpgmp_location_address', $post->ID);
-							$custom_fields['%post_digital_address%'] = get_field('digital_adress', $post->ID);
+							$post_digital_address = get_field('digital_adress', $post->ID);
+							if ((strpos($post_digital_address, 'https://') !== false) || (strpos($post_digital_address, 'http://') !== false)) {
+								$custom_fields['%post_digital_address%'] = $post_digital_address;
+							}else{
+								$custom_fields['%post_digital_address%'] ='https://'.$post_digital_address;
+							}
 							$custom_fields['%post_lat%'] = get_field('_wpgmp_metabox_latitude', $post->ID);
 							$custom_fields['%post_long%'] = get_field('_wpgmp_metabox_longitude', $post->ID);
 							$set_first = FALSE;

@@ -33,7 +33,12 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $postAddress = get_field('_wpgmp_location_address',$post->posts_id);
         $postLat = get_field('_wpgmp_metabox_latitude',$post->posts_id);
         $postLong = get_field('_wpgmp_metabox_longitude',$post->posts_id);
-        $postDigitalAddress = get_field('digital_adress',$post->posts_id);
+        $postDigitalAddress_cs = get_field('digital_adress',$post->posts_id);
+        if ((strpos($postDigitalAddress_cs, 'https://') !== false) || (strpos($postDigitalAddress_cs, 'http://') !== false)) {
+            $postDigitalAddress = $postDigitalAddress_cs;
+        }else{
+            $postDigitalAddress = 'https://'.$postDigitalAddress_cs;
+        }
         $postDescription = get_field('description',$post->posts_id);
         $cateID = get_field('category_id',$post->posts_id);
         $categs = [
