@@ -136,6 +136,7 @@ function update_map_params() {
 				4 => 'Public Art',
 				8 => 'Museum & Heritage',
 				9 => 'Music & Performance',
+				21 => 'Performing Arts Venue',
 			];
 
 			$category_id = [];
@@ -144,7 +145,7 @@ function update_map_params() {
 				$names = explode(',', $category_names[0]);
 				foreach ($names as $name) {
 					foreach ($categs as $cid => $cate) {
-						if ($cate == $name) $category_id[] = $cid;
+						if ($cate == trim($name)) $category_id[] = $cid;
 					}
 				}
 
