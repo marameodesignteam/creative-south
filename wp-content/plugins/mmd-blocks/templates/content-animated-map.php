@@ -65,16 +65,16 @@ if( !empty($block['anchor']) ) {
                 </div>
                 <div class="col-lg-5 region-selection-list">
                     <ul class="list-of-states">
-                        <li><a data-state="CS1" href="">Wollondilly</a></li>
-                        <li><a data-state="CS2" href="">Upper Lachlan</a></li>
-                        <li><a data-state="CS3" href="">Hilltops</a></li>
-                        <li><a data-state="CS4" href="">Wingecarribee (Southern Highlands)</a></li>
-                        <li><a data-state="CS5" href="">Goulburn Mulwaree</a></li>
-                        <li><a data-state="CS6" href="">Yass Valley </a></li>
-                        <li><a data-state="CS7" href="">Queanbeyan Palerang</a></li>
-                        <li><a data-state="CS8" href="">Eurobodalla</a></li>
-                        <li><a data-state="CS9" href="">Bega Valley</a></li>
-                        <li><a data-state="CS10" href="">Snowy Monaro</a></li>
+                        <li><a data-state="CS1" href="/map/?category=&region=Wollondilly&keyword=">Wollondilly</a></li>
+                        <li><a data-state="CS2" href="/map/?category=&region=Upper%20Lachlan&keyword=">Upper Lachlan</a></li>
+                        <li><a data-state="CS3" href="/map/?category=&region=Hilltops&keyword=">Hilltops</a></li>
+                        <li><a data-state="CS4" href="/map/?category=&region=Wingecarribee%20(Southern%20Highlands)&keyword=">Wingecarribee (Southern Highlands)</a></li>
+                        <li><a data-state="CS5" href="/map/?category=&region=Goulburn%20Mulwaree&keyword=">Goulburn Mulwaree</a></li>
+                        <li><a data-state="CS6" href="/map/?category=&region=Yass%Valley&keyword=">Yass Valley </a></li>
+                        <li><a data-state="CS7" href="/map/?category=&region=Queanbeyan%Palerang&keyword=">Queanbeyan Palerang</a></li>
+                        <li><a data-state="CS8" href="/map/?category=&region=Eurobodalla&keyword=">Eurobodalla</a></li>
+                        <li><a data-state="CS9" href="/map/?category=&region=Bega%Valley&keyword=">Bega Valley</a></li>
+                        <li><a data-state="CS10" href="/map/?category=&region=Snowy%Monaro&keyword=">Snowy Monaro</a></li>
                     </ul>
                 </div>
             </div>
