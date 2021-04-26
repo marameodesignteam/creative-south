@@ -37,7 +37,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         if ((strpos($postDigitalAddress_cs, 'https://') !== false) || (strpos($postDigitalAddress_cs, 'http://') !== false)) {
             $postDigitalAddress = $postDigitalAddress_cs;
         }else{
-            $postDigitalAddress = 'https://'.$postDigitalAddress_cs;
+            $postDigitalAddress = ($postDigitalAddress_cs != '') ? 'https://'.$postDigitalAddress_cs : '';
         }
         $postDescription = get_field('description',$post->posts_id);
         $cateID = get_field('category_id',$post->posts_id);

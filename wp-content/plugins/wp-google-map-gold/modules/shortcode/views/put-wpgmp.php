@@ -1095,7 +1095,7 @@ if ( ! empty( $filter_array ) ) {
 							if ((strpos($post_digital_address, 'https://') !== false) || (strpos($post_digital_address, 'http://') !== false)) {
 								$custom_fields['%post_digital_address%'] = $post_digital_address;
 							}else{
-								$custom_fields['%post_digital_address%'] ='https://'.$post_digital_address;
+								$custom_fields['%post_digital_address%'] = ($post_digital_address != '') ? 'https://'.$post_digital_address : '';
 							}
 							$custom_fields['%post_lat%'] = get_field('_wpgmp_metabox_latitude', $post->ID);
 							$custom_fields['%post_long%'] = get_field('_wpgmp_metabox_longitude', $post->ID);
