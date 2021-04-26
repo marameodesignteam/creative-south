@@ -1102,6 +1102,7 @@ if ( ! empty( $filter_array ) ) {
 							$set_first = FALSE;
 							$video_render = $images_render = '';
 							$mediaAttached = get_attached_media('', $post->ID);
+							$num_media = count($mediaAttached);
 							foreach ($mediaAttached as $item) {
 								$type = $item->post_mime_type;
 								$class = $set_first == FALSE ? 'active' : '';
@@ -1126,21 +1127,27 @@ if ( ! empty( $filter_array ) ) {
 								}
 								$set_first = TRUE;
 							}
-
+							$carousel_control = "";
+							if($num_media > 1){
+								$carousel_control .= 
+									"<a class='carousel-control-prev' href='#location-slide-{$post->ID}' role='button' data-slide='prev'>
+										<span class='carousel-control-prev-icon' aria-hidden='true'></span>
+										<span class='sr-only'>Previous</span>
+									</a>
+									<a class='carousel-control-next' href='#location-slide-{$post->ID}' role='button' data-slide='next'>
+										<span class='carousel-control-next-icon' aria-hidden='true'></span>
+										<span class='sr-only'>Next</span>
+									</a>";
+							}else{
+								$carousel_control .= "";
+							}
 							$custom_fields['%slide%'] = "<div class='tour-item-carousel'>
                                 <div id='location-slide-{$post->ID}' class='carousel slide' data-interval='false'>
                                     <div class='carousel-inner'>
                                         {$video_render} {$images_render}
                                     </div>
                                 </div>
-                                <a class='carousel-control-prev' href='#location-slide-{$post->ID}' role='button' data-slide='prev'>
-                                    <span class='carousel-control-prev-icon' aria-hidden='true'></span>
-                                    <span class='sr-only'>Previous</span>
-                                </a>
-                                <a class='carousel-control-next' href='#location-slide-{$post->ID}' role='button' data-slide='next'>
-                                    <span class='carousel-control-next-icon' aria-hidden='true'></span>
-                                    <span class='sr-only'>Next</span>
-                                </a>
+								{$carousel_control}
                             </div>";
 						}
 						
