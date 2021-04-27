@@ -7,7 +7,7 @@
     }
 
     $(window).on("load", function() {
-        //internalAnchors();
+        internalAnchors();
         mapMobile();
         anchorHash();
         mobileMenu();
@@ -152,7 +152,7 @@
                         // Only prevent default if animation is actually gonna happen
                         event.preventDefault();
                         var offsetTop = target.offset().top;
-                        var scrolltop = offsetTop - offsetHeader - 20;
+                        var scrolltop = offsetTop - offsetHeader - 100;
                         //var scrolltop = offsetTop
                         $('html, body').animate({
                             scrollTop: scrolltop

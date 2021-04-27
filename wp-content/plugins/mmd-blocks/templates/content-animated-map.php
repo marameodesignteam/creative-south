@@ -6,11 +6,12 @@
  */
 
 
-if( !empty($block['anchor']) ) {
-    $id = $block['anchor'];
-}else{
-    $id = 'animated-map-' . $block['id'];
-}
+// if( !empty($block['anchor']) ) {
+//     $id = $block['anchor'];
+// }else{
+//     $id = 'animated-map-' . $block['id'];
+// }
+$id="regionExplore";
 ?>
 <div id="<?php echo $id; ?>" class="animated-map-blocks region-selection custom-blocks full-width background-black">
     <div class="in_custom-block">
