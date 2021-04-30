@@ -85,6 +85,40 @@ if (! function_exists('generate_construct_footer')) {
               // jQuery("#post-" + place_id + " .more-info").toggleClass('active');
               // jQuery("#post-" + place_id + " .collapseTour-item").slideToggle();
           }
+          
+          function scrollToMoreInfoMobi(place_id) {
+            // Close all location descriptions except the opening one place.id
+            jQuery(".collapseTour-item").each(function() {
+              var current_id = this.id.replace('collapseTour-', '');
+              if (current_id != place_id) {
+                if (jQuery('#post-' + current_id + ' .more-info.active').length) {
+                  jQuery('#collapseTour-' + current_id).slideUp();
+                  jQuery('#post-' + current_id + ' .more-info').removeClass('active');
+                }
+              } else {
+                if (!jQuery('#post-' + current_id + ' .more-info.active').length) {
+                  jQuery('#collapseTour-' + current_id).slideDown();
+                  jQuery('#post-' + current_id + ' .more-info').addClass('active');
+                }
+              }
+            });
+
+            setTimeout(function() {
+              var position = jQuery('#post-' + place_id + ' .position').text();
+              var i;
+              var top_position = 0;
+              for (i = 1; i < position; i++) {
+                if (jQuery('#listing-item-' + i).length) {
+                  top_position += jQuery('#listing-item-' + i).height() + 25;
+                }
+              }
+              top_position += jQuery('#fullMap').height() - 75;
+
+              jQuery('html, body').animate({
+                scrollTop: top_position
+              }, 250);
+            }, 250);
+          }
 
           function clickFavourite(place_id) {
             jQuery('#mylist-' + place_id).click();
