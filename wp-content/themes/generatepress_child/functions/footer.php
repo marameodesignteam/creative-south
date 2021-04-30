@@ -104,6 +104,10 @@ if (! function_exists('generate_construct_footer')) {
             });
 
             setTimeout(function() {
+              jQuery('html, body').animate({
+                scrollTop: jQuery('#fullMap').height() + 75
+              }, 250);
+
               var position = jQuery('#post-' + place_id + ' .position').text();
               var i;
               var top_position = 0;
@@ -112,9 +116,8 @@ if (! function_exists('generate_construct_footer')) {
                   top_position += jQuery('#listing-item-' + i).height() + 25;
                 }
               }
-              top_position += jQuery('#fullMap').height() - 75;
 
-              jQuery('html, body').animate({
+              $('.listing-map').animate({
                 scrollTop: top_position
               }, 250);
             }, 250);
