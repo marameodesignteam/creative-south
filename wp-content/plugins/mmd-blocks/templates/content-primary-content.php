@@ -34,7 +34,7 @@ if( !empty($block['anchor']) ) {
                     <nav aria-labelledby="second-menu-nav-id">
                         <ul class="row">
                             <li class="col-lg-3 col-md-6"><a href="#regionExplore">Choose </br> a REGION </br> to explore</a></li>
-                            <li class="col-lg-3 col-md-6"><a href="#categoryDiscover">Select </br> a CATEGORY </br> like to discover</a></li>
+                            <li class="col-lg-3 col-md-6"><a href="#categoryDiscover">Select </br> a CATEGORY </br> to discover</a></li>
                             <li class="col-lg-3 col-md-6"><a href="/southern-stories/">See </br> southern </br> HIGHLIGHTS</a></li>
                             <li class="col-lg-3 col-md-6"><a href="/map">See </br> EVERYTHING</a></li>
                         </ul>
