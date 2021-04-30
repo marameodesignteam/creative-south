@@ -72,7 +72,6 @@ $id="regionExplore";
                         <li><a data-state="CS4" href="/map/?category=&region=Wingecarribee%20(Southern%20Highlands)&keyword=">Wingecarribee (Southern Highlands)</a></li>
                         <li><a data-state="CS5" href="/map/?category=&region=Goulburn%20Mulwaree&keyword=">Goulburn Mulwaree</a></li>
                         <li><a data-state="CS6" href="/map/?category=&region=Yass%20Valley&keyword=">Yass Valley </a></li>
-                        <li><a data-state="CS7" href="/map/?category=&region=Queanbeyan%20Palerang&keyword=">Queanbeyan Palerang</a></li>
                         <li><a data-state="CS8" href="/map/?category=&region=Eurobodalla&keyword=">Eurobodalla</a></li>
                         <li><a data-state="CS9" href="/map/?category=&region=Bega%20Valley&keyword=">Bega Valley</a></li>
                         <li><a data-state="CS10" href="/map/?category=&region=Snowy%20Monaro&keyword=">Snowy Monaro</a></li>
