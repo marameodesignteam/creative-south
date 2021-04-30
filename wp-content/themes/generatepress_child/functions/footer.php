@@ -88,10 +88,10 @@ if (! function_exists('generate_construct_footer')) {
             var elem_html = jQuery(this).html();
             var fake_btn_id = '#' + this.id + '_fake';
             if (elem_html.indexOf('Add') !== -1) {
-              jQuery(fake_btn_id).html('<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Tour</span>');
+              jQuery(fake_btn_id).html('<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Trip</span>');
             }
             if (elem_html.indexOf('Delete') !== -1) {
-              jQuery(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Tour</span>');
+              jQuery(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Trip</span>');
             }
           });
       </script>
