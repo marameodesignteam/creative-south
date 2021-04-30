@@ -75,6 +75,11 @@ if (! function_exists('generate_construct_footer')) {
             jQuery("#post-" + place_id + " .more-info").removeClass('active');
           }
 
+          function showMoreInfo(place_id) {
+            jQuery("#post-" + place_id + " .collapseTour-item").slideDown();
+            jQuery("#post-" + place_id + " .more-info").addClass('active');
+          }
+
           function showOnMapDes(place_id){
               jQuery("#post-" + place_id + " .place_title").click();
               // jQuery("#post-" + place_id + " .more-info").toggleClass('active');
