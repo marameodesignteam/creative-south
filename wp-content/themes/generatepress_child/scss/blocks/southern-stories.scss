@@ -1,10 +1,13 @@
 .southern-stories-blocks {
-    padding: 4rem 0 10rem;
+    padding: 1.2rem 0 10rem;
     .title-section {
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
     }
     .subtitle {
         margin-bottom: 2rem;
+        @include media(1200px) {
+            margin-bottom: 6rem;
+        }
     }
     .southern-stories-images {
         ul {

@@ -8,11 +8,12 @@
 $categories_matrix = get_field('categories_matrix');
 $title = get_field('title');
 $text = get_field('text');
-if( !empty($block['anchor']) ) {
-    $id = $block['anchor'];
-}else{
-    $id = 'category-matrix-' . $block['id'];
-}
+// if( !empty($block['anchor']) ) {
+//     $id = $block['anchor'];
+// }else{
+//     $id = 'category-matrix-' . $block['id'];
+// }
+$id="categoryDiscover";
 if($categories_matrix && count($categories_matrix) > 0) :
 ?>
 

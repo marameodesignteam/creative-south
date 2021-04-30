@@ -1091,7 +1091,12 @@ if ( ! empty( $filter_array ) ) {
 							$custom_fields['%dont_miss_flag%'] = $dont_miss_flag;
 							$custom_fields['%favourite_link%'] = do_shortcode( '[show_gd_mylist_btn]' );
 							$custom_fields['%post_address%'] = get_field('_wpgmp_location_address', $post->ID);
-							$custom_fields['%post_digital_address%'] = get_field('digital_adress', $post->ID);
+							$post_digital_address = get_field('digital_adress', $post->ID);
+							if ((strpos($post_digital_address, 'https://') !== false) || (strpos($post_digital_address, 'http://') !== false)) {
+								$custom_fields['%post_digital_address%'] = $post_digital_address;
+							}else{
+								$custom_fields['%post_digital_address%'] = ($post_digital_address != '') ? 'https://'.$post_digital_address : '';
+							}
 							$custom_fields['%post_lat%'] = get_field('_wpgmp_metabox_latitude', $post->ID);
 							$custom_fields['%post_long%'] = get_field('_wpgmp_metabox_longitude', $post->ID);
 							$custom_fields['%suburb%'] = get_field('suburb', $post->ID);
@@ -1099,6 +1104,7 @@ if ( ! empty( $filter_array ) ) {
 							$set_first = FALSE;
 							$video_render = $images_render = '';
 							$mediaAttached = get_attached_media('', $post->ID);
+							$num_media = count($mediaAttached);
 							foreach ($mediaAttached as $item) {
 								$type = $item->post_mime_type;
 								$class = $set_first == FALSE ? 'active' : '';
@@ -1123,21 +1129,27 @@ if ( ! empty( $filter_array ) ) {
 								}
 								$set_first = TRUE;
 							}
-
+							$carousel_control = "";
+							if($num_media > 1){
+								$carousel_control .= 
+									"<a class='carousel-control-prev' href='#location-slide-{$post->ID}' role='button' data-slide='prev'>
+										<span class='carousel-control-prev-icon' aria-hidden='true'></span>
+										<span class='sr-only'>Previous</span>
+									</a>
+									<a class='carousel-control-next' href='#location-slide-{$post->ID}' role='button' data-slide='next'>
+										<span class='carousel-control-next-icon' aria-hidden='true'></span>
+										<span class='sr-only'>Next</span>
+									</a>";
+							}else{
+								$carousel_control .= "";
+							}
 							$custom_fields['%slide%'] = "<div class='tour-item-carousel'>
                                 <div id='location-slide-{$post->ID}' class='carousel slide' data-interval='false'>
                                     <div class='carousel-inner'>
                                         {$video_render} {$images_render}
                                     </div>
                                 </div>
-                                <a class='carousel-control-prev' href='#location-slide-{$post->ID}' role='button' data-slide='prev'>
-                                    <span class='carousel-control-prev-icon' aria-hidden='true'></span>
-                                    <span class='sr-only'>Previous</span>
-                                </a>
-                                <a class='carousel-control-next' href='#location-slide-{$post->ID}' role='button' data-slide='next'>
-                                    <span class='carousel-control-next-icon' aria-hidden='true'></span>
-                                    <span class='sr-only'>Next</span>
-                                </a>
+								{$carousel_control}
                             </div>";
 						}
 						
@@ -2392,5 +2404,5 @@ if (!empty($map_data['places'])) {
 	return $map_output;
 }
 else {
-	return "NO PLACE";
+	return '<div class="no-results"><h2><strong>No results found! </strong></h2><a class="no-result-link" href="/map" class="">Open the map with all locations</a></div>';
 }

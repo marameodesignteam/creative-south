@@ -176,7 +176,7 @@
         height: 4.5rem;
         font-size: 1.3rem;
         z-index: 98;
-        background: #F24CAE;
+        background: $color-1;
         font-size: 1.4rem;
         line-height: 1.5rem;
         a {
@@ -184,11 +184,12 @@
             &:hover,
             &:focus {
                 color: #fff;
+                text-decoration: none;
             }
         }
-        @include media(992px) {
-            display: none;
-        }
+        // @include media(992px) {
+        //     display: none;
+        // }
     }
 }
 
@@ -198,13 +199,8 @@
     right: 10.5rem;
     top: 1.1rem;
     z-index: 98;
-    @include media(768px) {
-        right: 6rem;
-    }
-    // @include media(1200px) {
-    //     position: static;
-    //     margin-top: -7px;
-    //     margin-left: 0.9rem;
+    // @include media(992px) {
+    //     right: 6rem;
     // }
     button {
         color: $color-1;

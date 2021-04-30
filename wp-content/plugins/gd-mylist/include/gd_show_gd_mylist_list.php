@@ -33,7 +33,12 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $postAddress = get_field('_wpgmp_location_address',$post->posts_id);
         $postLat = get_field('_wpgmp_metabox_latitude',$post->posts_id);
         $postLong = get_field('_wpgmp_metabox_longitude',$post->posts_id);
-        $postDigitalAddress = get_field('digital_adress',$post->posts_id);
+        $postDigitalAddress_cs = get_field('digital_adress',$post->posts_id);
+        if ((strpos($postDigitalAddress_cs, 'https://') !== false) || (strpos($postDigitalAddress_cs, 'http://') !== false)) {
+            $postDigitalAddress = $postDigitalAddress_cs;
+        }else{
+            $postDigitalAddress = ($postDigitalAddress_cs != '') ? 'https://'.$postDigitalAddress_cs : '';
+        }
         $postDescription = get_field('description',$post->posts_id);
         $cateID = get_field('category_id',$post->posts_id);
         $categs = [
@@ -46,6 +51,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         ];
         $postCategory = $categs[$cateID];
         $mediaAttached = get_attached_media('', $post->posts_id); 
+        $num_media = count($mediaAttached); 
         $imageArr = [];
         $videoArr = [];
         $set_first = FALSE;
@@ -61,6 +67,21 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             }
             $set_first = TRUE;
         endforeach;
+
+        $carousel_control = "";
+        if($num_media > 1){
+            $carousel_control = 
+            '<a class="carousel-control-prev" href="#location-slide-'.$post->posts_id.'" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#location-slide-'.$post->posts_id.'" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>';
+        }else{
+            $carousel_control = '';
+        }
 
         $dont_miss = get_field('dont_miss', $post->posts_id);
 
@@ -89,6 +110,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             'postcategory' => $postCategory,
             'postmediaimage' => $imageArr,
             'postmediavideo' => $videoArr,
+            'postcarouselcontrol' => $carousel_control,
             'postdescription' => $postDescription,
             'postdate' => get_the_date('F j, Y', $postId),
             'postAuthorName' => $postAuthorName,

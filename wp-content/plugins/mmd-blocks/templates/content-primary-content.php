@@ -33,10 +33,10 @@ if( !empty($block['anchor']) ) {
                     <h2 id="second-menu-nav-id" class="sr-only">Second Navigation</h2>
                     <nav aria-labelledby="second-menu-nav-id">
                         <ul class="row">
-                            <li class="col-lg-3 col-md-6"><a href="">Choose a REGION to explore</a></li>
-                            <li class="col-lg-3 col-md-6"><a href="">Select the CATEGORY you'd like to discover</a></li>
-                            <li class="col-lg-3 col-md-6"><a href="">See the southern HIGHLIGHTS</a></li>
-                            <li class="col-lg-3 col-md-6"><a href="">See EVERYTHING at once</a></li>
+                            <li class="col-lg-3 col-md-6"><a href="#regionExplore">Choose </br> a REGION </br> to explore</a></li>
+                            <li class="col-lg-3 col-md-6"><a href="#categoryDiscover">Select </br> a CATEGORY </br> like to discover</a></li>
+                            <li class="col-lg-3 col-md-6"><a href="/southern-stories/">See </br> southern </br> HIGHLIGHTS</a></li>
+                            <li class="col-lg-3 col-md-6"><a href="/map">See </br> EVERYTHING</a></li>
                         </ul>
                     </nav>
                 </div>

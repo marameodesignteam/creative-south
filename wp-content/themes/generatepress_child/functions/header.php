@@ -151,10 +151,10 @@ if (! function_exists('generate_construct_header')) {
               </div>
             </div>
           </div>
-          <div class="my-tour-label bg-pink"><a href="/my-tour">My Tour</a></div>
-          <div class="header-search">
+          <div class="my-tour-label bg-pink"><a href="/my-trip">My Trip</a></div>
+          <!-- <div class="header-search">
               <button type="button" role="button" class="js-search-form"><span class="sr-only">Search form</span><i class="fas fa-search" aria-hidden="true"></i>
-          </button>
+          </button> -->
           </div>
           </div>
           <!-- Search popup -->

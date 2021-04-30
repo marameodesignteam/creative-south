@@ -25,7 +25,7 @@ if (! function_exists('generate_construct_footer')) {
           <div class="col-md-3">
               <a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/logo-footer.png" alt="Creative South"></a>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <div class="menu-footer">
               <h2 id="footer-menu-nav-id" class="sr-only">Main Navigation</h2>
                 <nav aria-labelledby="footer-menu-nav-id">
@@ -39,7 +39,21 @@ if (! function_exists('generate_construct_footer')) {
               </nav>
             </div>
           </div>
-          <div class="col-md-5 partners">
+          <div class="col-md-2">
+              <div class="footer-description">Submit your business for inclusion on the Creative South website</div>
+          </div>
+          <div class="col-md-2">
+            <div class="menu-footer">
+              <h2 id="footer-menu-nav-2-id" class="sr-only">Footer Navigation</h2>
+                <nav aria-labelledby="footer-menu-nav-2-id">
+                    <ul>
+                      <li><a href="/contact-us">Contact Us</a></li>
+                      <li><a href="/legals">Legals</a></li>
+                    </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="col-md-3 partners">
                 <ul class="d-flex">
                   <li><a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/southern-tablesands-arts.png" alt="Southern Tablesands Arts"></a></li>
                   <li><a href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/south-east-arts.png" alt="South East Arts"></a></li>

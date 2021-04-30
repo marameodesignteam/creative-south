@@ -1,18 +1,16 @@
 .footer-container {
     font-size: 1.4rem;
-    line-height: 2.4rem;
-    @include media(1400px) {
-        font-size: 1.6rem;
-        line-height: 2.6rem;
-    }
+    line-height: 2rem;
     .footer-menu {
         margin-bottom: 3rem;
     }
     ul {
         @include ulReset;
-        li {
-            line-height: 26px;
-        }
+    }
+    .footer-description {
+        font-size: 1.5rem;
+        color: #fff;
+        font-weight: 500;
     }
     .footer-block {
         padding: 3rem 0 6rem;
@@ -32,10 +30,9 @@
                     a {
                         color: #fff;
                         font-size: 1.4rem;
+                        line-height: 2rem;
                         text-decoration: none;
-                        @include media(1400px) {
-                            font-size: 1.6rem;
-                        }
+                        @include transition;
                         &:hover,
                         &:focus {
                             text-decoration: none;

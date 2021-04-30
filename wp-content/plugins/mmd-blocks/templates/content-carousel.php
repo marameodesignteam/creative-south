@@ -90,7 +90,7 @@ if ( is_array( $slides ) && $num_slides > 0 ) :
         <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main-logo.png" alt="Southern Tablesands Arts">
         <div class="page-entry-title">
             <div class="container">
-                <h2 class="entry-title-section"><?php the_title(); ?></h2>
+                <h1 class="entry-title-section"><?php the_title(); ?></h1>
             </div>
         </div>
     </div>

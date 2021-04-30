@@ -16,7 +16,7 @@
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header {
     float: none;
     order: 1;
-    background: #777777;
+    background: $color-5;
     width: 20%;
     height: 4.1rem;
 }
@@ -27,7 +27,7 @@
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form input {
-    background: #777777;
+    background: $color-5;
     border-bottom: none;
     color: #fff;
     border: none;
@@ -70,7 +70,7 @@
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter {
-    background: #777777;
+    background: $color-5;
     width: 30%;
     height: 4.1rem;
 }
@@ -260,7 +260,7 @@ body .fc-item-default.fc-wait .wpgmp_locations img {
 }
 
 body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
-    padding: 10px 0 15px 15px!important;
+    padding: 10px 5px 10px 20px!important;
     margin-bottom: 0 !important;
     @include mediamaxwidth(992px) {
         padding: 15px!important;
@@ -297,8 +297,8 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     background: #EAEAEA;
     border: none;
     padding: 1.5rem;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
     color: #1A1A1A;
 }
 
@@ -360,7 +360,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 
 .button-toggle {
     border: none;
-    background: #ee3897;
+    background: $color-1;
     color: #fff;
     font-weight: 600;
     padding: 0.5rem 1rem;
@@ -673,4 +673,28 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 .map-loader.active {
     display: flex;
     display: -webkit-flex;
+}
+
+.no-results {
+    max-width: $container-width-lg;
+    padding: 2rem $container-lateral-padding 10rem;
+    margin: 0 auto;
+    @include media(1440px) {
+        max-width: $container-width;
+    }
+    h2 {
+        font-size: 3rem;
+        color: $body-text;
+        @include media(1200px) {
+            font-size: 3.5rem;
+        }
+    }
+    .no-result-link {
+        text-decoration: underline;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $color-1;
+        }
+    }
 }

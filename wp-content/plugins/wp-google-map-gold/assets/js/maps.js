@@ -2977,7 +2977,7 @@
 
                 //$(map_obj.container).find("."+template_shortcode).html(content);
                 //$('body').find(wpgmp_filters.filters_container).append(content);
-                $('body').find(wpgmp_filters.filters_container).append('<select data-filter="dropdown"  name="place_%regions%" data-name = "%regions%"><option value="">Select Regions</option><option value="Macarthur">Macarthur</option><option value="Southern Highlands">Southern Highlands</option><option value="Southern Tablelands">Southern Tablelands</option></select>');
+                $('body').find(wpgmp_filters.filters_container).append('<select data-filter="dropdown"  name="place_%regions%" data-name = "%regions%"><option value="">Select Regions</option><option value="Wollondilly">Wollondilly</option><option value="Upper Lachlan">Upper Lachlan</option><option value="Hilltops">Hilltops</option><option value="Wingecarribee (Southern Highlands)">Wingecarribee (Southern Highlands)</option><option value="Goulburn Mulwaree">Goulburn Mulwaree</option><option value="Yass Valley">Yass Valley</option><option value="Queanbeyan Palerang">Queanbeyan Palerang</option><option value="Eurobodalla">Eurobodalla</option><option value="Bega Valley">Bega Valley</option><option value="Snowy Monaro">Snowy Monaro</option></select>');
             });
 
 
@@ -3109,6 +3109,11 @@
                 'id': 4,
                 'order': 0,
                 'name': 'Public Art'
+            };
+            filters['category']['Performing Arts Venue'] = {
+                'id': 21,
+                'order': 0,
+                'name': 'Performing Arts Venue'
             };
 
             // now create select boxes

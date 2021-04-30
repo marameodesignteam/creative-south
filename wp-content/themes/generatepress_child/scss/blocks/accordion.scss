@@ -1,5 +1,8 @@
 .accordion-blocks {
-    padding: 4rem 0;
+    padding: 1.2rem 0 4rem;
+    .title-section {
+        margin-bottom: 3rem;
+    }
     .accordion {
         margin-bottom: 4rem;
     }
@@ -27,6 +30,8 @@
             margin-bottom: 0;
             padding: 1rem 3rem;
             color: #fff;
+            font-size: 1.5rem;
+            line-height: 2.4rem;
             @include media(768px) {
                 border-bottom: 2px solid $color-5;
             }

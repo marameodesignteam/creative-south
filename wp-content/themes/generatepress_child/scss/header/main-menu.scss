@@ -56,8 +56,13 @@
                 }
                 @include media(1600px) {
                     font-size: 9rem;
+                    line-height: 8rem;
                     letter-spacing: -3px;
-                    margin-top: -10px;
+                }
+                @include media(1920px) {
+                    font-size: 11rem;
+                    line-height: 9.5rem;
+                    margin-top: 0;
                 }
                 line-height: 100%;
                 text-transform: uppercase;

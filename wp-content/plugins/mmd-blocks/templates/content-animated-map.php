@@ -6,18 +6,19 @@
  */
 
 
-if( !empty($block['anchor']) ) {
-    $id = $block['anchor'];
-}else{
-    $id = 'animated-map-' . $block['id'];
-}
+// if( !empty($block['anchor']) ) {
+//     $id = $block['anchor'];
+// }else{
+//     $id = 'animated-map-' . $block['id'];
+// }
+$id="regionExplore";
 ?>
 <div id="<?php echo $id; ?>" class="animated-map-blocks region-selection custom-blocks full-width background-black">
     <div class="in_custom-block">
        <div class="container">
             <h2 class="title-section">Choose the region you would like to explore</h2>
             <div class="row">
-                <div class="col-lg-6 region-selection-map">
+                <div class="col-lg-7 region-selection-map">
 					<div class="animated-map-image">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 705.71 598.7"><defs>
 					<style type="text/css">
@@ -63,18 +64,18 @@ if( !empty($block['anchor']) ) {
 			</div>
                 <!-- <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/CSouth_Map_01.svg" alt="Southern Tablesands Arts"> -->
                 </div>
-                <div class="col-lg-6 region-selection-list">
+                <div class="col-lg-5 region-selection-list">
                     <ul class="list-of-states">
-                        <li><a data-state="CS1" href="">Wollondilly</a></li>
-                        <li><a data-state="CS2" href="">Upper Lachlan</a></li>
-                        <li><a data-state="CS3" href="">Hilltops</a></li>
-                        <li><a data-state="CS4" href="">Wingecarribee (Southern Highlands)</a></li>
-                        <li><a data-state="CS5" href="">Goulburn Mulwaree</a></li>
-                        <li><a data-state="CS6" href="">Yass Valley </a></li>
-                        <li><a data-state="CS7" href="">Queanbeyan Palerang</a></li>
-                        <li><a data-state="CS8" href="">Eurobodalla</a></li>
-                        <li><a data-state="CS9" href="">Bega Valley</a></li>
-                        <li><a data-state="CS10" href="">Snowy Monaro</a></li>
+                        <li><a data-state="CS1" href="/map/?category=&region=Wollondilly&keyword=">Wollondilly</a></li>
+                        <li><a data-state="CS2" href="/map/?category=&region=Upper%20Lachlan&keyword=">Upper Lachlan</a></li>
+                        <li><a data-state="CS3" href="/map/?category=&region=Hilltops&keyword=">Hilltops</a></li>
+                        <li><a data-state="CS4" href="/map/?category=&region=Wingecarribee%20(Southern%20Highlands)&keyword=">Wingecarribee (Southern Highlands)</a></li>
+                        <li><a data-state="CS5" href="/map/?category=&region=Goulburn%20Mulwaree&keyword=">Goulburn Mulwaree</a></li>
+                        <li><a data-state="CS6" href="/map/?category=&region=Yass%20Valley&keyword=">Yass Valley </a></li>
+                        <li><a data-state="CS7" href="/map/?category=&region=Queanbeyan%20Palerang&keyword=">Queanbeyan Palerang</a></li>
+                        <li><a data-state="CS8" href="/map/?category=&region=Eurobodalla&keyword=">Eurobodalla</a></li>
+                        <li><a data-state="CS9" href="/map/?category=&region=Bega%20Valley&keyword=">Bega Valley</a></li>
+                        <li><a data-state="CS10" href="/map/?category=&region=Snowy%20Monaro&keyword=">Snowy Monaro</a></li>
                     </ul>
                 </div>
             </div>

@@ -24,7 +24,7 @@
 {{/if}}
 <div class="my-tour-content">
     <div class="container-small">
-        <div class="my-tour-label bg-pink">My Tour</div>
+        <div class="my-tour-label bg-pink">My Trip</div>
         <ul class="tour-list">
             {{#each listitem}}
             <li>
@@ -48,14 +48,7 @@
                                         {{/each}}
                                     </div>
                                 </div>
-                                <a class="carousel-control-prev" href="#location-slide-{{postId}}" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#location-slide-{{postId}}" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
+                                {{{postcarouselcontrol}}}
                             </div>
                         </div>
                         <div class="col-md-6 col-tour-item-infor">
@@ -64,7 +57,7 @@
                                     <div class="col-md-12 col-8">
                                         <h3 class="tour-item-title">{{posttitle}}</h3>
                                         <p class="address">{{postaddress}}</p>
-                                        <a target="_blank" href="https://{{postdigitaladdress}}" class="address-link">{{postdigitaladdress}}</a> {{#if postdescription}}
+                                        <a target="_blank" href="{{postdigitaladdress}}" class="address-link">{{postdigitaladdress}}</a> {{#if postdescription}}
                                         <div class="d-md-none d-block">
                                             <a class="more-info" data-toggle="collapse" href="#collapseTour-{{postId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <span class="open-des">More info</span>

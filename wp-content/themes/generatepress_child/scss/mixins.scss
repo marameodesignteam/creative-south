@@ -122,9 +122,11 @@
 @for $i from 1 through 10 {
     #states #CS#{$i}.on {
         fill: $color-1;
+        @include transition;
     }
 }
 
 .list-of-states li a[data-state].on {
     color: $color-1;
+    @include transition;
 }

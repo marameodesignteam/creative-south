@@ -59,6 +59,18 @@ function mmd_acf_init() {
     ));
 
     acf_register_block(array(
+      'name'				=> 'media-text',
+      'title'				=> __('Media Text Block'),
+      'description'		=> __('A Media Text Block'),
+      'render_callback'	=> 'mmd_blocks_acf_block_render_cb',
+      'category'			=> 'mmd-custom-blocks',
+      'icon'				=> 'align-left',
+      'keywords'			=> array( 'primary', 'content' ),
+      'mode'      => 'edit',
+      'supports' => array( 'mode' => false, 'anchor' => true ),
+    ));
+
+    acf_register_block(array(
       'name'				=> 'category-matrix',
       'title'				=> __('Category Matrix Block'),
       'description'		=> __('A Category Matrix Block'),
