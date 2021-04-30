@@ -14,11 +14,46 @@
         clipboard();
     });
 
+    function setCookie(cname,cvalue,exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function isVisited() {
+        var visited = getCookie("visited");
+        if (visited != "") {
+            return true;
+        } else {
+            setCookie("visited", true, 30);
+        }
+    }
 
     $(document).ready(function($) {
         $('.post-list .description .read-more').remove();
-        $('#wellcomeModal').modal('show');
+
+        if ($('#welcomeModal').length) {
+            if (!isVisited()) {
+                $('#welcomeModal').modal('show');
+            }
+        }
         modal_searchForm();
         var carousel = $('body').find('.carousel-blocks');
         //console.log(carousel);
