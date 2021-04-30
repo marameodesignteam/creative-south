@@ -4883,10 +4883,10 @@
                         var elem_html = $('#mylist_btn_' + place.id).html();
                         var fake_btn_id = '#mylist_btn_' + place.id + '_fake';
                         if (elem_html.indexOf('Add') !== -1) {
-                            $(fake_btn_id).html('<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Tour</span>');
+                            $(fake_btn_id).html('<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Trip</span>');
                         }
                         if (elem_html.indexOf('Delete') !== -1) {
-                            $(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Tour</span>');
+                            $(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Trip</span>');
                         }
 
 
@@ -5149,10 +5149,10 @@
                 var elem_html = $('#mylist_btn_' + place.id).html();
                 var fake_btn_html = '';
                 if (elem_html.indexOf('Add') !== -1) {
-                    fake_btn_html = '<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Tour</span>';
+                    fake_btn_html = '<span class="add-text"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add to Trip</span>';
                 }
                 if (elem_html.indexOf('Delete') !== -1) {
-                    fake_btn_html = '<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Tour</span>';
+                    fake_btn_html = '<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Trip</span>';
                 }
 
                 infoboxText.innerHTML = place.infowindow_data.replace('mylist_btn_html', fake_btn_html);

@@ -49,7 +49,7 @@ class gd_show_mylist_btn extends gd_mylist_plugin
                     'itemid' => $item_id,
                     'styletarget' => $styletarget,
                     'userid' => $user_id,
-                    'label' => __('Delete from tour', 'gd-mylist'),
+                    'label' => __('Delete from Trip', 'gd-mylist'),
                     'icon' => $this->stored_setting()['fontawesome_btn_remove'],
                 ];
             } else {
@@ -57,7 +57,7 @@ class gd_show_mylist_btn extends gd_mylist_plugin
                     'itemid' => $item_id,
                     'styletarget' => $styletarget,
                     'userid' => $user_id,
-                    'label' => __('Add to Tour', 'gd-mylist'),
+                    'label' => __('Add to Trip', 'gd-mylist'),
                     'icon' => $this->stored_setting()['fontawesome_btn_add'],
                 ];
             }
@@ -67,7 +67,7 @@ class gd_show_mylist_btn extends gd_mylist_plugin
             //must to be login
             $buttonData['showLogin'] = [
                 'message' => __('Please login first', 'gd-mylist'),
-                'label' => __('Add to Tour', 'gd-mylist'),
+                'label' => __('Add to Trip', 'gd-mylist'),
                 'icon' => $this->stored_setting()['fontawesome_btn_add'],
             ];
         }

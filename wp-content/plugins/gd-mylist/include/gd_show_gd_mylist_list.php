@@ -119,7 +119,7 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
                 'itemid' => $postId,
                 'styletarget' => 'mylist',
                 'userid' => $user_id,
-                'label' => __('Delete from tour', 'gd-mylist'),
+                'label' => __('Delete from Trip', 'gd-mylist'),
                 'icon' => $this->stored_setting()['fontawesome_btn_remove'],
             ],
         ];

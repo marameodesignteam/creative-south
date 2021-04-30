@@ -34,7 +34,7 @@ class gd_add_mylist extends gd_mylist_plugin
                 'itemid' => $item_id,
                 'styletarget' => null,
                 'userid' => $user_id,
-                'label' => __('Delete from tour', 'gd-mylist'),
+                'label' => __('Delete from Trip', 'gd-mylist'),
                 'icon' => $this->stored_setting()['fontawesome_btn_remove'],
             ];
         } else {
