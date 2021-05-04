@@ -339,17 +339,18 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 }
 
 .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
     background: #fff;
 }
 
 .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor .tour-item-title {
     color: #000;
-    margin-bottom: 1rem;
+    margin-bottom: 1.3rem;
+    height: auto;
 }
 
 .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor .tour-item-actions {
-    margin-top: 2rem;
+    margin-top: 5rem;
 }
 
 .button-toggle {
@@ -741,4 +742,14 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
             color: $color-1;
         }
     }
+}
+
+.btn-scroll-to-more-info {
+    background-color: $color-1;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    padding: 0.5rem;
+    width: 100%;
+    margin-top: 1rem;
 }
