@@ -4897,7 +4897,7 @@
                             var top_position = 0;
                             for (i = 1; i < position; i++) {
                                 if ($('#listing-item-' + i).length) {
-                                    top_position += $('#listing-item-' + i).height() + 25;
+                                    top_position += $('#listing-item-' + i).height() + 20;
                                 }
                             }
                             $('.listing-map').animate({
