@@ -18,14 +18,17 @@ if( !empty($block['anchor']) ) {
     <div class="in_custom-block">
        <div class="container">
             <div class="primary-content">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col creative-south-logo">
                         <img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/logo-header.png" alt="Creative South">
                     </div>
                     <div class="col col-auto cultural-logo">
                          <img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/cultural-treasure-maps.png" alt="Cultural Treasure Maps">
                     </div>
-                </div>  
+                </div>   -->
+                <div class="logos">
+                    <img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/logos.png" alt="Creative South">
+                </div>
                 <div class="primary-content-content">
                     <?php echo $content; ?>
                 </div>

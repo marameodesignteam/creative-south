@@ -23,6 +23,13 @@
         }
     }
     .primary-content {
+        .logos {
+            margin-bottom: 3rem;
+            img {
+                max-width: 553px;
+                width: 100%;
+            }
+        }
         .row {
             flex-wrap: wrap;
         }
