@@ -95,3 +95,32 @@
     <a href="/map/#fullMap" class="nav-browse-link browse-by-map"><i class="fas fa-map-marked-alt" aria-hidden="true"></i>Browse by map</a>
 </div>
 {{/if}}
+<!-- show empty -->
+{{#if showEmpty}}
+<div class="header-tour-empty">
+    <div class="container">
+        <h1 class="page-title-empty">My Trip</h1>
+    </div>
+</div>
+<div class="full-height-empty tour-empty">
+    <div class="container">
+        <div class="text-empty"> To create a 'My Trip' itinerary, click 'Add to Trip' on </br>
+            the items you would like to visit and they will </br>
+            appear here as a list that you can email or share
+        </div>
+    </div>
+</div>
+<script>
+    var windowWidth = jQuery(window).width();
+    var item = jQuery('.full-height-empty');
+    var wHeight = jQuery(window).height();
+    if (windowWidth < 375) {
+        var wHeight = jQuery(window).height() - 67 - 44;
+    } else if (windowWidth < 1199) {
+        var wHeight = jQuery(window).height() - 73.1 - 44;
+    } else {
+        var wHeight = jQuery(window).height() - 112.4 - 41;
+    }
+    item.height(wHeight);
+</script>
+{{/if}}

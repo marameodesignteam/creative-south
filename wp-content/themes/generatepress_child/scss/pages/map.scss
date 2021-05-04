@@ -63,7 +63,7 @@
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter {
-    background: #ee3897;
+    background: #ec008c;
     float: none;
     width: 50%;
     height: 4.1rem;
@@ -404,7 +404,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 
 .button-toggle {
     border: none;
-    background: #ee3897;
+    background: $color-1;
     color: #fff;
     padding: 1rem;
     width: 100%;
@@ -781,4 +781,40 @@ body .infowindow-close {
     background-size: 100% 100%;
     top: 12px;
     right: 8px;
+}
+
+// Empty
+.tour-empty {
+    padding: 5rem 0;
+}
+
+.text-empty {
+    font-size: 2.2rem;
+    line-height: 2.8rem;
+    color: $color-1;
+    font-weight: 700;
+}
+
+.header-tour-empty {
+    background-color: $color-1;
+    height: 4.1rem;
+    position: relative;
+    @include media(768px) {
+        &:after {
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            position: absolute;
+            background-color: $color-5;
+        }
+    }
+    .page-title-empty {
+        font-size: 2.2rem;
+        line-height: 2.8rem;
+        color: #fff;
+        margin: 0;
+        padding-top: 0.5rem;
+    }
 }

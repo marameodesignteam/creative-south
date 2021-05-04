@@ -88,6 +88,10 @@
 
 .my-tour-content {
     padding: 2rem 0;
+}
+
+.my-tour-content,
+.tour-empty {
     background-image: url(images/bg-map.jpg);
     background-repeat: no-repeat;
     background-size: cover;
