@@ -117,9 +117,10 @@
             font-size: 2.2rem;
             color: $color-1;
             font-weight: 700;
-            line-height: 3.4rem;
+            line-height: 2.8rem;
             @include media(768px) {
                 font-size: 2.6rem;
+                list-style: 3.2;
             }
             @include media(1200px) {
                 font-size: 3rem;
