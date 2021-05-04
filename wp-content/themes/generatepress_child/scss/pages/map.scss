@@ -251,7 +251,10 @@
 }
 
 .wpgmp_listing_container .more-info-div {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    display: -webkit-flex;
+    margin-right: 15px;
 }
 
 body .fc-item-default.fc-wait .wpgmp_locations img {
@@ -588,6 +591,12 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 .wpgmp_locations {
     .tour-item-infor {
         .more-info {
+            width: 50%;
+            margin-right: 1rem;
+            text-align: left;
+            @include media(992px) {
+                width: calc(50% - 0.5rem);
+            }
             .close-des {
                 display: none;
             }
@@ -599,6 +608,37 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
                     display: block;
                 }
             }
+            .open-des,
+            .close-des {
+                background-color: $color-1;
+                color: #fff;
+                text-transform: uppercase;
+                font-size: 1.2rem;
+                padding: .5rem 1rem;
+            }
+            .open-des-pc {
+                display: none;
+                @include media(992px) {
+                    display: block;
+                }
+            }
+            .open-des-mb {
+                display: block;
+                @include media(992px) {
+                    display: none;
+                }
+            }
+        }
+    }
+    .mobi-show-on-map {
+        border: none;
+        background-color: $color-1;
+        color: #fff;
+        font-size: 1.2rem;
+        width: 50%;
+        display: block;
+        @include media(992px) {
+            display: none;
         }
     }
 }
