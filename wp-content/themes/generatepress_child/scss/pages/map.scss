@@ -299,10 +299,14 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 .card-tour-description {
     background: #EAEAEA;
     border: none;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
     font-size: 1.5rem;
     line-height: 2.4rem;
     color: #1A1A1A;
+}
+
+.col-position-bottom {
+    margin-top: 50px;
 }
 
 .more-info {
