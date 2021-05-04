@@ -1,6 +1,6 @@
 .header-block {
     .header-block-inner {
-        padding: 3rem;
+        padding: 3rem 0 1rem;
         max-width: $container-width-lg;
         padding-left: $container-lateral-padding;
         padding-right: $container-lateral-padding;
@@ -32,7 +32,7 @@
         margin-left: 0;
         margin-top: 1.5rem;
         @include media(768px) {
-            margin-left: 22rem;
+            //margin-left: 22rem;
             margin-top: 0;
         }
         @include media(1920px) {
