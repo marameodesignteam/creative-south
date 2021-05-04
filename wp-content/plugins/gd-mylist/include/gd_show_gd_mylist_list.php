@@ -40,16 +40,8 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
             $postDigitalAddress = ($postDigitalAddress_cs != '') ? 'https://'.$postDigitalAddress_cs : '';
         }
         $postDescription = get_field('description',$post->posts_id);
-        $cateID = get_field('category_id',$post->posts_id);
-        $categs = [
-	        1 => 'Festivals',
-	        2 => 'Galleries & Studios',
-	        3 => 'Creative Retail & Markets',
-	        4 => 'Public Art',
-	        8 => 'Museum & Heritage',
-	        9 => 'Music & Performance',
-        ];
-        $postCategory = $categs[$cateID];
+        $cate_names = get_field('category_names',$post->posts_id);
+        $postCategory = str_replace(',', ', ', $cate_names);
         $mediaAttached = get_attached_media('', $post->posts_id); 
         $num_media = count($mediaAttached); 
         $imageArr = [];
