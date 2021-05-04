@@ -752,4 +752,8 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     padding: 0.5rem;
     width: 100%;
     margin-top: 1rem;
+    display: block;
+    @include media(992px) {
+        display: none;
+    }
 }
