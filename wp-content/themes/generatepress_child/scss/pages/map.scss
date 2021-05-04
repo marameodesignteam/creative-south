@@ -204,7 +204,10 @@
 }
 
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title {
-    max-height: 5.1rem;
+    // max-height: 5.1rem;
+    max-height: none;
+    height: auto;
+    margin-bottom: 1rem;
     text-transform: uppercase;
     cursor: pointer;
     @include transition;
