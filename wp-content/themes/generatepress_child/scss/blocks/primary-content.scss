@@ -26,7 +26,7 @@
         .logos {
             margin-bottom: 3rem;
             img {
-                max-width: 553px;
+                max-width: 67.2rem;
                 width: 100%;
             }
         }
@@ -57,7 +57,7 @@
             margin-bottom: 3rem;
             margin-left: 0;
             @include media(1200px) {
-                margin-left: calc(30rem - 15px);
+                margin-left: calc(36rem - 15px);
             }
             b,
             strong {
@@ -71,21 +71,25 @@
     ul {
         @include ulReset;
         &.row {
-            margin-right: -15px;
-            margin-left: -15px;
+            margin-right: -10px;
+            margin-left: -10px;
         }
         li {
             margin-bottom: 30px;
+            padding-right: 10px;
+            padding-left: 10px;
             a {
                 font-size: 2.4rem;
                 line-height: 2.8rem;
                 font-weight: 800;
                 color: #fff;
                 text-decoration: none;
-                display: block;
                 padding: 1.5rem 3rem 1.5rem 1.5rem;
-                min-height: 12.5rem;
+                min-height: 15.5rem;
                 height: 100%;
+                display: flex;
+                display: -webkit-flex;
+                align-items: center;
                 @include transition;
                 &:hover {
                     transform: scale(1.05);
