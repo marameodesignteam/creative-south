@@ -773,3 +773,12 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
         display: none;
     }
 }
+
+body .infowindow-close {
+    background-image: url(images/icon-close.png) !important;
+    width: 14px;
+    height: 14px;
+    background-size: 100% 100%;
+    top: 12px;
+    right: 8px;
+}
