@@ -18,10 +18,11 @@ $button_full = get_field('button');
 $num_slides = count( $slides );
 
 
-$arrowBackgroundPrev = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e";
+// $arrowBackgroundPrev = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e";
+// $arrowBackgroundNext = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e";
 
-$arrowBackgroundNext = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e";
-
+$arrowBackgroundPrev = get_stylesheet_directory_uri().'/images/arrow-left.png';
+$arrowBackgroundNext = get_stylesheet_directory_uri().'/images/arrow-right.png';
 
 if ( is_array( $slides ) && $num_slides > 0 ) :
 
@@ -87,7 +88,7 @@ if ( is_array( $slides ) && $num_slides > 0 ) :
 <?php if(!is_front_page()) : ?>
 <div class="header-block full-width background-black">
     <div class="header-block-inner">
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main-logo.png" alt="Southern Tablesands Arts">
+        <!-- <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main-logo.png" alt="Southern Tablesands Arts"> -->
         <div class="page-entry-title">
             <div class="container">
                 <h1 class="entry-title-section"><?php the_title(); ?></h1>

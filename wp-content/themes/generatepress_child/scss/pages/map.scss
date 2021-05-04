@@ -568,13 +568,21 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 
 .wpgmp_listing_container .carousel-control-prev,
 .wpgmp_listing_container .carousel-control-next {
-    width: 25px;
+    opacity: 1;
 }
 
 .wpgmp_listing_container .carousel-control-prev-icon,
 .wpgmp_listing_container .carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
+    width: 1.5rem;
+    height: 3rem;
+}
+
+.wpgmp_listing_container .carousel-control-prev-icon {
+    background-image: url(images/arrow-left.png);
+}
+
+.wpgmp_listing_container .carousel-control-next-icon {
+    background-image: url(images/arrow-right.png);
 }
 
 .tour-item-actions .fa-spinner {
