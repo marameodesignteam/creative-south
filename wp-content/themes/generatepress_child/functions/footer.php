@@ -141,7 +141,8 @@ if (! function_exists('generate_construct_footer')) {
     <?php if(is_front_page()) : ?>
     <div class="modal fade modalcustom" id="welcomeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="fas fa-times" aria-hidden="true"></i>
+          <!-- <i class="fas fa-times" aria-hidden="true"></i> -->
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/close-menu.png" alt="Loading">
         </button>
       <div class="modal-dialog modal-dialog-centered" role="document">
       

@@ -123,8 +123,10 @@ if (! function_exists('generate_construct_header')) {
         <div class="in_header">
           <a href="" role="button" class="menu-toggle"
                 aria-controls="menu-mobile" aria-expanded="false">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-                <i class="fas fa-times" aria-hidden="true"></i>
+                <!-- <i class="fas fa-bars" aria-hidden="true"></i> -->
+                <!-- <i class="fas fa-times" aria-hidden="true"></i> -->
+                <img class="fa-bars" src="<?php echo get_stylesheet_directory_uri(); ?>/images/icon-bar.png" alt="Open Menu">
+                <img class="fa-times" src="<?php echo get_stylesheet_directory_uri(); ?>/images/close-menu.png" alt="Close Menu">
                 <span class=" sr-only mobile-menu">Menu</span>
           </a>
           <?php
@@ -151,7 +153,7 @@ if (! function_exists('generate_construct_header')) {
               </div>
             </div>
           </div>
-          <div class="my-tour-label bg-pink"><a href="/my-trip">My Trip</a></div>
+          <div class="my-tour-label bg-pink"><a href="/my-trip"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/my-trip.png" alt="Close Menu"></a></div>
           <!-- <div class="header-search">
               <button type="button" role="button" class="js-search-form"><span class="sr-only">Search form</span><i class="fas fa-search" aria-hidden="true"></i>
           </button> -->
