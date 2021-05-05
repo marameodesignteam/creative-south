@@ -136,6 +136,11 @@ if (! function_exists('generate_construct_footer')) {
               jQuery(fake_btn_id).html('<span class="delete-text"><i class="fas fa-minus-circle" aria-hidden="true"></i>Delete from Trip</span>');
             }
           });
+
+          jQuery('body').on('click','.js-gd-remove-mylist.btn-tour',function() {
+              location.reload();
+	        });
+
       </script>
     </footer><!-- .site-info -->
     <?php if(is_front_page()) : ?>
