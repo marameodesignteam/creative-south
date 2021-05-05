@@ -137,7 +137,7 @@ if (! function_exists('generate_construct_footer')) {
             }
           });
 
-          jQuery('body').on('click','.js-gd-remove-mylist.btn-tour',function() {
+          jQuery('body').on('click','.tour-list .js-gd-remove-mylist.btn-tour',function() {
               location.reload();
 	        });
 
