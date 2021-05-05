@@ -799,6 +799,10 @@ body .infowindow-close {
     background-color: $color-1;
     height: 4.1rem;
     position: relative;
+    margin-top: 0.6rem;
+    @include media(1200px) {
+        margin-top: 0;
+    }
     @include media(768px) {
         &:after {
             content: "";
