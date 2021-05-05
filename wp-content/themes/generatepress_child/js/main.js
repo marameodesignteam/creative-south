@@ -86,7 +86,7 @@
     } else if (windowWidth < 1199) {
         var $wHeight = $(window).height() - 73.1 - 44;
     } else {
-        var $wHeight = $(window).height() - 112.4 - 41;
+        var $wHeight = $(window).height() - 112 - 41;
     }
     $item.height($wHeight);
 

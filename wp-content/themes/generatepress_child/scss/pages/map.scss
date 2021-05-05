@@ -21,6 +21,11 @@
     height: 4.1rem;
 }
 
+#post-38 .wpgmp_map_container {
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .wpgmp_listing_header div.wpgmp_search_form {
     float: none;
     margin-top: 0;
@@ -90,6 +95,7 @@
     margin-right: 0;
     height: 4.1rem;
     padding: 0 2rem;
+    border-radius: 0;
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter {
@@ -141,6 +147,7 @@
     font-size: 1.8rem;
     appearance: none;
     -webkit-appearance: none;
+    border-radius: 0;
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select option {
