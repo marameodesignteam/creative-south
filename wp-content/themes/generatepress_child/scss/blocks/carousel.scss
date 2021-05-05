@@ -53,3 +53,15 @@
         }
     }
 }
+
+.carousel-blocks {
+    .carousel {
+        .carousel-control-next,
+        .carousel-control-prev {
+            width: 15%;
+            @include media(768px) {
+                width: 17rem;
+            }
+        }
+    }
+}

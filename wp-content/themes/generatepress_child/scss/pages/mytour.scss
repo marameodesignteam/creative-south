@@ -115,6 +115,19 @@
 
 .tour-list {
     @include ulReset;
+    .tour-item-infor {
+        padding-left: 0;
+        .tour-item-actions {
+            margin-top: 3.6rem;
+            display: flex;
+            display: -webkit-flex;
+        }
+    }
+    .col-tour-item-infor .tour-item-infor {
+        @include mediamaxwidth(600px) {
+            margin-top: 0;
+        }
+    }
 }
 
 .tour-item {
@@ -141,8 +154,8 @@
 }
 
 .tour-item-cate {
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: 1.4rem;
+    padding: 0.21rem 1rem;
 }
 
 .basic-item {
@@ -237,6 +250,7 @@
             font-size: 1.2rem;
             color: #1A1A1A;
             padding: 0.5rem 1rem;
+            border-radius: 0;
             //margin-bottom: 1rem;
             width: 50%;
             display: block;

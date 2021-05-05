@@ -198,11 +198,6 @@
     border: none !important;
 }
 
-.tour-item-cate {
-    font-size: 1.5rem !important;
-    padding: 1rem !important;
-}
-
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title {
     // max-height: 5.1rem;
     max-height: none;
@@ -307,10 +302,19 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     font-size: 1.5rem;
     line-height: 2.4rem;
     color: #1A1A1A;
+    p {
+        margin-bottom: 0.6rem;
+    }
 }
 
 .col-position-bottom {
-    margin-top: 50px;
+    @include media(768px) {
+        position: absolute;
+        bottom: 1.5rem;
+        right: 0;
+        width: 50%;
+        padding-left: 0;
+    }
 }
 
 .more-info {
@@ -601,6 +605,16 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 // }
 .wpgmp_listing_container .wpgmp_locations .tour-item {
     margin-bottom: 0;
+    .row {
+        position: relative;
+        .row {
+            position: static;
+        }
+    }
+    .col-md-6 {
+        height: 100%;
+        position: static;
+    }
 }
 
 .wpgmp_listing_container .tour-item-infor .tour-item-actions {
@@ -776,11 +790,11 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
 
 body .infowindow-close {
     background-image: url(images/icon-close.png) !important;
-    width: 14px;
-    height: 14px;
     background-size: 100% 100%;
-    top: 12px;
-    right: 8px;
+    width: 12px;
+    height: 12px;
+    top: 6px;
+    right: 5px;
 }
 
 // Empty
