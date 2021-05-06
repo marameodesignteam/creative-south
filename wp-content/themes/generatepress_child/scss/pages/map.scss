@@ -113,8 +113,10 @@
     top: 0.6rem;
 }
 
-#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter select option {
-    color: #000;
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .categories_filter select option,
+#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select option {
+    color: #1A1A1A;
+    font-weight: 500;
 }
 
 #post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter {
@@ -148,10 +150,6 @@
     appearance: none;
     -webkit-appearance: none;
     border-radius: 0;
-}
-
-#post-38 .wpgmp-map-2 .wpgmp_filter_wrappers .regions_filter select option {
-    color: #000;
 }
 
 #post-38 figure.wp-block-table {
@@ -309,6 +307,7 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     font-size: 1.5rem;
     line-height: 2.4rem;
     color: #1A1A1A;
+    font-weight: 500;
     p {
         margin-bottom: 0.6rem;
     }
@@ -852,4 +851,5 @@ body .infowindow-close {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     padding-right: 1.5rem;
+    font-weight: 500;
 }
