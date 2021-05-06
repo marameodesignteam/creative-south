@@ -22,7 +22,8 @@ if( !empty($block['anchor']) ) {
             <?php endif;?>
        <?php 
         if (is_array($accordion) && count($accordion) > 0) :
-            $accordion_id .=  generateRandomString(20);
+            //$accordion_id .=  generateRandomString(20);
+            $accordion_id .=  'cs-accordion-' . $block['id'];
         ?>
        <div class="accordion" id="<?php echo $accordion_id; ?>">
             <?php foreach ($accordion as $key=>$collapsible) :
