@@ -25,7 +25,7 @@ if( !empty($block['anchor']) ) {
                     <div class="<?php echo $col_class_content;?>">
                         <?php echo $content; ?>
                     </div>
-                    <?php if($sidebar_images && count($sidebar_images > 0)) : ?>
+                    <?php if($sidebar_images && !empty($sidebar_images)) : ?>
                     <div class="<?php echo $col_class_sidebar;?>">
                         <?php foreach($sidebar_images as $item) : 
                             $imageArr = $item["image"];
