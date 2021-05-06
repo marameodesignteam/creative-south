@@ -16,6 +16,8 @@ if (! function_exists('generate_construct_footer')) {
       //   $type = $item->post_mime_type;
       //   //guid
       // endforeach;
+      $hide_footer = get_field('hide_footer');
+      if(!$hide_footer) :
       ?>
     <footer class="site-info" <?php generate_do_microdata('footer'); ?>>
     
@@ -143,7 +145,7 @@ if (! function_exists('generate_construct_footer')) {
 
       </script>
     </footer><!-- .site-info -->
-    <?php if(is_front_page()) : ?>
+    <?php endif; if(is_front_page()) : ?>
     <div class="modal fade modalcustom" id="welcomeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <!-- <i class="fas fa-times" aria-hidden="true"></i> -->

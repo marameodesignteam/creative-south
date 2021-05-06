@@ -43,6 +43,14 @@
                     }
                 }
             }
+            &.pink {
+                a {
+                    &:hover,
+                    &:focus {
+                        color: $color-1;
+                    }
+                }
+            }
             a {
                 color: #fff;
                 font-size: 4rem;
@@ -184,4 +192,12 @@ body.open .overlay {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0);
+}
+
+.home .main-navigation ul li.current_page_item a {
+    color: #fff;
+    &:hover,
+    &:focus {
+        color: $color-6;
+    }
 }
