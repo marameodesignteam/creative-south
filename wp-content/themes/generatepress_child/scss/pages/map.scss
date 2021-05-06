@@ -845,9 +845,9 @@ body .infowindow-close {
 }
 
 .short-description {
-    max-height: 84px;
+    max-height: 6.3rem;
     overflow: hidden;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
