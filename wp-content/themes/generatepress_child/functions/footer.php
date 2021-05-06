@@ -138,8 +138,10 @@ if (! function_exists('generate_construct_footer')) {
           });
 
           jQuery('body').on('click','.tour-list .js-gd-remove-mylist.btn-tour',function() {
+            setTimeout(function(){
               location.reload();
-	        });
+            },500);
+          });
 
       </script>
     </footer><!-- .site-info -->
