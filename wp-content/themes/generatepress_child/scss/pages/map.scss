@@ -215,11 +215,12 @@
 
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title:focus,
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title:hover {
-    color: #000;
+    color: $black;
 }
 
 .wpgmp_listing_list .fc-item-default .wpgmp_locations .tour-item-infor .tour-item-title .place_title {
     font-size: 1.8rem;
+    line-height: 2.4rem;
     font-weight: 700;
     height: 5rem;
     margin-bottom: .5rem;
