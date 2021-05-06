@@ -843,3 +843,13 @@ body .infowindow-close {
         padding-top: 0.5rem;
     }
 }
+
+.short-description {
+    max-height: 84px;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    padding-right: 1.5rem;
+}
