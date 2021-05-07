@@ -162,9 +162,9 @@
             background-color: $color-1;
             position: absolute;
             top: -2rem;
-            left: 7.5rem;
+            left: 5rem;
             width: .5rem;
-            height: 4rem;
+            height: 2rem;
         }
     }
 }
@@ -175,6 +175,7 @@
             @include media(768px) {
                 &:before {
                     top: -3rem;
+                    height: 3rem;
                 }
             }
         }
