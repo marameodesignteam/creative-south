@@ -87,7 +87,7 @@
 }
 
 .my-tour-content {
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 
 .my-tour-content,
@@ -100,10 +100,9 @@
 .my-tour-label {
     width: 6rem;
     height: 6rem;
-    padding: 0.5rem;
     font-weight: 700;
     font-size: 1.8rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     margin-left: 5rem;
     .my-tour-content & {
         display: none;
@@ -125,7 +124,7 @@
         }
     }
     .tour-item-infor {
-        padding-left: 0.5rem;
+        padding-left: 0;
         .tour-item-actions {
             display: flex;
             display: -webkit-flex;
@@ -136,6 +135,7 @@
                 bottom: 1.5rem;
                 width: 50%;
                 padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
         }
     }
@@ -147,7 +147,7 @@
 }
 
 .tour-item {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     display: block;
     background-color: $light-grey;
     position: relative;
@@ -161,10 +161,22 @@
             content: '';
             background-color: $color-1;
             position: absolute;
-            top: -4rem;
+            top: -2rem;
             left: 7.5rem;
             width: .5rem;
             height: 4rem;
+        }
+    }
+}
+
+.tour-list {
+    li:first-child {
+        .tour-item {
+            @include media(768px) {
+                &:before {
+                    top: -3rem;
+                }
+            }
         }
     }
 }

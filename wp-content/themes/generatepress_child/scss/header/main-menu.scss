@@ -54,6 +54,7 @@
             a {
                 color: #fff;
                 font-size: 4rem;
+                line-height: 3.6rem;
                 margin-top: 0;
                 letter-spacing: -2px;
                 @include media(768px) {
@@ -75,7 +76,6 @@
                     margin-top: 0;
                     letter-spacing: -5px;
                 }
-                line-height: 3.6rem;
                 text-transform: uppercase;
                 display: block;
                 &.active,

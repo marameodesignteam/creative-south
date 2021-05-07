@@ -153,7 +153,7 @@ if (! function_exists('generate_construct_header')) {
               </div>
             </div>
           </div>
-          <div class="my-tour-label bg-pink"><a href="/my-trip"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/my-trip.png" alt="Close Menu"></a></div>
+          <div class="my-tour-label bg-pink"><a href="/my-trip"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/my-trip.png" alt="My Trip"></a></div>
           <!-- <div class="header-search">
               <button type="button" role="button" class="js-search-form"><span class="sr-only">Search form</span><i class="fas fa-search" aria-hidden="true"></i>
           </button> -->
