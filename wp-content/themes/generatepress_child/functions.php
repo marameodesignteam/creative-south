@@ -68,6 +68,9 @@ function custom_style() {
             margin-left: 2%;
             margin-right: 2%;
         }
+        body .acf-fields>.acf-field.acf-field-6073ab2527699{
+            display: none !important;
+        }
     </style>
 <?php }
 add_action( 'admin_footer', 'custom_style' );
@@ -110,6 +113,7 @@ function custom_style_login() {
         .login .button.wp-hide-pw .dashicons{
             color: #ee3897;
         }
+       
     </style>
 <?php }
 add_action( 'login_head', 'custom_style_login' );
