@@ -3110,11 +3110,6 @@
                 'order': 0,
                 'name': 'Public Art'
             };
-            filters['category']['Performing Arts Venue'] = {
-                'id': 21,
-                'order': 0,
-                'name': 'Performing Arts Venue'
-            };
 
             // now create select boxes
             var content = '',
