@@ -1,9 +1,12 @@
+.page-id-38 .footer-container .site-footer {
+    display: none;
+}
+
 .footer-container {
-    .page-id-38 & {
-        display: none;
+    .site-footer {
+        font-size: 1.4rem;
+        line-height: 2rem;
     }
-    font-size: 1.4rem;
-    line-height: 2rem;
     .footer-menu {
         margin-bottom: 3rem;
     }

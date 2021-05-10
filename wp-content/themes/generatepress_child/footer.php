@@ -51,7 +51,8 @@ do_action( 'generate_before_footer' );
 	do_action( 'generate_after_footer_content' );
 	?>
 </div><!-- .site-footer -->
-
+ <!-- Loader -->
+ <div class="map-loader js-map-loader"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/map-loader.svg" alt="Loading"></div>
 <?php
 /**
  * generate_after_footer hook.

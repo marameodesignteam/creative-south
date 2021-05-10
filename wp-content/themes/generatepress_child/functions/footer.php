@@ -163,8 +163,6 @@ if (! function_exists('generate_construct_footer')) {
       </div>
     </div>
     <?php endif; ?>
-    <!-- Loader -->
-    <div class="map-loader js-map-loader"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/map-loader.svg" alt="Loading"></div>
     <?php
     }
 }
