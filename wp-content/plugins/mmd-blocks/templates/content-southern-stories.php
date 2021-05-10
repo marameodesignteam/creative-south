@@ -23,8 +23,18 @@ if( !empty($block['anchor']) ) {
                 </p>
                 <div class="southern-stories-images">
                     <ul class="d-flex">
-                        <li><a class="image-circle" href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/southern-tablesands-arts.png" alt="Southern Tablesands Arts"></a></li>
-                        <li><a class="image-circle" href="/"><img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/south-east-arts.png" alt="South East Arts"></a></li>
+                        <li>
+                            <a class="image-circle" target="_blank" href="https://www.southerntablelandsarts.com.au/index.php/stories-from-studio/">
+                                <img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/southern-tablesands-arts.png" alt="Southern Tablesands Arts">
+                                <span class="sr-only">(Open a new window)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="image-circle"  target="_blank" href="https://www.southeastarts.org.au/events">
+                                <img src=" <?php echo get_stylesheet_directory_uri(); ?>/images/south-east-arts.png" alt="South East Arts">
+                                <span class="sr-only">(Open a new window)</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
