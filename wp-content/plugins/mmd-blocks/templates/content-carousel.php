@@ -28,7 +28,7 @@ if ( is_array( $slides ) && $num_slides > 0 ) :
 
     ?>
 <div class="carousel-blocks custom-blocks full-width">
-    <div id="<?php echo $id; ?>" class="carousel slide" data-keyboard="true" data-ride="carousel" data-interval="4000">
+    <div id="<?php echo $id; ?>" class="carousel slide" data-keyboard="true" data-ride="carousel" data-interval="5000">
         <style>
             /* setting as inline style */
             .carousel-control-prev-icon {
