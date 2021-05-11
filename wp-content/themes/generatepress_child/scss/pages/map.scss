@@ -852,4 +852,12 @@ body .infowindow-close {
     -webkit-box-orient: vertical;
     padding-right: 1.5rem;
     font-weight: 500;
+    margin-bottom: 2rem;
+    @include media(768px) {
+        margin-bottom: 0;
+    }
+}
+
+.tour-item-infor .tour-item-actions {
+    margin-top: 1rem;
 }
