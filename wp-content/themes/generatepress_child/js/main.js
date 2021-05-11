@@ -12,7 +12,6 @@
         anchorHash();
         mobileMenu();
         clipboard();
-        menu_anchor();
     });
 
     function setCookie(cname, cvalue, exdays) {
@@ -215,22 +214,6 @@
             }
         }
     }
-
-    // function menu_anchor() {
-    //     $('.main-navigation ul li.menu-anchor a').on('click', function(e) {
-    //         e.preventDefault();
-    //         alert('a');
-    //         // var neo = $(this).attr('href');
-    //         // if ($('body').hasClass('home')) {
-    //         //     $('html, body').animate({
-    //         //         scrollTop: $(neo).offset().top - $('#header').outerHeight() - 5
-    //         //     }, 800);
-    //         // } else {
-    //         //     window.location.href = "<?php echo home_url(); ?>" + neo;
-    //         // }
-    //         return false;
-    //     });
-    // }
 
     function menu_fixed() {
         var carousel = $('body').find('.carousel-blocks');
