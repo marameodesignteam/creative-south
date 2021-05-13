@@ -48,7 +48,7 @@ if (! function_exists('generate_construct_footer')) {
                 <nav aria-labelledby="footer-menu-nav-2-id">
                     <ul>
                       <li><a href="/contact-us">Contact Us</a></li>
-                      <li><a href="/legals">Legals</a></li>
+                      <li><a href="/credits-legals">Credits & Legals</a></li>
                     </ul>
               </nav>
             </div>
