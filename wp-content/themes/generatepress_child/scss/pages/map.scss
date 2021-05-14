@@ -582,23 +582,23 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
     }
 }
 
-.wpgmp_listing_container .carousel-control-prev,
-.wpgmp_listing_container .carousel-control-next {
-    opacity: 1;
-}
-
-.wpgmp_listing_container .carousel-control-prev-icon,
-.wpgmp_listing_container .carousel-control-next-icon {
-    width: 2.1rem;
-    height: 1.9rem;
-}
-
-.wpgmp_listing_container .carousel-control-prev-icon {
-    background-image: url(images/arrow-left-small.png);
-}
-
-.wpgmp_listing_container .carousel-control-next-icon {
-    background-image: url(images/arrow-right-small.png);
+.tour-list,
+.wpgmp_listing_container {
+    .carousel-control-prev,
+    .carousel-control-next {
+        opacity: 1;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 2.1rem;
+        height: 1.9rem;
+    }
+    .carousel-control-prev-icon {
+        background-image: url(images/arrow-left-small.png);
+    }
+    .carousel-control-next-icon {
+        background-image: url(images/arrow-right-small.png);
+    }
 }
 
 .tour-item-actions .fa-spinner {
