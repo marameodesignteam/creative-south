@@ -31,11 +31,17 @@ add_action('init', 'wpb_custom_new_menu');
 add_post_type_support( 'page', 'excerpt' );
 
 ///Remove posts from side menu
-//add_action('admin_menu', 'remove_default_post_type');
+add_action('admin_menu', 'remove_default_post_type');
 function remove_default_post_type() {
 	remove_menu_page('edit.php');
 }
 
+//Disable comments
+function df_disable_comments_status() {
+	return false;
+}
+add_filter('comments_open', 'df_disable_comments_status', 20, 2);
+add_filter('pings_open', 'df_disable_comments_status', 20, 2);
 
 
 function generateRandomString($length = 10)
@@ -173,3 +179,4 @@ function itinerary_class_to_body( $classes ) {
 
 	return $classes;
 }
+
