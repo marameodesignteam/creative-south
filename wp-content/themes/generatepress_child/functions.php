@@ -219,3 +219,33 @@ function itinerary_class_to_body( $classes ) {
 	return $classes;
 }
 
+/* ============================= Update New Regions ============================= */
+add_action('wp_ajax_trip_locations', 'trip_locations');
+add_action('wp_ajax_nopriv_trip_locations', 'trip_locations');
+function trip_locations() {
+  $trip_locations = new WP_Query([
+    'post_type' => 'trip_locations',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+  ]);
+
+  foreach ($trip_locations->posts as $trip) {
+    $regions = get_field('regions',$trip->ID);
+    update_field('regions_new', $regions, $trip->ID);
+  }
+}
+/* ============================= Update OLD Regions ============================= */
+add_action('wp_ajax_trip_locations2', 'trip_locations2');
+add_action('wp_ajax_nopriv_trip_locations2', 'trip_locations2');
+function trip_locations2() {
+  $trip_locations = new WP_Query([
+    'post_type' => 'trip_locations',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+  ]);
+
+  foreach ($trip_locations->posts as $trip) {
+    $regions_new = get_field('regions_new',$trip->ID);
+    update_field('regions', $regions_new, $trip->ID);
+  }
+}
