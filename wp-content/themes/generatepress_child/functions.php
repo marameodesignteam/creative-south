@@ -267,15 +267,17 @@ function gallery_location() {
   foreach ($trip_locations->posts as $trip) {
     $mediaAttached = get_attached_media('', $trip->ID);
 
-    foreach($mediaAttached as $item) : 
+    foreach($mediaAttached as $item) {
         $type = $item->post_mime_type;
         if($type == 'video/mp4') {
             array_push($videos, ['video' => $item->ID]);
         }else{
             array_push($images, ['image' => $item->ID]);
         }
-    endforeach;
+    }
+
+    update_field('images', $images, $trip->ID);
+    update_field('videos', $videos, $trip->ID);
   }
-  update_field('images', $images, $trip->ID);
-  update_field('videos', $videos, $trip->ID);
+
 }
