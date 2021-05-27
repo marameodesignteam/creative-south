@@ -256,8 +256,6 @@ function itinerary_class_to_body( $classes ) {
 add_action('wp_ajax_gallery_location', 'gallery_location');
 add_action('wp_ajax_nopriv_gallery_location', 'gallery_location');
 function gallery_location() {
-    $images = [];
-    $videos = [];
     $trip_locations = new WP_Query([
     'post_type' => 'trip_locations',
     'posts_per_page' => -1,
@@ -265,6 +263,8 @@ function gallery_location() {
    ]);
 
   foreach ($trip_locations->posts as $trip) {
+    $images = [];
+    $videos = [];
     $mediaAttached = get_attached_media('', $trip->ID);
 
     foreach($mediaAttached as $item) {
