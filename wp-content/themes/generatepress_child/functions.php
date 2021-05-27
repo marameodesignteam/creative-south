@@ -250,3 +250,32 @@ function itinerary_class_to_body( $classes ) {
 //     update_field('regions', $regions_new, $trip->ID);
 //   }
 // }
+
+/* ============================= Update gallery field ============================= */
+///wp-admin/admin-ajax.php?action=gallery_location
+add_action('wp_ajax_gallery_location', 'gallery_location');
+add_action('wp_ajax_nopriv_gallery_location', 'gallery_location');
+function gallery_location() {
+    $images = [];
+    $videos = [];
+    $trip_locations = new WP_Query([
+    'post_type' => 'trip_locations',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+   ]);
+
+  foreach ($trip_locations->posts as $trip) {
+    $mediaAttached = get_attached_media('', $trip->ID);
+
+    foreach($mediaAttached as $item) : 
+        $type = $item->post_mime_type;
+        if($type == 'video/mp4') {
+            array_push($videos, ['video' => $item->ID]);
+        }else{
+            array_push($images, ['image' => $item->ID]);
+        }
+    endforeach;
+  }
+  update_field('images', $images, $trip->ID);
+  update_field('videos', $videos, $trip->ID);
+}

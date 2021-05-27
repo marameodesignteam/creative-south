@@ -42,23 +42,26 @@ class gd_show_gd_mylist_list extends gd_mylist_plugin
         $postDescription = get_field('description',$post->posts_id);
         $cate_names = get_field('category_names',$post->posts_id);
         $postCategory = str_replace(',', ', ', $cate_names);
-        $mediaAttached = get_attached_media('', $post->posts_id); 
-        $num_media = count($mediaAttached); 
+
+        $images_location = get_field('images', $post->posts_id);
+        $images_location = array_filter($images_location);
+        $videos_location = get_field('videos', $post->posts_id);
+        $videos_location = array_filter($videos_location);
+        $num_media = count($images_location) + count($videos_location);
         $imageArr = [];
         $videoArr = [];
         $set_first = FALSE;
-        foreach($mediaAttached as $item) : 
-            $type = $item->post_mime_type;
-            if($type == 'video/mp4') {
-                $url = $item->guid;
-                array_push($videoArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
-            }
-            else{
-                $url  = wp_get_attachment_image_url($item->ID, 'card-tour');
-                array_push($imageArr,['type'=>$type,'url'=>$url,'class' => $set_first == FALSE ? 'active' : '']);
-            }
+        foreach($videos_location as $videoID){
+            $url_video  = wp_get_attachment_url($videoID['video']);
+            array_push($videoArr,['type'=>$type,'url'=>$url_video,'class' => $set_first == FALSE ? 'active' : '']);
             $set_first = TRUE;
-        endforeach;
+        }
+
+        foreach($images_location as $imageID){
+            $url_image  = wp_get_attachment_image_url($imageID['image'], 'card-tour');
+            array_push($imageArr,['type'=>$type,'url'=>$url_image,'class' => $set_first == FALSE ? 'active' : '']);
+            $set_first = TRUE;
+        }
 
         $carousel_control = "";
         if($num_media > 1){

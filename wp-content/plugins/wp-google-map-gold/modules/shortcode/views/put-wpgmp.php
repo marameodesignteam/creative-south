@@ -1101,34 +1101,39 @@ if ( ! empty( $filter_array ) ) {
 							$custom_fields['%post_long%'] = get_field('_wpgmp_metabox_longitude', $post->ID);
 							$custom_fields['%suburb%'] = get_field('suburb', $post->ID);
 							$custom_fields['%open_hours%'] = get_field('open_hours', $post->ID);
-							$set_first = FALSE;
+	
 							$video_render = $images_render = '';
-							$mediaAttached = get_attached_media('', $post->ID);
-							$num_media = count($mediaAttached);
-							foreach ($mediaAttached as $item) {
-								$type = $item->post_mime_type;
+							$images_location = get_field('images', $post->ID);
+							$images_location = array_filter($images_location);
+							$videos_location = get_field('videos', $post->ID);
+							$videos_location = array_filter($videos_location);
+							$num_media = count($images_location) + count($videos_location);
+							$set_first = FALSE;	
+							foreach($videos_location as $videoID){
 								$class = $set_first == FALSE ? 'active' : '';
-								if ( $type == 'video/mp4' ) {
-									$url  = $item->guid;
-								    $video_render .=
-                                        "<div class='carousel-item {$class}'>
-                                            <video width='320' height='240' controls>
-                                                <source src='{$url}' type='video/mp4'>
-                                            </video>
-                                        </div>";
-								}
-								else {
-									$url  = wp_get_attachment_image_url($item->ID, 'card-tour');
-								    if (empty($custom_fields['%first_image%'])) {
-									    $custom_fields['%first_image%'] = $url;
-                                    }
-									$images_render .=
-										"<div class='carousel-item {$class}'>
-                                            <img src='{$url}'>
-                                        </div>";
-								}
+								$url_video  = wp_get_attachment_url($videoID['video']);
+								$video_render .=
+									"<div class='carousel-item {$class}'>
+										<video width='320' height='240' controls>
+											<source src='{$url_video}' type='video/mp4'>
+										</video>
+									</div>";
 								$set_first = TRUE;
 							}
+
+							foreach($images_location as $imageID){
+								$class = $set_first == FALSE ? 'active' : '';
+								$url_image  = wp_get_attachment_image_url($imageID['image'], 'card-tour');
+								if (empty($custom_fields['%first_image%'])) {
+									$custom_fields['%first_image%'] = $url_image;
+								}
+								$images_render .=
+									"<div class='carousel-item {$class}'>
+										<img src='{$url_image}'>
+									</div>";
+									$set_first = TRUE;
+							}
+
 							$carousel_control = "";
 							if($num_media > 1){
 								$carousel_control .= 
