@@ -14,9 +14,17 @@
         @include ulReset;
     }
     .footer-description {
-        font-size: 1.5rem;
-        color: #fff;
-        font-weight: 500;
+        a {
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 500;
+            @include transition;
+            &:hover,
+            &:focus {
+                color: $color-1;
+                text-decoration: none;
+            }
+        }
     }
     .footer-block {
         padding: 3rem 0 6rem;

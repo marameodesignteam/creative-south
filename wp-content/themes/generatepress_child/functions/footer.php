@@ -40,14 +40,14 @@ if (! function_exists('generate_construct_footer')) {
             </div>
           </div>
           <div class="col-md-2">
-              <div class="footer-description">Submit your business for inclusion on the Creative South website</div>
+              <div class="footer-description"><a href="/about">Submit your business for inclusion on the Creative South website</a></div>
           </div>
           <div class="col-md-2">
             <div class="menu-footer">
               <h2 id="footer-menu-nav-2-id" class="sr-only">Footer Navigation</h2>
                 <nav aria-labelledby="footer-menu-nav-2-id">
                     <ul>
-                      <li><a href="/contact-us">Contact Us</a></li>
+                      <li><a href="/about">Contact Us</a></li>
                       <li><a href="/credits-legals">Credits & Legals</a></li>
                     </ul>
               </nav>
