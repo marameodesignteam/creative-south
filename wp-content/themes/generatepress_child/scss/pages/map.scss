@@ -694,13 +694,16 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
         .tour-item-actions {
             .btn-tour {
                 background: #eaeaea;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 color: $black;
-                padding: .5rem .5rem;
+                padding: .5rem .2rem;
                 width: 50%;
                 border: none;
                 height: 3.2rem;
                 text-align: left;
+                @include media(768px) {
+                    font-size: 1.2rem;
+                }
             }
             .mylist-btn-fake {
                 &button.btn-tour {
@@ -714,8 +717,11 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
                 i {
                     color: $color-1;
                     margin-right: .5rem;
-                    font-size: 1.6rem;
+                    font-size: 1.4rem;
                     vertical-align: -1px;
+                    @include media(768px) {
+                        font-size: 1.6rem;
+                    }
                 }
                 &.add-tour {
                     .add-text {
