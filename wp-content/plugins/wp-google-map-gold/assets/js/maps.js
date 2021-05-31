@@ -3423,7 +3423,32 @@
                 }
             } else {
                 // content = "<div class='wpgmp_no_locations'>" + wpgmp_local.wpgmp_location_no_results + "</div>";
-                content = "<div class='wpgmp_no_locations'>" + wpgmp_local.wpgmp_location_no_results + "</div>";
+                var filter_detail = '';
+                var region_val = getQueryStringValue('region');
+                var category_val = getQueryStringValue('category');
+                var category_text = '';
+
+                if (category_val == 1) {
+                    category_text = 'for Festivals';
+                } else if (category_val == 2) {
+                    category_text = 'for Galleries & Studios';
+                } else if (category_val == 3) {
+                    category_text = 'for Creative Retail & Markets';
+                } else if (category_val == 4) {
+                    category_text = 'for Public Art';
+                } else if (category_val == 8) {
+                    category_text = 'for Museum & Heritage';
+                } else if (category_val == 9) {
+                    category_text = 'for Music & Performance';
+                }
+
+                if (region_val != '') region_val = " in " + region_val;
+
+                if (region_val != '' || category_val != '') {
+                    filter_detail = "You are searching " + category_text + region_val + ". </br>";
+                }
+
+                content = "<div class='wpgmp_no_locations'>No results found. </br> " + filter_detail + "Zoom out or reset the map.</div>";
             }
 
             for (var j = 0; j < data_source.length; j++) {
