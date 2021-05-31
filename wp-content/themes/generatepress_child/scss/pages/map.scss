@@ -716,11 +716,12 @@ body .wpgmp_listing_list .fc-item-default .wpgmp_locations {
                 }
                 i {
                     color: $color-1;
-                    margin-right: .5rem;
+                    margin-right: .1rem;
                     font-size: 1.4rem;
                     vertical-align: -1px;
                     @include media(768px) {
                         font-size: 1.6rem;
+                        margin-right: .5rem;
                     }
                 }
                 &.add-tour {
