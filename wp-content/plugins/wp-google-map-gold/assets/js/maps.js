@@ -3448,7 +3448,7 @@
                     filter_detail = "You are searching " + category_text + region_val + ". </br>";
                 }
 
-                content = "<div class='wpgmp_no_locations'>No results found. </br> " + filter_detail + "Zoom out or reset the map.</div>";
+                content = "<div class='wpgmp_no_locations wpgmp_no_locations_cs'><p></p>No results found. </br> " + filter_detail + "</p><p>Zoom out or <a href='/map'>click here to reset the map.</a></p></div>";
             }
 
             for (var j = 0; j < data_source.length; j++) {

@@ -868,3 +868,52 @@ body .infowindow-close {
 .tour-item-infor .tour-item-actions {
     margin-top: 1rem;
 }
+
+div.wpgmp_categories div.wpgmp_no_locations {
+    &.wpgmp_no_locations_cs {
+        a {
+            color: #000;
+            text-decoration: underline;
+            &:hover,
+            &:focus {
+                color: $color-1;
+            }
+        }
+    }
+}
+
+@include mediamaxwidth(400px) {
+    .col-tour-item-infor .tour-item-infor {
+        margin-top: 0;
+    }
+    .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor .tour-item-title {
+        font-size: 1.5rem;
+    }
+    .wpgmp_infowindow.fc-item-aare .tour-item-infor .address {
+        font-size: 1.3rem;
+    }
+    .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor .tour-item-actions {
+        margin-top: 3rem;
+        display: block;
+    }
+    .wpgmp_infowindow.fc-item-aare div .col-tour-item-infor .tour-item-actions>* {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    .wpgmp_infowindow.fc-item-aare .btn-scroll-to-more-info {
+        margin-top: 0;
+    }
+    .wpgmp_infowindow .tour-item-infor .tour-item-actions .mylist-btn-fake i {
+        margin-right: .3rem;
+    }
+    .wpgmp_infowindow .tour-item-infor .tour-item-actions .btn-tour {
+        font-size: 1.2rem;
+    }
+    .wpgmp_infowindow.fc-item-aare div.fc-feature-img {
+        display: none;
+    }
+    .wpgmp_infowindow.fc-item-aare div .tour-item-cate {
+        font-size: 1.2rem;
+    }
+}
