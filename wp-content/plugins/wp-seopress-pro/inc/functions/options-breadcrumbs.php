@@ -132,14 +132,15 @@ function seopress_breadcrumbs_term_link($post, $crumbs, $options) {
             $_seopress_robots_primary_cat = get_post_meta($post->ID, '_seopress_robots_primary_cat', true);
 
             if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat) {
-                $tax = get_term($_seopress_robots_primary_cat, $taxonomy);
+                $tax    = get_term($_seopress_robots_primary_cat, $taxonomy);
+                if ( ! is_wp_error($tax) && $tax && isset($tax->term_id)) {
+                    $terms  = wp_get_post_terms($post->ID, $taxonomy, ['orderby' => 'parent', 'order' => 'DESC', 'child_of' => $tax->term_id]);
+                    $parent = current($terms);
 
-                $parent = current(wp_get_post_terms($post->ID, $taxonomy, ['orderby' => 'parent', 'order' => 'DESC', 'child_of' => $tax->term_id]));
-
-                if ($parent !== false) {
-                    $tax = $parent;
+                    if (false !== $parent) {
+                        $tax = $parent;
+                    }
                 }
-
             } else {
                 $tax = current(wp_get_post_terms($post->ID, $taxonomy, ['orderby' => 'parent', 'order' => 'DESC']));
             }
@@ -693,7 +694,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
                 $here = seopress_breadcrumbs_i18n_here_option();
             }
 
-            $sp_breadcrumbs = '<nav aria-label="' . esc_html__('breadcrumb', 'wp-seopress-pro') . '">'.$here.'<ol class="breadcrumb" itemscope itemtype="' . seopress_check_ssl() . 'schema.org/BreadcrumbList">' . $sp_breadcrumbs_html . '</ol></nav>';
+            $sp_breadcrumbs = '<nav aria-label="' . esc_html__('breadcrumb', 'wp-seopress-pro') . '">' . $here . '<ol class="breadcrumb" itemscope itemtype="' . seopress_check_ssl() . 'schema.org/BreadcrumbList">' . $sp_breadcrumbs_html . '</ol></nav>';
 
             $sp_breadcrumbs = apply_filters('seopress_pro_breadcrumbs_html', $sp_breadcrumbs);
 

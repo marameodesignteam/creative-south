@@ -9,8 +9,7 @@ if ( ! defined('ABSPATH')) {
 use SEOPress\Core\Hooks\ExecuteHooksFrontend;
 use SEOPress\Helpers\RichSnippetType;
 
-class PrintLocalBusiness implements ExecuteHooksFrontend
-{
+class PrintLocalBusiness implements ExecuteHooksFrontend {
     public function hooks() {
         add_action('wp_head', [$this, 'render'], 2);
     }

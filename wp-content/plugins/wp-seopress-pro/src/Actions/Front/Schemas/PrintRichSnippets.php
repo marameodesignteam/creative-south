@@ -19,6 +19,15 @@ class PrintRichSnippets implements ExecuteHooksFrontend {
             return;
         }
 
+        $render = false;
+        if (is_singular()) {
+            $render =true;
+        }
+
+        if ( ! $render) {
+            return;
+        }
+
         $enable = seopress_pro_get_service('OptionPro')->getRichSnippetEnable();
 
         if ('1' !== $enable) {
@@ -32,6 +41,7 @@ class PrintRichSnippets implements ExecuteHooksFrontend {
 
         $jsonsNeedToCreate = [];
         $jsonsCustom       = [];
+
         foreach ($schemas as $schema) {
             if ( ! isset($schema['_seopress_pro_rich_snippets_type'])) {
                 continue;
@@ -52,12 +62,15 @@ class PrintRichSnippets implements ExecuteHooksFrontend {
             if (null === $json) {
                 continue;
             } ?> <script type="application/ld+json">
-                <?php echo apply_filters('seopress_rich_snippets_' . $jsonsNeedToCreate[$key] . '_html', $json); ?>
+                <?php echo apply_filters('seopress_rich_snippets_' . $jsonsNeedToCreate[$key] . '_html', $json, $context); ?>
                 </script><?php
                 echo "\n";
         }
+
+        $jsonsCustom  =seopress_get_service('TagsToString')->replaceDataToString($jsonsCustom, $context);
+
         foreach ($jsonsCustom as $key => $json) {
-            echo apply_filters('seopress_rich_snippets_custom_' . $key . '_html', $json);
+            echo apply_filters('seopress_rich_snippets_custom_' . $key . '_html', $json, $context);
             echo "\n";
         } ?>
         <?php

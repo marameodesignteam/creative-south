@@ -22,6 +22,7 @@ trait FieldOpeningHours {
         $mins  = OpeningHoursHelper::getMinutes();
 
         $halfDay = ['am', 'pm']; ?>
+        <span class="description"><?php _e('<strong>Morning and Afternoon are just time slots</strong>. Eg: if you\'re opened from 10:00 AM to 9:00 PM, check Morning and enter 10:00 / 9:00. If you are open non-stop, check Morning and enter 0:00 / 23:59.', 'wp-seopress-pro'); ?></span>
         <ul class="wrap-opening-hours">
         <?php
         foreach ($days as $key => $day) {

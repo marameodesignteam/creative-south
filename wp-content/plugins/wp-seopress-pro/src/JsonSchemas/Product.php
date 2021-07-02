@@ -20,14 +20,12 @@ class Product extends JsonSchemaValue implements GetJsonData {
     }
 
     /**
-     * @since 4.6.0
+     * @since 4.7.0
      *
      * @return array
-     *
-     * @param array $schemaManual
      */
-    protected function getVariablesForManualSnippet($schemaManual) {
-        $keys = [
+    protected function getKeysForSchemaManual() {
+        return [
             'type'             => '_seopress_pro_rich_snippets_type',
             'name'             => [
                 'value'   => '_seopress_pro_rich_snippets_product_name',
@@ -63,15 +61,18 @@ class Product extends JsonSchemaValue implements GetJsonData {
             ],
             'availability'     => '_seopress_pro_rich_snippets_product_availability',
         ];
-        $variables = [];
+    }
 
-        foreach ($keys as $key => $item) {
-            if (is_string($item)) {
-                $variables[$key] = isset($schemaManual[$item]) ? $schemaManual[$item] : '';
-            } elseif (is_array($item)) {
-                $variables[$key] = isset($schemaManual[$item['value']]) && ! empty($schemaManual[$item['value']]) ? $schemaManual[$item['value']] : $item['default'];
-            }
-        }
+    /**
+     * @since 4.6.0
+     *
+     * @return array
+     *
+     * @param array $keys
+     * @param array $data
+     */
+    protected function getVariablesByKeysAndData($keys, $data = []) {
+        $variables = parent::getVariablesByKeysAndData($keys, $data);
 
         if ('none' === $variables['globalIds']) {
             $variables['globalIds']= '';
@@ -94,18 +95,8 @@ class Product extends JsonSchemaValue implements GetJsonData {
         $data = $this->getArrayJson();
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::MANUAL;
-        $variables  = [];
-        switch ($typeSchema) {
-            case RichSnippetType::MANUAL:
-                $schemaManual = $this->getCurrentSchemaManual($context);
 
-                if (null === $schemaManual) {
-                    return $data;
-                }
-
-                $variables = $this->getVariablesForManualSnippet($schemaManual);
-                break;
-        }
+        $variables  = $this->getVariablesByType($typeSchema, $context);
 
         if (isset($variables['globalIds'],$variables['globalIdsValue']) && ! empty($variables['globalIds']) && ! empty($variables['globalIdsValue'])) {
             $data[$variables['globalIds']] = $variables['globalIdsValue'];

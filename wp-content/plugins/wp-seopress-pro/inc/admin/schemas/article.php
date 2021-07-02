@@ -72,13 +72,15 @@ function seopress_get_schema_metaboxe_article($seopress_pro_rich_snippets_data, 
 
     $seopress_pro_rich_snippets_article_type                        = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_type']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_type'] : '';
     $seopress_pro_rich_snippets_article_title                       = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_title']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_title'] : '';
+    $seopress_pro_rich_snippets_article_author                      = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_author']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_author'] : '';
     $seopress_pro_rich_snippets_article_img                         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_img']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_img'] : '';
     $seopress_pro_rich_snippets_article_img_width                   = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_img_width']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_img_width'] : '';
     $seopress_pro_rich_snippets_article_img_height                  = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_img_height']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_img_height'] : '';
     $seopress_pro_rich_snippets_article_coverage_start_date         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_start_date']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_start_date'] : '';
     $seopress_pro_rich_snippets_article_coverage_start_time         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_start_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_start_time'] : '';
     $seopress_pro_rich_snippets_article_coverage_end_date           = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_end_date']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_end_date'] : '';
-    $seopress_pro_rich_snippets_article_coverage_end_time           = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_end_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_end_time'] : ''; ?>
+    $seopress_pro_rich_snippets_article_coverage_end_time           = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_end_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_coverage_end_time'] : '';
+    $seopress_pro_rich_snippets_article_speakable_css_selector      = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_speakable_css_selector']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_speakable_css_selector'] : ''; ?>
 	<div class="wrap-rich-snippets-item wrap-rich-snippets-articles">
 		<p class="seopress-notice notice notice-info">
 			<?php _e('Proper structured data in your news, blog, and sports article page can enhance your appearance in Google Search results.', 'wp-seopress-pro'); ?>
@@ -108,6 +110,12 @@ function seopress_get_schema_metaboxe_article($seopress_pro_rich_snippets_data, 
 				<div class="seopress_rich_snippets_articles_counters"></div>
 				<?php _e(' (maximum limit)', 'wp-seopress-pro'); ?>
 			</div>
+		</p>
+        <p>
+			<label for="seopress_pro_rich_snippets_article_author_meta">
+				<?php _e('Post author', 'wp-seopress-pro'); ?></label>
+				<?php _e('Default value if empty: Post author', 'wp-seopress-pro'); ?>
+			<input type="text" id="seopress_pro_rich_snippets_article_author_meta" class="seopress_pro_rich_snippets_article_author_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_article_author]" placeholder="<?php echo esc_html__('The author of the article', 'wp-seopress-pro'); ?>" aria-label="<?php _e('The author of the article', 'wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_article_author; ?>" />
 		</p>
 		<p>
 			<label for="seopress_pro_rich_snippets_article_img_meta"><?php _e('Image', 'wp-seopress-pro'); ?></label>
@@ -146,6 +154,13 @@ function seopress_get_schema_metaboxe_article($seopress_pro_rich_snippets_data, 
 			</label>
 			<span class="description"><?php _e('To use with <strong>Live Blog Posting</strong> article type', 'wp-seopress-pro'); ?></span>
 			<input type="text" id="seopress_pro_rich_snippets_article_coverage_end_time_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_article_coverage_end_time]" placeholder="<?php echo esc_html__('Eg: HH:MM', 'wp-seopress-pro'); ?>" aria-label="<?php _e('Coverage End Time', 'wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_article_coverage_end_time; ?>" />
+		</p>
+		<p>
+			<label for="seopress_pro_rich_snippets_article_speakable_css_selector_meta">
+				<?php _e('Speakable CSS Selector', 'wp-seopress-pro'); ?>
+			</label>
+			<span class="description"><?php _e('Addresses content in the annotated pages (such as class attribute)', 'wp-seopress-pro'); ?></span>
+			<input type="text" id="seopress_pro_rich_snippets_article_speakable_css_selector_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_article_speakable_css_selector]" placeholder="<?php echo esc_html__('Eg: post', 'wp-seopress-pro'); ?>" aria-label="<?php _e('Speakable CSS Selector', 'wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_article_speakable_css_selector; ?>" />
 		</p>
 	</div>
 	<?php

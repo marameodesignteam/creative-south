@@ -25,14 +25,13 @@ class Article extends JsonSchemaValue implements GetJsonData {
      * @since 4.6.0
      *
      * @return array
-     *
-     * @param array $schemaManual
      */
-    protected function getVariablesForManualSnippet($schemaManual) {
-        $keys = [
+    protected function getKeysForSchemaManual() {
+        return [
             'type'              => '_seopress_pro_rich_snippets_type',
             'articleType'       => '_seopress_pro_rich_snippets_article_type',
             'title'             => '_seopress_pro_rich_snippets_article_title',
+            'author'            => '_seopress_pro_rich_snippets_article_author',
             'image'             => '_seopress_pro_rich_snippets_article_img',
             'imageWidth'        => '_seopress_pro_rich_snippets_article_img_width',
             'imageHeight'       => '_seopress_pro_rich_snippets_article_img_height',
@@ -40,14 +39,8 @@ class Article extends JsonSchemaValue implements GetJsonData {
             'coverageStartTime' => '_seopress_pro_rich_snippets_article_coverage_start_time',
             'coverageEndDate'   => '_seopress_pro_rich_snippets_article_coverage_end_date',
             'coverageEndTime'   => '_seopress_pro_rich_snippets_article_coverage_end_time',
+            'speakableCssSelector'   => '_seopress_pro_rich_snippets_article_speakable_css_selector',
         ];
-        $variables = [];
-
-        foreach ($keys as $key => $value) {
-            $variables[$key] = isset($schemaManual[$value]) ? $schemaManual[$value] : '';
-        }
-
-        return $variables;
     }
 
     /**
@@ -62,19 +55,7 @@ class Article extends JsonSchemaValue implements GetJsonData {
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::MANUAL;
 
-        $variables = [];
-
-        switch ($typeSchema) {
-            case RichSnippetType::MANUAL:
-                $schemaManual = $this->getCurrentSchemaManual($context);
-
-                if (null === $schemaManual) {
-                    return $data;
-                }
-
-                $variables = $this->getVariablesForManualSnippet($schemaManual);
-                break;
-        }
+        $variables = $this->getVariablesByType($typeSchema, $context);
 
         if (isset($variables['image']) && ! empty($variables['image'])) {
             $variablesContext = [
@@ -110,10 +91,30 @@ class Article extends JsonSchemaValue implements GetJsonData {
             $data['mainEntityOfPage'] = $schema;
         }
 
-        $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Author::NAME, $context, ['remove_empty'=> true]);
+        if (isset($variables['author']) && ! empty($variables['author'])) {
+            $variablesContext = [
+                'name' => $variables['author'],
+            ];
 
-        if (count($schema) > 1) {
-            $data['author'] = $schema;
+            $contextWithVariables              = $context;
+            $contextWithVariables['variables'] = $variablesContext;
+
+            $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Author::NAME, $contextWithVariables, ['remove_empty'=> true]);
+            if (count($schema) > 1) {
+                $data['author'] = $schema;
+            }
+        } else {
+            $variablesContext = [
+                'name'    => '%%post_author%%',
+            ];
+
+            $contextWithVariables              = $context;
+            $contextWithVariables['variables'] = $variablesContext;
+
+            $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Author::NAME, $contextWithVariables, ['remove_empty'=> true]);
+            if (count($schema) > 1) {
+                $data['author'] = $schema;
+            }
         }
 
         $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Organization::NAME, $context, ['remove_empty'=> true]);
@@ -154,6 +155,19 @@ class Article extends JsonSchemaValue implements GetJsonData {
             $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Thing::NAME, $context, ['remove_empty'=> true]);
             if (count($schema) > 1) {
                 $data['itemReviewed']= $schema;
+            }
+        }
+
+        if (isset($variables['speakableCssSelector']) && !empty($variables['speakableCssSelector'])) {
+            $variablesContext = [
+                'cssSelector'    => $variables['speakableCssSelector']
+            ];
+            $contextWithVariables              = $context;
+            $contextWithVariables['variables'] = $variablesContext;
+
+            $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Speakable::NAME, $contextWithVariables, ['remove_empty'=> true]);
+            if (count($schema) > 1) {
+                $data['speakable'] = $schema;
             }
         }
 

@@ -1,4 +1,6 @@
 {
     "@type": "HowToStep",
-    "text": "[[text]]"
+    "name": "[[name]]",
+    "text": "[[text]]",
+    "image": "[[image]]"
 }

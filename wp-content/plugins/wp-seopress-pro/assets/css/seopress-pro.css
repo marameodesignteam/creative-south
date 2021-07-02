@@ -293,11 +293,13 @@
     padding: 0;
     margin: 0;
 }
-#seopress_pro_cpt #wrap-faq .faq {
+#seopress_pro_cpt #wrap-faq .faq,
+#seopress_pro_cpt #wrap-how-to .step {
     background-color: #fff;
 }
 
-#seopress_pro_cpt #wrap-faq .faq .inside {
+#seopress_pro_cpt #wrap-faq .faq .inside,
+#seopress_pro_cpt #wrap-how-to .step .inside {
     padding: 0 12px 12px;
 }
 #seopress_schemas .inside {
@@ -509,23 +511,28 @@
     border-bottom: 1px solid #ccd0d4;
     border-top: 1px solid #ccd0d4;
 }
-#seopress_pro_cpt #wrap-faq .faq:nth-child(odd) {
+#seopress_pro_cpt #wrap-faq .faq:nth-child(odd),
+#seopress_pro_cpt #wrap-how-to .step:nth-child(odd) {
     background: #fdfdfd;
 }
-#seopress_pro_cpt #wrap-faq .faq {
+#seopress_pro_cpt #wrap-faq .faq,
+#seopress_pro_cpt #wrap-how-to .step {
     border-top: 1px solid #eee;
 }
-#seopress_pro_cpt #wrap-faq .faq .accordion-section-title {
+#seopress_pro_cpt #wrap-faq .faq .accordion-section-title,
+#seopress_pro_cpt #wrap-how-to .step .accordion-section-title {
     border: none;
     position: relative;
     display: inline-block;
     width: 100%;
     box-sizing: border-box;
 }
-#seopress_pro_cpt .wrap-rich-snippets-faq {
+#seopress_pro_cpt .wrap-rich-snippets-faq,
+#seopress_pro_cpt .wrap-rich-snippets-how-to {
     counter-reset: faq;
 }
-#seopress_pro_cpt #wrap-faq .faq .accordion-section-title::before {
+#seopress_pro_cpt #wrap-faq .faq .accordion-section-title::before,
+#seopress_pro_cpt #wrap-how-to .step .accordion-section-title::before {
     counter-increment: faq;
     content: "#" counter(faq) " - ";
     left: 10px;
@@ -536,15 +543,19 @@
     font-weight: bold;
     float: left;
 }
-#seopress_pro_cpt #wrap-faq .faq .ui-accordion-header-active {
+#seopress_pro_cpt #wrap-faq .faq .ui-accordion-header-active,
+#seopress_pro_cpt #wrap-how-to .step .ui-accordion-header-active {
     border-bottom: 1px solid #eee;
 }
 #seopress_pro_cpt #wrap-faq .faq input,
-#seopress_pro_cpt #wrap-faq .faq textarea {
+#seopress_pro_cpt #wrap-how-to .step input,
+#seopress_pro_cpt #wrap-faq .faq textarea,
+#seopress_pro_cpt #wrap-how-to .step textarea {
     width: 100%;
     display: block;
 }
-#seopress_pro_cpt #wrap-faq .faq:first-child .remove-faq {
+#seopress_pro_cpt #wrap-faq .faq:first-child .remove-faq,
+#seopress_pro_cpt #wrap-how-to .step:first-child .remove-step {
     display: none;
 }
 #seopress_pro_cpt .notice {

@@ -78,10 +78,10 @@ class Video extends JsonSchemaValue implements GetJsonData {
             $variables['uploadDate'] = get_the_date('c', $context['post']->ID);
         }
 
-        if (isset($variables['duration']) && ! empty($variables['duration'])) {
+        if (isset($variables['duration']) && ! empty($variables['duration']) ) {
             $time   = explode(':', $variables['duration']);
-            $sec 	  = isset($time[2]) ? $time[2] : 00;
-            $min 	  = isset($time[0]) && isset($time[1]) ? $time[0] * 60.0 + $time[1] * 1.0 : $_seopress_pro_rich_snippets_videos_duration;
+            $sec 	  = isset($time[2]) ? intval($time[2]) : 00;
+            $min 	  = isset($time[0]) && isset($time[1]) ? intval($time[0]) * 60.0 + intval($time[1]) * 1.0 : $_seopress_pro_rich_snippets_videos_duration;
 
             $variables['duration'] = sprintf('PT%sM%sS', $min, $sec);
         }

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress PRO
 Plugin URI: https://www.seopress.org/seopress-pro/
 Description: The PRO version of SEOPress. SEOPress required (free).
-Version: 4.6.0.2
+Version: 4.7.0
 Author: SEOPress
 Author URI: https://www.seopress.org/seopress-pro/
 License: GPLv2
@@ -151,7 +151,7 @@ function seopress_pro_uninstall() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_PRO_VERSION', '4.6.0.2');
+define('SEOPRESS_PRO_VERSION', '4.7.0');
 define('SEOPRESS_PRO_AUTHOR', 'Benjamin Denis');
 define('STORE_URL_SEOPRESS', 'https://www.seopress.org');
 define('ITEM_ID_SEOPRESS', 113);
@@ -171,7 +171,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php') && file_exists(WP_PLUGIN_DIR .
 
     $versions       = get_option('seopress_versions');
     $versionFree    = isset($versions['free']) ? $versions['free'] : 0;
-    if ('4.6.0.2' !== $versionFree && version_compare($versionFree, '4.5.1', '<=')) {
+    if ('4.7.0' !== $versionFree && version_compare($versionFree, '4.5.1', '<=')) {
         return;
     }
 

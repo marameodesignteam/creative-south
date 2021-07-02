@@ -7,5 +7,7 @@
     "url": "[[url]]",
     "telephone": "[[telephone]]",
     "priceRange": "[[priceRange]]",
-    "servesCuisine": "[[servesCuisines]]"
+    "servesCuisine": "[[servesCuisines]]",
+    "menu": "[[menu]]",
+    "acceptsReservations": "[[acceptsReservations]]"
 }

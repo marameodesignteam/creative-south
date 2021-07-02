@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '4.6.x-dev',
-    'version' => '4.6.9999999.9999999-dev',
+    'pretty_version' => '4.7.x-dev',
+    'version' => '4.7.9999999.9999999-dev',
     'aliases' => 
     array (
     ),
-    'reference' => 'aceb681cce2cb2f6f382a9b716a198dede11d8fe',
+    'reference' => 'c34fd0905440aeffcfb93aa7915fde5f215bc6ec',
     'name' => 'wp-seopress/wp-seopress',
   ),
   'versions' => 
@@ -31,12 +31,12 @@
     ),
     'google/apiclient-services' => 
     array (
-      'pretty_version' => 'v0.172.0',
-      'version' => '0.172.0.0',
+      'pretty_version' => 'v0.175.0',
+      'version' => '0.175.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '85e8a9f0062a9e1aba3cdc0f499968bc8de78b7d',
+      'reference' => '316cbf9b02c575a140d8cbeca48a3ca0070fcd5a',
     ),
     'google/auth' => 
     array (
@@ -137,12 +137,12 @@
     ),
     'psr/log' => 
     array (
-      'pretty_version' => '1.1.3',
-      'version' => '1.1.3.0',
+      'pretty_version' => '1.1.4',
+      'version' => '1.1.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
+      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
     ),
     'psr/log-implementation' => 
     array (
@@ -198,12 +198,12 @@
     ),
     'wp-seopress/wp-seopress' => 
     array (
-      'pretty_version' => '4.6.x-dev',
-      'version' => '4.6.9999999.9999999-dev',
+      'pretty_version' => '4.7.x-dev',
+      'version' => '4.7.9999999.9999999-dev',
       'aliases' => 
       array (
       ),
-      'reference' => 'aceb681cce2cb2f6f382a9b716a198dede11d8fe',
+      'reference' => 'c34fd0905440aeffcfb93aa7915fde5f215bc6ec',
     ),
   ),
 );

@@ -19,24 +19,30 @@ class Review extends JsonSchemaValue implements GetJsonData {
     }
 
     /**
-     * @since 4.6.0
+     * @since 4.7.0
      *
      * @return array
-     *
-     * @param array $schemaManual
      */
-    protected function getVariablesForManualSnippet($schemaManual) {
-        $keys = [
+    protected function getKeysForSchemaManual() {
+        return [
             'item'         => '_seopress_pro_rich_snippets_review_item',
             'itemType'     => '_seopress_pro_rich_snippets_review_item_type',
             'image'        => '_seopress_pro_rich_snippets_review_img',
             'ratingValue'  => '_seopress_pro_rich_snippets_review_rating',
+            'reviewBody'   => '_seopress_pro_rich_snippets_review_body',
         ];
-        $variables = [];
+    }
 
-        foreach ($keys as $key => $value) {
-            $variables[$key] = isset($schemaManual[$value]) ? $schemaManual[$value] : '';
-        }
+    /**
+     * @since 4.6.0
+     *
+     * @return array
+     *
+     * @param array $keys
+     * @param array $data
+     */
+    protected function getVariablesByKeysAndData($keys, $data = []) {
+        $variables = parent::getVariablesByKeysAndData($keys, $data);
 
         if (empty($variables['itemType'])) {
             $variables['itemType'] = 'Thing';
@@ -59,22 +65,7 @@ class Review extends JsonSchemaValue implements GetJsonData {
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::MANUAL;
 
-        $variables = [];
-
-        switch ($typeSchema) {
-            case RichSnippetType::SUB_TYPE:
-                $variables = isset($context['variables']) ? $context['variables'] : [];
-                break;
-            case RichSnippetType::MANUAL:
-                $schemaManual = $this->getCurrentSchemaManual($context);
-
-                if (null === $schemaManual) {
-                    return $data;
-                }
-
-                $variables = $this->getVariablesForManualSnippet($schemaManual);
-                break;
-        }
+        $variables  = $this->getVariablesByType($typeSchema, $context);
 
         if (isset($variables['item'])) {
             $data['itemReviewed'] = [
@@ -117,6 +108,10 @@ class Review extends JsonSchemaValue implements GetJsonData {
             if (count($schema) > 1) {
                 $data['author'] = $schema;
             }
+        }
+
+        if (isset($variables['reviewBody'])) {
+            $data['reviewBody'] = $variables['reviewBody'];
         }
 
         if (isset($context['post']->ID)) {

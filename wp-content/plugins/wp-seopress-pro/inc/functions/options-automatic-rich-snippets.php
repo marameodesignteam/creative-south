@@ -117,299 +117,236 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
             function seopress_automatic_rich_snippets_articles_option($schema_datas) {
                 //if no data
                 if (0 != count(array_filter($schema_datas, 'strlen'))) {
-                    $article_type 					          = $schema_datas['type'];
-                    $article_title 					         = $schema_datas['title'];
-                    $article_img 					           = $schema_datas['img'];
-                    $article_coverage_start_date	= $schema_datas['coverage_start_date'];
-                    $article_coverage_start_time	= $schema_datas['coverage_start_time'];
-                    $article_coverage_end_date 		= $schema_datas['coverage_end_date'];
-                    $article_coverage_end_time 		= $schema_datas['coverage_end_time'];
+                    $article_type 					           = $schema_datas['type'];
+                    $article_title 					          = $schema_datas['title'];
+                    $article_author 					         = $schema_datas['author'];
+                    $article_img 					            = $schema_datas['img'];
+                    $article_coverage_start_date	 = $schema_datas['coverage_start_date'];
+                    $article_coverage_start_time	 = $schema_datas['coverage_start_time'];
+                    $article_coverage_end_date 		 = $schema_datas['coverage_end_date'];
+                    $article_coverage_end_time 		 = $schema_datas['coverage_end_time'];
+                    $article_speakable 		         = $schema_datas['speakable'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org",';
-                    if ('' != $article_type) {
-                        $html .= '"@type": ' . json_encode($article_type) . ',';
-                    }
+                    $json = [
+                        '@context'         => seopress_check_ssl() . 'schema.org/',
+                        '@type'            => $article_type,
+                        'datePublished'    => get_the_date('c'),
+                        'dateModified'     => get_the_modified_date('c'),
+                    ];
+
                     if (function_exists('seopress_rich_snippets_articles_canonical_option') && '' != seopress_rich_snippets_articles_canonical_option()) {
-                        $html .= '"mainEntityOfPage": {
-									"@type": "WebPage",
-									"@id": ' . json_encode(seopress_rich_snippets_articles_canonical_option()) . '
-								},';
+                        $json['mainEntityOfPage'] = [
+                            '@type' => 'WebPage',
+                            '@id'   => seopress_rich_snippets_articles_canonical_option(),
+                        ];
                     }
-                    if ('' != $article_title) {
-                        $html .= '"headline": ' . json_encode($article_title) . ',';
+
+                    $json['headline'] = $article_title;
+
+                    $author = get_the_author();
+                    if ('' != $article_author) {
+                        $author = $article_author;
                     }
+
+                    $json['author'] = [
+                        '@type' => 'Person',
+                        'name'  => $author,
+                    ];
+
                     if ('' != $article_img) {
-                        $html .= '"image": {
-									"@type": "ImageObject",
-									"url": ' . json_encode($article_img) . '
-								},';
+                        $json['image'] = [
+                            '@type' => 'ImageObject',
+                            'url'   => $article_img,
+                        ];
                     }
-                    $html .= '"datePublished": "' . get_the_date('c') . '",
-							"dateModified": ' . json_encode(get_the_modified_date('c')) . ',
-							"author": {
-								"@type": "Person",
-								"name": ' . json_encode(get_the_author()) . '
-							},';
 
                     if (function_exists('seopress_rich_snippets_articles_publisher_option') && '' != seopress_rich_snippets_articles_publisher_option()) {
-                        $html .= '"publisher": {
-									"@type": "Organization",
-									"name": ' . json_encode(seopress_rich_snippets_articles_publisher_option()) . ',';
+                        $json['publisher'] = [
+                            '@type' => 'Organization',
+                            'name'  => seopress_rich_snippets_articles_publisher_option(),
+                        ];
                         if ('' != seopress_rich_snippets_articles_publisher_logo_option()) {
-                            $html .= '"logo": {
-											"@type": "ImageObject",
-											"url": ' . json_encode(seopress_rich_snippets_articles_publisher_logo_option()) . ',
-											"width": ' . json_encode(seopress_rich_snippets_articles_publisher_logo_width_option()) . ',
-											"height": ' . json_encode(seopress_rich_snippets_articles_publisher_logo_height_option()) . '
-										}';
+                            $json['publisher']['logo'] = [
+                                '@type'  => 'ImageObject',
+                                'url'    => seopress_rich_snippets_articles_publisher_logo_option(),
+                                'width'  => seopress_rich_snippets_articles_publisher_logo_width_option(),
+                                'height' => seopress_rich_snippets_articles_publisher_logo_height_option(),
+                            ];
                         }
-                        $html .= '},';
                     }
 
                     if ($article_coverage_start_date && $article_coverage_start_time && 'LiveBlogPosting' == $article_type) {
-                        $html .= '"coverageStartTime": "' . $article_coverage_start_date . 'T' . $article_coverage_start_time . '",';
+                        $json['coverageStartTime'] = $article_coverage_start_date . 'T' . $article_coverage_start_time;
                     }
 
                     if ($article_coverage_end_date && $article_coverage_end_time && 'LiveBlogPosting' == $article_type) {
-                        $html .= '"coverageEndTime": "' . $article_coverage_end_date . 'T' . $article_coverage_end_time . '",';
+                        $json['coverageEndTime'] = $article_coverage_end_date . 'T' . $article_coverage_end_time;
                     }
 
                     if ('ReviewNewsArticle' == $article_type) {
-                        $html .= '"itemReviewed": {"@type": "Thing", "name":"' . get_the_title() . '"},';
+                        $json['itemReviewed'] = [
+                            '@type' => 'Thing',
+                            'name'  => get_the_title(),
+                        ];
                     }
 
-                    $html .= '"description": ' . json_encode(wp_trim_words(esc_html(get_the_excerpt()), 30));
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
+                    $json['description'] = wp_trim_words(esc_html(get_the_excerpt()), 30);
 
-                    $html = apply_filters('seopress_schemas_auto_article_html', $html);
+                    if ('' != $article_speakable) {
+                        $json['speakable'] = [
+                            '@type'       => 'SpeakableSpecification',
+                            'cssSelector' => $article_speakable,
+                        ];
+                    }
 
-                    echo $html;
+                    $json = array_filter($json);
+
+                    $json = apply_filters('seopress_schemas_auto_article_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_article_html', $json);
+
+                    echo $json;
                 }
             }
 
             //Local Business JSON-LD
             function seopress_automatic_rich_snippets_lb_option($schema_datas) {
-                $lb_name 							        = $schema_datas['name'];
-                $lb_type 							        = $schema_datas['type'];
-                $lb_img 							         = $schema_datas['img'];
-                $lb_street_addr 					   = $schema_datas['street_addr'];
-                $lb_city 							        = $schema_datas['city'];
-                $lb_state 							       = $schema_datas['state'];
-                $lb_pc 								         = $schema_datas['pc'];
-                $lb_country 						      = $schema_datas['country'];
-                $lb_lat 							         = $schema_datas['lat'];
-                $lb_lon 							         = $schema_datas['lon'];
-                $lb_website 						      = $schema_datas['website'];
-                $lb_tel 							         = $schema_datas['tel'];
-                $lb_price 							       = $schema_datas['price'];
-                $lb_serves_cuisine 					= $schema_datas['serves_cuisine'];
-                $lb_opening_hours 					 = $schema_datas['opening_hours'];
+                $lb_name 							            = $schema_datas['name'];
+                $lb_type 							            = $schema_datas['type'];
+                $lb_img 							             = $schema_datas['img'];
+                $lb_street_addr 					       = $schema_datas['street_addr'];
+                $lb_city 							            = $schema_datas['city'];
+                $lb_state 							           = $schema_datas['state'];
+                $lb_pc 								             = $schema_datas['pc'];
+                $lb_country 						          = $schema_datas['country'];
+                $lb_lat 							             = $schema_datas['lat'];
+                $lb_lon 							             = $schema_datas['lon'];
+                $lb_website 						          = $schema_datas['website'];
+                $lb_tel 							             = $schema_datas['tel'];
+                $lb_price 							           = $schema_datas['price'];
+                $lb_serves_cuisine 					    = $schema_datas['serves_cuisine'];
+                $lb_menu 					              = $schema_datas['menu'];
+                $lb_accepts_reservations 			= $schema_datas['accepts_reservations'];
+                $lb_opening_hours 					     = $schema_datas['opening_hours'];
 
-                if ('' != $lb_img) {
-                    $lb_img = json_encode($lb_img);
+                if ('' == $lb_name) {
+                    $lb_name = get_bloginfo('name');
                 }
 
-                if ('' != $lb_name) {
-                    $lb_name = json_encode($lb_name);
-                }
-
-                if ('' != $lb_type) {
-                    $lb_type = json_encode($lb_type);
-                } else {
+                if ('' == $lb_type) {
                     $lb_type = 'LocalBusiness';
                 }
 
-                if ('' != $lb_street_addr) {
-                    $lb_street_addr = json_encode($lb_street_addr);
+                if ('' == $lb_menu && '' != $lb_website) {
+                    $lb_menu = $lb_website;
                 }
 
-                if ('' != $lb_city) {
-                    $lb_city = json_encode($lb_city);
+                $json = [
+                    '@context'   => seopress_check_ssl() . 'schema.org',
+                    '@type'      => $lb_type,
+                    'name'       => $lb_name,
+                    'image'      => $lb_img,
+                    'url'        => $lb_website,
+                    'telephone'  => $lb_tel,
+                    'priceRange' => $lb_price,
+                ];
+
+                if (function_exists('seopress_pro_rich_snippets_lb_id_option') && '' != seopress_pro_rich_snippets_lb_id_option()) {
+                    $json['@id'] = seopress_pro_rich_snippets_lb_id_option();
                 }
 
-                if ('' != $lb_state) {
-                    $lb_state = json_encode($lb_state);
+                if (isset($lb_street_addr) || isset($lb_city) || isset($lb_state) || isset($lb_pc) || isset($lb_country)) {
+                    $json['address'] = [
+                        '@type'           => 'PostalAddress',
+                        'streetAddress'   => $lb_street_addr,
+                        'addressLocality' => $lb_city,
+                        'addressRegion'   => $lb_state,
+                        'postalCode'      => $lb_pc,
+                        'addressCountry'  => $lb_country,
+                    ];
                 }
 
-                if ('' != $lb_pc) {
-                    $lb_pc = json_encode($lb_pc);
+                if (isset($lb_lat) || isset($lb_lon)) {
+                    $json['geo'] = [
+                        '@type'     => 'GeoCoordinates',
+                        'latitude'  => $lb_lat,
+                        'longitude' => $lb_lon,
+                    ];
                 }
 
-                if ('' != $lb_country) {
-                    $lb_country = json_encode($lb_country);
-                }
-
-                if ('' != $lb_lat) {
-                    $lb_lat = json_encode($lb_lat);
-                }
-
-                if ('' != $lb_lon) {
-                    $lb_lon = json_encode($lb_lon);
-                }
-
-                if ('' != $lb_website) {
-                    $lb_website = json_encode($lb_website);
-                }
-
-                if ('' != $lb_tel) {
-                    $lb_tel = json_encode($lb_tel);
-                }
-
-                if ('' != $lb_price) {
-                    $lb_price = json_encode($lb_price);
-                }
-
-                if ('' != $lb_serves_cuisine) {
-                    $lb_serves_cuisine = json_encode($lb_serves_cuisine);
+                if (isset($lb_serves_cuisine) &&
+                    (
+                        'FoodEstablishment' == $lb_type
+                        || 'Bakery' == $lb_type
+                        || 'BarOrPub' == $lb_type
+                        || 'Brewery' == $lb_type
+                        || 'CafeOrCoffeeShop' == $lb_type
+                        || 'FastFoodRestaurant' == $lb_type
+                        || 'IceCreamShop' == $lb_type
+                        || 'Restaurant' == $lb_type
+                        || 'Winery' == $lb_type
+                    )
+                ) {
+                    $json['servesCuisine']                = $lb_serves_cuisine;
+                    $json['menu']                         = $lb_menu;
+                    $json['acceptsReservations']          = $lb_accepts_reservations;
                 }
 
                 if ('' != $lb_opening_hours) {
                     $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-                    $seopress_pro_rich_snippets_lb_opening_hours_option ='';
-
                     foreach ($lb_opening_hours as $key => $day) {//DAY
                         if ( ! array_key_exists('open', $day)) {//CLOSED?
                             foreach ($day as $keys => $ampm) {//AM/PM
                                 if (array_key_exists('open', $ampm)) {//OPEN?
-                                    $seopress_pro_rich_snippets_lb_opening_hours_option .= '{ ';
-                                    $seopress_pro_rich_snippets_lb_opening_hours_option .= '"@type": "OpeningHoursSpecification",';
-                                    $seopress_pro_rich_snippets_lb_opening_hours_option .= '"dayOfWeek": "' . $days[$key] . '", ';
+                                    $hours = [
+                                        '@type'     => 'OpeningHoursSpecification',
+                                        'dayOfWeek' => $days[$key],
+                                    ];
 
                                     foreach ($ampm as $_key => $value) {//HOURS
+                                        $i         = 0;
+                                        $full_time = null;
                                         if ('start' == $_key) {//START AM/PM
-                                            $seopress_pro_rich_snippets_lb_opening_hours_option .= '"opens": "';
                                             foreach ($value as $__key => $time) {
-                                                $seopress_pro_rich_snippets_lb_opening_hours_option .= $time;
-                                                if ('hours' == $__key) {
-                                                    $seopress_pro_rich_snippets_lb_opening_hours_option .= ':';
+                                                $full_time .= $time;
+                                                if (0 === $i) {
+                                                    $full_time .= ':';
                                                 }
+                                                ++$i;
                                             }
-                                            $seopress_pro_rich_snippets_lb_opening_hours_option .= '",';
+                                            $hours['opens'][] = $full_time;
                                         }
                                         if ('end' == $_key) {//CLOSE AM/PM
-                                            $seopress_pro_rich_snippets_lb_opening_hours_option .= '"closes": "';
                                             foreach ($value as $__key => $time) {
-                                                $seopress_pro_rich_snippets_lb_opening_hours_option .= $time;
-                                                if ('hours' == $__key) {
-                                                    $seopress_pro_rich_snippets_lb_opening_hours_option .= ':';
+                                                $full_time .= $time;
+                                                if (0 === $i) {
+                                                    $full_time .= ':';
                                                 }
+                                                ++$i;
                                             }
-                                            $seopress_pro_rich_snippets_lb_opening_hours_option .= '"';
+                                            $hours['closes'][] = $full_time;
                                         }
                                     }
-
-                                    $seopress_pro_rich_snippets_lb_opening_hours_option .= '|';
                                 }
+
+                                $json['openingHoursSpecification'][] = $hours;
                             }
                         }
                     }
                 }
 
-                $html = '<script type="application/ld+json">';
-                $html .= '{"@context" : "' . seopress_check_ssl() . 'schema.org","@type" : ' . $lb_type . ',';
-                if (isset($lb_img)) {
-                    $html .= '"image": ' . $lb_img . ', ';
-                }
-                if (function_exists('seopress_pro_rich_snippets_lb_id_option') && '' != seopress_pro_rich_snippets_lb_id_option()) {
-                    $html .= '"@id": ' . json_encode(seopress_pro_rich_snippets_lb_id_option()) . ',';
-                }
+                $json = array_filter($json);
 
-                if (isset($lb_street_addr) || isset($lb_city) || isset($lb_state) || isset($lb_pc) || isset($lb_country)) {
-                    $html .= '"address": {
-						"@type": "PostalAddress",';
-                    if (isset($lb_street_addr)) {
-                        $html .= '"streetAddress": ' . $lb_street_addr . ',';
-                    }
-                    if (isset($lb_city)) {
-                        $html .= '"addressLocality": ' . $lb_city . ',';
-                    }
-                    if (isset($lb_state)) {
-                        $html .= '"addressRegion": ' . $lb_state . ',';
-                    }
-                    if (isset($lb_pc)) {
-                        $html .= '"postalCode": ' . $lb_pc . ',';
-                    }
-                    if (isset($lb_country)) {
-                        $html .= '"addressCountry": ' . $lb_country;
-                    }
-                    $html .= '},';
-                }
+                $json = apply_filters('seopress_schemas_auto_lb_json', $json);
 
-                if (isset($lb_lat) || isset($lb_lon)) {
-                    $html .= '"geo": {
-						"@type": "GeoCoordinates",';
-                    if (isset($lb_lat)) {
-                        $html .= '"latitude": ' . $lb_lat . ',';
-                    }
-                    if (isset($lb_lon)) {
-                        $html .= '"longitude": ' . $lb_lon;
-                    }
-                    $html .= '},';
-                }
+                $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
 
-                if (isset($lb_website)) {
-                    $html .= '"url": ' . $lb_website . ',';
-                }
+                $json = apply_filters('seopress_schemas_auto_lb_html', $json);
 
-                if (isset($lb_tel)) {
-                    $html .= '"telephone": ' . $lb_tel . ',';
-                }
-
-                if (isset($lb_price)) {
-                    $html .= '"priceRange": ' . $lb_price . ',';
-                }
-
-                if (isset($lb_serves_cuisine) &&
-                    (
-                        '"FoodEstablishment"' == $lb_type
-                        || '"Bakery"' == $lb_type
-                        || '"BarOrPub"' == $lb_type
-                        || '"Brewery"' == $lb_type
-                        || '"CafeOrCoffeeShop"' == $lb_type
-                        || '"FastFoodRestaurant"' == $lb_type
-                        || '"IceCreamShop"' == $lb_type
-                        || '"Restaurant"' == $lb_type
-                        || '"Winery"' == $lb_type
-                    )
-                ) {
-                    $html .= '"servesCuisine": ' . $lb_serves_cuisine . ',';
-                }
-
-                if (isset($seopress_pro_rich_snippets_lb_opening_hours_option)) {
-                    $html .= '"openingHoursSpecification": [';
-
-                    $explode              = array_filter(explode('|', $seopress_pro_rich_snippets_lb_opening_hours_option));
-                    $seopress_comma_count = count($explode);
-                    for ($i = 0; $i < $seopress_comma_count; ++$i) {
-                        $html .= $explode[$i];
-                        if ($i < ($seopress_comma_count - 1)) {
-                            $html .= '}, ';
-                        } else {
-                            $html .= '} ';
-                        }
-                    }
-
-                    $html .= '],';
-                }
-                if (isset($lb_name)) {
-                    $html .= '"name": ' . $lb_name;
-                } else {
-                    $html .= '"name": "' . get_bloginfo('name') . '"';
-                }
-                $html = trim($html, ',');
-                $html .= '}';
-                $html .= '</script>';
-                $html .= "\n";
-
-                $html = apply_filters('seopress_schemas_auto_lb_html', $html);
-
-                echo $html;
+                echo $json;
             }
 
             //FAQ JSON-LD
@@ -419,17 +356,30 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $faq_q 							= $schema_datas['q'];
                     $faq_a 							= $schema_datas['a'];
                     if (('' != $faq_q) && ('' != $faq_a)) {
-                        $html = '<script type="application/ld+json">';
-                        $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org",
-							"@type": "FAQPage",
-							"name": "FAQ","mainEntity": [{"@type": "Question","name": ' . json_encode($faq_q) . ',"answerCount": 1,"acceptedAnswer": {"@type": "Answer","text": ' . json_encode($faq_a) . '}}]}';
-                        $html .= '</script>';
-                        $html .= "\n";
+                        $json = [
+                            '@context'   => seopress_check_ssl() . 'schema.org',
+                            '@type'      => 'FAQPage',
+                            'name'       => 'FAQ',
+                            'mainEntity' => [
+                                '@type'          => 'Question',
+                                'name'           => $faq_q,
+                                'answerCount'    => 1,
+                                'acceptedAnswer' => [
+                                    '@type' => 'Answer',
+                                    'text'  => $faq_a,
+                                ],
+                            ],
+                        ];
 
-                        $html = apply_filters('seopress_schemas_auto_faq_html', $html);
+                        $json = array_filter($json);
 
-                        echo $html;
+                        $json = apply_filters('seopress_schemas_auto_faq_json', $json);
+
+                        $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                        $json = apply_filters('seopress_schemas_auto_faq_html', $json);
+
+                        echo $json;
                     }
                 }
             }
@@ -443,31 +393,30 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $courses_school 						 = $schema_datas['school'];
                     $courses_website 						= $schema_datas['website'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org",
-							"@type": "Course",';
-                    if ('' != $courses_title) {
-                        $html .= '"name": ' . json_encode($courses_title) . ',';
-                    }
-                    if ('' != $courses_desc) {
-                        $html .= '"description": ' . json_encode($courses_desc) . ',';
-                    }
+                    $json = [
+                        '@context'    => seopress_check_ssl() . 'schema.org',
+                        '@type'       => 'Course',
+                        'name'        => $courses_title,
+                        'description' => $courses_desc,
+                    ];
+
                     if ('' != $courses_school) {
-                        $html .= '"provider": {
-									"@type": "Organization",
-									"name": ' . json_encode($courses_school) . ',
-									"sameAs": ' . json_encode($courses_website) . '
-								}';
+                        $json['provider'] = [
+                            '@type'  => 'Organization',
+                            'name'   => $courses_school,
+                            'sameAs' => $courses_website,
+                        ];
                     }
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_course_html', $html);
+                    $json = array_filter($json);
 
-                    echo $html;
+                    $json = apply_filters('seopress_schemas_auto_course_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_course_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -479,6 +428,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $recipes_desc 							      = $schema_datas['desc'];
                     $recipes_cat 							       = $schema_datas['cat'];
                     $recipes_img 							       = $schema_datas['img'];
+                    $recipes_video 						      = $schema_datas['video'];
                     $recipes_prep_time 						  = $schema_datas['prep_time'];
                     $recipes_cook_time 						  = $schema_datas['cook_time'];
                     $recipes_calories 						   = $schema_datas['calories'];
@@ -488,62 +438,42 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $recipes_ingredient 					  = $schema_datas['ingredient'];
                     $recipes_instructions 					= $schema_datas['instructions'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org/",';
-                    $html .= '"@type": "Recipe",';
+                    $json = [
+                        '@context'       => seopress_check_ssl() . 'schema.org/',
+                        '@type'          => 'Recipe',
+                        'name'           => $recipes_name,
+                        'recipeCategory' => $recipes_cat,
+                        'image'          => $recipes_img,
+                        'description'    => $recipes_desc,
+                        'video'          => $recipes_video,
+                        'prepTime'       => 'PT' . $recipes_prep_time . 'M',
+                        'totalTime'      => 'PT' . $recipes_cook_time . 'M',
+                        'recipeYield'    => $recipes_yield,
+                        'keywords'       => $recipes_keywords,
+                        'recipeCuisine'  => $recipes_cuisine,
+                    ];
 
-                    if ('' != $recipes_name) {
-                        $html .= '"name": ' . json_encode($recipes_name) . ',';
-                    }
-                    if ('' != $recipes_cat) {
-                        $html .= '"recipeCategory": ' . json_encode($recipes_cat) . ',';
-                    }
-                    if ('' != $recipes_img) {
-                        $html .= '"image": ' . json_encode($recipes_img) . ',';
-                    }
                     if (get_the_author()) {
-                        $html .= '"author": {
-									"@type": "Person",
-									"name": ' . json_encode(get_the_author()) . '
-								},';
+                        $json['author'] = [
+                            '@type' => 'Person',
+                            'name'  => json_encode(get_the_author()),
+                        ];
                     }
+
                     if (get_the_date()) {
-                        $html .= '"datePublished": "' . get_the_date('Y-m-j') . '",';
+                        $json['datePublished'] = get_the_date('Y-m-j');
                     }
-                    if ('' != $recipes_desc) {
-                        $html .= '"description": ' . json_encode($recipes_desc) . ',';
-                    }
-                    if ($recipes_prep_time) {
-                        $html .= '"prepTime": ' . json_encode('PT' . $recipes_prep_time . 'M') . ',';
-                    }
-                    if ('' != $recipes_cook_time) {
-                        $html .= '"totalTime": ' . json_encode('PT' . $recipes_cook_time . 'M') . ',';
-                    }
-                    if ('' != $recipes_yield) {
-                        $html .= '"recipeYield": ' . json_encode($recipes_yield) . ',';
-                    }
-                    if ('' != $recipes_keywords) {
-                        $html .= '"keywords": ' . json_encode($recipes_keywords) . ',';
-                    }
-                    if ('' != $recipes_cuisine) {
-                        $html .= '"recipeCuisine": ' . json_encode($recipes_cuisine) . ',';
-                    }
+
                     if ('' != $recipes_ingredient) {
                         $recipes_ingredient = preg_split('/\r\n|[\r\n]/', $recipes_ingredient);
                         if ( ! empty($recipes_ingredient)) {
                             $i     = '0';
                             $count = count($recipes_ingredient);
 
-                            $html .= '"recipeIngredient": [';
                             foreach ($recipes_ingredient as $value) {
-                                $html .= json_encode($value);
-                                if ($i < $count - 1) {
-                                    $html .= ',';
-                                }
+                                $json['recipeIngredient'][] = $value;
                                 ++$i;
                             }
-                            $html .= '],';
                         }
                     }
                     if ('' != $recipes_instructions) {
@@ -552,31 +482,32 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                             $i     = '0';
                             $count = count($recipes_instructions);
 
-                            $html .= '"recipeInstructions": [';
                             foreach ($recipes_instructions as $value) {
-                                $html .= '{"@type": "HowToStep","text":' . json_encode($value) . '}';
-                                if ($i < $count - 1) {
-                                    $html .= ',';
-                                }
+                                $json['recipeInstructions'][] = [
+                                    '@type' => 'HowToStep',
+                                    'text'  => $value,
+                                ];
+
                                 ++$i;
                             }
-                            $html .= '],';
                         }
                     }
                     if ('' != $recipes_calories) {
-                        $html .= '"nutrition": {
-									"@type": "NutritionInformation",
-									"calories": ' . json_encode($recipes_calories) . '
-								}';
+                        $json['nutrition'] = [
+                            '@type'    => 'NutritionInformation',
+                            'calories' => $recipes_calories,
+                        ];
                     }
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_recipe_html', $html);
+                    $json = array_filter($json);
 
-                    echo $html;
+                    $json = apply_filters('seopress_schemas_auto_recipe_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_recipe_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -606,86 +537,72 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $jobs_salary_currency 				   = $schema_datas['salary_currency'];
                     $jobs_salary_unit 					      = $schema_datas['salary_unit'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org/",';
-                    $html .= '"@type": "JobPosting",';
+                    $json = [
+                        '@context'       => seopress_check_ssl() . 'schema.org/',
+                        '@type'          => 'JobPosting',
+                        'title'          => $jobs_name,
+                        'description'    => $jobs_desc,
+                        'datePosted'     => $jobs_date_posted,
+                        'validThrough'   => $jobs_valid_through,
+                        'employmentType' => $jobs_employment_type,
+                    ];
 
-                    if ('' != $jobs_name) {
-                        $html .= '"title": ' . json_encode($jobs_name) . ',';
-                    }
-                    if ('' != $jobs_desc) {
-                        $html .= '"description": ' . json_encode($jobs_desc) . ',';
-                    }
                     if ('' != $jobs_identifier_name && '' != $jobs_identifier_value) {
-                        $html .= '"identifier": {
-									"@type": "PropertyValue",
-									"name": ' . json_encode($jobs_identifier_name) . ',
-									"value": ' . json_encode($jobs_identifier_value) . '
-								},';
+                        $json['identifier'] = [
+                            '@type' => 'PropertyValue',
+                            'name'  => $jobs_identifier_name,
+                            'value' => $jobs_identifier_value,
+                        ];
                     }
-                    if ('' != $jobs_date_posted) {
-                        $html .= '"datePosted" : ' . json_encode($jobs_date_posted) . ',';
-                    }
-                    if ('' != $jobs_valid_through) {
-                        $html .= '"validThrough" : ' . json_encode($jobs_valid_through) . ',';
-                    }
-                    if ('' != $jobs_employment_type) {
-                        $html .= '"employmentType" : ' . json_encode($jobs_employment_type) . ',';
-                    }
+
                     if ('' != $jobs_hiring_organization && '' != $jobs_hiring_same_as && '' != $jobs_hiring_logo) {
-                        $html .= '"hiringOrganization" : {
-									"@type" : "Organization",
-									"name" : ' . json_encode($jobs_hiring_organization) . ',
-									"sameAs" : ' . json_encode($jobs_hiring_same_as) . ',
-									"logo" : ' . json_encode($jobs_hiring_logo) . '
-								},';
+                        $json['hiringOrganization'] = [
+                            '@type'  => 'Organization',
+                            'name'   => $jobs_hiring_organization,
+                            'sameAs' => $jobs_hiring_same_as,
+                            'logo'   => $jobs_hiring_logo,
+                        ];
                     }
+
                     if ('' != $jobs_address_street || '' != $jobs_address_locality || '' != $jobs_address_region || '' != $jobs_postal_code || '' != $jobs_country) {
-                        $html .= '"jobLocation": {
-									"@type": "Place",
-										"address": {
-										"@type": "PostalAddress",';
-                        if ('' != $jobs_address_street) {
-                            $html .= '"streetAddress": ' . json_encode($jobs_address_street) . ',';
-                        }
-                        if ('' != $jobs_address_locality) {
-                            $html .= '"addressLocality": ' . json_encode($jobs_address_locality) . ',';
-                        }
-                        if ('' != $jobs_address_region) {
-                            $html .= '"addressRegion": ' . json_encode($jobs_address_region) . ',';
-                        }
-                        if ('' != $jobs_postal_code) {
-                            $html .= '"postalCode": ' . json_encode($jobs_postal_code) . ',';
-                        }
-                        if ('' != $jobs_country) {
-                            $html .= '"addressCountry": ' . json_encode($jobs_country);
-                        }
-                        $html .= '}
-									},';
+                        $json['jobLocation'] = [
+                                '@type'   => 'Place',
+                                'address' => [
+                                    '@type'           => 'PostalAddress',
+                                    'streetAddress'   => $jobs_address_street,
+                                    'addressLocality' => $jobs_address_locality,
+                                    'addressRegion'   => $jobs_address_region,
+                                    'postalCode'      => $jobs_postal_code,
+                                    'addressCountry'  => $jobs_country,
+                                ],
+                            ];
                     }
+
                     if ('' != $jobs_remote && '' != $jobs_country) {
-                        $html .= '"jobLocationType": "TELECOMMUTE",';
+                        $json['jobLocationType'] = 'TELECOMMUTE';
                     }
+
                     if ('' != $jobs_salary && '' != $jobs_salary_currency && '' != $jobs_salary_unit) {
-                        $html .= '"baseSalary": {
-									"@type": "MonetaryAmount",
-									"currency": ' . json_encode($jobs_salary_currency) . ',
-									"value": {
-									"@type": "QuantitativeValue",
-									"value": ' . json_encode($jobs_salary) . ',
-									"unitText": ' . json_encode($jobs_salary_unit) . '
-									}
-								}';
+                        $json['baseSalary'] = [
+                            '@type'    => 'MonetaryAmount',
+                            'currency' => $jobs_salary_currency,
+                            'value'    => [
+                                '@type'    => 'QuantitativeValue',
+                                'value'    => $jobs_salary,
+                                'unitText' => $jobs_salary_unit,
+                            ],
+                        ];
                     }
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_job_html', $html);
+                    $json = array_filter($json);
 
-                    echo $html;
+                    $json = apply_filters('seopress_schemas_auto_job_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_job_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -699,51 +616,48 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $videos_duration 						  = $schema_datas['duration'];
                     $videos_url 							      = $schema_datas['url'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org",
-							"@type": "VideoObject",';
-                    if ('' != $videos_name) {
-                        $html .= '"name": ' . json_encode($videos_name) . ',';
-                    }
-                    if ('' != $videos_description) {
-                        $html .= '"description": ' . json_encode($videos_description) . ',';
-                    }
-                    if ('' != $videos_img) {
-                        $html .= '"thumbnailUrl": ' . json_encode($videos_img) . ',';
-                    }
+                    $json = [
+                        '@context'     => seopress_check_ssl() . 'schema.org',
+                        '@type'        => 'VideoObject',
+                        'name'         => $videos_name,
+                        'description'  => $videos_description,
+                        'thumbnailUrl' => $videos_img,
+                        'contentUrl'   => $videos_url,
+                        'embedUrl'     => $videos_url,
+                    ];
+
                     if (get_the_date()) {
-                        $html .= '"uploadDate": "' . get_the_date('c') . '",';
+                        $json['uploadDate'] = get_the_date('c');
                     }
+
                     if ('' != $videos_duration) {
                         $time   = explode(':', $videos_duration);
                         $sec 	  = isset($time[2]) ? $time[2] : 00;
                         $min 	  = ($time[0] * 60.0 + $time[1] * 1.0);
 
-                        $html .= '"duration": ' . json_encode('PT' . $min . 'M' . $sec . 'S') . ',';
+                        $json['duration'] = 'PT' . $min . 'M' . $sec . 'S';
                     }
+
                     if ('' != seopress_rich_snippets_videos_publisher_option()) {
-                        $html .= '"publisher": {
-									"@type": "Organization",
-									"name": ' . json_encode(seopress_rich_snippets_videos_publisher_option()) . ',
-									"logo": {
-										"@type": "ImageObject",
-										"url": ' . json_encode(seopress_rich_snippets_videos_publisher_logo_option()) . '
-									}
-								},';
+                        $json['publisher'] = [
+                            '@type' => 'Organization',
+                            'name'  => seopress_rich_snippets_videos_publisher_option(),
+                            'logo'  => [
+                                '@type' => 'ImageObject',
+                                'url'   => seopress_rich_snippets_videos_publisher_logo_option(),
+                            ],
+                        ];
                     }
-                    if ('' != $videos_url) {
-                        $html .= '"contentUrl": ' . json_encode($videos_url) . ',
-								"embedUrl": ' . json_encode($videos_url) . '';
-                    }
-                    $html .= '}';
-                    $html = trim($html, ',');
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_video_html', $html);
+                    $json = array_filter($json);
 
-                    echo $html;
+                    $json = apply_filters('seopress_schemas_auto_video_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_video_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -754,30 +668,33 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     //Init
                     global $post;
 
-                    $events_type 							              = $schema_datas['type'];
-                    $events_name 							              = $schema_datas['name'];
-                    $events_desc 							              = $schema_datas['desc'];
-                    $events_img 							               = $schema_datas['img'];
-                    $events_start_date 						         = $schema_datas['start_date'];
-                    $events_start_time 						         = $schema_datas['start_time'];
-                    $events_end_date 						           = $schema_datas['end_date'];
-                    $events_end_time 						           = $schema_datas['end_time'];
-                    $events_previous_start_date 			   = $schema_datas['previous_start_date'];
-                    $events_previous_start_time 			   = $schema_datas['previous_start_time'];
-                    $events_location_name 					       = $schema_datas['location_name'];
-                    $events_location_url 					        = $schema_datas['location_url'];
-                    $events_location_address 				     = $schema_datas['location_address'];
-                    $events_offers_name 					         = $schema_datas['offers_name'];
-                    $events_offers_cat 						         = $schema_datas['offers_cat'];
-                    $events_offers_price 					        = $schema_datas['offers_price'];
-                    $events_offers_price_currency 			 = $schema_datas['offers_price_currency'];
-                    $events_offers_availability 			   = $schema_datas['offers_availability'];
-                    $events_offers_valid_from_date 			= $schema_datas['offers_valid_from_date'];
-                    $events_offers_valid_from_time 			= $schema_datas['offers_valid_from_time'];
-                    $events_offers_url 						         = $schema_datas['offers_url'];
-                    $events_performer 						          = $schema_datas['performer'];
-                    $events_status 							            = $schema_datas['status'];
-                    $event_attendance_mode 					      = $schema_datas['attendance_mode'];
+                    $events_type 							                   = $schema_datas['type'];
+                    $events_name 							                   = $schema_datas['name'];
+                    $events_desc 							                   = $schema_datas['desc'];
+                    $events_img 							                    = $schema_datas['img'];
+                    $events_start_date 						              = $schema_datas['start_date'];
+                    $events_start_date_timezone 			        = $schema_datas['start_date_timezone'];
+                    $events_start_time 						              = $schema_datas['start_time'];
+                    $events_end_date 						                = $schema_datas['end_date'];
+                    $events_end_time 						                = $schema_datas['end_time'];
+                    $events_previous_start_date 			        = $schema_datas['previous_start_date'];
+                    $events_previous_start_time 			        = $schema_datas['previous_start_time'];
+                    $events_location_name 					            = $schema_datas['location_name'];
+                    $events_location_url 					             = $schema_datas['location_url'];
+                    $events_location_address 				          = $schema_datas['location_address'];
+                    $events_offers_name 					              = $schema_datas['offers_name'];
+                    $events_offers_cat 						              = $schema_datas['offers_cat'];
+                    $events_offers_price 					             = $schema_datas['offers_price'];
+                    $events_offers_price_currency 			      = $schema_datas['offers_price_currency'];
+                    $events_offers_availability 			        = $schema_datas['offers_availability'];
+                    $events_offers_valid_from_date 			     = $schema_datas['offers_valid_from_date'];
+                    $events_offers_valid_from_time 			     = $schema_datas['offers_valid_from_time'];
+                    $events_offers_url 						              = $schema_datas['offers_url'];
+                    $events_performer 						               = $schema_datas['performer'];
+                    $events_organizer_name 						          = $schema_datas['organizer_name'];
+                    $events_organizer_url 						           = $schema_datas['organizer_url'];
+                    $events_status 							                 = $schema_datas['status'];
+                    $event_attendance_mode 					           = $schema_datas['attendance_mode'];
 
                     if ('events_start_date' === $events_start_date && 'events_start_time' === $events_start_time) {
                         if (get_post_meta($post->ID, '_EventStartDateUTC', true)) {
@@ -789,6 +706,9 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         $events_start_date = $events_start_date[0] . 'T' . $events_start_date[1];
                     } elseif ('' != $events_start_date && '' != $events_start_time) {
                         $events_start_date = $events_start_date . 'T' . $events_start_time;
+                    }
+                    if ('' != $events_start_date_timezone && '' != $events_start_date) {
+                        $events_start_date = $events_start_date . $events_start_date_timezone;
                     }
 
                     if ('events_end_date' === $events_end_date && 'events_end_time' === $events_end_time) {
@@ -865,113 +785,97 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         }
                     }
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-							"@context": "' . seopress_check_ssl() . 'schema.org",';
-                    if ('' != $events_type) {
-                        $html .= '"@type": ' . json_encode($events_type) . ',';
-                    }
-                    if ('' != $events_name) {
-                        $html .= '"name": ' . json_encode($events_name) . ',';
-                    }
-                    if ('' != $events_desc) {
-                        $html .= '"description": ' . json_encode($events_desc) . ',';
-                    }
-                    if ('' != $events_img) {
-                        $html .= '"image": ' . json_encode($events_img) . ',';
-                    }
-                    if ('' != $events_location_url) {
-                        $html .= '"url": ' . json_encode($events_location_url) . ',';
-                    }
-                    if ('' != $events_start_date) {
-                        $html .= '"startDate": ' . json_encode($events_start_date) . ',';
-                    }
-                    if ('' != $events_end_date) {
-                        $html .= '"endDate": ' . json_encode($events_end_date) . ',';
-                    }
+                    $json = [
+                        '@context'    => seopress_check_ssl() . 'schema.org',
+                        '@type'       => $events_type,
+                        'name'        => $events_name,
+                        'description' => $events_desc,
+                        'image'       => $events_img,
+                        'url'         => $events_location_url,
+                        'startDate'   => $events_start_date,
+                        'endDate'     => $events_end_date,
+                    ];
+
                     if ($events_status == seopress_check_ssl() . 'schema.org/EventRescheduled' && '' != $events_previous_start_date) {
-                        $html .= '"previousStartDate": ' . json_encode($events_previous_start_date) . ',';
+                        $json['previousStartDate'] = $events_previous_start_date;
                     }
+
                     if ('' != $events_status && 'none' != $events_status) {
-                        $html .= '"eventStatus": ' . json_encode($events_status) . ',';
+                        $json['eventStatus'] = $events_status;
                     }
+
                     if ('' != $event_attendance_mode && 'none' != $event_attendance_mode) {
                         if (
                                     ('OnlineEventAttendanceMode' == $event_attendance_mode && '' != $events_location_url)
                                     ||
                                     ('MixedEventAttendanceMode' == $event_attendance_mode && '' != $events_location_url)
                                 ) {
-                            $html .= '"eventAttendanceMode": ' . json_encode($event_attendance_mode) . ',';
+                            $json['eventAttendanceMode'] = $event_attendance_mode;
                         }
                     }
+
                     if ('' != $events_location_name && '' != $events_location_address) {
                         if ('OnlineEventAttendanceMode' == $event_attendance_mode && '' != $events_location_url) {
-                            $html .= '"location": {
-										"@type":"VirtualLocation",
-										"url": ' . json_encode($events_location_url) . '
-									},';
+                            $json['location'] = [
+                                '@type' => 'VirtualLocation',
+                                'url'   => $events_location_url,
+                            ];
                         } elseif ('MixedEventAttendanceMode' == $event_attendance_mode && '' != $events_location_url) {
-                            $html .= '"location": [{
-										"@type":"VirtualLocation",
-										"url": ' . json_encode($events_location_url) . '
-									},
-									{
-										"@type": "Place",
-										"name": ' . json_encode($events_location_name) . ',
-										"address": ' . json_encode($events_location_address) . '
-									}],';
+                            $json['location'][] = [
+                                    '@type' => 'VirtualLocation',
+                                    'url'   => $events_location_url,
+                            ];
+                            $json['location'][] = [
+                                    '@type'   => 'Place',
+                                    'name'    => $events_location_name,
+                                    'address' => $events_location_address,
+                            ];
                         } else {
-                            $html .= '"location": {
-										"@type": "Place",
-										"name": ' . json_encode($events_location_name) . ',
-										"address": ' . json_encode($events_location_address) . '
-									},';
+                            $json['location'] = [
+                                '@type'   => 'Place',
+                                'name'    => $events_location_name,
+                                'address' => $events_location_address,
+                            ];
                         }
                     }
+
                     if ('' != $events_offers_name) {
-                        $sp_offers = '"offers": [{
-									"@type": "Offer",
-									"name": ' . json_encode($events_offers_name) . ',';
-                        if ('' != $events_offers_cat) {
-                            $sp_offers .= '"category": ' . json_encode($events_offers_cat) . ',';
-                        }
-                        if ('' != $events_offers_price) {
-                            $sp_offers .= '"price": ' . json_encode($events_offers_price) . ',';
-                        }
-                        if ('' != $events_offers_price_currency) {
-                            $sp_offers .= '"priceCurrency": ' . json_encode($events_offers_price_currency) . ',';
-                        }
-                        if ('' != $events_offers_url) {
-                            $sp_offers .= '"url": ' . json_encode($events_offers_url) . ',';
-                        }
-                        if ('' != $events_offers_availability) {
-                            $sp_offers .= '"availability": ' . json_encode($events_offers_availability) . ',';
-                        }
-                        if ('' != $events_offers_valid_from_date) {
-                            $sp_offers .= '"validFrom": ' . json_encode($events_offers_valid_from_date);
-                        }
-                        $sp_offers = trim($sp_offers, ',');
-                        if ('' != $events_performer) {
-                            $sp_offers .= '}],';
-                        } else {
-                            $sp_offers .= '}]';
-                        }
-                        $html .= $sp_offers;
+                        $json['offers'] = [
+                            '@type'         => 'Offer',
+                            'name'          => $events_offers_name,
+                            'category'      => $events_offers_cat,
+                            'price'         => $events_offers_price,
+                            'priceCurrency' => $events_offers_price_currency,
+                            'url'           => $events_offers_url,
+                            'availability'  => $events_offers_availability,
+                            'validFrom'     => $events_offers_valid_from_date,
+                        ];
                     }
+
                     if ('' != $events_performer) {
-                        $html .= '"performer": {
-									"@type": "Person",
-									"name": ' . json_encode($events_performer) . '
-								}';
+                        $json['performer'] = [
+                            '@type' => 'Person',
+                            'name'  => $events_performer,
+                        ];
                     }
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_event_html', $html);
+                    if ('' != $events_organizer_name) {
+                        $json['organizer'] = [
+                            '@type' => 'Organization',
+                            'name'  => $events_organizer_name,
+                            'url'   => $events_organizer_url,
+                        ];
+                    }
 
-                    echo $html;
+                    $json = array_filter($json);
+
+                    $json = apply_filters('seopress_schemas_auto_event_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_event_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -1049,32 +953,25 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         $products_availability = seopress_check_ssl() . 'schema.org/InStock';
                     }
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-						"@context": "' . seopress_check_ssl() . 'schema.org/",
-						"@type": "Product",';
-                    if ($products_name) {
-                        $html .= '"name": ' . json_encode($products_name) . ',';
-                    }
-                    if ('' != $products_img) {
-                        $html .= '"image": ' . json_encode($products_img) . ',';
-                    }
-                    if ('' != $products_description) {
-                        $html .= '"description": ' . json_encode($products_description) . ',';
-                    }
-                    if ('' != $products_sku) {
-                        $html .= '"sku": ' . json_encode($products_sku) . ',';
-                    }
+                    $json = [
+                        '@context'    => seopress_check_ssl() . 'schema.org/',
+                        '@type'       => 'Product',
+                        'name'        => $products_name,
+                        'image'       => $products_img,
+                        'description' => $products_description,
+                        'sku'         => $products_sku,
+                    ];
+
                     if ('' != $products_global_ids && '' != $products_global_ids_value) {
-                        $html .= json_encode($products_global_ids) . ': ' . json_encode($products_global_ids_value) . ',';
+                        $json[$products_global_ids] = $products_global_ids_value;
                     }
 
                     //brand
                     if ('' != $products_brand) {
-                        $html .= '"brand": {
-								"@type": "Brand",
-								"name": ' . json_encode($products_brand) . '
-							},';
+                        $json['brand'] = [
+                            '@type' => 'Brand',
+                            'name'  => $products_brand,
+                        ];
                     }
 
                     if (isset($product) && true === comments_open(get_the_ID())) {//If Reviews is true
@@ -1094,31 +991,30 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         $comments = get_comments($args);
 
                         if ( ! empty($comments)) {
-                            $html .= '"review": {
-									"@type": "Review",
-									"reviewRating": {
-										"@type": "Rating",
-										"ratingValue": ' . json_encode(get_comment_meta($comments[0]->comment_ID, 'rating', true)) . '
-									},
-									"author": {
-										"@type": "Person",
-										"name": ' . json_encode(get_comment_author($comments[0]->comment_ID)) . '
-									}
-								},';
+                            $json['review'] = [
+                                    '@type'        => 'Review',
+                                    'reviewRating' => [
+                                        '@type'       => 'Rating',
+                                        'ratingValue' => get_comment_meta($comments[0]->comment_ID, 'rating', true),
+                                    ],
+                                    'author' => [
+                                        '@type' => 'Person',
+                                        'name'  => get_comment_author($comments[0]->comment_ID),
+                                    ],
+                                ];
                         }
 
                         //aggregateRating
                         if (isset($product) && method_exists($product, 'get_review_count') && $product->get_review_count() >= 1) {
-                            $html .= '"aggregateRating": {
-									"@type": "AggregateRating",
-									"ratingValue": "' . $product->get_average_rating() . '",
-									"reviewCount": "' . json_encode($product->get_review_count()) . '"
-								},';
+                            $json['aggregateRating'] = [
+                                    '@type'       => 'AggregateRating',
+                                    'ratingValue' => $product->get_average_rating(),
+                                    'reviewCount' => $product->get_review_count(),
+                            ];
                         }
                     }
 
                     if (isset($product) && method_exists($product, 'is_type') && $product->is_type('variable')) {
-                        $offers     = '"offers" : [';
                         $variations = $product->get_available_variations();
 
                         $i               = 1;
@@ -1177,54 +1073,46 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                                 $variation_price = $variation->get_price();
                             }
 
-                            $offers .= '
-                                {
-                                    "@type": "Offer",
-                                    "url": ' . json_encode(get_permalink()) . ',
-                                    "sku": "' . $sku . '",
-                                    "price": ' . $variation_price . ',
-                                    "priceCurrency": "' . $products_currency . '",
-                                    "itemCondition": ' . json_encode($products_condition) . ',
-                                    "availability": "' . $availability . '"
-                                ';
+                            $offer = [
+                                '@type'           => 'Offer',
+                                'url'             => get_permalink(),
+                                'sku'             => $sku,
+                                'price'           => $variation_price,
+                                'priceCurrency'   => $products_currency,
+                                'itemCondition'   => $products_condition,
+                                'availability'    => $availability,
+                                'priceValidUntil' => $variation_price_valid_date,
+                            ];
 
                             if ( ! empty($product_global_ids) && 'none' !== $product_global_ids && ! empty($product_barcode)) {
-                                $offers .= sprintf(', "%s" : "%s"', $product_global_ids, $product_barcode);
+                                $offer[$product_global_ids] = $product_barcode;
                             }
 
-                            if ($variation_price_valid_date) {
-                                $offers .= sprintf(', "%s" : "%s"', 'priceValidUntil', $variation_price_valid_date);
-                            }
+                            $json['offers'][] = $offer;
 
-                            $offers .= '}';
-
-                            if ($i != $totalVariations) {
-                                $offers .= ',';
-                            }
                             ++$i;
                         }
-                        $offers .= ']';
-                        $html .= $offers;
                     } elseif ('' != $products_price) {
-                        $html .= '"offers": {
-								"@type": "Offer",
-								"url": ' . json_encode(get_permalink()) . ',
-								"priceCurrency": ' . json_encode($products_currency) . ',
-								"price": ' . json_encode($products_price) . ',
-								"priceValidUntil": ' . json_encode($products_price_valid_date) . ',
-								"itemCondition": ' . json_encode($products_condition) . ',
-								"availability": ' . json_encode($products_availability) . '
-							}';
+                        $json['offers'] = [
+                                '@type'           => 'Offer',
+                                'url'             => get_permalink(),
+                                'priceCurrency'   => $products_currency,
+                                'price'           => $products_price,
+                                'priceValidUntil' => $products_price_valid_date,
+                                'itemCondition'   => $products_condition,
+                                'availability'    => $products_availability,
+                        ];
                     }
 
-                    $html = trim($html, ',');
-                    $html .= '}';
+                    $json = array_filter($json);
 
-                    $html .= '</script>';
-                    $html .= "\n";
+                    $json = apply_filters('seopress_schemas_auto_product_json', $json);
 
-                    $html = apply_filters('seopress_schemas_auto_product_html', $html);
-                    echo $html;
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_product_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -1241,47 +1129,44 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $softwareapp_price 					  = $schema_datas['price'];
                     $softwareapp_currency 				= $schema_datas['currency'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-						"@context": "' . seopress_check_ssl() . 'schema.org/",
-						"@type": "SoftwareApplication",';
-                    if ('' != $softwareapp_name) {
-                        $html .= '"name": ' . json_encode($softwareapp_name) . ',';
-                    }
-                    if ('' != $softwareapp_os) {
-                        $html .= '"operatingSystem": ' . json_encode($softwareapp_os) . ',';
-                    }
-                    if ('' != $softwareapp_cat) {
-                        $html .= '"applicationCategory": ' . json_encode($softwareapp_cat) . ',';
-                    }
+                    $json = [
+                        '@context'            => seopress_check_ssl() . 'schema.org/',
+                        '@type'               => 'SoftwareApplication',
+                        'name'                => $softwareapp_name,
+                        'operatingSystem'     => $softwareapp_os,
+                        'applicationCategory' => $softwareapp_cat,
+                    ];
+
                     if ('' != $softwareapp_rating) {
-                        $html .= '"review": {
-							"@type": "Review",
-								"reviewRating": {
-										"@type": "Rating",
-										"ratingValue": ' . json_encode($softwareapp_rating) . '
-									},
-									"author": {
-										"@type": "Person",
-										"name": ' . json_encode(get_the_author()) . '
-									}
-								},';
+                        $json['review'] = [
+                            '@type'        => 'Review',
+                            'reviewRating' => [
+                                '@type'       => 'Rating',
+                                'ratingValue' => $softwareapp_rating,
+                            ],
+                            'author' => [
+                                '@type' => 'Person',
+                                'name'  => get_the_author(),
+                            ],
+                        ];
                     }
                     if ('' != $softwareapp_price && '' != $softwareapp_currency) {
-                        $html .= '"offers": {
-							"@type": "Offer",';
-                        $html .= '"price": ' . json_encode($softwareapp_price) . ',';
-                        $html .= '"priceCurrency": ' . json_encode($softwareapp_currency);
-                        $html .= '}';
+                        $json['offers'] = [
+                            '@type'         => 'Offer',
+                            'price'         => $softwareapp_price,
+                            'priceCurrency' => $softwareapp_currency,
+                        ];
                     }
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_softwareapp_html', $html);
+                    $json = array_filter($json);
 
-                    echo $html;
+                    $json = apply_filters('seopress_schemas_auto_softwareapp_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_softwareapp_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -1311,134 +1196,93 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                     $service_tel 							       = $schema_datas['tel'];
                     $service_price 							     = $schema_datas['price'];
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-						"@context": "' . seopress_check_ssl() . 'schema.org/",
-						"@type": "Service",';
-                    if ('' != $service_name) {
-                        $html .= '"name": ' . json_encode($service_name) . ',';
-                    }
-                    if ('' != $service_type) {
-                        $html .= '"serviceType": ' . json_encode($service_type) . ',';
-                    }
-                    if ('' != $service_desc) {
-                        $html .= '"description": ' . json_encode($service_desc) . ',';
-                    }
-                    if ('' != $service_img) {
-                        $html .= '"image": ' . json_encode($service_img) . ',';
-                    }
-                    if ('' != $service_area) {
-                        $html .= '"areaServed": ' . json_encode($service_area) . ',';
-                    }
-                    if ('' != $service_provider_mob) {
-                        $html .= '"providerMobility": ' . json_encode($service_provider_mob) . ',';
-                    }
-                    if ('' != $service_slogan) {
-                        $html .= '"slogan": ' . json_encode($service_slogan) . ',';
-                    }
-                    //Provider
+                    $json = [
+                        '@context'         => seopress_check_ssl() . 'schema.org/',
+                        '@type'            => 'Service',
+                        'name'             => $service_name,
+                        'serviceType'      => $service_type,
+                        'description'      => $service_desc,
+                        'image'            => $service_img,
+                        'areaServed'       => $service_area,
+                        'providerMobility' => $service_provider_mob,
+                        'slogan'           => $service_slogan,
+                    ];
+
                     if ('' != $service_provider_name) {
-                        $html .= '"provider": {
-								"@type": "LocalBusiness",';
-                        $html .= '"name": ' . json_encode($service_provider_name) . ',';
+                        $json['provider'] = [
+                            '@type'      => 'LocalBusiness',
+                            'name'       => $service_provider_name,
+                            'telephone'  => $service_tel,
+                            'image'      => $service_lb_img,
+                            'priceRange' => $service_price,
+                        ];
 
-                        if ('' != $service_tel) {
-                            $html .= '"telephone": ' . json_encode($service_tel) . ',';
-                        }
-                        if ('' != $service_lb_img) {
-                            $html .= '"image": ' . json_encode($service_lb_img) . ',';
-                        }
-                        if ('' != $service_price) {
-                            $html .= '"priceRange": ' . json_encode($service_price) . ',';
-                        }
-
-                        //Address
                         if (isset($service_street_addr) || isset($service_city) || isset($service_state) || isset($service_postal_code) || isset($service_country)) {
-                            $html .= '"address": {
-									"@type": "PostalAddress",';
-                            if (isset($service_street_addr)) {
-                                $html .= '"streetAddress": ' . json_encode($service_street_addr) . ',';
-                            }
-                            if (isset($service_city)) {
-                                $html .= '"addressLocality": ' . json_encode($service_city) . ',';
-                            }
-                            if (isset($service_state)) {
-                                $html .= '"addressRegion": ' . json_encode($service_state) . ',';
-                            }
-                            if (isset($service_postal_code)) {
-                                $html .= '"postalCode": ' . json_encode($service_postal_code) . ',';
-                            }
-                            if (isset($service_country)) {
-                                $html .= '"addressCountry": ' . json_encode($service_country);
-                            }
-                            $html .= '},';
+                            $json['provider']['address'] = [
+                                '@type'           => 'PostalAddress',
+                                'streetAddress'   => $service_street_addr,
+                                'addressLocality' => $service_city,
+                                'addressRegion'   => $service_state,
+                                'postalCode'      => $service_postal_code,
+                                'addressCountry'  => $service_country,
+                            ];
                         }
-                        //GPS
+
                         if ('' != $service_lat || '' != $service_lon) {
-                            $html .= '"geo": {
-									"@type": "GeoCoordinates",';
-                            if (isset($service_lat)) {
-                                $html .= '"latitude": ' . json_encode($service_lat) . ',';
-                            }
-                            if (isset($service_lon)) {
-                                $html .= '"longitude": ' . json_encode($service_lon);
-                            }
-                            $html .= '}';
-                        }
-                        if (isset($product) && true === comments_open(get_the_ID())) {//If Reviews is true
-                            $html .= '},';
-                        } else {
-                            $html .= '}';
+                            $json['provider']['geo'] = [
+                                '@type'     => 'GeoCoordinates',
+                                'latitude'  => $service_lat,
+                                'longitude' => $service_lon,
+                            ];
                         }
                     }
 
-                    if (isset($product) && true === comments_open(get_the_ID())) {//If Reviews is true
+                    if (isset($product) && true === comments_open(get_the_ID())) {
                         //review
                         $args = [
-                                'meta_key'    => 'rating',
-                                'number'      => 1,
-                                'status'      => 'approve',
-                                'post_status' => 'publish',
-                                'parent'      => 0,
-                                'orderby'     => 'meta_value_num',
-                                'order'       => 'DESC',
-                                'post_id'     => get_the_ID(),
-                                'post_type'   => 'product',
-                            ];
+                            'meta_key'    => 'rating',
+                            'number'      => 1,
+                            'status'      => 'approve',
+                            'post_status' => 'publish',
+                            'parent'      => 0,
+                            'orderby'     => 'meta_value_num',
+                            'order'       => 'DESC',
+                            'post_id'     => get_the_ID(),
+                            'post_type'   => 'product',
+                        ];
 
                         $comments = get_comments($args);
 
-                        if ( ! empty($comments)) {
-                            $html .= '"review": {
-									"@type": "Review",
-									"reviewRating": {
-											"@type": "Rating",
-										"ratingValue": ' . json_encode(get_comment_meta($comments[0]->comment_ID, 'rating', true)) . '
-									},
-									"author": {
-										"@type": "Person",
-											"name": ' . json_encode(get_comment_author($comments[0]->comment_ID)) . '
-									}
-									},';
-                        }
-
-                        //aggregateRating
-                        if (isset($product) && $product->get_review_count() >= 1) {
-                            $html .= '"aggregateRating": {
-									"@type": "AggregateRating",
-									"ratingValue": "' . $product->get_average_rating() . '",
-									"reviewCount": "' . json_encode($product->get_review_count()) . '"
-									}';
-                        }
+                        $json['review'] = [
+                            '@type'        => 'Review',
+                            'reviewRating' => [
+                                '@type'       => 'Rating',
+                                'ratingValue' => get_comment_meta($comments[0]->comment_ID, 'rating', true),
+                            ],
+                            'author' => [
+                                '@type' => 'Person',
+                                'name'  => get_comment_author($comments[0]->comment_ID),
+                            ],
+                        ];
                     }
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_service_html', $html);
+                    if (isset($product) && $product->get_review_count() >= 1) {
+                        $json['aggregateRating'] = [
+                            '@type'       => 'AggregateRating',
+                            'ratingValue' => $product->get_average_rating(),
+                            'reviewCount' => $product->get_review_count(),
+                        ];
+                    }
 
-                    echo $html;
+                    $json = array_filter($json);
+
+                    $json = apply_filters('seopress_schemas_auto_service_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_service_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -1446,10 +1290,11 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
             function seopress_automatic_rich_snippets_review_option($schema_datas) {
                 //if no data
                 if (0 != count(array_filter($schema_datas, 'strlen'))) {
-                    $review_item 							  = $schema_datas['item'];
-                    $review_type 							  = $schema_datas['item_type'];
-                    $review_img 							   = $schema_datas['img'];
-                    $review_rating 							= $schema_datas['rating'];
+                    $review_item 							     = $schema_datas['item'];
+                    $review_type 							     = $schema_datas['item_type'];
+                    $review_img 							      = $schema_datas['img'];
+                    $review_rating 						    = $schema_datas['rating'];
+                    $review_body 							     = $schema_datas['body'];
 
                     if ($review_type) {
                         $type = $review_type;
@@ -1457,37 +1302,44 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         $type = 'Thing';
                     }
 
-                    $html = '<script type="application/ld+json">';
-                    $html .= '{
-						"@context": "' . seopress_check_ssl() . 'schema.org/",
-						"@type": "Review",';
-                    if ($review_item) {
-                        $html .= '"itemReviewed":{"@type":' . json_encode($type) . ',"name":' . json_encode($review_item);
-                    }
-                    if ('' != $review_item && '' == $review_img) {
-                        $html .= '},';
-                    } else {
-                        $html .= ',';
-                    }
+                    $json = [
+                        '@context'     => seopress_check_ssl() . 'schema.org/',
+                        '@type'        => 'Review',
+                        'itemReviewed' => [
+                            '@type' => $type,
+                            'name'  => $review_item,
+                        ],
+                        'datePublished' => get_the_date('c'),
+                        'author'        => [
+                            '@type' => 'Person',
+                            'name'  => get_the_author(),
+                        ],
+                        'reviewBody' => $review_body,
+                    ];
+
                     if ('' != $review_img) {
-                        $html .= '"image": {"@type":"ImageObject","url":' . json_encode($review_img) . '}';
+                        $json['image'] = [
+                            '@type' => 'ImageObject',
+                            'url'   => $review_img,
+                        ];
                     }
-                    if ('' != $review_item && '' != $review_img) {
-                        $html .= '},';
-                    }
+
                     if ('' != $review_rating) {
-                        $html .= '"reviewRating":{"@type":"Rating","ratingValue":' . json_encode($review_rating) . '},';
+                        $json['reviewRating'] = [
+                            '@type'       => 'Rating',
+                            'ratingValue' => $review_rating,
+                        ];
                     }
-                    $html .= '"datePublished":"' . get_the_date('c') . '",';
-                    $html .= '"author":{"@type":"Person","name":' . json_encode(get_the_author()) . '}';
-                    $html = trim($html, ',');
-                    $html .= '}';
-                    $html .= '</script>';
-                    $html .= "\n";
 
-                    $html = apply_filters('seopress_schemas_auto_review_html', $html);
+                    $json = array_filter($json);
 
-                    echo $html;
+                    $json = apply_filters('seopress_schemas_auto_review_json', $json);
+
+                    $json = '<script type="application/ld+json">' . json_encode($json) . '</script>' . "\n";
+
+                    $json = apply_filters('seopress_schemas_auto_review_html', $json);
+
+                    echo $json;
                 }
             }
 
@@ -1740,6 +1592,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                 'product_stock',
             ];
 
+            $sp_schemas_dyn_variables = apply_filters('seopress_schemas_dyn_variables', $sp_schemas_dyn_variables);
+
             $sp_schemas_dyn_variables_replace = [
                 get_bloginfo('name'),
                 get_bloginfo('description'),
@@ -1766,6 +1620,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                 $product_cat_term_list,
                 $get_stock,
             ];
+
+            $sp_schemas_dyn_variables_replace = apply_filters('seopress_schemas_dyn_variables_replace', $sp_schemas_dyn_variables_replace);
 
             //Request schemas based on post type / rules
             $args = [
@@ -1811,13 +1667,15 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         $schema_name 					= 'article';
 
                         $post_meta_key = [
-                            'type' 						           => '_seopress_pro_rich_snippets_article_type',
-                            'title' 					           => '_seopress_pro_rich_snippets_article_title',
-                            'img' 						            => '_seopress_pro_rich_snippets_article_img',
-                            'coverage_start_date' 		=> '_seopress_pro_rich_snippets_article_coverage_start_date',
-                            'coverage_start_time' 		=> '_seopress_pro_rich_snippets_article_coverage_start_time',
-                            'coverage_end_date' 		  => '_seopress_pro_rich_snippets_article_coverage_end_date',
-                            'coverage_end_time' 		  => '_seopress_pro_rich_snippets_article_coverage_end_time',
+                            'type' 						            => '_seopress_pro_rich_snippets_article_type',
+                            'title' 					            => '_seopress_pro_rich_snippets_article_title',
+                            'author' 					           => '_seopress_pro_rich_snippets_article_author',
+                            'img' 						             => '_seopress_pro_rich_snippets_article_img',
+                            'coverage_start_date' 		 => '_seopress_pro_rich_snippets_article_coverage_start_date',
+                            'coverage_start_time' 		 => '_seopress_pro_rich_snippets_article_coverage_start_time',
+                            'coverage_end_date' 		   => '_seopress_pro_rich_snippets_article_coverage_end_date',
+                            'coverage_end_time' 		   => '_seopress_pro_rich_snippets_article_coverage_end_time',
+                            'speakable' 		           => '_seopress_pro_rich_snippets_article_speakable',
                         ];
 
                         //Get datas
@@ -1833,21 +1691,23 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         $schema_name 									= 'lb';
 
                         $post_meta_key = [
-                            'name'           => '_seopress_pro_rich_snippets_lb_name',
-                            'type'           => '_seopress_pro_rich_snippets_lb_type',
-                            'img'            => '_seopress_pro_rich_snippets_lb_img',
-                            'street_addr'    => '_seopress_pro_rich_snippets_lb_street_addr',
-                            'city'           => '_seopress_pro_rich_snippets_lb_city',
-                            'state'          => '_seopress_pro_rich_snippets_lb_state',
-                            'pc'             => '_seopress_pro_rich_snippets_lb_pc',
-                            'country'        => '_seopress_pro_rich_snippets_lb_country',
-                            'lat'            => '_seopress_pro_rich_snippets_lb_lat',
-                            'lon'            => '_seopress_pro_rich_snippets_lb_lon',
-                            'website'        => '_seopress_pro_rich_snippets_lb_website',
-                            'tel'            => '_seopress_pro_rich_snippets_lb_tel',
-                            'price'          => '_seopress_pro_rich_snippets_lb_price',
-                            'serves_cuisine' => '_seopress_pro_rich_snippets_lb_serves_cuisine',
-                            'opening_hours'  => '_seopress_pro_rich_snippets_lb_opening_hours',
+                            'name'                           => '_seopress_pro_rich_snippets_lb_name',
+                            'type'                           => '_seopress_pro_rich_snippets_lb_type',
+                            'img'                            => '_seopress_pro_rich_snippets_lb_img',
+                            'street_addr'                    => '_seopress_pro_rich_snippets_lb_street_addr',
+                            'city'                           => '_seopress_pro_rich_snippets_lb_city',
+                            'state'                          => '_seopress_pro_rich_snippets_lb_state',
+                            'pc'                             => '_seopress_pro_rich_snippets_lb_pc',
+                            'country'                        => '_seopress_pro_rich_snippets_lb_country',
+                            'lat'                            => '_seopress_pro_rich_snippets_lb_lat',
+                            'lon'                            => '_seopress_pro_rich_snippets_lb_lon',
+                            'website'                        => '_seopress_pro_rich_snippets_lb_website',
+                            'tel'                            => '_seopress_pro_rich_snippets_lb_tel',
+                            'price'                          => '_seopress_pro_rich_snippets_lb_price',
+                            'serves_cuisine'                 => '_seopress_pro_rich_snippets_lb_serves_cuisine',
+                            'menu'                           => '_seopress_pro_rich_snippets_lb_menu',
+                            'accepts_reservations'           => '_seopress_pro_rich_snippets_lb_accepts_reservations',
+                            'opening_hours'                  => '_seopress_pro_rich_snippets_lb_opening_hours',
                         ];
 
                         //Get datas
@@ -1903,6 +1763,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                             'desc'         => '_seopress_pro_rich_snippets_recipes_desc',
                             'cat'          => '_seopress_pro_rich_snippets_recipes_cat',
                             'img'          => '_seopress_pro_rich_snippets_recipes_img',
+                            'video'        => '_seopress_pro_rich_snippets_recipes_video',
                             'prep_time'    => '_seopress_pro_rich_snippets_recipes_prep_time',
                             'cook_time'    => '_seopress_pro_rich_snippets_recipes_cook_time',
                             'calories'     => '_seopress_pro_rich_snippets_recipes_calories',
@@ -1987,6 +1848,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                             'desc'                   => '_seopress_pro_rich_snippets_events_desc',
                             'img'                    => '_seopress_pro_rich_snippets_events_img',
                             'start_date'             => '_seopress_pro_rich_snippets_events_start_date',
+                            'start_date_timezone'    => '_seopress_pro_rich_snippets_events_start_date_timezone',
                             'start_time'             => '_seopress_pro_rich_snippets_events_start_time',
                             'end_date'               => '_seopress_pro_rich_snippets_events_end_date',
                             'end_time'               => '_seopress_pro_rich_snippets_events_end_time',
@@ -2004,6 +1866,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                             'offers_valid_from_time' => '_seopress_pro_rich_snippets_events_offers_valid_from_time',
                             'offers_url'             => '_seopress_pro_rich_snippets_events_offers_url',
                             'performer'              => '_seopress_pro_rich_snippets_events_performer',
+                            'organizer_name'         => '_seopress_pro_rich_snippets_events_organizer_name',
+                            'organizer_url'          => '_seopress_pro_rich_snippets_events_organizer_url',
                             'status'                 => '_seopress_pro_rich_snippets_events_status',
                             'attendance_mode'        => '_seopress_pro_rich_snippets_events_attendance_mode',
                         ];
@@ -2106,6 +1970,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                             'item_type' => '_seopress_pro_rich_snippets_review_item_type',
                             'img'       => '_seopress_pro_rich_snippets_review_img',
                             'rating'    => '_seopress_pro_rich_snippets_review_rating',
+                            'body'      => '_seopress_pro_rich_snippets_review_body',
                         ];
 
                         //Get datas
@@ -2172,6 +2037,12 @@ function seopress_is_content_valid_for_schemas($post_id) {
             }
             if ('taxonomy' === $value['filter'] && term_exists((int) $value['taxo']) &&
                 ((isset($_terms[$value['taxo']]) && 'equal' === $value['cond']) || ( ! isset($_terms[$value['taxo']]) && 'not_equal' === $value['cond']))
+            ) {
+                ++$flag;
+            }
+            if (
+                'postId' === $value['filter'] &&
+                (((int) $value['postId'] === (int) $post_id && 'equal' === $value['cond']) || ((int) $value['postId'] !== (int) $post_id && 'not_equal' === $value['cond']))
             ) {
                 ++$flag;
             }

@@ -6,8 +6,10 @@
     "image": "[[image]]",
     "datePublished": "[[datePublished]]",
     "description": "[[description]]",
+    "video": "[[video]]",
     "prepTime": "[[prepTime]]",
     "totalTime": "[[totalTime]]",
     "recipeYield": "[[recipeYield]]",
-    "keywords": "[[keywords]]"
+    "keywords": "[[keywords]]",
+    "recipeCuisine": "[[recipeCuisine]]"
 }

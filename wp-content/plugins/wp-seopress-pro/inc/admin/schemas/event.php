@@ -11,6 +11,7 @@ function seopress_get_schema_metaboxe_event($seopress_pro_rich_snippets_data, $k
 	$seopress_pro_rich_snippets_events_desc                         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_desc']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_desc'] : "";
 	$seopress_pro_rich_snippets_events_img                          = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_img']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_img'] : "";
 	$seopress_pro_rich_snippets_events_start_date                   = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_start_date']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_start_date'] : "";
+	$seopress_pro_rich_snippets_events_start_date_timezone          = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_start_date_timezone']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_start_date_timezone'] : "";
 	$seopress_pro_rich_snippets_events_start_time                   = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_start_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_start_time'] : "";
 	$seopress_pro_rich_snippets_events_end_date                     = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_end_date']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_end_date'] : "";
 	$seopress_pro_rich_snippets_events_end_time                     = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_end_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_end_time'] : "";
@@ -28,6 +29,8 @@ function seopress_get_schema_metaboxe_event($seopress_pro_rich_snippets_data, $k
 	$seopress_pro_rich_snippets_events_offers_valid_from_time       = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_offers_valid_from_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_offers_valid_from_time'] : "";
 	$seopress_pro_rich_snippets_events_offers_url                   = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_offers_url']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_offers_url'] : "";
 	$seopress_pro_rich_snippets_events_performer                    = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_performer']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_performer'] : "";
+	$seopress_pro_rich_snippets_events_organizer_name               = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_organizer_name']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_organizer_name'] : "";
+	$seopress_pro_rich_snippets_events_organizer_url                = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_organizer_url']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_organizer_url'] : "";
 	$seopress_pro_rich_snippets_events_status                       = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_status']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_status'] : "";
 	$seopress_pro_rich_snippets_events_attendance_mode              = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_attendance_mode']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_events_attendance_mode'] : "";
 
@@ -154,6 +157,12 @@ function seopress_get_schema_metaboxe_event($seopress_pro_rich_snippets_data, $k
 			<input type="text" id="seopress-date-picker1" class="seopress-date-picker" autocomplete="off" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_events_start_date]" placeholder="<?php echo esc_html__('Eg: YYYY-MM-DD','wp-seopress-pro'); ?>" aria-label="<?php _e('Start date','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_events_start_date; ?>" />
 		</p>
 		<p>
+			<label for="seopress_pro_rich_snippets_events_start_date_timezone_meta">
+				<?php _e( 'Timezone', 'wp-seopress-pro' ); ?>
+			</label>
+			<input type="text" id="seopress_pro_rich_snippets_events_start_date_timezone_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_events_start_date_timezone]" placeholder="<?php echo esc_html__('Timezone start date','wp-seopress-pro'); ?>" aria-label="<?php _e('Timezone','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_events_start_date_timezone; ?>" />
+		</p>
+		<p>
 			<label for="seopress_pro_rich_snippets_events_start_time_meta">
 				<?php _e( 'Start time', 'wp-seopress-pro' ); ?>
 			</label>
@@ -267,6 +276,18 @@ function seopress_get_schema_metaboxe_event($seopress_pro_rich_snippets_data, $k
 				<?php _e( 'Performer name', 'wp-seopress-pro' ); ?>
 			</label>
 			<input type="text" id="seopress_pro_rich_snippets_events_performer_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_events_performer]" placeholder="<?php echo esc_html__('Eg: Lana Del Rey','wp-seopress-pro'); ?>" aria-label="<?php _e('Performer name','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_events_performer; ?>" />
+		</p>
+		<p>
+			<label for="seopress_pro_rich_snippets_events_organizer_name_meta">
+				<?php _e( 'Organizer name', 'wp-seopress-pro' ); ?>
+			</label>
+			<input type="text" id="seopress_pro_rich_snippets_events_organizer_name_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_events_organizer_name]" placeholder="<?php echo esc_html__('Eg: Apple','wp-seopress-pro'); ?>" aria-label="<?php _e('Organizer name','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_events_organizer_name; ?>" />
+		</p>
+		<p>
+			<label for="seopress_pro_rich_snippets_events_organizer_url_meta">
+				<?php _e( 'Organizer URL', 'wp-seopress-pro' ); ?>
+			</label>
+			<input type="text" id="seopress_pro_rich_snippets_events_organizer_url_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_events_organizer_url]" placeholder="<?php echo esc_html__('Eg: https://www.apple.com/apple-events/','wp-seopress-pro'); ?>" aria-label="<?php _e('Organizer URL','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_events_organizer_url; ?>" />
 		</p>
 		<p>
 			<label for="seopress_pro_rich_snippets_events_status_meta"><?php _e( 'Select your event status', 'wp-seopress-pro' ); ?>

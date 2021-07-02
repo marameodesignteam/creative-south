@@ -7,6 +7,7 @@ function seopress_get_schema_metaboxe_recipe($seopress_pro_rich_snippets_data, $
 	$seopress_pro_rich_snippets_recipes_desc                        = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_desc']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_desc'] : "";
 	$seopress_pro_rich_snippets_recipes_cat                         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_cat']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_cat'] : "";
 	$seopress_pro_rich_snippets_recipes_img                         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_img']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_img'] : "";
+	$seopress_pro_rich_snippets_recipes_video                       = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_video']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_video'] : "";
 	$seopress_pro_rich_snippets_recipes_prep_time                   = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_prep_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_prep_time'] : "";
 	$seopress_pro_rich_snippets_recipes_cook_time                   = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_cook_time']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_cook_time'] : "";
 	$seopress_pro_rich_snippets_recipes_calories                    = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_calories']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_recipes_calories'] : "";
@@ -49,6 +50,12 @@ function seopress_get_schema_metaboxe_recipe($seopress_pro_rich_snippets_data, $
 			<span class="advise"><?php _e('Minimum size: 185px by 185px, aspect ratio 1:1', 'wp-seopress-pro'); ?></span>
 			<input id="seopress_pro_rich_snippets_recipes_img_meta" type="text" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_recipes_img]" placeholder="<?php echo esc_html__('Select your image','wp-seopress-pro'); ?>" aria-label="<?php _e('Image','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_recipes_img; ?>" />
 			<input id="seopress_pro_rich_snippets_recipes_img" class="button seopress_media_upload" type="button" value="<?php _e('Upload an Image','wp-seopress-pro'); ?>" />
+		</p>
+        <p>
+			<label for="seopress_pro_rich_snippets_recipes_video_meta">
+				<?php _e( 'Video URL of the recipe', 'wp-seopress-pro' ); ?>
+			</label>
+			<input type="text" id="seopress_pro_rich_snippets_recipes_video_meta" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_recipes_video]" placeholder="<?php echo esc_html__('Eg: https://www.youtube.com/watch?v=n-a2U4_anWA','wp-seopress-pro'); ?>" aria-label="<?php _e('Video URL of the recipe','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_recipes_video; ?>" />
 		</p>
 		<p>
 			<label for="seopress_pro_rich_snippets_recipes_prep_time_meta">

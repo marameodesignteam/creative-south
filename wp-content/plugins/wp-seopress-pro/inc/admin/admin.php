@@ -2,8 +2,7 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-class seopress_pro_options
-{
+class seopress_pro_options {
     /**
      * Holds the values to be used in the fields callbacks.
      */
@@ -199,7 +198,7 @@ class seopress_pro_options
         } ?>" id="tab_seopress_page_speed"><?php do_settings_sections('seopress-settings-admin-page-speed'); ?></div>
 
 			<!-- Robots -->
-			<?php if ( ! defined('SUBDOMAIN_INSTALL') || (defined('SUBDOMAIN_INSTALL') && true === constant('SUBDOMAIN_INSTALL'))) { //if multisite sub-domains ?>
+			<?php if ( ! defined('SUBDOMAIN_INSTALL') || (defined('SUBDOMAIN_INSTALL') && true === constant('SUBDOMAIN_INSTALL'))) { //if multisite sub-domains?>
 				<div class="seopress-tab <?php if ('tab_seopress_robots' == $current_tab) {
             echo 'active';
         } ?>" id="tab_seopress_robots"><?php do_settings_sections('seopress-settings-admin-robots'); ?></div>
@@ -303,7 +302,7 @@ class seopress_pro_options
             echo '</div>'; ?>
 
 					<!-- Robots -->
-					<?php if (defined('SUBDOMAIN_INSTALL') && false === constant('SUBDOMAIN_INSTALL')) {//if subdirectories ?>
+					<?php if (defined('SUBDOMAIN_INSTALL') && false === constant('SUBDOMAIN_INSTALL')) {//if subdirectories?>
 						<div class="seopress-tab <?php if ('tab_seopress_robots' == $current_tab) {
                 echo 'active';
             } ?>" id="tab_seopress_robots"><?php do_settings_sections('seopress-mu-settings-admin-robots'); ?></div>
@@ -1427,7 +1426,7 @@ class seopress_pro_options
                 'toggle' => 1,
                 'icon'   => 'store',
                 'title'  => __('Local Business', 'wp-seopress-pro'),
-                'desc'   => sprintf(__('Local Business data type for Google. This schema will be displayed on the homepage. <br>You can also display these informations using our <a href="%1$s">Local Business widget</a> to optimize your site for <a class="seopress-help" href="%2$s" target="_blank" rel="nofollow" title="' . __('Optimizing WordPress sites for Google EAT (new window)', 'wp-seopress-pro') . '">Google EAT</a><span class="seopress-help dashicons dashicons-external"></span>.', 'wp-seopress-pro'), admin_url('widgets.php'), $seopress_docs_link['lb']['eat'] ),
+                'desc'   => sprintf(__('Local Business data type for Google. This schema will be displayed on the homepage. <br>You can also display these informations using our <a href="%1$s">Local Business widget</a> to optimize your site for <a class="seopress-help" href="%2$s" target="_blank" rel="nofollow" title="' . __('Optimizing WordPress sites for Google EAT (new window)', 'wp-seopress-pro') . '">Google EAT</a><span class="seopress-help dashicons dashicons-external"></span>.', 'wp-seopress-pro'), admin_url('widgets.php'), $seopress_docs_link['lb']['eat']),
             ],
             'edd'=> [
                 'toggle' => 1,
@@ -2758,7 +2757,7 @@ class seopress_pro_options
         esc_html($check)
         );
 
-        echo '<p class="description">'.__('HTML tags allowed, eg: span, p...', 'wp-seopress-pro').'</p>';
+        echo '<p class="description">' . __('HTML tags allowed, eg: span, p...', 'wp-seopress-pro') . '</p>';
     }
 
     public function seopress_breadcrumbs_i18n_home_callback() {
@@ -3845,20 +3844,18 @@ User-agent: SemrushBot-SA
                 //Select view from Google Analytics
                 if ('1' == get_option('seopress_google_analytics_lock_option_name')) {
                     echo '<p>' . __('Your Google Analytics view is locked. Log out from Google to unlocked it.', 'wp-seopress-pro') . '</p>';
-                    echo '<input id="seopress_google_analytics_auth" name="seopress_google_analytics_option_name[seopress_google_analytics_auth]" type="hidden" value="'.$selected.'">';
+                    echo '<input id="seopress_google_analytics_auth" name="seopress_google_analytics_option_name[seopress_google_analytics_auth]" type="hidden" value="' . $selected . '">';
                 } else {
                     //Important to prevent fatal errors
                     try {
                         $accounts = $service->management_accountSummaries
                             ->listManagementAccountSummaries();
 
-                        if (!empty($accounts->getItems())) {
+                        if ( ! empty($accounts->getItems())) {
                             echo '<p><select id="seopress_google_analytics_auth" name="seopress_google_analytics_option_name[seopress_google_analytics_auth]">';
 
                             foreach ($accounts->getItems() as $item) {
-
                                 foreach ($item->getWebProperties() as $wp) {
-
                                     $views = $wp->getProfiles();
                                     if ( ! is_null($views)) {
                                         foreach ($wp->getProfiles() as $view) {
@@ -3878,15 +3875,15 @@ User-agent: SemrushBot-SA
                                 echo '<br><div class="button" id="seopress-google-analytics-lock"><span class="dashicons dashicons-lock"></span> ' . __('Lock selection?', 'wp-seopress-pro') . '</div><span class="spinner"></span>';
                             }
                         } else {
-                            echo '<p class="seopress-notice error notice">'.__('We couldn\'t find any GA properties associated with your Google account. Please use another Google account.','wp-seopress-pro').'</p>';
+                            echo '<p class="seopress-notice error notice">' . __('We couldn\'t find any GA properties associated with your Google account. Please use another Google account.', 'wp-seopress-pro') . '</p>';
                         }
                     } catch (Exception $e) {
                         $err = $e->getMessage();
                         $err = json_decode($err, true);
 
                         if ($err['error']['message']) {
-                            echo '<p class="seopress-notice error notice">'.__('There was an Analytics API service error:','wp-seopress-pro').'<br>';
-                            echo '<strong>'.$e->getCode() . ':' . $err['error']['message'] .'</strong></p>';
+                            echo '<p class="seopress-notice error notice">' . __('There was an Analytics API service error:', 'wp-seopress-pro') . '<br>';
+                            echo '<strong>' . $e->getCode() . ':' . $err['error']['message'] . '</strong></p>';
                         }
                     }
                 }

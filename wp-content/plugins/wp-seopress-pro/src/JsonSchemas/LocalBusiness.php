@@ -43,7 +43,7 @@ class LocalBusiness extends JsonSchemaValue implements GetJsonData {
      *
      * @return array
      */
-    protected function getVariablesForOptionLocalBusiness() {
+    protected function getKeysForOptionLocalBusiness() {
         return [
            'type'           => '%%local_business_type%%',
            'image'          => '%%social_knowledge_image%%',
@@ -57,14 +57,43 @@ class LocalBusiness extends JsonSchemaValue implements GetJsonData {
     }
 
     /**
-     * @since 4.6.0
+     * @since 4.7.0
      *
      * @return array
-     *
-     * @param array $schemaManual
      */
-    protected function getVariablesForManualSnippet($schemaManual) {
-        $servesCuisine = [
+    protected function getKeysForSchemaManual() {
+        return [
+            'type'                   => '_seopress_pro_rich_snippets_lb_type',
+            'image'                  => '_seopress_pro_rich_snippets_lb_img',
+            'url'                    => '_seopress_pro_rich_snippets_lb_website',
+            'telephone'              => '_seopress_pro_rich_snippets_lb_tel',
+            'priceRange'             => '_seopress_pro_rich_snippets_lb_price',
+            'country'                => '_seopress_pro_rich_snippets_lb_country',
+            'postalCode'             => '_seopress_pro_rich_snippets_lb_pc',
+            'state'                  => '_seopress_pro_rich_snippets_lb_state',
+            'city'                   => '_seopress_pro_rich_snippets_lb_city',
+            'address'                => '_seopress_pro_rich_snippets_lb_street_addr',
+            'menu'                   => '_seopress_pro_rich_snippets_lb_menu',
+            'acceptsReservations'    => '_seopress_pro_rich_snippets_lb_accepts_reservations',
+            'servesCuisines'         => '_seopress_pro_rich_snippets_lb_cuisine',
+            'name'                   => [
+                'value'  => '_seopress_pro_rich_snippets_lb_name',
+                'default'=> '%%sitetitle%%',
+            ],
+            'id' => [
+                'default' => '%%schema_article_canonical%%',
+            ],
+            'openingHours' => '_seopress_pro_rich_snippets_lb_opening_hours',
+         ];
+    }
+
+    /**
+     * @since 4.7.0
+     *
+     * @return array
+     */
+    protected function getTypeFood() {
+        return [
             'FoodEstablishment',
             'Bakery',
             'BarOrPub',
@@ -75,21 +104,25 @@ class LocalBusiness extends JsonSchemaValue implements GetJsonData {
             'Restaurant',
             'Winery',
         ];
+    }
 
-        $type = isset($schemaManual['_seopress_pro_rich_snippets_lb_type']) ? $schemaManual['_seopress_pro_rich_snippets_lb_type'] : '';
+    /**
+     * @since 4.6.0
+     *
+     * @return array
+     *
+     * @param array $keys
+     * @param array $data
+     */
+    protected function getVariablesByKeysAndData($keys, $data = []) {
+        $variables = parent::getVariablesByKeysAndData($keys, $data);
 
-        $variables = [
-           'type'                 => $type,
-           'image'                => isset($schemaManual['_seopress_pro_rich_snippets_lb_img']) ? $schemaManual['_seopress_pro_rich_snippets_lb_img'] : '',
-           'url'                  => isset($schemaManual['_seopress_pro_rich_snippets_lb_website']) ? $schemaManual['_seopress_pro_rich_snippets_lb_website'] : '',
-           'telephone'            => isset($schemaManual['_seopress_pro_rich_snippets_lb_tel']) ? $schemaManual['_seopress_pro_rich_snippets_lb_tel'] : '',
-           'priceRange'           => isset($schemaManual['_seopress_pro_rich_snippets_lb_price']) ? $schemaManual['_seopress_pro_rich_snippets_lb_price'] : '',
-           'name'                 => isset($schemaManual['_seopress_pro_rich_snippets_lb_name']) ? $schemaManual['_seopress_pro_rich_snippets_lb_name'] : '%%sitetitle%%',
-           'id'                   => '%%schema_article_canonical%%',
-        ];
+        if (isset($variables['servesCuisines']) && ! in_array($variables['type'], $this->getTypeFood(), true)) {
+            unset($variables['servesCuisines']);
+        }
 
-        if (in_array($type, $servesCuisine)) {
-            $variables['servesCuisine'] = isset($schemaManual['_seopress_pro_rich_snippets_lb_cuisine']) ? $schemaManual['_seopress_pro_rich_snippets_lb_cuisine'] : '';
+        if (isset($variables['openingHours']['seopress_local_business_opening_hours'])) {
+            $variables['openingHours'] = $variables['openingHours']['seopress_local_business_opening_hours'];
         }
 
         return $variables;
@@ -107,26 +140,13 @@ class LocalBusiness extends JsonSchemaValue implements GetJsonData {
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::OPTION_LOCAL_BUSINESS;
 
-        $variables    = [];
         $openingHours = [];
-        switch ($typeSchema) {
-            case RichSnippetType::OPTION_LOCAL_BUSINESS:
-            default:
-                $variables    = $this->getVariablesForOptionLocalBusiness();
-                $openingHours = seopress_pro_get_service('OptionPro')->getLocalBusinessOpeningHours();
-                break;
-            case RichSnippetType::MANUAL:
-                $schemaManual = $this->getCurrentSchemaManual($context);
+        $variables    = $this->getVariablesByType($typeSchema, $context);
 
-                if (null === $schemaManual) {
-                    return $data;
-                }
-                $variables    = $this->getVariablesForManualSnippet($schemaManual);
-                $openingHours = isset($schemaManual['_seopress_pro_rich_snippets_lb_opening_hours']['seopress_local_business_opening_hours']) ? $schemaManual['_seopress_pro_rich_snippets_lb_opening_hours']['seopress_local_business_opening_hours'] : [];
-                break;
-            case RichSnippetType::SUB_TYPE:
-                $variables = isset($context['variables']) ? $context['variables'] : [];
-                break;
+        if (RichSnippetType::OPTION_LOCAL_BUSINESS === $typeSchema) {
+            $openingHours = seopress_pro_get_service('OptionPro')->getLocalBusinessOpeningHours();
+        } elseif (isset($variables['openingHours'])) {
+            $openingHours = $variables['openingHours'];
         }
 
         $data = seopress_get_service('VariablesToString')->replaceDataToString($data, $variables);
@@ -154,13 +174,13 @@ class LocalBusiness extends JsonSchemaValue implements GetJsonData {
                         continue;
                     }
 
-                    $variables = [
+                    $variablesOpeningHours = [
                         'dayOfWeek' => $this->getDayByKey($key),
                         'opens'     => \sprintf('%s:%s:00', $halfDay['start']['hours'], $halfDay['start']['mins']),
                         'closes'    => \sprintf('%s:%s:00', $halfDay['end']['hours'], $halfDay['end']['mins']),
                     ];
 
-                    $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(OpeningHours::NAME, ['variables' => $variables], ['remove_empty'=> true]);
+                    $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(OpeningHours::NAME, ['variables' => $variablesOpeningHours], ['remove_empty'=> true]);
                     if (count($schema) > 1) {
                         $data['openingHoursSpecification'][] = $schema;
                     }
@@ -169,5 +189,18 @@ class LocalBusiness extends JsonSchemaValue implements GetJsonData {
         }
 
         return apply_filters('seopress_pro_get_json_data_local_business', $data, $context);
+    }
+
+    public function cleanValues($data) {
+        if (isset($data['@type']) && ! in_array($data['@type'], $this->getTypeFood(), true)) {
+            $removeKeys = ['menu', 'acceptsReservations'];
+            foreach ($removeKeys as $key => $value) {
+                if (isset($data[$value])) {
+                    unset($data[$value]);
+                }
+            }
+        }
+
+        return $data;
     }
 }

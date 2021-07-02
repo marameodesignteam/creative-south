@@ -26,6 +26,6 @@ class Offer extends JsonSchemaValue implements GetJsonData {
     public function getJsonData($context = null) {
         $data = $this->getArrayJson();
 
-        return apply_filters('seopress_pro_get_json_data_offser', $data, $context);
+        return apply_filters('seopress_pro_get_json_data_offer', $data, $context);
     }
 }

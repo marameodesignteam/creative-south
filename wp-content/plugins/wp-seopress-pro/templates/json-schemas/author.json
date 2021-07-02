@@ -1,4 +1,4 @@
 {
     "@type": "Person",
-    "name": "%%post_author%%"
+    "name": "[[name]]"
 }

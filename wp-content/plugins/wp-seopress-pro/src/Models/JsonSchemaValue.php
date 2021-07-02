@@ -6,6 +6,7 @@ if ( ! defined('ABSPATH')) {
     exit;
 }
 
+use SEOPress\Helpers\RichSnippetType;
 use SEOPress\Models\JsonSchemaValue as JsonSchemaValueBase;
 
 /**
@@ -45,5 +46,73 @@ abstract class JsonSchemaValue extends JsonSchemaValueBase {
         }
 
         return $context['schemas_manual'][$context['key_get_json_schema']];
+    }
+
+    /**
+     * @since 4.7.0
+     *
+     * @return array
+     */
+    protected function getKeysForSchemaManual() {
+        return [];
+    }
+
+    /**
+     * @since 4.7.0
+     *
+     * @return array
+     */
+    protected function getKeysForOptionLocalBusiness() {
+        return [];
+    }
+
+    /**
+     * @since 4.7.0
+     *
+     * @param array $keys
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function getVariablesByKeysAndData($keys, $data = []) {
+        $variables = [];
+
+        foreach ($keys as $key => $item) {
+            if (is_string($item)) {
+                $variables[$key] = isset($data[$item]) ? $data[$item] : '';
+            } elseif (is_array($item)) {
+                $variables[$key] = (isset($item['value']) && isset($data[$item['value']]) && ! empty($data[$item['value']])) ? $data[$item['value']] : $item['default'];
+            }
+        }
+
+        return $variables;
+    }
+
+    /**
+     * @since 4.7.0
+     *
+     * @param string $type
+     * @param array  $context
+     *
+     * @return array
+     */
+    public function getVariablesByType($type, $context) {
+        switch ($type) {
+            case RichSnippetType::MANUAL:
+                $data = $this->getCurrentSchemaManual($context);
+                if (null === $data) {
+                    return [];
+                }
+
+                $keys      = $this->getKeysForSchemaManual();
+
+                return $this->getVariablesByKeysAndData($keys, $data);
+            case RichSnippetType::OPTION_LOCAL_BUSINESS:
+                return $this->getKeysForOptionLocalBusiness();
+            case RichSnippetType::SUB_TYPE:
+                return isset($context['variables']) ? $context['variables'] : [];
+            default:
+                return [];
+        }
     }
 }

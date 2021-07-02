@@ -7,6 +7,7 @@ if ( ! defined('ABSPATH')) {
 }
 
 use SEOPress\Helpers\RichSnippetType;
+use SEOPress\JsonSchemas\Organization;
 use SEOPress\Models\GetJsonData;
 use SEOPressPro\Models\JsonSchemaValue;
 
@@ -20,20 +21,19 @@ class Event extends JsonSchemaValue implements GetJsonData {
     }
 
     /**
-     * @since 4.6.0
+     * @since 4.7.0
      *
      * @return array
-     *
-     * @param array $schemaManual
      */
-    protected function getVariablesForManualSnippet($schemaManual) {
-        $keys = [
+    protected function getKeysForSchemaManual() {
+        return [
             'type'                          => '_seopress_pro_rich_snippets_type',
             'eventType'                     => '_seopress_pro_rich_snippets_events_type',
             'name'                          => '_seopress_pro_rich_snippets_events_name',
             'description'                   => '_seopress_pro_rich_snippets_events_desc',
             'image'                         => '_seopress_pro_rich_snippets_events_img',
             'startDate'                     => '_seopress_pro_rich_snippets_events_start_date',
+            'startDateTimezone'             => '_seopress_pro_rich_snippets_events_start_date_timezone',
             'startTime'                     => '_seopress_pro_rich_snippets_events_start_time',
             'endDate'                       => '_seopress_pro_rich_snippets_events_end_date',
             'endTime'                       => '_seopress_pro_rich_snippets_events_end_time',
@@ -51,14 +51,23 @@ class Event extends JsonSchemaValue implements GetJsonData {
             'offersValidFromTime'           => '_seopress_pro_rich_snippets_events_offers_valid_from_time',
             'offersUrl'                     => '_seopress_pro_rich_snippets_events_offers_url',
             'performer'                     => '_seopress_pro_rich_snippets_events_performer',
+            'organizerName'                 => '_seopress_pro_rich_snippets_events_organizer_name',
+            'organizerUrl'                  => '_seopress_pro_rich_snippets_events_organizer_url',
             'status'                        => '_seopress_pro_rich_snippets_events_status',
             'attendanceMode'                => '_seopress_pro_rich_snippets_events_attendance_mode',
         ];
-        $variables = [];
+    }
 
-        foreach ($keys as $key => $value) {
-            $variables[$key] = isset($schemaManual[$value]) ? $schemaManual[$value] : '';
-        }
+    /**
+     * @since 4.7.0
+     *
+     * @return array
+     *
+     * @param array $keys
+     * @param array $data
+     */
+    protected function getVariablesByKeysAndData($keys, $data = []) {
+        $variables = parent::getVariablesByKeysAndData($keys, $data);
 
         if (isset($variables['status']) && ! empty($variables['status'])) {
             $variables['eventStatus'] = sprintf('%sschema.org/%s', seopress_check_ssl(), $variables['status']);
@@ -70,6 +79,10 @@ class Event extends JsonSchemaValue implements GetJsonData {
 
         if (isset($variables['startDate'], $variables['startTime']) && ! empty($variables['startDate']) && ! empty($variables['startTime'])) {
             $variables['startDate'] = sprintf('%sT%s', $variables['startDate'], $variables['startTime']);
+
+            if ($variables['startDateTimezone']) {
+                $variables['startDate'] = $variables['startDate'] . $variables['startDateTimezone'];
+            }
         }
 
         if (isset($variables['endDate'], $variables['endTime']) && ! empty($variables['endDate']) && ! empty($variables['endTime'])) {
@@ -91,19 +104,7 @@ class Event extends JsonSchemaValue implements GetJsonData {
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::MANUAL;
 
-        $variables = [];
-
-        switch ($typeSchema) {
-            case RichSnippetType::MANUAL:
-                $schemaManual = $this->getCurrentSchemaManual($context);
-
-                if (null === $schemaManual) {
-                    return $data;
-                }
-
-                $variables = $this->getVariablesForManualSnippet($schemaManual);
-                break;
-        }
+        $variables  = $this->getVariablesByType($typeSchema, $context);
 
         if (isset($variables['previousStartDate']) && ! isset($variables['eventStatus']) || $variables['eventStatus'] !== seopress_check_ssl() . 'schema.org/EventRescheduled') {
             unset($variables['previousStartDate']);
@@ -136,12 +137,12 @@ class Event extends JsonSchemaValue implements GetJsonData {
                 $contextWithVariables['type']      = RichSnippetType::SUB_TYPE;
                 $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(VirtualLocation::NAME, $contextWithVariables, ['remove_empty'=> true]);
                 if (count($schema) > 1) {
-                    $data['locations'][] = $schema;
+                    $data['location'][] = $schema;
                 }
 
                 $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Place::NAME, $contextWithVariables, ['remove_empty'=> true]);
                 if (count($schema) > 1) {
-                    $data['locations'][] = $schema;
+                    $data['location'][] = $schema;
                 }
             } else {
                 $contextWithVariables              = $context;
@@ -199,8 +200,39 @@ class Event extends JsonSchemaValue implements GetJsonData {
             }
         }
 
+        if (isset($variables['organizerName']) && ! empty($variables['organizerName'])) {
+            $variablesSchema = [
+                'type'    => 'Organization',
+                'name'    => isset($variables['organizerName']) ? $variables['organizerName'] : '',
+                'url'     => isset($variables['organizerUrl']) ? $variables['organizerUrl'] : '',
+            ];
+
+            $contextWithVariables              = $context;
+            $contextWithVariables['variables'] = $variablesSchema;
+            $contextWithVariables['type']      = RichSnippetType::SUB_TYPE;
+            $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Organization::NAME, $contextWithVariables, ['remove_empty'=> true]);
+            if (count($schema) > 1) {
+                $data['organizer'] = $schema;
+            }
+        }
+
         $data = seopress_get_service('VariablesToString')->replaceDataToString($data, $variables);
 
         return apply_filters('seopress_pro_get_json_data_event', $data, $context);
+    }
+
+    /**
+     * @since 4.5.0
+     *
+     * @param  $data
+     *
+     * @return array
+     */
+    public function cleanValues($data) {
+        if (isset($data['organizer']['contactPoint'])) {
+            unset($data['organizer']['contactPoint']);
+        }
+
+        return parent::cleanValues($data);
     }
 }

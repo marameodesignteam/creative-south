@@ -8,6 +8,7 @@ function seopress_get_schema_metaboxe_review($seopress_pro_rich_snippets_data, $
 	$seopress_pro_rich_snippets_review_item_type                    = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_item_type']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_item_type'] : "";
 	$seopress_pro_rich_snippets_review_img                          = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_img']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_img'] : "";
 	$seopress_pro_rich_snippets_review_rating                       = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_rating']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_rating'] : "";
+	$seopress_pro_rich_snippets_review_body                         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_body']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_body'] : "";
 
 	?>
 	<div class="wrap-rich-snippets-item wrap-rich-snippets-review">
@@ -48,6 +49,12 @@ function seopress_get_schema_metaboxe_review($seopress_pro_rich_snippets_data, $
 			</label>
 			<input type="number" id="seopress_pro_rich_snippets_review_rating_meta" max="5" min="1" step="0.1" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_review_rating]" placeholder="<?php echo esc_html__('The item rating','wp-seopress-pro'); ?>" aria-label="<?php _e('Your rating','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_review_rating; ?>" />
 		</p>
+        <p>
+            <label for="seopress_pro_rich_snippets_review_body_meta">
+				<?php _e( 'Review body', 'wp-seopress-pro' ); ?>
+			</label>
+			<textarea id="seopress_pro_rich_snippets_review_body_meta" style="width:100%" name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_review_body]" placeholder="<?php echo esc_html__('Enter your review body','wp-seopress-pro'); ?>" aria-label="<?php _e('Review body','wp-seopress-pro'); ?>" value="<?php echo $seopress_pro_rich_snippets_review_body; ?>"><?php echo $seopress_pro_rich_snippets_review_body; ?></textarea>
+        </p>
 	</div>
 	<?php
 }

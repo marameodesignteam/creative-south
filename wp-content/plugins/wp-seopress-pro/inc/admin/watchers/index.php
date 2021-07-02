@@ -48,7 +48,7 @@ if ('1' == seopress_get_toggle_option('404') && apply_filters('seopress_post_aut
 
         $messages[] = $message;
 
-        update_option('seopress_can_post_redirect', $messages);
+        update_option('seopress_can_post_redirect', $messages, false);
     }
 
     /**
@@ -78,7 +78,7 @@ if ('1' == seopress_get_toggle_option('404') && apply_filters('seopress_post_aut
             return;
         }
 
-        update_option('seopress_can_post_redirect', $messages);
+        update_option('seopress_can_post_redirect', $messages, false);
     }
 
     /**

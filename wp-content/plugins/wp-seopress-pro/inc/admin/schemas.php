@@ -25,7 +25,11 @@ function seopress_get_schemas_conditions() {
  * @return (array)
  **/
 function seopress_get_schemas_filters() {
-    return ['post_type' => __('Post Type', 'wp-seopress-pro'), 'taxonomy'  => __('Taxonomy', 'wp-seopress-pro')];
+    return [
+        'post_type'     => __('Post Type', 'wp-seopress-pro'),
+        'taxonomy'      => __('Taxonomy', 'wp-seopress-pro'),
+        'postId'        => __('Post ID', 'wp-seopress-pro'),
+    ];
 }
 
 /**
@@ -40,7 +44,15 @@ function seopress_get_schemas_filters() {
  * @param mixed $rule
  **/
 function seopress_get_default_schemas_rules($rule) {
-    return [[['filter' => 'post_type', 'cpt' => $rule, 'taxo' => 0, 'cond' => 'equal']]];
+    return [
+        [
+            [
+                'filter' => 'post_type',
+                'cpt'    => $rule, 'taxo' => 0,
+                'cond'   => 'equal',
+            ],
+        ],
+    ];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -318,6 +330,9 @@ function seopress_schemas_display_column($column, $post_id) {
                         $tax   = esc_html(get_taxonomy(get_term($value['taxo'])->taxonomy)->label);
                         $label = esc_html(get_term($value['taxo'])->name);
                         $html .= " <strong>$filter</strong> \"$tax\" <em>$cond</em> \"$label\" ";
+                    } elseif ('postId' === $value['filter']) {
+                        $label = esc_html($value['postId']);
+                        $html .= " <strong>$filter</strong> <em>$cond</em> \"$label\" ";
                     }
                     $html .= __('and', 'wp-seopress-pro');
                     ++$n;
@@ -545,6 +560,7 @@ function seopress_schemas_cpt($post) {
                         if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
                             $seopress_schemas_mapping_case['Events Calendar'] = [
                                 'events_start_date'             => __('Start date', 'wp-seopress-pro'),
+                                'events_start_date_timezone'    => __('Timezone start date', 'wp-seopress-pro'),
                                 'events_start_time'             => __('Start time', 'wp-seopress-pro'),
                                 'events_end_date'               => __('End date', 'wp-seopress-pro'),
                                 'events_end_time'               => __('End time', 'wp-seopress-pro'),
@@ -588,7 +604,7 @@ function seopress_schemas_cpt($post) {
 
                         $post_meta_value = get_post_meta($post->ID, '_' . $post_meta_name . '_manual_rating_global', true);
 
-                        $seopress_schemas_manual_rating_global = '<input type="number" id="' . $post_meta_name . '_manual_rating_global" name="' . $post_meta_name . '_manual_rating_global" min="0" max="5" step="0.1" class="manual_rating_global" aria-label="' . __('Rating', 'wp-seopress-pro') . '" value="' . $post_meta_value . '" />';
+                        $seopress_schemas_manual_rating_global = '<input type="number" id="' . $post_meta_name . '_manual_rating_global" name="' . $post_meta_name . '_manual_rating_global" min="1" max="5" step="0.1" class="manual_rating_global" aria-label="' . __('Rating', 'wp-seopress-pro') . '" value="' . $post_meta_value . '" />';
                     break;
                 case 'custom':
                         //custom case
@@ -606,6 +622,8 @@ function seopress_schemas_cpt($post) {
         }
 
         $post_meta_value = get_post_meta($post->ID, '_' . $post_meta_name, true);
+
+        $seopress_schemas_mapping_case = apply_filters('seopress_schemas_mapping_select', $seopress_schemas_mapping_case);
 
         $html = '<select name="' . $post_meta_name . '" class="dyn">';
         foreach ($seopress_schemas_mapping_case as $key => $value) {
@@ -742,6 +760,11 @@ function seopress_schemas_cpt($post) {
             }
             echo '</select>';
 
+            // INPUT
+            $class       = 'postId' === $_rule['filter'] ? '' : 'hidden';
+            $valuePostId = isset($_rule['postId']) ? $_rule['postId'] : '';
+            echo "\t<input id=\"{$_id_name_for}[g{$_group}][i{$_index}][postId]\" name=\"{$_id_name_for}[g{$_group}][i{$_index}][postId]\" class=\"{$class}\" value=\"{$valuePostId}\" />\n";
+
             // Buttons
             echo ' <span class="dashicons dashicons-plus-alt ' . $_id_name_for . '_and" data-group="' . $_group . '"></span>';
             echo ' <span class="hidden dashicons dashicons-no-alt ' . $_id_name_for . '_del" data-group="' . $_group . '"></span>';
@@ -798,6 +821,12 @@ function seopress_schemas_cpt($post) {
 										<span class="description">' . __('The headline of the article', 'wp-seopress-pro') . '</span>
 									</p>
 									<p>
+										<label for="seopress_pro_rich_snippets_article_author_meta">
+											' . __('Post author', 'wp-seopress-pro') . '</label>
+										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_article_author', 'default') . '
+										<span class="description">' . __('The author of the article', 'wp-seopress-pro') . '</span>
+									</p>
+									<p>
 										<label for="seopress_pro_rich_snippets_article_img_meta">' . __('Image', 'wp-seopress-pro') . '</label>
 										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_article_img', 'image') . '
 										<span class="description">' . __('The representative image of the article. Only a marked-up image that directly belongs to the article should be specified. ', 'wp-seopress-pro') . '<br>
@@ -827,6 +856,12 @@ function seopress_schemas_cpt($post) {
 											' . __('Coverage End Time', 'wp-seopress-pro') . '</label>
 											' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_article_coverage_end_time', 'time') . '
 											<span class="description">' . __('Eg: HH:MM - To use with <strong>Live Blog Posting</strong> article type only', 'wp-seopress-pro') . '</span>
+									</p>
+                                    <p>
+										<label for="seopress_pro_rich_snippets_article_speakable_meta">
+											' . __('Speakable CSS Selector', 'wp-seopress-pro') . '</label>
+										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_article_speakable', 'default') . '
+										<span class="description">' . __('Addresses content in the annotated pages (such as class attribute)', 'wp-seopress-pro') . '</span>
 									</p>
 								</div>
 
@@ -919,8 +954,22 @@ For best results, provide multiple high-resolution images (minimum of 50K pixels
 										<span class="description">' . __('Only to be filled if the business type is: "FoodEstablishment", "Bakery", "BarOrPub", "Brewery", "CafeOrCoffeeShop", "FastFoodRestaurant", "IceCreamShop", "Restaurant" or "Winery".', 'wp-seopress-pro') . '</span>
 									</p>
 									<p>
+										<label for="seopress_pro_rich_snippets_lb_menu_meta">
+											' . __('URL of the menu', 'wp-seopress-pro') . '</label>
+										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_lb_menu', 'default') . '
+                                        <span class="description">' . __('Only to be filled if the business type is: "FoodEstablishment", "Bakery", "BarOrPub", "Brewery", "CafeOrCoffeeShop", "FastFoodRestaurant", "IceCreamShop", "Restaurant" or "Winery".', 'wp-seopress-pro') . '</span>
+										<span class="description">' . __('Default value if empty: URL from the Website property', 'wp-seopress-pro') . '</span>
+									</p>
+									<p>
+										<label for="seopress_pro_rich_snippets_lb_accepts_reservations_meta">
+											' . __('Accepts reservations', 'wp-seopress-pro') . '</label>
+										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_lb_accepts_reservations', 'default') . '
+										<span class="description">' . __('Indicates whether a FoodEstablishment accepts reservations. Values can be Boolean (True or False), an URL at which reservations can be made or (for backwards compatibility) the strings Yes or No.', 'wp-seopress-pro') . '</span>
+									</p>
+									<p>
 										<label for="seopress_pro_rich_snippets_lb_opening_hours_meta">
 											' . __('Opening hours', 'wp-seopress-pro') . '</label>
+                                            <span class="description">' . __('<strong>Morning and Afternoon are just time slots</strong>. Eg: if you\'re opened from 10:00 AM to 9:00 PM, check Morning and enter 10:00 / 9:00. If you are open non-stop, check Morning and enter 0:00 / 23:59.', 'wp-seopress-pro') . '</span>
 									</p>';
 
     $options = $seopress_pro_rich_snippets_lb_opening_hours;
@@ -1222,6 +1271,11 @@ For best results, provide multiple high-resolution images (minimum of 50K pixels
 										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_recipes_img', 'image') . '
 										<span class="advise">' . __('Minimum size: 185px by 185px, aspect ratio 1:1', 'wp-seopress-pro') . '</span>
 									</p>
+                                    <p>
+										<label for="seopress_pro_rich_snippets_recipes_video_meta">' . __('Video URL of the recipe', 'wp-seopress-pro') . '</label>
+										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_recipes_video', 'default') . '
+										<span class="description">' . __('A video URL describing the recipe preparation', 'wp-seopress-pro') . '</span>
+									</p>
 									<p>
 										<label for="seopress_pro_rich_snippets_recipes_prep_time_meta">
 											' . __('Preparation time (in minutes)', 'wp-seopress-pro') . '</label>
@@ -1438,6 +1492,12 @@ For best results, provide multiple high-resolution images (minimum of 50K pixels
 											<span class="description">' . __('Eg: YYYY-MM-DD', 'wp-seopress-pro') . '</span>
 									</p>
 									<p>
+										<label for="seopress_pro_rich_snippets_events_start_date_timezone_meta">
+											' . __('Timezone start date', 'wp-seopress-pro') . '</label>
+											' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_events_start_date_timezone', ['default', 'events']) . '
+											<span class="description">' . __('Eg: -4:00', 'wp-seopress-pro') . '</span>
+									</p>
+									<p>
 										<label for="seopress_pro_rich_snippets_events_start_time_meta">
 											' . __('Start time', 'wp-seopress-pro') . '</label>
 											' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_events_start_time', ['time', 'events']) . '
@@ -1533,6 +1593,18 @@ For best results, provide multiple high-resolution images (minimum of 50K pixels
 											' . __('Performer name', 'wp-seopress-pro') . '</label>
 											' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_events_performer', ['default', 'events']) . '
 											<span class="description">' . __('Eg: Lana Del Rey', 'wp-seopress-pro') . '</span>
+									</p>
+									<p>
+										<label for="seopress_pro_rich_snippets_events_organizer_name_meta">
+											' . __('Organizer name', 'wp-seopress-pro') . '</label>
+											' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_events_organizer_name', ['default', 'events']) . '
+											<span class="description">' . __('Eg: Apple', 'wp-seopress-pro') . '</span>
+									</p>
+									<p>
+										<label for="seopress_pro_rich_snippets_events_organizer_url_meta">
+											' . __('Organizer URL', 'wp-seopress-pro') . '</label>
+											' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_events_organizer_url', ['default', 'events']) . '
+											<span class="description">' . __('Eg: https://www.apple.com/apple-events/', 'wp-seopress-pro') . '</span>
 									</p>
 									<p>
 										<label for="seopress_pro_rich_snippets_events_status_meta">
@@ -1834,6 +1906,12 @@ For best results, provide multiple high-resolution images (minimum of 50K pixels
 										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_review_rating', 'rating') . '
 										<span class="description">' . __('Your rating: scale from 1 to 5', 'wp-seopress-pro') . '</span>
 									</p>
+									<p>
+										<label for="seopress_pro_rich_snippets_review_body_meta">
+											' . __('Review body', 'wp-seopress-pro') . '</label>
+										' . seopress_schemas_mapping_array('seopress_pro_rich_snippets_review_body', 'default') . '
+										<span class="description">' . __('Your review body', 'wp-seopress-pro') . '</span>
+									</p>
 								</div>
 
 								<div class="wrap-rich-snippets-custom">
@@ -1895,6 +1973,18 @@ function seopress_schemas_save_metabox($post_id, $post) {
     }
     if (isset($_POST['seopress_pro_rich_snippets_article_title_manual_global'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_article_title_manual_global', esc_html($_POST['seopress_pro_rich_snippets_article_title_manual_global']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_author'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_author', esc_html($_POST['seopress_pro_rich_snippets_article_author']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_author_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_author_cf', esc_html($_POST['seopress_pro_rich_snippets_article_author_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_author_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_author_tax', esc_html($_POST['seopress_pro_rich_snippets_article_author_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_author_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_author_manual_global', esc_html($_POST['seopress_pro_rich_snippets_article_author_manual_global']));
     }
     if (isset($_POST['seopress_pro_rich_snippets_article_img'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_article_img', esc_html($_POST['seopress_pro_rich_snippets_article_img']));
@@ -1965,6 +2055,19 @@ function seopress_schemas_save_metabox($post_id, $post) {
     if (isset($_POST['seopress_pro_rich_snippets_article_coverage_end_time_manual_time_global'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_article_coverage_end_time_manual_time_global', esc_html($_POST['seopress_pro_rich_snippets_article_coverage_end_time_manual_time_global']));
     }
+    if (isset($_POST['seopress_pro_rich_snippets_article_speakable'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_speakable', esc_html($_POST['seopress_pro_rich_snippets_article_speakable']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_speakable_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_speakable_cf', esc_html($_POST['seopress_pro_rich_snippets_article_speakable_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_speakable_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_speakable_tax', esc_html($_POST['seopress_pro_rich_snippets_article_speakable_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_article_speakable_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_article_speakable_manual_global', esc_html($_POST['seopress_pro_rich_snippets_article_speakable_manual_global']));
+    }
+
     //Local Business
     if (isset($_POST['seopress_pro_rich_snippets_lb_name'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_name', esc_html($_POST['seopress_pro_rich_snippets_lb_name']));
@@ -2146,6 +2249,30 @@ function seopress_schemas_save_metabox($post_id, $post) {
     if (isset($_POST['seopress_pro_rich_snippets_lb_serves_cuisine_manual_global'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_serves_cuisine_manual_global', esc_html($_POST['seopress_pro_rich_snippets_lb_serves_cuisine_manual_global']));
     }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_menu'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_menu', esc_html($_POST['seopress_pro_rich_snippets_lb_menu']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_menu_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_menu_cf', esc_html($_POST['seopress_pro_rich_snippets_lb_menu_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_menu_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_menu_tax', esc_html($_POST['seopress_pro_rich_snippets_lb_menu_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_menu_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_menu_manual_global', esc_html($_POST['seopress_pro_rich_snippets_lb_menu_manual_global']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_accepts_reservations'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_accepts_reservations', esc_html($_POST['seopress_pro_rich_snippets_lb_accepts_reservations']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_accepts_reservations_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_accepts_reservations_cf', esc_html($_POST['seopress_pro_rich_snippets_lb_accepts_reservations_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_accepts_reservations_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_accepts_reservations_tax', esc_html($_POST['seopress_pro_rich_snippets_lb_accepts_reservations_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_lb_accepts_reservations_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_accepts_reservations_manual_global', esc_html($_POST['seopress_pro_rich_snippets_lb_accepts_reservations_manual_global']));
+    }
     if (isset($_POST['seopress_pro_rich_snippets_lb_opening_hours'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_lb_opening_hours', $_POST['seopress_pro_rich_snippets_lb_opening_hours']);
     }
@@ -2280,6 +2407,18 @@ function seopress_schemas_save_metabox($post_id, $post) {
     }
     if (isset($_POST['seopress_pro_rich_snippets_recipes_img_manual_img_library_global_height'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_recipes_img_manual_img_library_global_height', esc_html($_POST['seopress_pro_rich_snippets_recipes_img_manual_img_library_global_height']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_recipes_video'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_recipes_video', esc_html($_POST['seopress_pro_rich_snippets_recipes_video']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_recipes_video_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_recipes_video_cf', esc_html($_POST['seopress_pro_rich_snippets_recipes_video_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_recipes_video_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_recipes_video_tax', esc_html($_POST['seopress_pro_rich_snippets_recipes_video_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_recipes_video_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_recipes_video_manual_global', esc_html($_POST['seopress_pro_rich_snippets_recipes_video_manual_global']));
     }
     if (isset($_POST['seopress_pro_rich_snippets_recipes_prep_time'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_recipes_prep_time', esc_html($_POST['seopress_pro_rich_snippets_recipes_prep_time']));
@@ -2767,6 +2906,18 @@ function seopress_schemas_save_metabox($post_id, $post) {
     if (isset($_POST['seopress_pro_rich_snippets_events_start_date_manual_date_global'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_events_start_date_manual_date_global', esc_html($_POST['seopress_pro_rich_snippets_events_start_date_manual_date_global']));
     }
+    if (isset($_POST['seopress_pro_rich_snippets_events_start_date_timezone'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_start_date_timezone', esc_html($_POST['seopress_pro_rich_snippets_events_start_date_timezone']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_start_date_timezone_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_start_date_timezone_cf', esc_html($_POST['seopress_pro_rich_snippets_events_start_date_timezone_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_start_date_timezone_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_start_date_timezone_tax', esc_html($_POST['seopress_pro_rich_snippets_events_start_date_timezone_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_start_date_timezone_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_start_date_timezone_manual_global', esc_html($_POST['seopress_pro_rich_snippets_events_start_date_timezone_manual_global']));
+    }
     if (isset($_POST['seopress_pro_rich_snippets_events_start_time'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_events_start_time', esc_html($_POST['seopress_pro_rich_snippets_events_start_time']));
     }
@@ -2970,6 +3121,30 @@ function seopress_schemas_save_metabox($post_id, $post) {
     }
     if (isset($_POST['seopress_pro_rich_snippets_events_performer_manual_global'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_events_performer_manual_global', esc_html($_POST['seopress_pro_rich_snippets_events_performer_manual_global']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_name'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_name', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_name']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_name_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_name_cf', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_name_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_name_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_name_tax', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_name_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_name_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_name_manual_global', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_name_manual_global']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_name'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_url', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_url']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_url_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_url_cf', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_url_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_url_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_url_tax', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_url_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_events_organizer_url_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_events_organizer_url_manual_global', esc_html($_POST['seopress_pro_rich_snippets_events_organizer_url_manual_global']));
     }
     if (isset($_POST['seopress_pro_rich_snippets_events_status'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_events_status', esc_html($_POST['seopress_pro_rich_snippets_events_status']));
@@ -3514,6 +3689,18 @@ function seopress_schemas_save_metabox($post_id, $post) {
     }
     if (isset($_POST['seopress_pro_rich_snippets_review_rating_manual_rating_global'])) {
         update_post_meta($post_id, '_seopress_pro_rich_snippets_review_rating_manual_rating_global', esc_html($_POST['seopress_pro_rich_snippets_review_rating_manual_rating_global']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_review_body'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_review_body', esc_html($_POST['seopress_pro_rich_snippets_review_body']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_review_body_cf'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_review_body_cf', esc_html($_POST['seopress_pro_rich_snippets_review_body_cf']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_review_body_tax'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_review_body_tax', esc_html($_POST['seopress_pro_rich_snippets_review_body_tax']));
+    }
+    if (isset($_POST['seopress_pro_rich_snippets_review_body_manual_global'])) {
+        update_post_meta($post_id, '_seopress_pro_rich_snippets_review_body_manual_global', esc_html($_POST['seopress_pro_rich_snippets_review_body_manual_global']));
     }
     //Custom
     if (isset($_POST['seopress_pro_rich_snippets_custom'])) {
