@@ -2,11 +2,13 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-function seopress_get_all_pro_rich_snippets_manual($post_id) {
+function seopress_get_all_pro_rich_snippets_manual($post_id)
+{
     return get_post_meta($post_id, '_seopress_pro_schemas_manual', true);
 }
 
-function seopress_pro_rich_snippets_is_multidimensional($post_id) {
+function seopress_pro_rich_snippets_is_multidimensional($post_id)
+{
     if (apply_filters('seopress_get_pro_schemas_manual', true)) {
         $seopress_pro_rich_snippets_data = seopress_get_all_pro_rich_snippets_manual($post_id);
     } else {
@@ -22,15 +24,16 @@ function seopress_pro_rich_snippets_is_multidimensional($post_id) {
     return apply_filters('seopress_pro_rich_snippets_data_is_multidimensional', $is_multidimensional);
 }
 
-function seopress_get_pro_rich_snippets_by_key($post_id, $key, $key_number_schema = 0) {
+function seopress_get_pro_rich_snippets_by_key($post_id, $key, $key_number_schema = 0)
+{
     // SEOPress < 3.9
-    if ( ! apply_filters('seopress_get_pro_schemas_manual', true, $post_id, $key)) {
+    if (! apply_filters('seopress_get_pro_schemas_manual', true, $post_id, $key)) {
         return get_post_meta($post_id, $key, true);
     }
 
     $schemas = seopress_get_all_pro_rich_snippets_manual($post_id);
 
-    if ( ! $schemas) {
+    if (! $schemas) {
         return '';
     }
 
@@ -42,19 +45,19 @@ function seopress_get_pro_rich_snippets_by_key($post_id, $key, $key_number_schem
     $is_multidimensional = apply_filters('seopress_pro_rich_snippets_data_is_multidimensional', $is_multidimensional);
 
     // Before the management of multiple schemas
-    if ( ! $is_multidimensional) {
-        if ( ! array_key_exists($key, $schemas)) {
+    if (! $is_multidimensional) {
+        if (! array_key_exists($key, $schemas)) {
             return '';
         }
     }
 
-    if ( ! array_key_exists($key_number_schema, $schemas)) {
+    if (! array_key_exists($key_number_schema, $schemas)) {
         return '';
     }
 
     $schemas_number = $schemas[$key_number_schema];
 
-    if ( ! array_key_exists($key, $schemas_number)) {
+    if (! array_key_exists($key, $schemas_number)) {
         return '';
     }
 
@@ -70,7 +73,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Articles
     //=========================================================================================
     //Type
-    function seopress_rich_snippets_articles_type_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_type_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_type', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_type) {
             return $_seopress_pro_rich_snippets_article_type;
@@ -79,7 +83,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Title
-    function seopress_rich_snippets_articles_title_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_title_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_title = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_title', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_title) {
             return $_seopress_pro_rich_snippets_article_title;
@@ -88,7 +93,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Img
-    function seopress_rich_snippets_articles_img_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_img) {
             return $_seopress_pro_rich_snippets_article_img;
@@ -99,7 +105,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Img Width
-    function seopress_rich_snippets_articles_img_width_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_img_width_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_img_width = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_img_width', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_img_width) {
             return $_seopress_pro_rich_snippets_article_img_width;
@@ -110,7 +117,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Img Height
-    function seopress_rich_snippets_articles_img_height_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_img_height_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_img_height = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_img_height', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_img_height) {
             return $_seopress_pro_rich_snippets_article_img_height;
@@ -121,7 +129,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Canonical
-    function seopress_rich_snippets_articles_canonical_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_canonical_option($key_schema = 0)
+    {
         $_seopress_robots_canonical = get_post_meta(get_the_ID(), '_seopress_robots_canonical', true);
         if ('' != $_seopress_robots_canonical) {
             return $_seopress_robots_canonical;
@@ -132,9 +141,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Person name
-    function seopress_rich_snippets_articles_publisher_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_publisher_option($key_schema = 0)
+    {
         $seopress_rich_snippets_articles_publisher_option = get_option('seopress_social_option_name');
-        if ( ! empty($seopress_rich_snippets_articles_publisher_option)) {
+        if (! empty($seopress_rich_snippets_articles_publisher_option)) {
             foreach ($seopress_rich_snippets_articles_publisher_option as $key => $seopress_rich_snippets_articles_publisher_value) {
                 $options[$key] = $seopress_rich_snippets_articles_publisher_value;
             }
@@ -144,9 +154,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Logo
-    function seopress_rich_snippets_articles_publisher_logo_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_publisher_logo_option($key_schema = 0)
+    {
         $seopress_rich_snippets_articles_publisher_logo_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_rich_snippets_articles_publisher_logo_option)) {
+        if (! empty($seopress_rich_snippets_articles_publisher_logo_option)) {
             foreach ($seopress_rich_snippets_articles_publisher_logo_option as $key => $seopress_rich_snippets_articles_publisher_logo_value) {
                 $options[$key] = $seopress_rich_snippets_articles_publisher_logo_value;
             }
@@ -156,9 +167,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Logo width
-    function seopress_rich_snippets_articles_publisher_logo_width_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_publisher_logo_width_option($key_schema = 0)
+    {
         $seopress_rich_snippets_articles_publisher_logo_width_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_rich_snippets_articles_publisher_logo_width_option)) {
+        if (! empty($seopress_rich_snippets_articles_publisher_logo_width_option)) {
             foreach ($seopress_rich_snippets_articles_publisher_logo_width_option as $key => $seopress_rich_snippets_articles_publisher_logo_width_value) {
                 $options[$key] = $seopress_rich_snippets_articles_publisher_logo_width_value;
             }
@@ -168,9 +180,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Logo height
-    function seopress_rich_snippets_articles_publisher_logo_height_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_publisher_logo_height_option($key_schema = 0)
+    {
         $seopress_rich_snippets_articles_publisher_logo_height_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_rich_snippets_articles_publisher_logo_height_option)) {
+        if (! empty($seopress_rich_snippets_articles_publisher_logo_height_option)) {
             foreach ($seopress_rich_snippets_articles_publisher_logo_height_option as $key => $seopress_rich_snippets_articles_publisher_logo_height_value) {
                 $options[$key] = $seopress_rich_snippets_articles_publisher_logo_height_value;
             }
@@ -180,35 +193,40 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Start Coverage Date
-    function seopress_pro_rich_snippets_article_coverage_start_date_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_article_coverage_start_date_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_coverage_start_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_coverage_start_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_coverage_start_date) {
             return $_seopress_pro_rich_snippets_article_coverage_start_date;
         }
     }
     //Start Coverage Time
-    function seopress_pro_rich_snippets_article_coverage_start_time_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_article_coverage_start_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_coverage_start_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_coverage_start_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_coverage_start_time) {
             return $_seopress_pro_rich_snippets_article_coverage_start_time;
         }
     }
     //End Coverage Date
-    function seopress_pro_rich_snippets_article_coverage_end_date_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_article_coverage_end_date_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_coverage_end_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_coverage_end_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_coverage_end_date) {
             return $_seopress_pro_rich_snippets_article_coverage_end_date;
         }
     }
     //End Coverage Time
-    function seopress_pro_rich_snippets_article_coverage_end_time_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_article_coverage_end_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_article_coverage_end_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_article_coverage_end_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_article_coverage_end_time) {
             return $_seopress_pro_rich_snippets_article_coverage_end_time;
         }
     }
 
-    function seopress_rich_snippets_articles_option($key_schema = 0) {
+    function seopress_rich_snippets_articles_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 				"@context": "' . seopress_check_ssl() . 'schema.org",';
@@ -281,7 +299,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Local Business
     //=========================================================================================
     //ID
-    function seopress_pro_rich_snippets_lb_id_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_id_option($key_schema = 0)
+    {
         $_seopress_robots_canonical = get_post_meta(get_the_ID(), '_seopress_robots_canonical', true);
         if ('' != $_seopress_robots_canonical) {
             return $_seopress_robots_canonical;
@@ -292,14 +311,16 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Name
-    function seopress_pro_rich_snippets_lb_name_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_name) {
             return $_seopress_pro_rich_snippets_lb_name;
         }
     }
     //Type
-    function seopress_pro_rich_snippets_lb_type_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_type_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_type', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_type) {
             return $_seopress_pro_rich_snippets_lb_type;
@@ -308,112 +329,128 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //ServedCuisine
-    function seopress_pro_rich_snippets_lb_cuisine_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_cuisine_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_cuisine = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_cuisine', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_cuisine) {
             return $_seopress_pro_rich_snippets_lb_cuisine;
         }
     }
     //Img
-    function seopress_pro_rich_snippets_lb_img_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_img) {
             return $_seopress_pro_rich_snippets_lb_img;
         }
     }
     //Img width
-    function seopress_pro_rich_snippets_lb_img_width_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_img_width_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_img_width = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_img_width', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_img_width) {
             return $_seopress_pro_rich_snippets_lb_img_width;
         }
     }
     //Img height
-    function seopress_pro_rich_snippets_lb_img_height_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_img_height_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_img_height = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_img_height', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_img_height) {
             return $_seopress_pro_rich_snippets_lb_img_height;
         }
     }
     //Street addr
-    function seopress_pro_rich_snippets_lb_street_addr_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_street_addr_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_street_addr = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_street_addr', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_street_addr) {
             return $_seopress_pro_rich_snippets_lb_street_addr;
         }
     }
     //City
-    function seopress_pro_rich_snippets_lb_city_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_city_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_city = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_city', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_city) {
             return $_seopress_pro_rich_snippets_lb_city;
         }
     }
     //State
-    function seopress_pro_rich_snippets_lb_state_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_state_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_state = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_state', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_state) {
             return $_seopress_pro_rich_snippets_lb_state;
         }
     }
     //Postal Code
-    function seopress_pro_rich_snippets_lb_pc_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_pc_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_pc = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_pc', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_pc) {
             return $_seopress_pro_rich_snippets_lb_pc;
         }
     }
     //Country
-    function seopress_pro_rich_snippets_lb_country_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_country_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_country = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_country', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_country) {
             return $_seopress_pro_rich_snippets_lb_country;
         }
     }
     //Lat
-    function seopress_pro_rich_snippets_lb_lat_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_lat_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_lat = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_lat', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_lat) {
             return $_seopress_pro_rich_snippets_lb_lat;
         }
     }
     //Lon
-    function seopress_pro_rich_snippets_lb_lon_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_lon_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_lon = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_lon', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_lon) {
             return $_seopress_pro_rich_snippets_lb_lon;
         }
     }
     //Website
-    function seopress_pro_rich_snippets_lb_website_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_website_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_website = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_website', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_website) {
             return $_seopress_pro_rich_snippets_lb_website;
         }
     }
     //Tel
-    function seopress_pro_rich_snippets_lb_tel_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_tel_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_tel = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_tel', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_tel) {
             return $_seopress_pro_rich_snippets_lb_tel;
         }
     }
     //Price
-    function seopress_pro_rich_snippets_lb_price_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_price_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_price = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_price', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_price) {
             return $_seopress_pro_rich_snippets_lb_price;
         }
     }
     //Opening Hours
-    function seopress_pro_rich_snippets_lb_opening_hours_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_lb_opening_hours_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_lb_opening_hours = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_lb_opening_hours', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_lb_opening_hours) {
             return $_seopress_pro_rich_snippets_lb_opening_hours;
         }
     }
 
-    function seopress_rich_snippets_local_business_option($key_schema = 0) {
+    function seopress_rich_snippets_local_business_option($key_schema = 0)
+    {
         if ('' != seopress_pro_rich_snippets_lb_img_option($key_schema)) {
             $seopress_pro_rich_snippets_lb_img_option = json_encode(seopress_pro_rich_snippets_lb_img_option($key_schema));
         }
@@ -464,7 +501,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
             foreach (seopress_pro_rich_snippets_lb_opening_hours_option($key_schema) as $oh) {//OPENING HOURS
                 foreach ($oh as $key => $day) {//DAY
-                    if ( ! array_key_exists('open', $day)) {//CLOSED?
+                    if (! array_key_exists('open', $day)) {//CLOSED?
                         foreach ($day as $keys => $ampm) {//AM/PM
                             if (array_key_exists('open', $ampm)) {//OPEN?
                                 $seopress_pro_rich_snippets_lb_opening_hours_option .= '{ ';
@@ -597,14 +634,15 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         echo $html;
     }
 
-    function seopress_rich_snippets_faq_option($key_schema = 0) {
+    function seopress_rich_snippets_faq_option($key_schema = 0)
+    {
         //Question
         $seopress_pro_rich_snippets_faq     			= seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_faq', $key_schema);
 
         // Double dimension required as a result of migration 3.9
         $seopress_pro_rich_snippets_faq = ['0' => $seopress_pro_rich_snippets_faq];
 
-        if ( ! empty($seopress_pro_rich_snippets_faq[0][0]['question']) && ! empty($seopress_pro_rich_snippets_faq[0][0]['answer'])) {
+        if (! empty($seopress_pro_rich_snippets_faq[0][0]['question']) && ! empty($seopress_pro_rich_snippets_faq[0][0]['answer'])) {
             //Init
             $seopress_pro_rich_snippets_faq_questions ='';
             $i                                        = '0';
@@ -648,7 +686,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Courses
     //=========================================================================================
     //Title
-    function seopress_rich_snippets_courses_title_option($key_schema = 0) {
+    function seopress_rich_snippets_courses_title_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_courses_title = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_courses_title', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_courses_title) {
             return $_seopress_pro_rich_snippets_courses_title;
@@ -657,7 +696,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Description
-    function seopress_rich_snippets_courses_desc_option($key_schema = 0) {
+    function seopress_rich_snippets_courses_desc_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_courses_desc = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_courses_desc', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_courses_desc) {
             return $_seopress_pro_rich_snippets_courses_desc;
@@ -666,7 +706,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //School
-    function seopress_rich_snippets_courses_school_option($key_schema = 0) {
+    function seopress_rich_snippets_courses_school_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_courses_school = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_courses_school', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_courses_school) {
             return $_seopress_pro_rich_snippets_courses_school;
@@ -675,7 +716,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Website
-    function seopress_rich_snippets_courses_website_option($key_schema = 0) {
+    function seopress_rich_snippets_courses_website_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_courses_website = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_courses_website', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_courses_website) {
             return $_seopress_pro_rich_snippets_courses_website;
@@ -684,7 +726,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
 
-    function seopress_rich_snippets_courses_option($key_schema = 0) {
+    function seopress_rich_snippets_courses_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 				  "@context": "' . seopress_check_ssl() . 'schema.org",
@@ -715,7 +758,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Recipes
     //=========================================================================================
     //Recipe name
-    function seopress_rich_snippets_recipes_name_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_name) {
             return $_seopress_pro_rich_snippets_recipes_name;
@@ -724,7 +768,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Description
-    function seopress_rich_snippets_recipes_desc_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_desc_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_desc = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_desc', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_desc) {
             return $_seopress_pro_rich_snippets_recipes_desc;
@@ -733,83 +778,95 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Categories
-    function seopress_rich_snippets_recipes_cat_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_cat_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_cat = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_cat', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_cat) {
             return $_seopress_pro_rich_snippets_recipes_cat;
         }
     }
     //Image
-    function seopress_rich_snippets_recipes_img_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_img) {
             return $_seopress_pro_rich_snippets_recipes_img;
         }
     }
     //Prep Time
-    function seopress_rich_snippets_recipes_prep_time_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_prep_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_prep_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_prep_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_prep_time) {
             return $_seopress_pro_rich_snippets_recipes_prep_time;
         }
     }
     //Cook Time
-    function seopress_rich_snippets_recipes_cook_time_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_cook_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_cook_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_cook_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_cook_time) {
             return $_seopress_pro_rich_snippets_recipes_cook_time;
         }
     }
     //Total Time
-    function seopress_rich_snippets_recipes_total_time_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_total_time_option($key_schema = 0)
+    {
         $seopress_pro_rich_snippets_recipes_total_time = seopress_rich_snippets_recipes_cook_time_option() + seopress_rich_snippets_recipes_prep_time_option();
 
         return $seopress_pro_rich_snippets_recipes_total_time;
     }
     //Calories
-    function seopress_rich_snippets_recipes_calories_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_calories_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_calories = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_calories', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_calories) {
             return $_seopress_pro_rich_snippets_recipes_calories;
         }
     }
     //Yield
-    function seopress_rich_snippets_recipes_yield_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_yield_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_yield = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_yield', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_yield) {
             return $_seopress_pro_rich_snippets_recipes_yield;
         }
     }
     //Keywords
-    function seopress_rich_snippets_recipes_keywords_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_keywords_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_keywords = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_keywords', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_keywords) {
             return $_seopress_pro_rich_snippets_recipes_keywords;
         }
     }
     //Recipe Cuisine
-    function seopress_rich_snippets_recipes_cuisine_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_cuisine_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_cuisine = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_cuisine', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_cuisine) {
             return $_seopress_pro_rich_snippets_recipes_cuisine;
         }
     }
     //Recipe Ingredients
-    function seopress_rich_snippets_recipes_ingredient_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_ingredient_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_ingredient = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_ingredient', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_ingredient) {
             return $_seopress_pro_rich_snippets_recipes_ingredient;
         }
     }
     //Recipe Instructions
-    function seopress_rich_snippets_recipes_instructions_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_instructions_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_recipes_instructions = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_recipes_instructions', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_recipes_instructions) {
             return $_seopress_pro_rich_snippets_recipes_instructions;
         }
     }
 
-    function seopress_rich_snippets_recipes_option($key_schema = 0) {
+    function seopress_rich_snippets_recipes_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 				  "@context": "' . seopress_check_ssl() . 'schema.org/",';
@@ -853,7 +910,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
         if ('' != seopress_rich_snippets_recipes_ingredient_option($key_schema)) {
             $recipes_ingredient = preg_split('/\r\n|[\r\n]/', seopress_rich_snippets_recipes_ingredient_option($key_schema));
-            if ( ! empty($recipes_ingredient)) {
+            if (! empty($recipes_ingredient)) {
                 $i     = '0';
                 $count = count($recipes_ingredient);
 
@@ -870,7 +927,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
         if ('' != seopress_rich_snippets_recipes_instructions_option($key_schema)) {
             $recipes_instructions = preg_split('/\r\n|[\r\n]/', seopress_rich_snippets_recipes_instructions_option($key_schema));
-            if ( ! empty($recipes_instructions)) {
+            if (! empty($recipes_instructions)) {
                 $i     = '0';
                 $count = count($recipes_instructions);
 
@@ -905,58 +962,66 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Jobs
     //=========================================================================================
     //Job title
-    function seopress_pro_rich_snippets_jobs_name_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_name) {
             return $_seopress_pro_rich_snippets_jobs_name;
         }
     }
     //Job description
-    function seopress_pro_rich_snippets_jobs_desc_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_desc_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_desc = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_desc', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_desc) {
             return $_seopress_pro_rich_snippets_jobs_desc;
         }
     }
     //Job date posted
-    function seopress_pro_rich_snippets_jobs_date_posted_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_date_posted_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_date_posted = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_date_posted', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_date_posted) {
             return $_seopress_pro_rich_snippets_jobs_date_posted;
         }
     }
     //Job valid through
-    function seopress_pro_rich_snippets_jobs_valid_through_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_valid_through_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_valid_through = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_valid_through', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_valid_through) {
             return $_seopress_pro_rich_snippets_jobs_valid_through;
         }
     }
     //Job employment type
-    function seopress_pro_rich_snippets_jobs_employment_type_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_employment_type_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_employment_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_employment_type', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_employment_type) {
             return $_seopress_pro_rich_snippets_jobs_employment_type;
         }
     }
     //Job ID name
-    function seopress_pro_rich_snippets_jobs_identifier_name_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_identifier_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_identifier_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_identifier_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_identifier_name) {
             return $_seopress_pro_rich_snippets_jobs_identifier_name;
         }
     }
     //Job ID value
-    function seopress_pro_rich_snippets_jobs_identifier_value_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_identifier_value_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_identifier_value = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_identifier_value', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_identifier_value) {
             return $_seopress_pro_rich_snippets_jobs_identifier_value;
         }
     }
     //Job hiring organization
-    function seopress_pro_rich_snippets_jobs_hiring_organization_default_name_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_organization_default_name_option($key_schema = 0)
+    {
         $seopress_local_business_img_option = get_option('seopress_social_option_name');
-        if ( ! empty($seopress_local_business_img_option)) {
+        if (! empty($seopress_local_business_img_option)) {
             foreach ($seopress_local_business_img_option as $key => $seopress_local_business_img_value) {
                 $options[$key] = $seopress_local_business_img_value;
             }
@@ -965,9 +1030,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
             }
         }
     }
-    function seopress_pro_rich_snippets_jobs_hiring_organization_default_logo_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_organization_default_logo_option($key_schema = 0)
+    {
         $seopress_local_business_img_option = get_option('seopress_social_option_name');
-        if ( ! empty($seopress_local_business_img_option)) {
+        if (! empty($seopress_local_business_img_option)) {
             foreach ($seopress_local_business_img_option as $key => $seopress_local_business_img_value) {
                 $options[$key] = $seopress_local_business_img_value;
             }
@@ -976,7 +1042,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
             }
         }
     }
-    function seopress_pro_rich_snippets_jobs_hiring_organization_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_organization_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_hiring_organization = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_hiring_organiz', $key_schema, true);
         if ('' != $_seopress_pro_rich_snippets_jobs_hiring_organization) {
             return $_seopress_pro_rich_snippets_jobs_hiring_organization;
@@ -985,7 +1052,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Job hiring same as
-    function seopress_pro_rich_snippets_jobs_hiring_same_as_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_same_as_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_hiring_same_as = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_hiring_same_as', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_hiring_same_as) {
             return $_seopress_pro_rich_snippets_jobs_hiring_same_as;
@@ -994,7 +1062,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Job hiring logo
-    function seopress_pro_rich_snippets_jobs_hiring_logo_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_logo_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_hiring_logo = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_hiring_logo', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_hiring_logo) {
             return $_seopress_pro_rich_snippets_jobs_hiring_logo;
@@ -1003,84 +1072,96 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Job hiring logo width
-    function seopress_pro_rich_snippets_jobs_hiring_logo_width_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_logo_width_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_hiring_logo_width = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_hiring_logo_width', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_hiring_logo_width) {
             return $_seopress_pro_rich_snippets_jobs_hiring_logo_width;
         }
     }
     //Job hiring logo height
-    function seopress_pro_rich_snippets_jobs_hiring_logo_height_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_hiring_logo_height_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_hiring_logo_height = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_hiring_logo_height', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_hiring_logo_height) {
             return $_seopress_pro_rich_snippets_jobs_hiring_logo_height;
         }
     }
     //Job street address
-    function seopress_pro_rich_snippets_jobs_address_street_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_address_street_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_address_street = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_address_street', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_address_street) {
             return $_seopress_pro_rich_snippets_jobs_address_street;
         }
     }
     //Job address locality
-    function seopress_pro_rich_snippets_jobs_address_locality_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_address_locality_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_address_locality = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_address_locality', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_address_locality) {
             return ', ' . $_seopress_pro_rich_snippets_jobs_address_locality;
         }
     }
     //Job address region
-    function seopress_pro_rich_snippets_jobs_address_region_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_address_region_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_address_region = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_address_region', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_address_region) {
             return $_seopress_pro_rich_snippets_jobs_address_region;
         }
     }
     //Job postal code
-    function seopress_pro_rich_snippets_jobs_postal_code_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_postal_code_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_postal_code = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_postal_code', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_postal_code) {
             return $_seopress_pro_rich_snippets_jobs_postal_code;
         }
     }
     //Job country
-    function seopress_pro_rich_snippets_jobs_country_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_country_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_country = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_country', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_country) {
             return $_seopress_pro_rich_snippets_jobs_country;
         }
     }
     //Job remote
-    function seopress_pro_rich_snippets_jobs_remote_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_remote_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_remote = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_remote', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_remote) {
             return $_seopress_pro_rich_snippets_jobs_remote;
         }
     }
     //Job salary
-    function seopress_pro_rich_snippets_jobs_salary_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_salary_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_salary = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_salary', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_salary) {
             return $_seopress_pro_rich_snippets_jobs_salary;
         }
     }
     //Job salary currency
-    function seopress_pro_rich_snippets_jobs_salary_currency_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_salary_currency_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_salary_currency = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_salary_currency', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_salary_currency) {
             return $_seopress_pro_rich_snippets_jobs_salary_currency;
         }
     }
     //Job salary unit
-    function seopress_pro_rich_snippets_jobs_salary_unit_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_jobs_salary_unit_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_jobs_salary_unit = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_jobs_salary_unit', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_jobs_salary_unit) {
             return $_seopress_pro_rich_snippets_jobs_salary_unit;
         }
     }
 
-    function seopress_rich_snippets_jobs_option($key_schema = 0) {
+    function seopress_rich_snippets_jobs_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 				  "@context": "' . seopress_check_ssl() . 'schema.org/",';
@@ -1167,7 +1248,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Videos
     //=========================================================================================
     //Video name
-    function seopress_rich_snippets_videos_name_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_name) {
             return $_seopress_pro_rich_snippets_videos_name;
@@ -1176,7 +1258,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Description
-    function seopress_rich_snippets_videos_desc_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_desc_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_description = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_description', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_description) {
             return $_seopress_pro_rich_snippets_videos_description;
@@ -1185,28 +1268,32 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Thumbnail
-    function seopress_rich_snippets_videos_img_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_img) {
             return $_seopress_pro_rich_snippets_videos_img;
         }
     }
     //Thumbnail width
-    function seopress_rich_snippets_videos_img_width_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_img_width_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_img_width = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_img_width', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_img_width) {
             return $_seopress_pro_rich_snippets_videos_img_width;
         }
     }
     //Thumbnail Height
-    function seopress_rich_snippets_videos_img_height_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_img_height_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_img_height = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_img_height', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_img_height) {
             return $_seopress_pro_rich_snippets_videos_img_height;
         }
     }
     //Duration
-    function seopress_rich_snippets_videos_duration_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_duration_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_duration = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_duration', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_duration) {
             $time   = explode(':', $_seopress_pro_rich_snippets_videos_duration);
@@ -1217,16 +1304,18 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //URL
-    function seopress_rich_snippets_videos_url_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_url_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_videos_url = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_videos_url', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_videos_url) {
             return $_seopress_pro_rich_snippets_videos_url;
         }
     }
     //Publisher name
-    function seopress_rich_snippets_videos_publisher_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_publisher_option($key_schema = 0)
+    {
         $seopress_rich_snippets_videos_publisher_option = get_option('seopress_social_option_name');
-        if ( ! empty($seopress_rich_snippets_videos_publisher_option)) {
+        if (! empty($seopress_rich_snippets_videos_publisher_option)) {
             foreach ($seopress_rich_snippets_videos_publisher_option as $key => $seopress_rich_snippets_videos_publisher_value) {
                 $options[$key] = $seopress_rich_snippets_videos_publisher_value;
             }
@@ -1236,9 +1325,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Publisher Logo
-    function seopress_rich_snippets_videos_publisher_logo_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_publisher_logo_option($key_schema = 0)
+    {
         $seopress_local_business_img_option = get_option('seopress_social_option_name');
-        if ( ! empty($seopress_local_business_img_option)) {
+        if (! empty($seopress_local_business_img_option)) {
             foreach ($seopress_local_business_img_option as $key => $seopress_local_business_img_value) {
                 $options[$key] = $seopress_local_business_img_value;
             }
@@ -1248,7 +1338,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
 
-    function seopress_rich_snippets_videos_option($key_schema = 0) {
+    function seopress_rich_snippets_videos_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 				"@context": "' . seopress_check_ssl() . 'schema.org",
@@ -1295,14 +1386,16 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Events
     //=========================================================================================
     //Event type
-    function seopress_rich_snippets_events_type_option($key_schema = 0) {
+    function seopress_rich_snippets_events_type_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_type', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_type) {
             return $_seopress_pro_rich_snippets_events_type;
         }
     }
     //Event name
-    function seopress_rich_snippets_events_name_option($key_schema = 0) {
+    function seopress_rich_snippets_events_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_name) {
             return $_seopress_pro_rich_snippets_events_name;
@@ -1311,7 +1404,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Event Description
-    function seopress_rich_snippets_events_description_option($key_schema = 0) {
+    function seopress_rich_snippets_events_description_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_description = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_desc', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_description) {
             return $_seopress_pro_rich_snippets_events_description;
@@ -1320,28 +1414,32 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Event Thumbnail
-    function seopress_rich_snippets_events_img_option($key_schema = 0) {
+    function seopress_rich_snippets_events_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_img) {
             return $_seopress_pro_rich_snippets_events_img;
         }
     }
     //Start Date
-    function seopress_rich_snippets_events_start_date_option($key_schema = 0) {
+    function seopress_rich_snippets_events_start_date_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_start_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_start_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_start_date) {
             return $_seopress_pro_rich_snippets_events_start_date;
         }
     }
     //Start time
-    function seopress_rich_snippets_events_start_time_option($key_schema = 0) {
+    function seopress_rich_snippets_events_start_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_start_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_start_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_start_time) {
             return $_seopress_pro_rich_snippets_events_start_time;
         }
     }
     //Start time + Start date
-    function seopress_rich_snippets_events_date_time_start_option($key_schema = 0) {
+    function seopress_rich_snippets_events_date_time_start_option($key_schema = 0)
+    {
         if ('' != seopress_rich_snippets_events_start_date_option() && '' != seopress_rich_snippets_events_start_time_option()) {
             return seopress_rich_snippets_events_start_date_option() . 'T' . seopress_rich_snippets_events_start_time_option();
         } else {
@@ -1349,21 +1447,24 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //End Date
-    function seopress_rich_snippets_events_end_date_option($key_schema = 0) {
+    function seopress_rich_snippets_events_end_date_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_end_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_end_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_end_date) {
             return $_seopress_pro_rich_snippets_events_end_date;
         }
     }
     //End time
-    function seopress_rich_snippets_events_end_time_option($key_schema = 0) {
+    function seopress_rich_snippets_events_end_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_end_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_end_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_end_time) {
             return $_seopress_pro_rich_snippets_events_end_time;
         }
     }
     //End time + End date
-    function seopress_rich_snippets_events_date_time_end_option($key_schema = 0) {
+    function seopress_rich_snippets_events_date_time_end_option($key_schema = 0)
+    {
         if ('' != seopress_rich_snippets_events_end_date_option() && '' != seopress_rich_snippets_events_end_time_option()) {
             return seopress_rich_snippets_events_end_date_option() . 'T' . seopress_rich_snippets_events_end_time_option();
         } else {
@@ -1371,21 +1472,24 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Previous start date
-    function seopress_rich_snippets_events_previous_start_date_option($key_schema = 0) {
+    function seopress_rich_snippets_events_previous_start_date_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_previous_start_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_previous_start_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_previous_start_date) {
             return $_seopress_pro_rich_snippets_events_previous_start_date;
         }
     }
     //Previous Start time
-    function seopress_rich_snippets_events_previous_start_time_option($key_schema = 0) {
+    function seopress_rich_snippets_events_previous_start_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_previous_start_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_previous_start_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_previous_start_time) {
             return $_seopress_pro_rich_snippets_events_previous_start_time;
         }
     }
     //Previous start time + Start date
-    function seopress_rich_snippets_events_previous_date_time_start_option($key_schema = 0) {
+    function seopress_rich_snippets_events_previous_date_time_start_option($key_schema = 0)
+    {
         if ('' != seopress_rich_snippets_events_previous_start_date_option($key_schema) && '' != seopress_rich_snippets_events_previous_start_time_option($key_schema)) {
             return seopress_rich_snippets_events_previous_start_date_option($key_schema) . 'T' . seopress_rich_snippets_events_previous_start_time_option($key_schema);
         } else {
@@ -1393,77 +1497,88 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Location name
-    function seopress_rich_snippets_events_location_name_option($key_schema = 0) {
+    function seopress_rich_snippets_events_location_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_location_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_location_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_location_name) {
             return $_seopress_pro_rich_snippets_events_location_name;
         }
     }
     //Location URL
-    function seopress_rich_snippets_events_location_url_option($key_schema = 0) {
+    function seopress_rich_snippets_events_location_url_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_location_url = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_location_url', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_location_url) {
             return $_seopress_pro_rich_snippets_events_location_url;
         }
     }
     //Location Address
-    function seopress_rich_snippets_events_location_address_option($key_schema = 0) {
+    function seopress_rich_snippets_events_location_address_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_location_address = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_location_address', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_location_address) {
             return $_seopress_pro_rich_snippets_events_location_address;
         }
     }
     //Offer name
-    function seopress_rich_snippets_events_offers_name_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_name) {
             return $_seopress_pro_rich_snippets_events_offers_name;
         }
     }
     //Offer category
-    function seopress_rich_snippets_events_offers_cat_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_cat_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_cat = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_cat', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_cat) {
             return $_seopress_pro_rich_snippets_events_offers_cat;
         }
     }
     //Offer price
-    function seopress_rich_snippets_events_offers_price_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_price_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_price = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_price', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_price) {
             return $_seopress_pro_rich_snippets_events_offers_price;
         }
     }
     //Offer price currency
-    function seopress_rich_snippets_events_offers_price_currency_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_price_currency_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_price_currency = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_price_currency', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_price_currency) {
             return $_seopress_pro_rich_snippets_events_offers_price_currency;
         }
     }
     //Offer availability
-    function seopress_rich_snippets_events_offers_availability_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_availability_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_availability = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_availability', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_availability) {
             return $_seopress_pro_rich_snippets_events_offers_availability;
         }
     }
     //Offer ValidFrom Date
-    function seopress_rich_snippets_events_offers_valid_from_date_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_valid_from_date_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_valid_from_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_valid_from_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_valid_from_date) {
             return $_seopress_pro_rich_snippets_events_offers_valid_from_date;
         }
     }
     //Offer ValidFrom Time
-    function seopress_rich_snippets_events_offers_valid_from_time_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_valid_from_time_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_valid_from_time = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_valid_from_time', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_valid_from_time) {
             return $_seopress_pro_rich_snippets_events_offers_valid_from_time;
         }
     }
     //Offer ValidFrom Date+Time+Timezone
-    function seopress_rich_snippets_events_offers_valid_from($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_valid_from($key_schema = 0)
+    {
         if ('' != seopress_rich_snippets_events_offers_valid_from_date_option() && '' != seopress_rich_snippets_events_offers_valid_from_time_option()) {
             $date = seopress_rich_snippets_events_offers_valid_from_date_option() . 'T' . seopress_rich_snippets_events_offers_valid_from_time_option();
 
@@ -1477,35 +1592,40 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     }
 
     //Offer URL
-    function seopress_rich_snippets_events_offers_url_option($key_schema = 0) {
+    function seopress_rich_snippets_events_offers_url_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_offers_url = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_offers_url', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_offers_url) {
             return $_seopress_pro_rich_snippets_events_offers_url;
         }
     }
     //Performer name
-    function seopress_pro_rich_snippets_events_performer_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_events_performer_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_performer_option = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_performer', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_performer_option) {
             return $_seopress_pro_rich_snippets_events_performer_option;
         }
     }
     //Event status
-    function seopress_rich_snippets_events_status_option($key_schema = 0) {
+    function seopress_rich_snippets_events_status_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_status_option = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_status', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_status_option && 'none' != $_seopress_pro_rich_snippets_events_status_option) {
             return seopress_check_ssl() . 'schema.org/' . $_seopress_pro_rich_snippets_events_status_option;
         }
     }
     //Event attendance mode
-    function seopress_rich_snippets_events_attendance_mode_option($key_schema = 0) {
+    function seopress_rich_snippets_events_attendance_mode_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_events_attendance_mode_option = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_events_attendance_mode', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_events_attendance_mode_option) {
             return $_seopress_pro_rich_snippets_events_attendance_mode_option;
         }
     }
 
-    function seopress_rich_snippets_events_option($key_schema = 0) {
+    function seopress_rich_snippets_events_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 				"@context": "' . seopress_check_ssl() . 'schema.org",';
@@ -1542,6 +1662,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
                         ||
                         ('MixedEventAttendanceMode' == seopress_rich_snippets_events_attendance_mode_option($key_schema) && '' != seopress_rich_snippets_events_location_url_option($key_schema))
                     ) {
+                $html .= '"eventAttendanceMode": ' . json_encode(seopress_rich_snippets_events_attendance_mode_option($key_schema)) . ',';
+            } else {
                 $html .= '"eventAttendanceMode": ' . json_encode(seopress_rich_snippets_events_attendance_mode_option($key_schema)) . ',';
             }
         }
@@ -1621,7 +1743,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     global $product;
 
     //Product name
-    function seopress_rich_snippets_product_name_option($key_schema = 0) {
+    function seopress_rich_snippets_product_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_name) {
             return $_seopress_pro_rich_snippets_product_name;
@@ -1630,7 +1753,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Description
-    function seopress_rich_snippets_product_description_option($key_schema = 0) {
+    function seopress_rich_snippets_product_description_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_description = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_description', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_description) {
             return $_seopress_pro_rich_snippets_product_description;
@@ -1639,7 +1763,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Img
-    function seopress_rich_snippets_product_img_option($key_schema = 0) {
+    function seopress_rich_snippets_product_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_img) {
             return $_seopress_pro_rich_snippets_product_img;
@@ -1648,7 +1773,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Price
-    function seopress_rich_snippets_product_price_option($product, $key_schema = 0) {
+    function seopress_rich_snippets_product_price_option($product, $key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_price = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_price', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_price) {
             return $_seopress_pro_rich_snippets_product_price;
@@ -1657,7 +1783,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Price valid until
-    function seopress_pro_rich_snippets_product_price_valid_date_option($product, $key_schema = 0) {
+    function seopress_pro_rich_snippets_product_price_valid_date_option($product, $key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_price_valid_date = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_price_valid_date', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_price_valid_date) {
             return $_seopress_pro_rich_snippets_product_price_valid_date;
@@ -1668,7 +1795,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //SKU
-    function seopress_rich_snippets_product_sku_option($product, $key_schema = 0) {
+    function seopress_rich_snippets_product_sku_option($product, $key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_sku = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_sku', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_sku) {
             return $_seopress_pro_rich_snippets_product_sku;
@@ -1677,39 +1805,44 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Product Brand
-    function seopress_rich_snippets_product_brand_option($key_schema = 0) {
+    function seopress_rich_snippets_product_brand_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_brand = '';
         $_seopress_pro_rich_snippets_product_brand = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_brand', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_brand) {
             $term_list = wp_get_post_terms(get_the_ID(), $_seopress_pro_rich_snippets_product_brand, ['fields' => 'names']);
-            if ( ! empty($term_list) && ! is_wp_error($term_list)) {
+            if (! empty($term_list) && ! is_wp_error($term_list)) {
                 return $term_list[0];
             }
         }
     }
     //gtin8 | gtin13 | gtin14 | mpn | isbn
-    function seopress_rich_snippets_product_global_ids_option($key_schema = 0) {
+    function seopress_rich_snippets_product_global_ids_option($key_schema = 0)
+    {
         $_seopress_rich_snippets_product_global_ids = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_global_ids', $key_schema);
         if ('' != $_seopress_rich_snippets_product_global_ids) {
             return $_seopress_rich_snippets_product_global_ids;
         }
     }
     //global identifiers value
-    function seopress_rich_snippets_product_global_ids_value_option($key_schema = 0) {
+    function seopress_rich_snippets_product_global_ids_value_option($key_schema = 0)
+    {
         $_seopress_rich_snippets_product_global_ids_value = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_global_ids_value', $key_schema);
         if ('' != $_seopress_rich_snippets_product_global_ids_value) {
             return $_seopress_rich_snippets_product_global_ids_value;
         }
     }
     //Price currency
-    function seopress_rich_snippets_product_price_currency_option($key_schema = 0) {
+    function seopress_rich_snippets_product_price_currency_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_price_currency = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_price_currency', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_price_currency) {
             return $_seopress_pro_rich_snippets_product_price_currency;
         }
     }
     //Item Condition
-    function seopress_rich_snippets_product_condition_option($key_schema = 0) {
+    function seopress_rich_snippets_product_condition_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_condition = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_condition', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_condition) {
             return seopress_check_ssl() . 'schema.org/' . $_seopress_pro_rich_snippets_product_condition;
@@ -1718,14 +1851,16 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Availability
-    function seopress_rich_snippets_product_availability_option($key_schema = 0) {
+    function seopress_rich_snippets_product_availability_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_product_availability = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_product_availability', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_product_availability) {
             return seopress_check_ssl() . 'schema.org/' . $_seopress_pro_rich_snippets_product_availability;
         }
     }
 
-    function seopress_rich_snippets_product_option($product, $key_schema = 0) {
+    function seopress_rich_snippets_product_option($product, $key_schema = 0)
+    {
         //Init
         global $product;
 
@@ -1771,7 +1906,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
             $comments = get_comments($args);
 
-            if ( ! empty($comments)) {
+            if (! empty($comments)) {
                 $html .= '"review": {
 						"@type": "Review",
 						"reviewRating": {
@@ -1820,7 +1955,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //=========================================================================================
 
     //Service name
-    function seopress_rich_snippets_service_name_option($key_schema = 0) {
+    function seopress_rich_snippets_service_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_name) {
             return $_seopress_pro_rich_snippets_service_name;
@@ -1829,14 +1965,16 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Service type
-    function seopress_rich_snippets_service_type_option($key_schema = 0) {
+    function seopress_rich_snippets_service_type_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_type', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_type) {
             return $_seopress_pro_rich_snippets_service_type;
         }
     }
     //Service description
-    function seopress_rich_snippets_service_description_option($key_schema = 0) {
+    function seopress_rich_snippets_service_description_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_description = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_description', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_description) {
             return $_seopress_pro_rich_snippets_service_description;
@@ -1845,7 +1983,8 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Img
-    function seopress_rich_snippets_service_img_option($key_schema = 0) {
+    function seopress_rich_snippets_service_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_img) {
             return $_seopress_pro_rich_snippets_service_img;
@@ -1854,112 +1993,128 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
     //Area served
-    function seopress_rich_snippets_service_area_served_option($key_schema = 0) {
+    function seopress_rich_snippets_service_area_served_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_area = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_area', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_area) {
             return $_seopress_pro_rich_snippets_service_area;
         }
     }
     //Provider name
-    function seopress_rich_snippets_service_provider_name_option($key_schema = 0) {
+    function seopress_rich_snippets_service_provider_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_provider_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_provider_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_provider_name) {
             return $_seopress_pro_rich_snippets_service_provider_name;
         }
     }
     //Location img
-    function seopress_rich_snippets_service_lb_img_option($key_schema = 0) {
+    function seopress_rich_snippets_service_lb_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_lb_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_lb_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_lb_img) {
             return $_seopress_pro_rich_snippets_service_lb_img;
         }
     }
     //Provider mobility
-    function seopress_rich_snippets_service_provider_mobility_option($key_schema = 0) {
+    function seopress_rich_snippets_service_provider_mobility_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_provider_mobility = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_provider_mobility', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_provider_mobility) {
             return $_seopress_pro_rich_snippets_service_provider_mobility;
         }
     }
     //Slogan
-    function seopress_rich_snippets_service_slogan_option($key_schema = 0) {
+    function seopress_rich_snippets_service_slogan_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_slogan = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_slogan', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_slogan) {
             return $_seopress_pro_rich_snippets_service_slogan;
         }
     }
     //Street addr
-    function seopress_rich_snippets_service_street_addr_option($key_schema = 0) {
+    function seopress_rich_snippets_service_street_addr_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_street_addr = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_street_addr', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_street_addr) {
             return $_seopress_pro_rich_snippets_service_street_addr;
         }
     }
     //City
-    function seopress_rich_snippets_service_city_option($key_schema = 0) {
+    function seopress_rich_snippets_service_city_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_city = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_city', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_city) {
             return $_seopress_pro_rich_snippets_service_city;
         }
     }
     //State
-    function seopress_rich_snippets_service_state_option($key_schema = 0) {
+    function seopress_rich_snippets_service_state_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_state = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_state', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_state) {
             return $_seopress_pro_rich_snippets_service_state;
         }
     }
     //PC
-    function seopress_rich_snippets_service_pc_option($key_schema = 0) {
+    function seopress_rich_snippets_service_pc_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_pc = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_pc', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_pc) {
             return $_seopress_pro_rich_snippets_service_pc;
         }
     }
     //Country
-    function seopress_rich_snippets_service_country_option($key_schema = 0) {
+    function seopress_rich_snippets_service_country_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_country = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_country', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_country) {
             return $_seopress_pro_rich_snippets_service_country;
         }
     }
     //Lat
-    function seopress_rich_snippets_service_lat_option($key_schema = 0) {
+    function seopress_rich_snippets_service_lat_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_lat = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_lat', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_lat) {
             return $_seopress_pro_rich_snippets_service_lat;
         }
     }
     //Lon
-    function seopress_rich_snippets_service_lon_option($key_schema = 0) {
+    function seopress_rich_snippets_service_lon_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_lon = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_lon', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_lon) {
             return $_seopress_pro_rich_snippets_service_lon;
         }
     }
     //Provider name
-    function seopress_pro_rich_snippets_service_provider_name_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_service_provider_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_provider_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_provider_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_provider_name) {
             return $_seopress_pro_rich_snippets_service_provider_name;
         }
     }
     //Tel
-    function seopress_rich_snippets_service_tel_option($key_schema = 0) {
+    function seopress_rich_snippets_service_tel_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_tel = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_tel', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_tel) {
             return $_seopress_pro_rich_snippets_service_tel;
         }
     }
     //Price
-    function seopress_rich_snippets_service_price_option($key_schema = 0) {
+    function seopress_rich_snippets_service_price_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_service_price = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_service_price', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_service_price) {
             return $_seopress_pro_rich_snippets_service_price;
         }
     }
 
-    function seopress_rich_snippets_service_option($key_schema = 0) {
+    function seopress_rich_snippets_service_option($key_schema = 0)
+    {
         //Init
         global $product;
 
@@ -1967,6 +2122,9 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         $html .= '{
 			"@context": "' . seopress_check_ssl() . 'schema.org/",
 			"@type": "Service",';
+        if ('' != seopress_rich_snippets_articles_canonical_option($key_schema)) {
+            $html .= '"@id": ' . json_encode(seopress_rich_snippets_articles_canonical_option($key_schema)) . ',';
+        }
         if ('' != seopress_rich_snippets_service_name_option($key_schema)) {
             $html .= '"name": ' . json_encode(seopress_rich_snippets_service_name_option($key_schema)) . ',';
         }
@@ -2061,7 +2219,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
             $comments = get_comments($args);
 
-            if ( ! empty($comments)) {
+            if (! empty($comments)) {
                 $html .= '"review": {
 						"@type": "Review",
 						"reviewRating": {
@@ -2098,49 +2256,56 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //=========================================================================================
 
     //Software name
-    function seopress_rich_snippets_softwareapp_name_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_name_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_softwareapp_name = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_softwareapp_name', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_softwareapp_name) {
             return $_seopress_pro_rich_snippets_softwareapp_name;
         }
     }
     //OS
-    function seopress_rich_snippets_softwareapp_os_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_os_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_softwareapp_os = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_softwareapp_os', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_softwareapp_os) {
             return $_seopress_pro_rich_snippets_softwareapp_os;
         }
     }
     //Category
-    function seopress_rich_snippets_softwareapp_cat_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_cat_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_softwareapp_cat = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_softwareapp_cat', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_softwareapp_cat) {
             return $_seopress_pro_rich_snippets_softwareapp_cat;
         }
     }
     //Price
-    function seopress_rich_snippets_softwareapp_price_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_price_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_softwareapp_price = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_softwareapp_price', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_softwareapp_price) {
             return $_seopress_pro_rich_snippets_softwareapp_price;
         }
     }
     //Currency
-    function seopress_rich_snippets_softwareapp_currency_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_currency_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_softwareapp_currency = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_softwareapp_currency', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_softwareapp_currency) {
             return $_seopress_pro_rich_snippets_softwareapp_currency;
         }
     }
     //Rating
-    function seopress_rich_snippets_softwareapp_rating_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_rating_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_softwareapp_rating = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_softwareapp_rating', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_softwareapp_rating) {
             return $_seopress_pro_rich_snippets_softwareapp_rating;
         }
     }
 
-    function seopress_rich_snippets_softwareapp_option($key_schema = 0) {
+    function seopress_rich_snippets_softwareapp_option($key_schema = 0)
+    {
         $html = '<script type="application/ld+json">';
         $html .= '{
 			"@context": "' . seopress_check_ssl() . 'schema.org/",
@@ -2188,35 +2353,48 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //=========================================================================================
 
     //Review item name
-    function seopress_pro_rich_snippets_review_item_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_review_item_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_review_item = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_review_item', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_review_item) {
             return $_seopress_pro_rich_snippets_review_item;
         }
     }
     //Review item type
-    function seopress_pro_rich_snippets_review_item_type_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_review_item_type_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_review_item_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_review_item_type', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_review_item_type) {
             return $_seopress_pro_rich_snippets_review_item_type;
         }
     }
     //Review item img
-    function seopress_pro_rich_snippets_review_img_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_review_img_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_review_img = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_review_img', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_review_img) {
             return $_seopress_pro_rich_snippets_review_img;
         }
     }
     //Review rating
-    function seopress_pro_rich_snippets_review_rating_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_review_rating_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_review_rating = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_review_rating', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_review_rating) {
             return $_seopress_pro_rich_snippets_review_rating;
         }
     }
+    //Review max rating
+    function seopress_pro_rich_snippets_review_max_rating_option($key_schema = 0)
+    {
+        $_seopress_pro_rich_snippets_review_max_rating = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_review_max_rating', $key_schema);
+        if ('' != $_seopress_pro_rich_snippets_review_max_rating) {
+            return $_seopress_pro_rich_snippets_review_max_rating;
+        }
+    }
 
-    function seopress_rich_snippets_review_option($key_schema = 0) {
+    function seopress_rich_snippets_review_option($key_schema = 0)
+    {
         if (seopress_pro_rich_snippets_review_item_type_option($key_schema)) {
             $type = seopress_pro_rich_snippets_review_item_type_option($key_schema);
         } else {
@@ -2260,14 +2438,16 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     //Custom schema
     //=========================================================================================
     //Custom
-    function seopress_pro_rich_snippets_custom_option($key_schema = 0) {
+    function seopress_pro_rich_snippets_custom_option($key_schema = 0)
+    {
         $_seopress_pro_rich_snippets_custom = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_custom', $key_schema);
         if ('' != $_seopress_pro_rich_snippets_custom) {
             return $_seopress_pro_rich_snippets_custom;
         }
     }
 
-    function seopress_rich_snippets_custom_option($key_schema = 0) {
+    function seopress_rich_snippets_custom_option($key_schema = 0)
+    {
         $html = '';
         if (seopress_pro_rich_snippets_custom_option($key_schema)) {
             $variables = null;
@@ -2300,7 +2480,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
             preg_match_all('/%%_cf_(.*?)%%/', $custom, $matches); //custom fields
 
-            if ( ! empty($matches)) {
+            if (! empty($matches)) {
                 $seopress_titles_cf_template_variables_array = [];
                 $seopress_titles_cf_template_replace_array   = [];
 
@@ -2315,7 +2495,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
             preg_match_all('/%%_ct_(.*?)%%/', $custom, $matches2); //custom terms taxonomy
 
-            if ( ! empty($matches2)) {
+            if (! empty($matches2)) {
                 $seopress_titles_ct_template_variables_array = [];
                 $seopress_titles_ct_template_replace_array   = [];
 
@@ -2325,7 +2505,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
                 foreach ($matches2['1'] as $key => $value) {
                     $term = wp_get_post_terms($post->ID, $value);
-                    if ( ! is_wp_error($term)) {
+                    if (! is_wp_error($term)) {
                         $seopress_titles_ct_template_replace_array[] = esc_attr($term[0]->name);
                     }
                 }
@@ -2335,12 +2515,12 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
             $custom = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $custom);
 
             //Custom fields
-            if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
+            if (! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
                 $custom = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $custom);
             }
 
             //Custom terms taxonomy
-            if ( ! empty($matches2) && ! empty($seopress_titles_ct_template_variables_array) && ! empty($seopress_titles_ct_template_replace_array)) {
+            if (! empty($matches2) && ! empty($seopress_titles_ct_template_variables_array) && ! empty($seopress_titles_ct_template_replace_array)) {
                 $custom = str_replace($seopress_titles_ct_template_variables_array, $seopress_titles_ct_template_replace_array, $custom);
             }
 
@@ -2358,9 +2538,10 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
 
     //=========================================================================================
     //SiteNavigationElement?
-    function seopress_rich_snippets_site_nav_option() {
+    function seopress_rich_snippets_site_nav_option()
+    {
         $seopress_rich_snippets_site_nav_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_rich_snippets_site_nav_option)) {
+        if (! empty($seopress_rich_snippets_site_nav_option)) {
             foreach ($seopress_rich_snippets_site_nav_option as $key => $seopress_rich_snippets_site_nav_value) {
                 $options[$key] = $seopress_rich_snippets_site_nav_value;
             }
@@ -2370,11 +2551,12 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
         }
     }
 
-    function seopress_rich_snippets_site_nav() {
+    function seopress_rich_snippets_site_nav()
+    {
         if (function_exists('wp_get_nav_menu_items')) {
             $menu_items = wp_get_nav_menu_items(seopress_rich_snippets_site_nav_option());
 
-            if ( ! empty($menu_items)) {
+            if (! empty($menu_items)) {
                 $html = '<script type="application/ld+json">';
                 $html .= '{
 					"@context": "' . seopress_check_ssl() . 'schema.org/",
@@ -2420,7 +2602,7 @@ if ('1' == seopress_rich_snippets_enable_option()) { //Is RS enable
     if (apply_filters('seopress_fallback_option_rich_snippets', false)) {
         $is_multidimensional = seopress_pro_rich_snippets_is_multidimensional(get_the_ID());
 
-        if ( ! $is_multidimensional) {
+        if (! $is_multidimensional) {
             $_seopress_pro_rich_snippets_type = seopress_get_pro_rich_snippets_by_key(get_the_ID(), '_seopress_pro_rich_snippets_type', 0);
 
             //Articles JSON-LD

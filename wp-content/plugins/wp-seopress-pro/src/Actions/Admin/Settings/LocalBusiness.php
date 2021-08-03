@@ -23,10 +23,6 @@ class LocalBusiness implements ExecuteHooksBackend {
      * @return void
      */
     public function init() {
-        if (apply_filters('seopress_pro_fallback_local_business_settings', false)) {
-            return;
-        }
-
         seopress_pro_get_service('SettingsSectionLocalBusiness')->renderSettings();
     }
 }

@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
     var mediaUploader;
-    $('.button.manual_img_library_global').click(function (e) {
+    $('input[type="button"].manual_img_library_global').click(function (e) {
         e.preventDefault();
 
         var url_field_id = $(this).attr('id');

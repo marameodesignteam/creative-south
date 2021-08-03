@@ -20,7 +20,7 @@ trait FieldPriceRange {
             value="<?php echo esc_html($value); ?>"
         />
 
-        <p class="description"><?php _e('<strong>Recommended</strong> property by Google.', 'wp-seopress-pro'); ?></p>
+        <p class="description"><?php _e('<span class="field-recommended">Recommended</span> property by Google.', 'wp-seopress-pro'); ?></p>
 
         <?php
     }

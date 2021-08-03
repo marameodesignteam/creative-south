@@ -231,23 +231,23 @@ jQuery(document).ready(function ($) {
             $(selector).text(
                 $(
                     ".box-schema-item[data-key='" +
-                        number +
-                        "'] .seopress_pro_rich_snippets_article_title_meta"
+                    number +
+                    "'] .seopress_pro_rich_snippets_article_title_meta"
                 ).val().length
             );
             if (
                 $(
                     ".box-schema-item[data-key='" +
-                        number +
-                        "'] .seopress_pro_rich_snippets_article_title_meta"
+                    number +
+                    "'] .seopress_pro_rich_snippets_article_title_meta"
                 ).val().length > 110
             ) {
                 $(selector).css("color", "red");
             }
             $(
                 ".box-schema-item[data-key='" +
-                    number +
-                    "'] .seopress_pro_rich_snippets_article_title_meta"
+                number +
+                "'] .seopress_pro_rich_snippets_article_title_meta"
             ).keyup(function (event) {
                 $(selector).css("color", "inherit");
                 if ($(this).val().length > 110) {
@@ -256,8 +256,8 @@ jQuery(document).ready(function ($) {
                 $(selector).text(
                     $(
                         ".box-schema-item[data-key='" +
-                            number +
-                            "'] .seopress_pro_rich_snippets_article_title_meta"
+                        number +
+                        "'] .seopress_pro_rich_snippets_article_title_meta"
                     ).val().length
                 );
                 if ($(this).val().length > 0) {
@@ -289,23 +289,23 @@ jQuery(document).ready(function ($) {
             $(selector).text(
                 $(
                     ".box-schema-item[data-key='" +
-                        number +
-                        "'] .seopress_pro_rich_snippets_courses_desc"
+                    number +
+                    "'] .seopress_pro_rich_snippets_courses_desc"
                 ).val().length
             );
             if (
                 $(
                     ".box-schema-item[data-key='" +
-                        number +
-                        "'] .seopress_pro_rich_snippets_courses_desc"
+                    number +
+                    "'] .seopress_pro_rich_snippets_courses_desc"
                 ).val().length > 60
             ) {
                 $(selector).css("color", "red");
             }
             $(
                 ".box-schema-item[data-key='" +
-                    number +
-                    "'] .seopress_pro_rich_snippets_courses_desc"
+                number +
+                "'] .seopress_pro_rich_snippets_courses_desc"
             ).keyup(function (event) {
                 $(selector).css("color", "inherit");
                 if ($(this).val().length > 60) {
@@ -314,8 +314,8 @@ jQuery(document).ready(function ($) {
                 $(selector).text(
                     $(
                         ".box-schema-item[data-key='" +
-                            number +
-                            "'] .seopress_pro_rich_snippets_courses_desc"
+                        number +
+                        "'] .seopress_pro_rich_snippets_courses_desc"
                     ).val().length
                 );
                 if ($(this).val().length > 0) {
@@ -424,6 +424,7 @@ jQuery(document).ready(function ($) {
         $(
             ".box-schema-item[data-key='" + number + "'] #wrap-faq .faq"
         ).accordion({
+            animate: false,
             collapsible: true,
             active: false,
             heightStyle: "panel",
@@ -557,6 +558,7 @@ jQuery(document).ready(function ($) {
         $(
             ".box-schema-item[data-key='" + number + "'] #wrap-how-to .step"
         ).accordion({
+            animate: false,
             collapsible: true,
             active: false,
             heightStyle: "panel",
@@ -574,8 +576,8 @@ jQuery(document).ready(function ($) {
         //How-to
         var template = $(
             ".box-schema-item[data-key='" +
-                number +
-                "'] #wrap-how-to .step:last"
+            number +
+            "'] #wrap-how-to .step:last"
         ).clone();
 
         //accordion
@@ -1011,420 +1013,420 @@ jQuery(document).ready(function ($) {
                 $(sc_ad).show();
                 $(
                     sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "articles") {
                 $(sc_a).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "localbusiness") {
                 $(sc_b).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "faq") {
                 $(sc_f).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "courses") {
                 $(sc_c).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "recipes") {
                 $(sc_r).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "jobs") {
                 $(sc_j).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "videos") {
                 $(sc_v).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "events") {
                 $(sc_e).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "products") {
                 $(sc_p).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "services") {
                 $(sc_s).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "softwareapp") {
                 $(sc_app).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        ", " +
-                        sc_s +
-                        ", " +
-                        sc_re +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    ", " +
+                    sc_s +
+                    ", " +
+                    sc_re +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "review") {
                 $(sc_re).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_cu
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_cu
                 ).hide();
             }
             if (seopress_rs_type == "custom") {
                 $(sc_cu).show();
                 $(
                     sc_ad +
-                        "," +
-                        sc_a +
-                        "," +
-                        sc_b +
-                        "," +
-                        sc_f +
-                        "," +
-                        sc_c +
-                        "," +
-                        sc_r +
-                        "," +
-                        sc_j +
-                        "," +
-                        sc_v +
-                        "," +
-                        sc_e +
-                        "," +
-                        sc_p +
-                        "," +
-                        sc_app +
-                        "," +
-                        sc_s +
-                        "," +
-                        sc_re
+                    "," +
+                    sc_a +
+                    "," +
+                    sc_b +
+                    "," +
+                    sc_f +
+                    "," +
+                    sc_c +
+                    "," +
+                    sc_r +
+                    "," +
+                    sc_j +
+                    "," +
+                    sc_v +
+                    "," +
+                    sc_e +
+                    "," +
+                    sc_p +
+                    "," +
+                    sc_app +
+                    "," +
+                    sc_s +
+                    "," +
+                    sc_re
                 ).hide();
             }
         }

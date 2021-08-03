@@ -17,6 +17,7 @@ class ComposerStaticInit2abef7b876df44453cb95fc8b54b1513
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
     );
 
@@ -48,6 +49,7 @@ class ComposerStaticInit2abef7b876df44453cb95fc8b54b1513
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Google\\Service\\' => 15,
             'Google\\Auth\\' => 12,
             'Google\\' => 7,
         ),
@@ -110,6 +112,10 @@ class ComposerStaticInit2abef7b876df44453cb95fc8b54b1513
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Google\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/apiclient-services/src',
+        ),
         'Google\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/auth/src',
@@ -121,16 +127,6 @@ class ComposerStaticInit2abef7b876df44453cb95fc8b54b1513
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'G' => 
-        array (
-            'Google_Service_' => 
-            array (
-                0 => __DIR__ . '/..' . '/google/apiclient-services/src',
-            ),
         ),
     );
 
@@ -172,7 +168,6 @@ class ComposerStaticInit2abef7b876df44453cb95fc8b54b1513
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2abef7b876df44453cb95fc8b54b1513::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2abef7b876df44453cb95fc8b54b1513::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit2abef7b876df44453cb95fc8b54b1513::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit2abef7b876df44453cb95fc8b54b1513::$classMap;
 
         }, null, ClassLoader::class);

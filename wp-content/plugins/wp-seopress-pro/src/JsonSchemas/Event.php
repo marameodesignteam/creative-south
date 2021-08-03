@@ -2,7 +2,7 @@
 
 namespace SEOPressPro\JsonSchemas;
 
-if ( ! defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
@@ -11,12 +11,14 @@ use SEOPress\JsonSchemas\Organization;
 use SEOPress\Models\GetJsonData;
 use SEOPressPro\Models\JsonSchemaValue;
 
-class Event extends JsonSchemaValue implements GetJsonData {
+class Event extends JsonSchemaValue implements GetJsonData
+{
     const NAME = 'event';
 
     const ALIAS = ['events'];
 
-    protected function getName() {
+    protected function getName()
+    {
         return self::NAME;
     }
 
@@ -25,7 +27,8 @@ class Event extends JsonSchemaValue implements GetJsonData {
      *
      * @return array
      */
-    protected function getKeysForSchemaManual() {
+    protected function getKeysForSchemaManual()
+    {
         return [
             'type'                          => '_seopress_pro_rich_snippets_type',
             'eventType'                     => '_seopress_pro_rich_snippets_events_type',
@@ -66,7 +69,8 @@ class Event extends JsonSchemaValue implements GetJsonData {
      * @param array $keys
      * @param array $data
      */
-    protected function getVariablesByKeysAndData($keys, $data = []) {
+    protected function getVariablesByKeysAndData($keys, $data = [])
+    {
         $variables = parent::getVariablesByKeysAndData($keys, $data);
 
         if (isset($variables['status']) && ! empty($variables['status'])) {
@@ -99,7 +103,8 @@ class Event extends JsonSchemaValue implements GetJsonData {
      *
      * @return array
      */
-    public function getJsonData($context = null) {
+    public function getJsonData($context = null)
+    {
         $data = $this->getArrayJson();
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::MANUAL;
@@ -111,7 +116,7 @@ class Event extends JsonSchemaValue implements GetJsonData {
         }
 
         if (isset($variables['attendanceMode']) && 'none' != $variables['attendanceMode']) {
-            if (in_array($variables['attendanceMode'], ['OnlineEventAttendanceMode', 'MixedEventAttendanceMode'], true)) {
+            if (in_array($variables['attendanceMode'], ['OnlineEventAttendanceMode', 'MixedEventAttendanceMode', 'OfflineEventAttendanceMode'], true)) {
                 $data['eventAttendanceMode'] = $variables['attendanceMode'];
             }
         }
@@ -173,7 +178,7 @@ class Event extends JsonSchemaValue implements GetJsonData {
             if (isset($variables['offersValidFromDate'], $variables['offersValidFromTime']) && ! empty($variables['offersValidFromDate']) && ! empty($variables['offersValidFromTime'])) {
                 $date      = sprintf('%sT%s', $variables['offersValidFromDate'], $variables['offersValidFromTime']);
                 $gmtOffset = get_option('gmt_offset');
-                if ( ! empty($gmtOffset)) {
+                if (! empty($gmtOffset)) {
                     $timezone = sprintf('%+d', $gmtOffset);
                     $date     = $date . $timezone . ':00';
                 }
@@ -228,7 +233,8 @@ class Event extends JsonSchemaValue implements GetJsonData {
      *
      * @return array
      */
-    public function cleanValues($data) {
+    public function cleanValues($data)
+    {
         if (isset($data['organizer']['contactPoint'])) {
             unset($data['organizer']['contactPoint']);
         }

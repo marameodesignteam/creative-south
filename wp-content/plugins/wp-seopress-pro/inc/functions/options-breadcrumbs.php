@@ -6,9 +6,10 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //Breadcrumbs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Breadcrumbs separator
-function seopress_breadcrumbs_separator_option() {
+function seopress_breadcrumbs_separator_option()
+{
     $seopress_breadcrumbs_separator_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_separator_option)) {
+    if (! empty($seopress_breadcrumbs_separator_option)) {
         foreach ($seopress_breadcrumbs_separator_option as $key => $seopress_breadcrumbs_separator_value) {
             $options[$key] = $seopress_breadcrumbs_separator_value;
         }
@@ -19,9 +20,10 @@ function seopress_breadcrumbs_separator_option() {
 }
 
 //i18n You are here
-function seopress_breadcrumbs_i18n_here_option() {
+function seopress_breadcrumbs_i18n_here_option()
+{
     $seopress_breadcrumbs_i18n_here_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_i18n_here_option)) {
+    if (! empty($seopress_breadcrumbs_i18n_here_option)) {
         foreach ($seopress_breadcrumbs_i18n_here_option as $key => $seopress_breadcrumbs_i18n_here_value) {
             $options[$key] = $seopress_breadcrumbs_i18n_here_value;
         }
@@ -32,9 +34,10 @@ function seopress_breadcrumbs_i18n_here_option() {
 }
 
 //i18n Homepage
-function seopress_breadcrumbs_i18n_home_option() {
+function seopress_breadcrumbs_i18n_home_option()
+{
     $seopress_breadcrumbs_i18n_home_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_i18n_home_option)) {
+    if (! empty($seopress_breadcrumbs_i18n_home_option)) {
         foreach ($seopress_breadcrumbs_i18n_home_option as $key => $seopress_breadcrumbs_i18n_home_value) {
             $options[$key] = $seopress_breadcrumbs_i18n_home_value;
         }
@@ -44,10 +47,25 @@ function seopress_breadcrumbs_i18n_home_option() {
     }
 }
 
+//i18n Author
+function seopress_breadcrumbs_i18n_author_option()
+{
+    $seopress_breadcrumbs_i18n_author_option = get_option('seopress_pro_option_name');
+    if (! empty($seopress_breadcrumbs_i18n_author_option)) {
+        foreach ($seopress_breadcrumbs_i18n_author_option as $key => $seopress_breadcrumbs_i18n_author_value) {
+            $options[$key] = $seopress_breadcrumbs_i18n_author_value;
+        }
+        if (isset($seopress_breadcrumbs_i18n_author_option['seopress_breadcrumbs_i18n_author'])) {
+            return $seopress_breadcrumbs_i18n_author_option['seopress_breadcrumbs_i18n_author'];
+        }
+    }
+}
+
 //i18n 404 error
-function seopress_breadcrumbs_i18n_404_option() {
+function seopress_breadcrumbs_i18n_404_option()
+{
     $seopress_breadcrumbs_i18n_404_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_i18n_404_option)) {
+    if (! empty($seopress_breadcrumbs_i18n_404_option)) {
         foreach ($seopress_breadcrumbs_i18n_404_option as $key => $seopress_breadcrumbs_i18n_404_value) {
             $options[$key] = $seopress_breadcrumbs_i18n_404_value;
         }
@@ -58,9 +76,10 @@ function seopress_breadcrumbs_i18n_404_option() {
 }
 
 //i18n Search results for
-function seopress_breadcrumbs_i18n_search_option() {
+function seopress_breadcrumbs_i18n_search_option()
+{
     $seopress_breadcrumbs_i18n_search_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_i18n_search_option)) {
+    if (! empty($seopress_breadcrumbs_i18n_search_option)) {
         foreach ($seopress_breadcrumbs_i18n_search_option as $key => $seopress_breadcrumbs_i18n_search_value) {
             $options[$key] = $seopress_breadcrumbs_i18n_search_value;
         }
@@ -71,9 +90,10 @@ function seopress_breadcrumbs_i18n_search_option() {
 }
 
 //i18n No results
-function seopress_breadcrumbs_i18n_no_results_option() {
+function seopress_breadcrumbs_i18n_no_results_option()
+{
     $seopress_breadcrumbs_i18n_no_results_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_i18n_no_results_option)) {
+    if (! empty($seopress_breadcrumbs_i18n_no_results_option)) {
         foreach ($seopress_breadcrumbs_i18n_no_results_option as $key => $seopress_breadcrumbs_i18n_no_results_value) {
             $options[$key] = $seopress_breadcrumbs_i18n_no_results_value;
         }
@@ -84,9 +104,10 @@ function seopress_breadcrumbs_i18n_no_results_option() {
 }
 
 //Breadcrumbs remove blog page
-function seopress_breadcrumbs_remove_blog_page_option() {
+function seopress_breadcrumbs_remove_blog_page_option()
+{
     $seopress_breadcrumbs_remove_blog_page_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_remove_blog_page_option)) {
+    if (! empty($seopress_breadcrumbs_remove_blog_page_option)) {
         foreach ($seopress_breadcrumbs_remove_blog_page_option as $key => $seopress_breadcrumbs_remove_blog_page_value) {
             $options[$key] = $seopress_breadcrumbs_remove_blog_page_value;
         }
@@ -97,9 +118,10 @@ function seopress_breadcrumbs_remove_blog_page_option() {
 }
 
 //Breadcrumbs remove shop page
-function seopress_breadcrumbs_remove_shop_page_option() {
+function seopress_breadcrumbs_remove_shop_page_option()
+{
     $seopress_breadcrumbs_remove_shop_page_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_remove_shop_page_option)) {
+    if (! empty($seopress_breadcrumbs_remove_shop_page_option)) {
         foreach ($seopress_breadcrumbs_remove_shop_page_option as $key => $seopress_breadcrumbs_remove_shop_page_value) {
             $options[$key] = $seopress_breadcrumbs_remove_shop_page_value;
         }
@@ -110,9 +132,10 @@ function seopress_breadcrumbs_remove_shop_page_option() {
 }
 
 //Breadcrumbs disable default separator
-function seopress_breadcrumbs_separator_disable_option() {
+function seopress_breadcrumbs_separator_disable_option()
+{
     $seopress_breadcrumbs_separator_disable_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_breadcrumbs_separator_disable_option)) {
+    if (! empty($seopress_breadcrumbs_separator_disable_option)) {
         foreach ($seopress_breadcrumbs_separator_disable_option as $key => $seopress_breadcrumbs_separator_disable_value) {
             $options[$key] = $seopress_breadcrumbs_separator_disable_value;
         }
@@ -123,7 +146,8 @@ function seopress_breadcrumbs_separator_disable_option() {
 }
 
 //Display Term archive link
-function seopress_breadcrumbs_term_link($post, $crumbs, $options) {
+function seopress_breadcrumbs_term_link($post, $crumbs, $options)
+{
     $cpt      = get_post_type($post);
     $taxonomy = isset($options['seopress_breadcrumbs_tax'][$cpt]['tax']) ? $options['seopress_breadcrumbs_tax'][$cpt]['tax'] : null;
 
@@ -133,7 +157,7 @@ function seopress_breadcrumbs_term_link($post, $crumbs, $options) {
 
             if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat) {
                 $tax    = get_term($_seopress_robots_primary_cat, $taxonomy);
-                if ( ! is_wp_error($tax) && $tax && isset($tax->term_id)) {
+                if (! is_wp_error($tax) && $tax && isset($tax->term_id)) {
                     $terms  = wp_get_post_terms($post->ID, $taxonomy, ['orderby' => 'parent', 'order' => 'DESC', 'child_of' => $tax->term_id]);
                     $parent = current($terms);
 
@@ -153,7 +177,7 @@ function seopress_breadcrumbs_term_link($post, $crumbs, $options) {
 
             $ancestors_crumb = array_reverse($ancestors_cat);
 
-            if ( ! empty($ancestors_crumb)) {
+            if (! empty($ancestors_crumb)) {
                 foreach ($ancestors_crumb as $key => $value) {
                     $term = get_term($value, $taxonomy);
                     $term = $term->name;
@@ -192,7 +216,8 @@ function seopress_breadcrumbs_term_link($post, $crumbs, $options) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_json_enable_option()) {
     //Inlince CSS in head
-    function seopress_breadcrumbs_inline_css() {
+    function seopress_breadcrumbs_inline_css()
+    {
         //Separator
         if ('' != seopress_breadcrumbs_separator_disable_option()) {
             $seopress_display_breadcrumbs_separator = null;
@@ -212,7 +237,8 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
     }
     add_action('wp_head', 'seopress_breadcrumbs_inline_css', 30);
 
-    function seopress_display_breadcrumbs($echo = true) {
+    function seopress_display_breadcrumbs($echo = true)
+    {
         $page_id = get_option('page_for_posts');
         /**i18n**/
         //Home
@@ -220,6 +246,12 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
             $i18n_home = seopress_breadcrumbs_i18n_home_option();
         } else {
             $i18n_home = __('Home', 'wp-seopress-pro');
+        }
+        //Author
+        if ('' != seopress_breadcrumbs_i18n_author_option()) {
+            $i18n_author = seopress_breadcrumbs_i18n_author_option();
+        } else {
+            $i18n_author = __('Author: ', 'wp-seopress-pro');
         }
         //404 error
         if ('' != seopress_breadcrumbs_i18n_404_option()) {
@@ -275,7 +307,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
         }
 
         //Single
-        if (is_single() && ( ! is_home() && ! is_front_page())) {
+        if (is_single() && (! is_home() && ! is_front_page())) {
             if (is_singular('tribe_events')) { //Events calendar
                 $queried_object = get_queried_object();
                 $post_type      = get_post_type_object('tribe_events');
@@ -413,7 +445,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
         }
 
         //Page
-        if (is_page() && ( ! is_home() && ! is_front_page())) {
+        if (is_page() && (! is_home() && ! is_front_page())) {
             if ($post->post_parent) { //If post has parent pages
                 $parent_id = $post->post_parent;
                 while ($parent_id) {
@@ -535,7 +567,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
             $author_name = get_userdata($author);
 
             $crumbs[] = [
-                0 => __('Author: ', 'wp-seopress-pro') . $author_name->display_name,
+                0 => $i18n_author . $author_name->display_name,
                 1 => get_author_posts_url($author_name->ID),
             ];
         }
@@ -671,7 +703,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
                 }
 
                 if ($last_key != $sep) {
-                    if ( ! empty($crumb[1])) {
+                    if (! empty($crumb[1])) {
                         $sp_breadcrumbs_html .= '<a itemscope itemtype="http://schema.org/WebPage" itemprop="item" itemid="' . $crumb[1] . '" href="' . $crumb[1] . '">';
                     }
                 }
@@ -679,7 +711,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
                 $sp_breadcrumbs_html .= '<span itemprop="name">' . $crumb[0] . '</span>';
 
                 if ($last_key != $sep) {
-                    if ( ! empty($crumb[1])) {
+                    if (! empty($crumb[1])) {
                         $sp_breadcrumbs_html .= '</a>';
                     }
                 }
@@ -717,7 +749,7 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
                     ];
 
                     //Check if URL is available
-                    if ( ! empty($crumb[1])) {
+                    if (! empty($crumb[1])) {
                         $sp_breadcrumbs_json['itemListElement'][$key]['item'] = $crumb[1];
                     }
                 }
@@ -746,7 +778,8 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
         }
     }
     //Shortcode
-    function seopress_shortcode_breadcrumbs() {
+    function seopress_shortcode_breadcrumbs()
+    {
         return seopress_display_breadcrumbs(false);
     }
     if ('1' == seopress_breadcrumbs_enable_option()) {
@@ -756,7 +789,8 @@ if ('1' == seopress_breadcrumbs_enable_option() || '1' == seopress_breadcrumbs_j
     //JSON-LD
     if ('1' == seopress_breadcrumbs_json_enable_option()) {
         add_action('wp_head', 'seopress_jsonld_breadcrumbs', 2);
-        function seopress_jsonld_breadcrumbs() {
+        function seopress_jsonld_breadcrumbs()
+        {
             echo seopress_display_breadcrumbs('json');
         }
     }

@@ -38,7 +38,7 @@ function seopress_notices_migrate_schema() {
         return;
     }
 
-    $class   = 'notice notice-info';
+    $class   = 'seopress-notice';
     $message = '<p><strong>' . __('Optimization of your database in progress!', 'wp-seopress-pro') . '</strong></p>';
 
     $message .= sprintf('<p>' . __('We migrate a total of %s items.', 'wp-seopress-pro') . '</p>', get_option('_seopress_migrate_schema_total'));
@@ -79,12 +79,12 @@ function seopress_notice_finish_clean_database() {
     $total   = get_option('_seopress_migrate_schema_total');
 
     if (false !== get_option('_seopress_can_clean_migrate_schema') || (false !== $current && $current >= $total)) {
-        $class   = 'notice notice-info';
+        $class   = 'seopress-notice';
         $message = '<p><strong>' . __('We have finished optimizing your database.', 'wp-seopress-pro') . '</strong></p>';
         $message .= sprintf('<p>' . __('As a security measure, we still have your old data so that we can go back if you find an error.', 'wp-seopress-pro') . '</p>', get_option('_seopress_migrate_schema_total'));
         $message .= sprintf('<p>' . __('In which case, you can also delete this old information by clicking on the following button to complete the optimization.', 'wp-seopress-pro') . '</p>');
 
-        $message .= sprintf('<p><a href="%s" class="button button-primary">' . __('Clean database', 'wp-seopress-pro') . '</a></p>', wp_nonce_url(
+        $message .= sprintf('<p><a href="%s" class="btn btnPrimary">' . __('Clean database', 'wp-seopress-pro') . '</a></p>', wp_nonce_url(
             add_query_arg(
             [
                 'action' => 'clean_old_schema_manual',

@@ -29,6 +29,7 @@ class Review extends JsonSchemaValue implements GetJsonData {
             'itemType'     => '_seopress_pro_rich_snippets_review_item_type',
             'image'        => '_seopress_pro_rich_snippets_review_img',
             'ratingValue'  => '_seopress_pro_rich_snippets_review_rating',
+            'bestRating'   => '_seopress_pro_rich_snippets_review_max_rating',
             'reviewBody'   => '_seopress_pro_rich_snippets_review_body',
         ];
     }
@@ -90,6 +91,8 @@ class Review extends JsonSchemaValue implements GetJsonData {
             $contextWithVariables              = $context;
             $contextWithVariables['variables'] = [
                 'ratingValue'  => $variables['ratingValue'],
+                'bestRating'  => $variables['bestRating'],
+                'worstRating'  => empty($variables['bestRating']) ? '' : 1
             ];
             $contextWithVariables['type']      = RichSnippetType::SUB_TYPE;
             $schema                            = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(Rating::NAME, $contextWithVariables, ['remove_empty'=> true]);

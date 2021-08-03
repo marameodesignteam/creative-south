@@ -3,7 +3,7 @@
 Plugin Name: SEOPress PRO
 Plugin URI: https://www.seopress.org/seopress-pro/
 Description: The PRO version of SEOPress. SEOPress required (free).
-Version: 4.7.0
+Version: 5.0.2
 Author: SEOPress
 Author URI: https://www.seopress.org/seopress-pro/
 License: GPLv2
@@ -151,13 +151,15 @@ function seopress_pro_uninstall() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_PRO_VERSION', '4.7.0');
+define('SEOPRESS_PRO_VERSION', '5.0.2');
 define('SEOPRESS_PRO_AUTHOR', 'Benjamin Denis');
 define('STORE_URL_SEOPRESS', 'https://www.seopress.org');
 define('ITEM_ID_SEOPRESS', 113);
 define('ITEM_NAME_SEOPRESS', 'SEOPress PRO');
 define('SEOPRESS_LICENSE_PAGE', 'seopress-license');
 define('SEOPRESS_PRO_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
+define('SEOPRESS_PRO_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
+define('SEOPRESS_PRO_ASSETS_DIR', SEOPRESS_PRO_PLUGIN_DIR_URL . 'assets');
 define('SEOPRESS_PRO_TEMPLATE_DIR', SEOPRESS_PRO_PLUGIN_DIR_PATH . 'templates');
 define('SEOPRESS_PRO_TEMPLATE_JSON_SCHEMAS', SEOPRESS_PRO_TEMPLATE_DIR . '/json-schemas');
 
@@ -171,7 +173,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php') && file_exists(WP_PLUGIN_DIR .
 
     $versions       = get_option('seopress_versions');
     $versionFree    = isset($versions['free']) ? $versions['free'] : 0;
-    if ('4.7.0' !== $versionFree && version_compare($versionFree, '4.5.1', '<=')) {
+    if ('5.0.2' !== $versionFree && version_compare($versionFree, '4.5.1', '<=')) {
         return;
     }
 
@@ -199,7 +201,7 @@ function seopress_pro_init() {
         require_once dirname(__FILE__) . '/inc/admin/admin.php';
         require_once dirname(__FILE__) . '/inc/admin/ajax.php';
         if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
-            require_once dirname(__FILE__) . '/inc/admin/admin-metaboxes.php';
+            require_once dirname(__FILE__) . '/inc/admin/metaboxes/admin-metaboxes.php';
         }
         global $pagenow;
         if ('index.php' == $pagenow) {
@@ -428,7 +430,7 @@ function seopress_get_toggle_white_label_option() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads the JS/CSS in admin
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Google Page Speed
+//Google Page Speed Insights
 function seopress_pro_admin_ps_scripts() {
     wp_enqueue_script('seopress-pro-admin-easypiechart-js', plugins_url('assets/js/jquery.easypiechart.min.js', __FILE__), ['jquery'], SEOPRESS_PRO_VERSION);
     wp_enqueue_script('seopress-pro-admin-google-chart-js', 'https://www.gstatic.com/charts/loader.js', ['jquery'], SEOPRESS_PRO_VERSION);
@@ -471,6 +473,16 @@ function seopress_pro_add_admin_options_scripts($hook) {
             'seopress_request_google_analytics' => admin_url('admin-ajax.php'),
         ];
         wp_localize_script('seopress-pro-ga', 'seopressAjaxRequestGoogleAnalytics', $seopress_request_google_analytics);
+    }
+
+    if ('widgets.php' == $pagenow) {
+        wp_enqueue_script('seopress-pro-lb-widget', plugins_url('assets/js/seopress-pro-lb-widget.js', __FILE__), ['jquery', 'jquery-ui-tabs'], SEOPRESS_PRO_VERSION);
+
+        $seopress_pro_lb_widget = [
+            'seopress_nonce'                    => wp_create_nonce('seopress_pro_lb_widget_nonce'),
+            'seopress_pro_lb_widget'            => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-pro-lb-widget', 'seopressAjaxLocalBusinessOrder', $seopress_pro_lb_widget);
     }
 
     //GA tab
@@ -540,13 +552,14 @@ add_action('admin_enqueue_scripts', 'seopress_pro_add_admin_options_scripts', 10
 function seopress_pro_notice() {
     if ( ! is_plugin_active('wp-seopress/seopress.php') && current_user_can('manage_options')) {
         ?>
-		<div class="error notice">
-			<p>
-				<?php _e('Please enable <strong>SEOPress</strong> in order to use SEOPress PRO.', 'wp-seopress-pro'); ?>
-				<a href="<?php echo esc_url(admin_url('plugin-install.php?tab=plugin-information&plugin=wp-seopress&TB_iframe=true&width=600&height=550')); ?>" class="thickbox button-primary" target="_blank"><?php _e('Enable / Download now!', 'wp-seopress-pro'); ?></a>
-			</p>
-		</div>
-		<?php
+<div class="notice error">
+    <p>
+        <?php _e('Please enable <strong>SEOPress</strong> in order to use SEOPress PRO.', 'wp-seopress-pro'); ?>
+        <a href="<?php echo esc_url(admin_url('plugin-install.php?tab=plugin-information&plugin=wp-seopress&TB_iframe=true&width=600&height=550')); ?>"
+            class="thickbox btn btnPrimary" target="_blank"><?php _e('Enable / Download now!', 'wp-seopress-pro'); ?></a>
+    </p>
+</div>
+<?php
     }
 }
 add_action('admin_notices', 'seopress_pro_notice');
@@ -591,7 +604,6 @@ if ( ! class_exists('SEOPRESS_Updater')) {
     // load our custom updater
     require_once dirname(__FILE__) . '/inc/admin/updater/plugin-updater.php';
     require_once dirname(__FILE__) . '/inc/admin/updater/plugin-upgrader.php';
-    require_once dirname(__FILE__) . '/inc/admin/updater/plugin-licence.php';
 }
 
 function SEOPRESS_Updater() {
@@ -748,151 +760,152 @@ add_action('seopress_404_cron_cleaning', 'seopress_404_cron_cleaning_action', 10
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_lb_types_list() {
     $seopress_lb_types = [
-        'LocalBusiness'						          => __('Local Business (default)', 'wp-seopress-pro'),
-        'AnimalShelter'						          => __('Animal Shelter', 'wp-seopress-pro'),
-        'AutomotiveBusiness'				       => __('Automotive Business', 'wp-seopress-pro'),
-        'AutoBodyShop'						           => __('|-Auto Body Shop', 'wp-seopress-pro'),
-        'AutoDealer'						             => __('|-Auto Dealer', 'wp-seopress-pro'),
-        'AutoPartsStore'					          => __('|-Auto Parts Store', 'wp-seopress-pro'),
-        'AutoRental'						             => __('|-Auto Rental', 'wp-seopress-pro'),
-        'AutoRepair'						             => __('|-Auto Repair', 'wp-seopress-pro'),
-        'Auto Wash'							             => __('|-AutoWash', 'wp-seopress-pro'),
-        'GasStation'						             => __('|-Gas Station', 'wp-seopress-pro'),
-        'MotorcycleDealer'					        => __('|-Motorcycle Dealer', 'wp-seopress-pro'),
-        'MotorcycleRepair'					        => __('|-Motorcycle Repair', 'wp-seopress-pro'),
-        'ChildCare'							             => __('Child Care', 'wp-seopress-pro'),
-        'Dentist'							               => __('Dentist', 'wp-seopress-pro'),
-        'DryCleaningOrLaundry'				     => __('Dry Cleaning Or Laundry', 'wp-seopress-pro'),
-        'EmergencyService'					        => __('Emergency Service', 'wp-seopress-pro'),
-        'FireStation'						            => __('|-Fire Station', 'wp-seopress-pro'),
-        'Hospital'							              => __('|-Hospital', 'wp-seopress-pro'),
-        'PoliceStation'						          => __('|-Police Station', 'wp-seopress-pro'),
-        'EmploymentAgency'					        => __('Employment Agency', 'wp-seopress-pro'),
-        'EntertainmentBusiness'				    => __('Entertainment Business', 'wp-seopress-pro'),
-        'AdultEntertainment'				       => __('|-Adult Entertainment', 'wp-seopress-pro'),
-        'AmusementPark'						          => __('|-Amusement Park', 'wp-seopress-pro'),
-        'ArtGallery'						             => __('|-Art Gallery', 'wp-seopress-pro'),
-        'Casino'							                => __('|-Casino', 'wp-seopress-pro'),
-        'ComedyClub'						             => __('|-Comedy Club', 'wp-seopress-pro'),
-        'MovieTheater'						           => __('|-Movie Theater', 'wp-seopress-pro'),
-        'NightClub'							             => __('|-Night Club', 'wp-seopress-pro'),
-        'FinancialService'					        => __('Financial Service', 'wp-seopress-pro'),
-        'AccountingService'					       => __('|-Accounting Service', 'wp-seopress-pro'),
-        'AutomatedTeller'					         => __('|-Automated Teller', 'wp-seopress-pro'),
-        'BankOrCreditUnion'					       => __('|-Bank Or Credit Union', 'wp-seopress-pro'),
-        'InsuranceAgency'					         => __('|-Insurance Agency', 'wp-seopress-pro'),
-        'FoodEstablishment'					       => __('Food Establishment', 'wp-seopress-pro'),
-        'Bakery'							                => __('|-Bakery', 'wp-seopress-pro'),
-        'BarOrPub'							              => __('|-Bar Or Pub', 'wp-seopress-pro'),
-        'Brewery'							               => __('|-Brewery', 'wp-seopress-pro'),
-        'CafeOrCoffeeShop' 					       => __('|-Cafe Or Coffee Shop', 'wp-seopress-pro'),
-        'FastFoodRestaurant' 				      => __('|-Fast Food Restaurant', 'wp-seopress-pro'),
-        'IceCreamShop' 						          => __('|-Ice Cream Shop', 'wp-seopress-pro'),
-        'Restaurant' 						            => __('|-Restaurant', 'wp-seopress-pro'),
-        'Winery' 							               => __('|-Winery', 'wp-seopress-pro'),
-        'GovernmentOffice' 					       => __('Government Office', 'wp-seopress-pro'),
-        'PostOffice' 						            => __('|-PostOffice', 'wp-seopress-pro'),
-        'HealthAndBeautyBusiness' 			  => __('Health And Beauty Business', 'wp-seopress-pro'),
-        'BeautySalon' 						           => __('|-Beauty Salon', 'wp-seopress-pro'),
-        'DaySpa'							                => __('|-Day Spa', 'wp-seopress-pro'),
-        'HairSalon'							             => __('|-Hair Salon', 'wp-seopress-pro'),
-        'HealthClub'						             => __('|-Health Club', 'wp-seopress-pro'),
-        'NailSalon'							             => __('|-Nail Salon', 'wp-seopress-pro'),
-        'TattooParlor'						           => __('|-Tattoo Parlor', 'wp-seopress-pro'),
-        'HomeAndConstructionBusiness'		=> __('Home And Construction Business', 'wp-seopress-pro'),
-        'Electrician'						            => __('|-Electrician', 'wp-seopress-pro'),
-        'HVACBusiness'						           => __('|-HVAC Business', 'wp-seopress-pro'),
-        'HousePainter'						           => __('|-House Painter', 'wp-seopress-pro'),
-        'Locksmith'							             => __('|-Locksmith', 'wp-seopress-pro'),
-        'MovingCompany'						          => __('|-Moving Company', 'wp-seopress-pro'),
-        'Plumber'							               => __('|-Plumber', 'wp-seopress-pro'),
-        'RoofingContractor'					       => __('|-Roofing Contractor', 'wp-seopress-pro'),
-        'InternetCafe'						           => __('Internet Cafe', 'wp-seopress-pro'),
-        'MedicalBusiness'					         => __('Medical Business', 'wp-seopress-pro'),
-        'CommunityHealth'					         => __('|-Community Health', 'wp-seopress-pro'),
-        'Dentist'							               => __('|-Dentist', 'wp-seopress-pro'),
-        'Dermatology'						            => __('|-Dermatology', 'wp-seopress-pro'),
-        'DietNutrition'						          => __('|-Diet Nutrition', 'wp-seopress-pro'),
-        'Emergency'							             => __('|-Emergency', 'wp-seopress-pro'),
-        'Gynecologic'						            => __('|-Gynecologic', 'wp-seopress-pro'),
-        'MedicalClinic'						          => __('|-Medical Clinic', 'wp-seopress-pro'),
-        'Midwifery'							             => __('|-Midwifery', 'wp-seopress-pro'),
-        'Nursing'							               => __('|-Nursing', 'wp-seopress-pro'),
-        'Obstetric'							             => __('|-Obstetric', 'wp-seopress-pro'),
-        'Oncologic'							             => __('|-Oncologic', 'wp-seopress-pro'),
-        'Optician'							              => __('|-Optician', 'wp-seopress-pro'),
-        'Optometric'						             => __('|-Optometric', 'wp-seopress-pro'),
-        'Otolaryngologic'					         => __('|-Otolaryngologic', 'wp-seopress-pro'),
-        'Pediatric'							             => __('|-Pediatric', 'wp-seopress-pro'),
-        'Pharmacy'							              => __('|-Pharmacy', 'wp-seopress-pro'),
-        'Physician'							             => __('|-Physician', 'wp-seopress-pro'),
-        'Physiotherapy'						          => __('|-Physiotherapy', 'wp-seopress-pro'),
-        'PlasticSurgery'					          => __('|-Plastic Surgery', 'wp-seopress-pro'),
-        'Podiatric'							             => __('|-Podiatric', 'wp-seopress-pro'),
-        'PrimaryCare'						            => __('|-Primary Care', 'wp-seopress-pro'),
-        'Psychiatric'						            => __('|-Psychiatric', 'wp-seopress-pro'),
-        'PublicHealth'						           => __('|-Public Health', 'wp-seopress-pro'),
-        'LegalService'						           => __('Legal Service', 'wp-seopress-pro'),
-        'Attorney'							              => __('|-Attorney', 'wp-seopress-pro'),
-        'Notary'							                => __('|-Notary', 'wp-seopress-pro'),
-        'Library'							               => __('Library', 'wp-seopress-pro'),
-        'LodgingBusiness'					         => __('Lodging Business', 'wp-seopress-pro'),
-        'BedAndBreakfast'					         => __('|-Bed And Breakfast', 'wp-seopress-pro'),
-        'Campground'						             => __('|-Campground', 'wp-seopress-pro'),
-        'Hostel'							                => __('|-Hostel', 'wp-seopress-pro'),
-        'Hotel'								                => __('|-Hotel', 'wp-seopress-pro'),
-        'Motel'								                => __('|-Motel', 'wp-seopress-pro'),
-        'Resort'							                => __('|-Resort', 'wp-seopress-pro'),
-        'ProfessionalService'				      => __('Professional Service', 'wp-seopress-pro'),
-        'RadioStation'						           => __('Radio Station', 'wp-seopress-pro'),
-        'RealEstateAgent'					         => __('Real Estate Agent', 'wp-seopress-pro'),
-        'RecyclingCenter'					         => __('Recycling Center', 'wp-seopress-pro'),
-        'SelfStorage'						            => __('Real Self Storage', 'wp-seopress-pro'),
-        'ShoppingCenter'					          => __('Shopping Center', 'wp-seopress-pro'),
-        'SportsActivityLocation'			    => __('Sports Activity Location', 'wp-seopress-pro'),
-        'BowlingAlley'						           => __('|-Bowling Alley', 'wp-seopress-pro'),
-        'ExerciseGym'						            => __('|-Exercise Gym', 'wp-seopress-pro'),
-        'GolfCourse'						             => __('|-Golf Course', 'wp-seopress-pro'),
-        'HealthClub'						             => __('|-Health Club', 'wp-seopress-pro'),
-        'PublicSwimmingPool'				       => __('|-Public Swimming Pool', 'wp-seopress-pro'),
-        'SkiResort'							             => __('|-Ski Resort', 'wp-seopress-pro'),
-        'SportsClub'						             => __('|-Sports Club', 'wp-seopress-pro'),
-        'StadiumOrArena'					          => __('|-Stadium Or Arena', 'wp-seopress-pro'),
-        'TennisComplex'						          => __('|-Tennis Complex', 'wp-seopress-pro'),
-        'Store'								                => __('Store', 'wp-seopress-pro'),
-        'AutoPartsStore'					          => __('|-Auto Parts Store', 'wp-seopress-pro'),
-        'BikeStore'							             => __('|-Bike Store', 'wp-seopress-pro'),
-        'BookStore'							             => __('|-Book Store', 'wp-seopress-pro'),
-        'ClothingStore'						          => __('|-Clothing Store', 'wp-seopress-pro'),
-        'ComputerStore'						          => __('|-Computer Store', 'wp-seopress-pro'),
-        'ConvenienceStore'					        => __('|-Convenience Store', 'wp-seopress-pro'),
-        'DepartmentStore'					         => __('|-Department Store', 'wp-seopress-pro'),
-        'ElectronicsStore'					        => __('|-Electronics Store', 'wp-seopress-pro'),
-        'Florist'							               => __('|-Florist', 'wp-seopress-pro'),
-        'FurnitureStore'					          => __('|-Furniture Store', 'wp-seopress-pro'),
-        'GardenStore'						            => __('|-Garden Store', 'wp-seopress-pro'),
-        'GroceryStore'						           => __('|-Grocery Store', 'wp-seopress-pro'),
-        'HardwareStore'						          => __('|-Hardware Store', 'wp-seopress-pro'),
-        'HobbyShop'							             => __('|-Hobby Shop', 'wp-seopress-pro'),
-        'HomeGoodsStore'					          => __('|-Home Goods Store', 'wp-seopress-pro'),
-        'JewelryStore'						           => __('|-Jewelry Store', 'wp-seopress-pro'),
-        'LiquorStore'						            => __('|-Liquor Store', 'wp-seopress-pro'),
-        'MensClothingStore'					       => __('|-Mens Clothing Store', 'wp-seopress-pro'),
-        'MobilePhoneStore'					        => __('|-Mobile Phone Store', 'wp-seopress-pro'),
-        'MovieRentalStore'					        => __('|-Movie Rental Store', 'wp-seopress-pro'),
-        'MusicStore'						             => __('|-Music Store', 'wp-seopress-pro'),
-        'OfficeEquipmentStore'				     => __('|-Office Equipment Store', 'wp-seopress-pro'),
-        'OutletStore'						            => __('|-Outlet Store', 'wp-seopress-pro'),
-        'PawnShop'							              => __('|-Pawn Shop', 'wp-seopress-pro'),
-        'PetStore'							              => __('|-Pet Store', 'wp-seopress-pro'),
-        'ShoeStore'							             => __('|-Shoe Store', 'wp-seopress-pro'),
-        'SportingGoodsStore'				       => __('|-Sporting Goods Store', 'wp-seopress-pro'),
-        'TireShop'							              => __('|-Tire Shop', 'wp-seopress-pro'),
-        'ToyStore'							              => __('|-Toy Store', 'wp-seopress-pro'),
-        'WholesaleStore'					          => __('|-Wholesale Store', 'wp-seopress-pro'),
-        'TelevisionStation'					       => __('|-Wholesale Store', 'wp-seopress-pro'),
-        'TouristInformationCenter'			  => __('Tourist Information Center', 'wp-seopress-pro'),
-        'TravelAgency'						           => __('Travel Agency', 'wp-seopress-pro'),
+        'LocalBusiness'						            => __('Local Business (default)', 'wp-seopress-pro'),
+        'AnimalShelter'						            => __('Animal Shelter', 'wp-seopress-pro'),
+        'AutomotiveBusiness'				         => __('Automotive Business', 'wp-seopress-pro'),
+        'AutoBodyShop'						             => __('|-Auto Body Shop', 'wp-seopress-pro'),
+        'AutoDealer'						               => __('|-Auto Dealer', 'wp-seopress-pro'),
+        'AutoPartsStore'					            => __('|-Auto Parts Store', 'wp-seopress-pro'),
+        'AutoRental'						               => __('|-Auto Rental', 'wp-seopress-pro'),
+        'AutoRepair'						               => __('|-Auto Repair', 'wp-seopress-pro'),
+        'Auto Wash'							               => __('|-AutoWash', 'wp-seopress-pro'),
+        'GasStation'						               => __('|-Gas Station', 'wp-seopress-pro'),
+        'MotorcycleDealer'					          => __('|-Motorcycle Dealer', 'wp-seopress-pro'),
+        'MotorcycleRepair'					          => __('|-Motorcycle Repair', 'wp-seopress-pro'),
+        'ChildCare'							               => __('Child Care', 'wp-seopress-pro'),
+        'Dentist'							                 => __('Dentist', 'wp-seopress-pro'),
+        'DryCleaningOrLaundry'				       => __('Dry Cleaning Or Laundry', 'wp-seopress-pro'),
+        'EmergencyService'					          => __('Emergency Service', 'wp-seopress-pro'),
+        'FireStation'						              => __('|-Fire Station', 'wp-seopress-pro'),
+        'Hospital'							                => __('|-Hospital', 'wp-seopress-pro'),
+        'PoliceStation'						            => __('|-Police Station', 'wp-seopress-pro'),
+        'EmploymentAgency'					          => __('Employment Agency', 'wp-seopress-pro'),
+        'EntertainmentBusiness'				      => __('Entertainment Business', 'wp-seopress-pro'),
+        'AdultEntertainment'				         => __('|-Adult Entertainment', 'wp-seopress-pro'),
+        'AmusementPark'						            => __('|-Amusement Park', 'wp-seopress-pro'),
+        'ArtGallery'						               => __('|-Art Gallery', 'wp-seopress-pro'),
+        'Casino'							                  => __('|-Casino', 'wp-seopress-pro'),
+        'ComedyClub'						               => __('|-Comedy Club', 'wp-seopress-pro'),
+        'MovieTheater'						             => __('|-Movie Theater', 'wp-seopress-pro'),
+        'NightClub'							               => __('|-Night Club', 'wp-seopress-pro'),
+        'FinancialService'					          => __('Financial Service', 'wp-seopress-pro'),
+        'AccountingService'					         => __('|-Accounting Service', 'wp-seopress-pro'),
+        'AutomatedTeller'					           => __('|-Automated Teller', 'wp-seopress-pro'),
+        'BankOrCreditUnion'					         => __('|-Bank Or Credit Union', 'wp-seopress-pro'),
+        'InsuranceAgency'					           => __('|-Insurance Agency', 'wp-seopress-pro'),
+        'FoodEstablishment'					         => __('Food Establishment', 'wp-seopress-pro'),
+        'Bakery'							                  => __('|-Bakery', 'wp-seopress-pro'),
+        'BarOrPub'							                => __('|-Bar Or Pub', 'wp-seopress-pro'),
+        'Brewery'							                 => __('|-Brewery', 'wp-seopress-pro'),
+        'CafeOrCoffeeShop' 					         => __('|-Cafe Or Coffee Shop', 'wp-seopress-pro'),
+        'FastFoodRestaurant' 				        => __('|-Fast Food Restaurant', 'wp-seopress-pro'),
+        'IceCreamShop' 						            => __('|-Ice Cream Shop', 'wp-seopress-pro'),
+        'Restaurant' 						              => __('|-Restaurant', 'wp-seopress-pro'),
+        'Winery' 							                 => __('|-Winery', 'wp-seopress-pro'),
+        'GovernmentOffice' 					         => __('Government Office', 'wp-seopress-pro'),
+        'PostOffice' 						              => __('|-PostOffice', 'wp-seopress-pro'),
+        'HealthAndBeautyBusiness' 			    => __('Health And Beauty Business', 'wp-seopress-pro'),
+        'BeautySalon' 						             => __('|-Beauty Salon', 'wp-seopress-pro'),
+        'DaySpa'							                  => __('|-Day Spa', 'wp-seopress-pro'),
+        'HairSalon'							               => __('|-Hair Salon', 'wp-seopress-pro'),
+        'HealthClub'						               => __('|-Health Club', 'wp-seopress-pro'),
+        'NailSalon'							               => __('|-Nail Salon', 'wp-seopress-pro'),
+        'TattooParlor'						             => __('|-Tattoo Parlor', 'wp-seopress-pro'),
+        'HomeAndConstructionBusiness'		  => __('Home And Construction Business', 'wp-seopress-pro'),
+        'Electrician'						              => __('|-Electrician', 'wp-seopress-pro'),
+        'HVACBusiness'						             => __('|-HVAC Business', 'wp-seopress-pro'),
+        'HousePainter'						             => __('|-House Painter', 'wp-seopress-pro'),
+        'Locksmith'							               => __('|-Locksmith', 'wp-seopress-pro'),
+        'MovingCompany'						            => __('|-Moving Company', 'wp-seopress-pro'),
+        'Plumber'							                 => __('|-Plumber', 'wp-seopress-pro'),
+        'RoofingContractor'					         => __('|-Roofing Contractor', 'wp-seopress-pro'),
+        'InternetCafe'						             => __('Internet Cafe', 'wp-seopress-pro'),
+        'MedicalBusiness'					           => __('Medical Business', 'wp-seopress-pro'),
+        'CommunityHealth'					           => __('|-Community Health', 'wp-seopress-pro'),
+        'Dentist'							                 => __('|-Dentist', 'wp-seopress-pro'),
+        'Dermatology'						              => __('|-Dermatology', 'wp-seopress-pro'),
+        'DietNutrition'						            => __('|-Diet Nutrition', 'wp-seopress-pro'),
+        'Emergency'							               => __('|-Emergency', 'wp-seopress-pro'),
+        'Gynecologic'						              => __('|-Gynecologic', 'wp-seopress-pro'),
+        'MedicalClinic'						            => __('|-Medical Clinic', 'wp-seopress-pro'),
+        'Midwifery'							               => __('|-Midwifery', 'wp-seopress-pro'),
+        'Nursing'							                 => __('|-Nursing', 'wp-seopress-pro'),
+        'Obstetric'							               => __('|-Obstetric', 'wp-seopress-pro'),
+        'Oncologic'							               => __('|-Oncologic', 'wp-seopress-pro'),
+        'Optician'							                => __('|-Optician', 'wp-seopress-pro'),
+        'Optometric'						               => __('|-Optometric', 'wp-seopress-pro'),
+        'Otolaryngologic'					           => __('|-Otolaryngologic', 'wp-seopress-pro'),
+        'Pediatric'							               => __('|-Pediatric', 'wp-seopress-pro'),
+        'Pharmacy'							                => __('|-Pharmacy', 'wp-seopress-pro'),
+        'Physician'							               => __('|-Physician', 'wp-seopress-pro'),
+        'Physiotherapy'						            => __('|-Physiotherapy', 'wp-seopress-pro'),
+        'PlasticSurgery'					            => __('|-Plastic Surgery', 'wp-seopress-pro'),
+        'Podiatric'							               => __('|-Podiatric', 'wp-seopress-pro'),
+        'PrimaryCare'						              => __('|-Primary Care', 'wp-seopress-pro'),
+        'Psychiatric'						              => __('|-Psychiatric', 'wp-seopress-pro'),
+        'PublicHealth'						             => __('|-Public Health', 'wp-seopress-pro'),
+        'VeterinaryCare'						           => __('|-Veterinary Care', 'wp-seopress-pro'),
+        'LegalService'						             => __('Legal Service', 'wp-seopress-pro'),
+        'Attorney'							                => __('|-Attorney', 'wp-seopress-pro'),
+        'Notary'							                  => __('|-Notary', 'wp-seopress-pro'),
+        'Library'							                 => __('Library', 'wp-seopress-pro'),
+        'LodgingBusiness'					           => __('Lodging Business', 'wp-seopress-pro'),
+        'BedAndBreakfast'					           => __('|-Bed And Breakfast', 'wp-seopress-pro'),
+        'Campground'						               => __('|-Campground', 'wp-seopress-pro'),
+        'Hostel'							                  => __('|-Hostel', 'wp-seopress-pro'),
+        'Hotel'								                  => __('|-Hotel', 'wp-seopress-pro'),
+        'Motel'								                  => __('|-Motel', 'wp-seopress-pro'),
+        'Resort'							                  => __('|-Resort', 'wp-seopress-pro'),
+        'ProfessionalService'				        => __('Professional Service', 'wp-seopress-pro'),
+        'RadioStation'						             => __('Radio Station', 'wp-seopress-pro'),
+        'RealEstateAgent'					           => __('Real Estate Agent', 'wp-seopress-pro'),
+        'RecyclingCenter'					           => __('Recycling Center', 'wp-seopress-pro'),
+        'SelfStorage'						              => __('Real Self Storage', 'wp-seopress-pro'),
+        'ShoppingCenter'					            => __('Shopping Center', 'wp-seopress-pro'),
+        'SportsActivityLocation'			      => __('Sports Activity Location', 'wp-seopress-pro'),
+        'BowlingAlley'						             => __('|-Bowling Alley', 'wp-seopress-pro'),
+        'ExerciseGym'						              => __('|-Exercise Gym', 'wp-seopress-pro'),
+        'GolfCourse'						               => __('|-Golf Course', 'wp-seopress-pro'),
+        'HealthClub'						               => __('|-Health Club', 'wp-seopress-pro'),
+        'PublicSwimmingPool'				         => __('|-Public Swimming Pool', 'wp-seopress-pro'),
+        'SkiResort'							               => __('|-Ski Resort', 'wp-seopress-pro'),
+        'SportsClub'						               => __('|-Sports Club', 'wp-seopress-pro'),
+        'StadiumOrArena'					            => __('|-Stadium Or Arena', 'wp-seopress-pro'),
+        'TennisComplex'						            => __('|-Tennis Complex', 'wp-seopress-pro'),
+        'Store'								                  => __('Store', 'wp-seopress-pro'),
+        'AutoPartsStore'					            => __('|-Auto Parts Store', 'wp-seopress-pro'),
+        'BikeStore'							               => __('|-Bike Store', 'wp-seopress-pro'),
+        'BookStore'							               => __('|-Book Store', 'wp-seopress-pro'),
+        'ClothingStore'						            => __('|-Clothing Store', 'wp-seopress-pro'),
+        'ComputerStore'						            => __('|-Computer Store', 'wp-seopress-pro'),
+        'ConvenienceStore'					          => __('|-Convenience Store', 'wp-seopress-pro'),
+        'DepartmentStore'					           => __('|-Department Store', 'wp-seopress-pro'),
+        'ElectronicsStore'					          => __('|-Electronics Store', 'wp-seopress-pro'),
+        'Florist'							                 => __('|-Florist', 'wp-seopress-pro'),
+        'FurnitureStore'					            => __('|-Furniture Store', 'wp-seopress-pro'),
+        'GardenStore'						              => __('|-Garden Store', 'wp-seopress-pro'),
+        'GroceryStore'						             => __('|-Grocery Store', 'wp-seopress-pro'),
+        'HardwareStore'						            => __('|-Hardware Store', 'wp-seopress-pro'),
+        'HobbyShop'							               => __('|-Hobby Shop', 'wp-seopress-pro'),
+        'HomeGoodsStore'					            => __('|-Home Goods Store', 'wp-seopress-pro'),
+        'JewelryStore'						             => __('|-Jewelry Store', 'wp-seopress-pro'),
+        'LiquorStore'						              => __('|-Liquor Store', 'wp-seopress-pro'),
+        'MensClothingStore'					         => __('|-Mens Clothing Store', 'wp-seopress-pro'),
+        'MobilePhoneStore'					          => __('|-Mobile Phone Store', 'wp-seopress-pro'),
+        'MovieRentalStore'					          => __('|-Movie Rental Store', 'wp-seopress-pro'),
+        'MusicStore'						               => __('|-Music Store', 'wp-seopress-pro'),
+        'OfficeEquipmentStore'				       => __('|-Office Equipment Store', 'wp-seopress-pro'),
+        'OutletStore'						              => __('|-Outlet Store', 'wp-seopress-pro'),
+        'PawnShop'							                => __('|-Pawn Shop', 'wp-seopress-pro'),
+        'PetStore'							                => __('|-Pet Store', 'wp-seopress-pro'),
+        'ShoeStore'							               => __('|-Shoe Store', 'wp-seopress-pro'),
+        'SportingGoodsStore'				         => __('|-Sporting Goods Store', 'wp-seopress-pro'),
+        'TireShop'							                => __('|-Tire Shop', 'wp-seopress-pro'),
+        'ToyStore'							                => __('|-Toy Store', 'wp-seopress-pro'),
+        'WholesaleStore'					            => __('|-Wholesale Store', 'wp-seopress-pro'),
+        'TelevisionStation'					         => __('|-Wholesale Store', 'wp-seopress-pro'),
+        'TouristInformationCenter'			    => __('Tourist Information Center', 'wp-seopress-pro'),
+        'TravelAgency'						             => __('Travel Agency', 'wp-seopress-pro'),
     ];
 
     $seopress_lb_types = apply_filters('seopress_schemas_lb_types', $seopress_lb_types);

@@ -19,7 +19,7 @@ trait FieldPostalCode {
             aria-label="<?php _e('Postal code', 'wp-seopress-pro'); ?>"
             value="<?php echo esc_html($value); ?>" />
 
-        <p class="description"><?php _e('<span class="field-required"><strong>Required</strong></span> property by Google.', 'wp-seopress-pro'); ?></p>
+        <p class="description"><?php _e('<span class="field-required">Required</span> property by Google.', 'wp-seopress-pro'); ?></p>
 
         <?php
     }

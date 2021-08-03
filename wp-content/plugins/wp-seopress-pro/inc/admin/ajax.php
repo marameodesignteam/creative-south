@@ -4,7 +4,8 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPress Bot
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_request_bot() {
+function seopress_request_bot()
+{
     check_ajax_referer('seopress_request_bot_nonce');
 
     if (current_user_can(seopress_capability('manage_options', 'bot')) && is_admin()) {
@@ -12,9 +13,10 @@ function seopress_request_bot() {
         $data = [];
 
         //Links cleaning
-        function seopress_bot_scan_settings_cleaning_option() {
+        function seopress_bot_scan_settings_cleaning_option()
+        {
             $seopress_bot_scan_settings_cleaning_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_cleaning_option)) {
+            if (! empty($seopress_bot_scan_settings_cleaning_option)) {
                 foreach ($seopress_bot_scan_settings_cleaning_option as $key => $seopress_bot_scan_settings_cleaning_value) {
                     $options[$key] = $seopress_bot_scan_settings_cleaning_value;
                 }
@@ -41,9 +43,10 @@ function seopress_request_bot() {
         }
 
         //Type of links
-        function seopress_bot_scan_settings_type_option() {
+        function seopress_bot_scan_settings_type_option()
+        {
             $seopress_bot_scan_settings_type_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_type_option)) {
+            if (! empty($seopress_bot_scan_settings_type_option)) {
                 foreach ($seopress_bot_scan_settings_type_option as $key => $seopress_bot_scan_settings_type_value) {
                     $options[$key] = $seopress_bot_scan_settings_type_value;
                 }
@@ -54,9 +57,10 @@ function seopress_request_bot() {
         }
 
         //Find links in
-        function seopress_bot_scan_settings_where_option() {
+        function seopress_bot_scan_settings_where_option()
+        {
             $seopress_bot_scan_settings_where_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_where_option)) {
+            if (! empty($seopress_bot_scan_settings_where_option)) {
                 foreach ($seopress_bot_scan_settings_where_option as $key => $seopress_bot_scan_settings_where_value) {
                     $options[$key] = $seopress_bot_scan_settings_where_value;
                 }
@@ -67,9 +71,10 @@ function seopress_request_bot() {
         }
 
         //404 only
-        function seopress_bot_scan_settings_404_option() {
+        function seopress_bot_scan_settings_404_option()
+        {
             $seopress_bot_scan_settings_404_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_404_option)) {
+            if (! empty($seopress_bot_scan_settings_404_option)) {
                 foreach ($seopress_bot_scan_settings_404_option as $key => $seopress_bot_scan_settings_404_value) {
                     $options[$key] = $seopress_bot_scan_settings_404_value;
                 }
@@ -80,9 +85,10 @@ function seopress_request_bot() {
         }
 
         //Timeout
-        function seopress_bot_scan_settings_timeout_option() {
+        function seopress_bot_scan_settings_timeout_option()
+        {
             $seopress_bot_scan_settings_timeout_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_timeout_option)) {
+            if (! empty($seopress_bot_scan_settings_timeout_option)) {
                 foreach ($seopress_bot_scan_settings_timeout_option as $key => $seopress_bot_scan_settings_timeout_value) {
                     $options[$key] = $seopress_bot_scan_settings_timeout_value;
                 }
@@ -93,9 +99,10 @@ function seopress_request_bot() {
         }
 
         //Number of content to scan
-        function seopress_bot_scan_settings_number_option() {
+        function seopress_bot_scan_settings_number_option()
+        {
             $seopress_bot_scan_settings_number_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_number_option)) {
+            if (! empty($seopress_bot_scan_settings_number_option)) {
                 foreach ($seopress_bot_scan_settings_number_option as $key => $seopress_bot_scan_settings_number_value) {
                     $options[$key] = $seopress_bot_scan_settings_number_value;
                 }
@@ -106,9 +113,10 @@ function seopress_request_bot() {
         }
 
         //Include Custom Post Types
-        function seopress_bot_scan_settings_post_types_option() {
+        function seopress_bot_scan_settings_post_types_option()
+        {
             $seopress_bot_scan_settings_post_types_option = get_option('seopress_bot_option_name');
-            if ( ! empty($seopress_bot_scan_settings_post_types_option)) {
+            if (! empty($seopress_bot_scan_settings_post_types_option)) {
                 foreach ($seopress_bot_scan_settings_post_types_option as $key => $seopress_bot_scan_settings_post_types_value) {
                     $options[$key] = $seopress_bot_scan_settings_post_types_value;
                 }
@@ -167,12 +175,30 @@ function seopress_request_bot() {
                     } else {
                         $timeout = 5;
                     }
+
+                    //Get cookies
+                    if (isset($_COOKIE)) {
+                        $cookies = [];
+
+                        foreach ($_COOKIE as $name => $value) {
+                            if ('PHPSESSID' !== $name) {
+                                $cookies[] = new WP_Http_Cookie(['name' => $name, 'value' => $value]);
+                            }
+                        }
+                    }
+
                     $args = [
                         'blocking'    => true,
                         'timeout'     => $timeout,
                         'sslverify'   => false,
                         'compress'    => true,
+                        'redirection' => 4,
                     ];
+
+                    if (isset($cookies) && ! empty($cookies)) {
+                        $args['cookies'] = $cookies;
+                    }
+
                     foreach ($bot_query as $post) {
                         if ('' == seopress_bot_scan_settings_where_option() || 'post_content' == seopress_bot_scan_settings_where_option()) {//post content
                             $response = apply_filters('the_content', get_post_field('post_content', $post));
@@ -185,72 +211,74 @@ function seopress_request_bot() {
                             $response = wp_remote_get(get_permalink($post), $args);
 
                             //Check for error
-                            if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
+                            if (is_wp_error($response) || '404' === wp_remote_retrieve_response_code($response)) {
                                 $data['post_title'] = __('Unable to request page: ', 'wp-seopress-pro') . get_the_title($post);
                             } else {
                                 $response = wp_remote_retrieve_body($response);
                             }
                         }
 
-                        if ( ! is_wp_error($response) || '404' !== wp_remote_retrieve_response_code($response)) {
-                            $data['post_title'][] = get_the_title($post);
+                        if (! is_wp_error($response) || '404' !== wp_remote_retrieve_response_code($response)) {
+                            if (get_the_title($post)) {
+                                $data['post_title'] = get_the_title($post).' ('.get_permalink($post).')';
 
-                            if ($dom->loadHTML('<?xml encoding="utf-8" ?>' . $response)) {
-                                $xpath = new DOMXPath($dom);
+                                if ($dom->loadHTML('<?xml encoding="utf-8" ?>' . $response)) {
+                                    $xpath = new DOMXPath($dom);
 
-                                //Links
-                                $links = $xpath->query('//a');
+                                    //Links
+                                    $links = $xpath->query('//a');
 
-                                if ( ! empty($links)) {
-                                    foreach ($links as $key => $link) {
-                                        $links2 = [];
-                                        $links3 = [];
+                                    if (! empty($links)) {
+                                        foreach ($links as $key => $link) {
+                                            $links2 = [];
+                                            $links3 = [];
 
-                                        $href = $link->getAttribute('href');
-                                        $text = esc_attr($link->textContent);
+                                            $href = $link->getAttribute('href');
+                                            $text = esc_attr($link->textContent);
 
-                                        //remove anchors
-                                        if ('#' != $href) {
-                                            $links2[$text] = $href;
-                                        }
+                                            //remove anchors
+                                            if ('#' != $href) {
+                                                $links2[$text] = $href;
+                                            }
 
-                                        //remove duplicates
-                                        $links2 = array_unique($links2);
+                                            //remove duplicates
+                                            $links2 = array_unique($links2);
 
-                                        foreach ($links2 as $_key => $_value) {
-                                            $args = [
+                                            foreach ($links2 as $_key => $_value) {
+                                                $args = [
                                                 'timeout'       => $timeout,
                                                 'blocking'      => true,
                                                 'sslverify'     => false,
                                                 'compress'      => true,
                                             ];
 
-                                            $response = wp_remote_get($_value, $args);
+                                                $response = wp_remote_get($_value, $args);
 
-                                            $bot_status_code = wp_remote_retrieve_response_code($response);
+                                                $bot_status_code = wp_remote_retrieve_response_code($response);
 
-                                            if ( ! $bot_status_code) {
-                                                $bot_status_code = __('domain not found', 'wp-seopress-pro');
-                                            }
+                                                if (! $bot_status_code) {
+                                                    $bot_status_code = __('domain not found', 'wp-seopress-pro');
+                                                }
 
-                                            if ('1' == seopress_bot_scan_settings_type_option()) {
-                                                $bot_status_type = wp_remote_retrieve_header($response, 'content-type');
-                                            }
+                                                if ('1' == seopress_bot_scan_settings_type_option()) {
+                                                    $bot_status_type = wp_remote_retrieve_header($response, 'content-type');
+                                                }
 
-                                            if ('1' == seopress_bot_scan_settings_404_option()) {
-                                                if ('404' == $bot_status_code || strpos(json_encode($response), 'cURL error 6')) {
+                                                if ('1' == seopress_bot_scan_settings_404_option()) {
+                                                    if ('404' == $bot_status_code || strpos(json_encode($response), 'cURL error 6')) {
+                                                        $links3[] = $_value;
+                                                    }
+                                                } else {
                                                     $links3[] = $_value;
                                                 }
-                                            } else {
-                                                $links3[] = $_value;
                                             }
-                                        }
 
-                                        foreach ($links3 as $_key => $_value) {
-                                            $check_page_id = get_page_by_title($_value, OBJECT, 'seopress_bot');
+                                            foreach ($links3 as $_key => $_value) {
+                                                $check_page_id = get_page_by_title($_value, OBJECT, 'seopress_bot');
 
-                                            if ($check_page_id->post_title != $_value && get_post_meta($check_page_id->ID, 'seopress_bot_source_url', true) != $_value) {
-                                                wp_insert_post([
+                                                if ($check_page_id->post_title != $_value && get_post_meta($check_page_id->ID, 'seopress_bot_source_url', true) != $_value) {
+                                                    wp_insert_post(
+                                                        [
                                                     'post_title'        => $_value,
                                                     'post_type'         => 'seopress_bot',
                                                     'post_status'       => 'publish',
@@ -265,13 +293,14 @@ function seopress_request_bot() {
                                                         'seopress_bot_a_title'          => $text,
                                                         ],
                                                     ]
-                                                );
-                                            } elseif ($check_page_id->post_title == $_value) {
-                                                $seopress_bot_count = get_post_meta($check_page_id->ID, 'seopress_bot_count', true);
-                                                update_post_meta($check_page_id->ID, 'seopress_bot_count', ++$seopress_bot_count);
-                                            }
+                                                    );
+                                                } elseif ($check_page_id->post_title == $_value) {
+                                                    $seopress_bot_count = get_post_meta($check_page_id->ID, 'seopress_bot_count', true);
+                                                    update_post_meta($check_page_id->ID, 'seopress_bot_count', ++$seopress_bot_count);
+                                                }
 
-                                            $data['link'][] = $_value;
+                                                $data['link'][] = $_value;
+                                            }
                                         }
                                     }
                                 }
@@ -301,12 +330,14 @@ add_action('wp_ajax_seopress_request_bot', 'seopress_request_bot');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 if (is_plugin_active('admin-columns-pro/admin-columns-pro.php')) {
     add_action('ac/column_groups', 'ac_register_seopress_column_group');
-    function ac_register_seopress_column_group(AC\Groups $groups) {
+    function ac_register_seopress_column_group(AC\Groups $groups)
+    {
         $groups->register_group('seopress', 'SEOPress');
     }
 
     add_action('ac/column_types', 'ac_register_seopress_columns');
-    function ac_register_seopress_columns(AC\ListScreen $list_screen) {
+    function ac_register_seopress_columns(AC\ListScreen $list_screen)
+    {
         if ($list_screen instanceof ACP\ListScreen\Post) {
             require_once plugin_dir_path(__FILE__) . 'admin-columns/acp-column-sp_title.php';
             require_once plugin_dir_path(__FILE__) . 'admin-columns/acp-column-sp_desc.php';
@@ -324,9 +355,30 @@ if (is_plugin_active('admin-columns-pro/admin-columns-pro.php')) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+//LB Widget order
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_pro_lb_widget()
+{
+    check_ajax_referer('seopress_pro_lb_widget_nonce');
+    if (current_user_can('edit_theme_options') && is_admin()) {
+        if (isset($_POST['order']) && $_POST['order'] && isset($_POST['id']) && $_POST['id']) {
+            $widget_option = get_option('widget_seopress_pro_lb_widget');
+
+            $widget_option[(int)$_POST['id']]['order'] = $_POST['order'];
+
+            update_option('widget_seopress_pro_lb_widget', $widget_option);
+        }
+    }
+
+    wp_send_json_success();
+}
+add_action('wp_ajax_seopress_pro_lb_widget', 'seopress_pro_lb_widget');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //Request Reverse domains
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_request_reverse() {
+function seopress_request_reverse()
+{
     check_ajax_referer('seopress_request_reverse_nonce');
 
     delete_transient('seopress_results_reverse');
@@ -351,7 +403,8 @@ add_action('wp_ajax_seopress_request_reverse', 'seopress_request_reverse');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Request Google PageSpeed Insights
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_request_page_speed() {
+function seopress_request_page_speed()
+{
     check_ajax_referer('seopress_request_page_speed_nonce');
 
     $seopress_google_api_key = 'AIzaSyBqvSx2QrqbEqZovzKX8znGpTosw7KClHQ';
@@ -361,7 +414,6 @@ function seopress_request_page_speed() {
     } else {
         $seopress_get_site_url = get_home_url();
     }
-
     delete_transient('seopress_results_page_speed');
 
     $args = ['timeout' => 30];
@@ -380,10 +432,11 @@ add_action('wp_ajax_seopress_request_page_speed', 'seopress_request_page_speed')
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Reset License
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_request_reset_license() {
+function seopress_request_reset_license()
+{
     check_ajax_referer('seopress_request_reset_license_nonce');
 
-    if (current_user_can(seopress_capability('manage_options', 'bot')) && is_admin()) {
+    if (current_user_can(seopress_capability('manage_options', 'license')) && is_admin()) {
         delete_option('seopress_pro_license_status');
         delete_option('seopress_pro_license_key');
 
@@ -396,7 +449,8 @@ add_action('wp_ajax_seopress_request_reset_license', 'seopress_request_reset_lic
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Lock Google Analytics view
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_google_analytics_lock() {
+function seopress_google_analytics_lock()
+{
     check_ajax_referer('seopress_google_analytics_lock_nonce');
 
     update_option('seopress_google_analytics_lock_option_name', '1', 'yes');
@@ -415,18 +469,21 @@ add_action('wp_ajax_seopress_google_analytics_lock', 'seopress_google_analytics_
  *
  * @author Benjamin
  */
-function seopress_request_google_analytics_cron() {
-    seopress_request_google_analytics();
+function seopress_request_google_analytics_cron()
+{
+    seopress_request_google_analytics(true);
 }
 add_action('seopress_google_analytics_cron', 'seopress_request_google_analytics_cron');
 
-function seopress_request_google_analytics() {
+function seopress_request_google_analytics($clear = false)
+{
     //check_ajax_referer( 'seopress_request_google_analytics_nonce' );
 
     if (is_admin()) {
-        function seopress_google_analytics_auth_option() {
+        function seopress_google_analytics_auth_option()
+        {
             $seopress_google_analytics_auth_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_auth_option)) {
+            if (! empty($seopress_google_analytics_auth_option)) {
                 foreach ($seopress_google_analytics_auth_option as $key => $seopress_google_analytics_auth_value) {
                     $options[$key] = $seopress_google_analytics_auth_value;
                 }
@@ -436,9 +493,10 @@ function seopress_request_google_analytics() {
             }
         }
 
-        function seopress_google_analytics_auth_client_id_option() {
+        function seopress_google_analytics_auth_client_id_option()
+        {
             $seopress_google_analytics_auth_client_id_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_auth_client_id_option)) {
+            if (! empty($seopress_google_analytics_auth_client_id_option)) {
                 foreach ($seopress_google_analytics_auth_client_id_option as $key => $seopress_google_analytics_auth_client_id_value) {
                     $options[$key] = $seopress_google_analytics_auth_client_id_value;
                 }
@@ -448,9 +506,10 @@ function seopress_request_google_analytics() {
             }
         }
 
-        function seopress_google_analytics_auth_secret_id_option() {
+        function seopress_google_analytics_auth_secret_id_option()
+        {
             $seopress_google_analytics_auth_secret_id_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_auth_secret_id_option)) {
+            if (! empty($seopress_google_analytics_auth_secret_id_option)) {
                 foreach ($seopress_google_analytics_auth_secret_id_option as $key => $seopress_google_analytics_auth_secret_id_value) {
                     $options[$key] = $seopress_google_analytics_auth_secret_id_value;
                 }
@@ -460,9 +519,10 @@ function seopress_request_google_analytics() {
             }
         }
 
-        function seopress_google_analytics_auth_token_option() {
+        function seopress_google_analytics_auth_token_option()
+        {
             $seopress_google_analytics_auth_token_option = get_option('seopress_google_analytics_option_name1');
-            if ( ! empty($seopress_google_analytics_auth_token_option)) {
+            if (! empty($seopress_google_analytics_auth_token_option)) {
                 foreach ($seopress_google_analytics_auth_token_option as $key => $seopress_google_analytics_auth_token_value) {
                     $options[$key] = $seopress_google_analytics_auth_token_value;
                 }
@@ -472,9 +532,10 @@ function seopress_request_google_analytics() {
             }
         }
 
-        function seopress_google_analytics_refresh_token_option() {
+        function seopress_google_analytics_refresh_token_option()
+        {
             $seopress_google_analytics_refresh_token_option = get_option('seopress_google_analytics_option_name1');
-            if ( ! empty($seopress_google_analytics_refresh_token_option)) {
+            if (! empty($seopress_google_analytics_refresh_token_option)) {
                 foreach ($seopress_google_analytics_refresh_token_option as $key => $seopress_google_analytics_refresh_token_value) {
                     $options[$key] = $seopress_google_analytics_refresh_token_value;
                 }
@@ -484,9 +545,10 @@ function seopress_request_google_analytics() {
             }
         }
 
-        function seopress_google_analytics_debug_option() {
+        function seopress_google_analytics_debug_option()
+        {
             $seopress_google_analytics_debug_option = get_option('seopress_google_analytics_option_name1');
-            if ( ! empty($seopress_google_analytics_debug_option)) {
+            if (! empty($seopress_google_analytics_debug_option)) {
                 foreach ($seopress_google_analytics_debug_option as $key => $seopress_google_analytics_debug_value) {
                     $options[$key] = $seopress_google_analytics_debug_value;
                 }
@@ -498,7 +560,7 @@ function seopress_request_google_analytics() {
 
         if ('' != seopress_google_analytics_auth_option() && '' != seopress_google_analytics_auth_token_option()) {
             // get saved data
-            if ( ! $widget_options = get_option('seopress_ga_dashboard_widget_options')) {
+            if (! $widget_options = get_option('seopress_ga_dashboard_widget_options')) {
                 $widget_options = [];
             }
 
@@ -553,6 +615,10 @@ function seopress_request_google_analytics() {
             }
 
             $service = new Google_Service_AnalyticsReporting($client);
+
+            if (true === $clear) {
+                delete_transient('seopress_results_google_analytics');
+            }
 
             if (false === ($seopress_results_google_analytics_cache = get_transient('seopress_results_google_analytics'))) {
                 $seopress_results_google_analytics_cache = [];
@@ -814,7 +880,8 @@ function seopress_request_google_analytics() {
                 //BATCH REPORT
                 ////////////////////////////////////////////////////////////////////////////////////////
 
-                function seopress_analytics_get_reports($reports) {
+                function seopress_analytics_get_reports($reports)
+                {
                     $return = [];
 
                     for ($reportIndex = 0; $reportIndex < count($reports); ++$reportIndex) {
@@ -890,8 +957,8 @@ function seopress_request_google_analytics() {
                 $seopress_results_google_analytics_cache['source']                  = $all[6];
                 $seopress_results_google_analytics_cache['fullReferrer']            = $all[7];
                 $seopress_results_google_analytics_cache['contentpageviews']        = $all[8];
-                $seopress_results_google_analytics_cache['totalEvents']             = $all[0]['ga:totalEvents'];
-                $seopress_results_google_analytics_cache['uniqueEvents']            = $all[0]['ga:uniqueEvents'];
+                $seopress_results_google_analytics_cache['totalEvents']             = $all[0]['totalEvents'] ? $all[0]['totalEvents'] : '';
+                $seopress_results_google_analytics_cache['uniqueEvents']            = $all[0]['uniqueEvents'] ? $all[0]['uniqueEvents'] : '';
                 $seopress_results_google_analytics_cache['eventCategory']           = $all[9];
                 $seopress_results_google_analytics_cache['eventAction']             = $all[10];
                 $seopress_results_google_analytics_cache['eventLabel']              = $all[11];
@@ -930,7 +997,8 @@ function seopress_request_google_analytics() {
                         $seopress_ga_dashboard_widget_options_title = __('Sessions', 'wp-seopress-pro');
                 }
 
-                function seopress_ga_dashboard_get_sessions_labels($ga_date) {
+                function seopress_ga_dashboard_get_sessions_labels($ga_date)
+                {
                     $labels = [];
                     foreach ($ga_date as $key => $value) {
                         array_push($labels, date_i18n(get_option('date_format'), strtotime($value)));
@@ -939,7 +1007,8 @@ function seopress_request_google_analytics() {
                     return $labels;
                 }
 
-                function seopress_ga_dashboard_get_sessions_data($ga_sessions_rows) {
+                function seopress_ga_dashboard_get_sessions_data($ga_sessions_rows)
+                {
                     $data = [];
                     foreach ($ga_sessions_rows as $key => $value) {
                         array_push($data, $value);
@@ -970,7 +1039,8 @@ add_action('wp_ajax_seopress_request_google_analytics', 'seopress_request_google
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Clear Google Page Speed cache
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_clear_page_speed_cache() {
+function seopress_clear_page_speed_cache()
+{
     check_ajax_referer('seopress_clear_page_speed_cache_nonce');
 
     global $wpdb;
@@ -985,7 +1055,8 @@ add_action('wp_ajax_seopress_clear_page_speed_cache', 'seopress_clear_page_speed
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Save htaccess file
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_save_htaccess() {
+function seopress_save_htaccess()
+{
     check_ajax_referer('seopress_save_htaccess_nonce');
 
     if (current_user_can(seopress_capability('manage_options', 'htaccess')) && is_admin()) {
@@ -996,7 +1067,7 @@ function seopress_save_htaccess() {
         }
 
         if (is_writable($filename)) {
-            if ( ! $handle = fopen($filename, 'w')) {
+            if (! $handle = fopen($filename, 'w')) {
                 _e('Impossible to open file: ', 'wp-seopress-pro') . $filename;
                 exit;
             }

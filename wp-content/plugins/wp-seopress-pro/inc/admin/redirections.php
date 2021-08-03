@@ -5,7 +5,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         //Register SEOPress 404 / 301 Custom Post Type
         ///////////////////////////////////////////////////////////////////////////////////////////////////
-        function seopress_404_fn() {
+        function seopress_404_fn()
+        {
             $labels = [
                 'name'                  => _x('404 / 301', 'Post Type General Name', 'wp-seopress-pro'),
                 'singular_name'         => _x('404 / 301', 'Post Type Singular Name', 'wp-seopress-pro'),
@@ -70,7 +71,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Map SEOPress 404 caps
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         add_filter('map_meta_cap', 'seopress_404_map_meta_cap', 10, 4);
-        function seopress_404_map_meta_cap($caps, $cap, $user_id, $args) {
+        function seopress_404_map_meta_cap($caps, $cap, $user_id, $args)
+        {
             /* If editing, deleting, or reading a redirection, get the post and post type object. */
             if ('edit_redirection' === $cap || 'delete_redirection' === $cap || 'read_redirection' === $cap) {
                 $post      = get_post($args[0]);
@@ -116,7 +118,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         //Register SEOPress Custom Taxonomy Categories for Redirections
         ///////////////////////////////////////////////////////////////////////////////////////////////////
-        function seopress_404_cat_fn() {
+        function seopress_404_cat_fn()
+        {
             $labels = [
                 'name'                       => _x('Categories', 'Taxonomy General Name', 'wp-seopress-pro'),
                 'singular_name'              => _x('Category', 'Taxonomy Singular Name', 'wp-seopress-pro'),
@@ -158,24 +161,35 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Add custom buttons to SEOPress Redirections Custom Post Type
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-        function seopress_404_btn_cpt() {
+        function seopress_404_btn_cpt()
+        {
             $screen = get_current_screen();
             if ('seopress_404' == $screen->post_type) {
                 ?>
-				<script>
-				jQuery(function(){
-					jQuery("body.post-type-seopress_404 .wrap h1 ~ a").after('<a href="<?php echo admin_url('edit-tags.php?taxonomy=seopress_404_cat&post_type=seopress_404'); ?>" id="seopress-cat-redirects" style="margin: 10px 0 0 10px;" class="page-title-action"><?php _e('Manage categories redirects', 'wp-seopress-pro'); ?></a>');
+<script>
+    jQuery(function() {
+        jQuery("body.post-type-seopress_404 .wrap h1 ~ a").after(
+            '<a href="<?php echo admin_url('edit-tags.php?taxonomy=seopress_404_cat&post_type=seopress_404'); ?>" id="seopress-cat-redirects" class="page-title-action"><?php _e('Manage categories redirects', 'wp-seopress-pro'); ?></a>'
+        );
 
-					jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-cat-redirects").after('<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-import-redirects" style="margin: 10px 0 0 10px;" class="button button-primary"><?php _e('Import your redirects', 'wp-seopress-pro'); ?></a>');
+        jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-cat-redirects").after(
+            '<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-import-redirects" class="page-title-action"><?php _e('Import your redirects', 'wp-seopress-pro'); ?></a>'
+        );
 
-					jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-import-redirects").after('<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-export-redirections" style="margin: 10px 0 0 10px;" class="button button-primary"><?php _e('Export your redirects', 'wp-seopress-pro'); ?></a>');
+        jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-import-redirects").after(
+            '<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-export-redirections" class="page-title-action"><?php _e('Export your redirects', 'wp-seopress-pro'); ?></a>'
+        );
 
-					jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-export-redirections").after('<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-clean-404" style="margin: 10px 0 0 10px;" class="button"><?php _e('Clean your 404', 'wp-seopress-pro'); ?></a>');
+        jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-export-redirections").after(
+            '<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-clean-404" class="page-title-action"><?php _e('Clean your 404', 'wp-seopress-pro'); ?></a>'
+        );
 
-					jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-clean-404").after('<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-clean-redirects" style="margin: 10px 0 0 10px;" class="button"><?php _e('Clean all entries', 'wp-seopress-pro'); ?></a>');
-				});
-				</script>
-			<?php
+        jQuery("body.post-type-seopress_404 .wrap h1 ~ #seopress-clean-404").after(
+            '<a href="<?php echo admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects'); ?>" id="seopress-clean-redirects" class="page-title-action"><?php _e('Clean all entries', 'wp-seopress-pro'); ?></a>'
+        );
+    });
+</script>
+<?php
             }
         }
         add_action('admin_head', 'seopress_404_btn_cpt');
@@ -185,21 +199,28 @@ if ('1' == seopress_get_toggle_option('404')) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         add_action('manage_posts_extra_tablenav', 'seopress_404_maybe_render_blank_state');
 
-        function seopress_404_render_blank_state() {
-            echo '<div class="seopress-BlankState">';
+        function seopress_404_render_blank_state() { ?>
+<div class="seopress-BlankState">
 
-            echo '<h2 class="seopress-BlankState-message">' . esc_html__('Your redirections and 404 errors will appear here.', 'wp-seopress-pro') . '</h2>';
+    <h2 class="seopress-BlankState-message">
+        <?php esc_html_e('Your redirections and 404 errors will appear here.', 'wp-seopress-pro'); ?>
+    </h2>
 
-            echo '<div class="seopress-BlankState-buttons">';
+    <div class="seopress-BlankState-buttons">
 
-            echo '<a class="seopress-BlankState-cta button-primary button" href="' . esc_url(admin_url('post-new.php?post_type=seopress_404')) . '">' . esc_html__('Create a redirect', 'wp-seopress-pro') . '</a>';
-            echo '<a class="seopress-BlankState-cta button" href="' . esc_url(admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects')) . '">' . esc_html__('Start Import', 'wp-seopress-pro') . '</a>';
+        <a class="seopress-BlankState-cta btn btnPrimary"
+            href="<?php echo esc_url(admin_url('post-new.php?post_type=seopress_404')); ?>"><?php esc_html_e('Create a redirect', 'wp-seopress-pro'); ?></a>
+        <a class="seopress-BlankState-cta button"
+            href="<?php echo esc_url(admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_redirects')); ?>"><?php esc_html_e('Start Import', 'wp-seopress-pro'); ?></a>
 
-            echo '</div>';
+    </div>
 
-            echo '</div>';
+</div>
+
+<?php
         }
-        function seopress_404_maybe_render_blank_state($which) {
+        function seopress_404_maybe_render_blank_state($which)
+        {
             global $post_type;
 
             if ('seopress_404' === $post_type && 'bottom' === $which) {
@@ -219,7 +240,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         //Row actions links
         ///////////////////////////////////////////////////////////////////////////////////////////////////
-        function seopress_404_row_actions($actions, $post) {
+        function seopress_404_row_actions($actions, $post)
+        {
             if ('seopress_404' === get_post_type()) {
                 //WPML
                 add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
@@ -240,7 +262,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Filters view
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-        function seopress_404_filters_cpt() {
+        function seopress_404_filters_cpt()
+        {
             global $typenow;
 
             if ('seopress_404' == $typenow) {
@@ -289,7 +312,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
         add_action('restrict_manage_posts', 'seopress_404_filters_cpt');
 
-        function seopress_404_filters_action($query) {
+        function seopress_404_filters_action($query)
+        {
             global $pagenow;
             $current_page = isset($_GET['post_type']) ? $_GET['post_type'] : '';
 
@@ -362,7 +386,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         //enable 301
         add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_enable');
 
-        function seopress_bulk_actions_enable($bulk_actions) {
+        function seopress_bulk_actions_enable($bulk_actions)
+        {
             $bulk_actions['seopress_enable'] = __('Enable redirection', 'wp-seopress-pro');
 
             return $bulk_actions;
@@ -370,7 +395,8 @@ if ('1' == seopress_get_toggle_option('404')) {
 
         add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_enable_handler', 10, 3);
 
-        function seopress_bulk_action_enable_handler($redirect_to, $doaction, $post_ids) {
+        function seopress_bulk_action_enable_handler($redirect_to, $doaction, $post_ids)
+        {
             if ('seopress_enable' !== $doaction) {
                 return $redirect_to;
             }
@@ -383,24 +409,27 @@ if ('1' == seopress_get_toggle_option('404')) {
             return $redirect_to;
         }
 
-        add_action('admin_notices', 'seopress_bulk_action_enable_admin_notice');
+        add_action('seopress_admin_notices', 'seopress_bulk_action_enable_admin_notice');
 
-        function seopress_bulk_action_enable_admin_notice() {
-            if ( ! empty($_REQUEST['bulk_enable_posts'])) {
+        function seopress_bulk_action_enable_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_enable_posts'])) {
                 $enable_count = intval($_REQUEST['bulk_enable_posts']);
                 printf('<div id="message" class="updated fade"><p>' .
-                        _n('%s redirections enabled.',
-                                '%s redirections enabled.',
-                                $enable_count,
-                                'wp-seopress-pro'
-                                ) . '</p></div>', $enable_count);
+                        _n(
+                            '%s redirection enabled.',
+                            '%s redirections enabled.',
+                            $enable_count,
+                            'wp-seopress-pro'
+                        ) . '</p></div>', $enable_count);
             }
         }
 
         //disable 301
         add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_disable');
 
-        function seopress_bulk_actions_disable($bulk_actions) {
+        function seopress_bulk_actions_disable($bulk_actions)
+        {
             $bulk_actions['seopress_disable'] = __('Disable redirection', 'wp-seopress-pro');
 
             return $bulk_actions;
@@ -408,7 +437,8 @@ if ('1' == seopress_get_toggle_option('404')) {
 
         add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_disable_handler', 10, 3);
 
-        function seopress_bulk_action_disable_handler($redirect_to, $doaction, $post_ids) {
+        function seopress_bulk_action_disable_handler($redirect_to, $doaction, $post_ids)
+        {
             if ('seopress_disable' !== $doaction) {
                 return $redirect_to;
             }
@@ -416,22 +446,229 @@ if ('1' == seopress_get_toggle_option('404')) {
                 // Perform action for each post.
                 update_post_meta($post_id, '_seopress_redirections_enabled', '');
             }
-            $redirect_to = add_query_arg('bulk_enable_posts', count($post_ids), $redirect_to);
+            $redirect_to = add_query_arg('bulk_disable_posts', count($post_ids), $redirect_to);
 
             return $redirect_to;
         }
 
-        add_action('admin_notices', 'seopress_bulk_action_disable_admin_notice');
+        add_action('seopress_admin_notices', 'seopress_bulk_action_disable_admin_notice');
 
-        function seopress_bulk_action_disable_admin_notice() {
-            if ( ! empty($_REQUEST['bulk_disable_posts'])) {
-                $enable_count = intval($_REQUEST['bulk_disable_posts']);
+        function seopress_bulk_action_disable_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_disable_posts'])) {
+                $disable_count = intval($_REQUEST['bulk_disable_posts']);
                 printf('<div id="message" class="updated fade"><p>' .
-                        _n('%s redirection disabled.',
-                                '%s redirections disabled.',
-                                $enable_count,
-                                'wp-seopress-pro'
-                                ) . '</p></div>', $enable_count);
+                        _n(
+                            '%s redirection disabled.',
+                            '%s redirections disabled.',
+                            $disable_count,
+                            'wp-seopress-pro'
+                        ) . '</p></div>', $disable_count);
+            }
+        }
+
+        //Set as 301
+        add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_redirect_301');
+
+        function seopress_bulk_actions_redirect_301($bulk_actions)
+        {
+            $bulk_actions['seopress_redirect_301'] = __('Mark as 301', 'wp-seopress');
+
+            return $bulk_actions;
+        }
+        add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_redirect_301_handler', 10, 3);
+
+        function seopress_bulk_action_redirect_301_handler($redirect_to, $doaction, $post_ids)
+        {
+            if ('seopress_redirect_301' !== $doaction) {
+                return $redirect_to;
+            }
+            foreach ($post_ids as $post_id) {
+                // Perform action for each post.
+                update_post_meta($post_id, '_seopress_redirections_type', '301');
+            }
+            $redirect_to = add_query_arg('bulk_301_redirects_posts', count($post_ids), $redirect_to);
+
+            return $redirect_to;
+        }
+
+        add_action('seopress_admin_notices', 'seopress_bulk_action_redirect_301_admin_notice');
+
+        function seopress_bulk_action_redirect_301_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_301_redirects_posts'])) {
+                $count_301 = intval($_REQUEST['bulk_301_redirects_posts']);
+                printf('<div id="message" class="updated fade"><p>' .
+                _n(
+                    '%s marked as 301 redirect.',
+                    '%s marked as 301 redirect.',
+                    $count_301,
+                    'wp-seopress-pro'
+                ) . '</p></div>', $count_301);
+            }
+        }
+
+        //Set as 302
+        add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_redirect_302');
+
+        function seopress_bulk_actions_redirect_302($bulk_actions)
+        {
+            $bulk_actions['seopress_redirect_302'] = __('Mark as 302', 'wp-seopress');
+
+            return $bulk_actions;
+        }
+        add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_redirect_302_handler', 10, 3);
+
+        function seopress_bulk_action_redirect_302_handler($redirect_to, $doaction, $post_ids)
+        {
+            if ('seopress_redirect_302' !== $doaction) {
+                return $redirect_to;
+            }
+            foreach ($post_ids as $post_id) {
+                // Perform action for each post.
+                update_post_meta($post_id, '_seopress_redirections_type', '302');
+            }
+            $redirect_to = add_query_arg('bulk_302_redirects_posts', count($post_ids), $redirect_to);
+
+            return $redirect_to;
+        }
+
+        add_action('seopress_admin_notices', 'seopress_bulk_action_redirect_302_admin_notice');
+
+        function seopress_bulk_action_redirect_302_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_302_redirects_posts'])) {
+                $count_302 = intval($_REQUEST['bulk_302_redirects_posts']);
+                printf('<div id="message" class="updated fade"><p>' .
+                _n(
+                    '%s marked as 302 redirect.',
+                    '%s marked as 302 redirect.',
+                    $count_302,
+                    'wp-seopress-pro'
+                ) . '</p></div>', $count_302);
+            }
+        }
+
+        //Set as 307
+        add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_redirect_307');
+
+        function seopress_bulk_actions_redirect_307($bulk_actions)
+        {
+            $bulk_actions['seopress_redirect_307'] = __('Mark as 307', 'wp-seopress');
+
+            return $bulk_actions;
+        }
+        add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_redirect_307_handler', 10, 3);
+
+        function seopress_bulk_action_redirect_307_handler($redirect_to, $doaction, $post_ids)
+        {
+            if ('seopress_redirect_307' !== $doaction) {
+                return $redirect_to;
+            }
+            foreach ($post_ids as $post_id) {
+                // Perform action for each post.
+                update_post_meta($post_id, '_seopress_redirections_type', '307');
+            }
+            $redirect_to = add_query_arg('bulk_307_redirects_posts', count($post_ids), $redirect_to);
+
+            return $redirect_to;
+        }
+
+        add_action('seopress_admin_notices', 'seopress_bulk_action_redirect_307_admin_notice');
+
+        function seopress_bulk_action_redirect_307_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_307_redirects_posts'])) {
+                $count_307 = intval($_REQUEST['bulk_307_redirects_posts']);
+                printf('<div id="message" class="updated fade"><p>' .
+                _n(
+                    '%s marked as 307 redirect.',
+                    '%s marked as 307 redirect.',
+                    $count_307,
+                    'wp-seopress-pro'
+                ) . '</p></div>', $count_307);
+            }
+        }
+
+        //Set as 410
+        add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_redirect_410');
+
+        function seopress_bulk_actions_redirect_410($bulk_actions)
+        {
+            $bulk_actions['seopress_redirect_410'] = __('Mark as 410', 'wp-seopress');
+
+            return $bulk_actions;
+        }
+        add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_redirect_410_handler', 10, 3);
+
+        function seopress_bulk_action_redirect_410_handler($redirect_to, $doaction, $post_ids)
+        {
+            if ('seopress_redirect_410' !== $doaction) {
+                return $redirect_to;
+            }
+            foreach ($post_ids as $post_id) {
+                // Perform action for each post.
+                update_post_meta($post_id, '_seopress_redirections_type', '410');
+            }
+            $redirect_to = add_query_arg('bulk_410_redirects_posts', count($post_ids), $redirect_to);
+
+            return $redirect_to;
+        }
+
+        add_action('seopress_admin_notices', 'seopress_bulk_action_redirect_410_admin_notice');
+
+        function seopress_bulk_action_redirect_410_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_410_redirects_posts'])) {
+                $count_410 = intval($_REQUEST['bulk_410_redirects_posts']);
+                printf('<div id="message" class="updated fade"><p>' .
+                _n(
+                    '%s marked as 410 redirect.',
+                    '%s marked as 410 redirect.',
+                    $count_410,
+                    'wp-seopress-pro'
+                ) . '</p></div>', $count_410);
+            }
+        }
+
+        //Set as 451
+        add_filter('bulk_actions-edit-seopress_404', 'seopress_bulk_actions_redirect_451');
+
+        function seopress_bulk_actions_redirect_451($bulk_actions)
+        {
+            $bulk_actions['seopress_redirect_451'] = __('Mark as 451', 'wp-seopress');
+
+            return $bulk_actions;
+        }
+        add_filter('handle_bulk_actions-edit-seopress_404', 'seopress_bulk_action_redirect_451_handler', 10, 3);
+
+        function seopress_bulk_action_redirect_451_handler($redirect_to, $doaction, $post_ids)
+        {
+            if ('seopress_redirect_451' !== $doaction) {
+                return $redirect_to;
+            }
+            foreach ($post_ids as $post_id) {
+                // Perform action for each post.
+                update_post_meta($post_id, '_seopress_redirections_type', '451');
+            }
+            $redirect_to = add_query_arg('bulk_451_redirects_posts', count($post_ids), $redirect_to);
+
+            return $redirect_to;
+        }
+
+        add_action('seopress_admin_notices', 'seopress_bulk_action_redirect_451_admin_notice');
+
+        function seopress_bulk_action_redirect_451_admin_notice()
+        {
+            if (! empty($_REQUEST['bulk_451_redirects_posts'])) {
+                $count_451 = intval($_REQUEST['bulk_451_redirects_posts']);
+                printf('<div id="message" class="updated fade"><p>' .
+                _n(
+                    '%s marked as 451 redirect.',
+                    '%s marked as 451 redirect.',
+                    $count_451,
+                    'wp-seopress-pro'
+                ) . '</p></div>', $count_451);
             }
         }
 
@@ -439,7 +676,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Set title placeholder for 404 / 301 Custom Post Type
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-        function seopress_404_cpt_title($title) {
+        function seopress_404_cpt_title($title)
+        {
             if (function_exists('get_current_screen')) {
                 $screen = get_current_screen();
                 if ('seopress_404' == $screen->post_type) {
@@ -457,7 +695,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
         add_action('edit_form_after_title', 'seopress_301_after_title');
-        function seopress_301_after_title() {
+        function seopress_301_after_title()
+        {
             global $typenow;
             if (isset($typenow) && 'seopress_404' == $typenow) {
                 echo '<p>' . __('Enter your <strong>relative</strong> URL above. Do not use anchors, they are not sent by your browser.', 'wp-seopress-pro') . '<br>';
@@ -470,7 +709,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Set messages for 404 / 301 Custom Post Type
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-        function seopress_404_set_messages($messages) {
+        function seopress_404_set_messages($messages)
+        {
             global $post, $post_ID, $typenow;
             $post_type         = 'seopress_404';
             $seopress_404_test = '';
@@ -508,7 +748,8 @@ if ('1' == seopress_get_toggle_option('404')) {
 
         add_filter('post_updated_messages', 'seopress_404_set_messages');
 
-        function seopress_404_set_messages_list($bulk_messages, $bulk_counts) {
+        function seopress_404_set_messages_list($bulk_messages, $bulk_counts)
+        {
             $bulk_messages['seopress_404'] = [
                 'updated'   => _n('%s redirection updated.', '%s redirections updated.', $bulk_counts['updated']),
                 'locked'    => _n('%s redirection not updated, somebody is editing it.', '%s redirections not updated, somebody is editing them.', $bulk_counts['locked']),
@@ -528,19 +769,22 @@ if ('1' == seopress_get_toggle_option('404')) {
         add_filter('manage_edit-seopress_404_columns', 'seopress_404_count_columns');
         add_action('manage_seopress_404_posts_custom_column', 'seopress_404_count_display_column', 10, 2);
 
-        function seopress_404_count_columns($columns) {
+        function seopress_404_count_columns($columns)
+        {
             $columns['seopress_404']                        = __('Count', 'wp-seopress-pro');
             $columns['seopress_404_redirect_enable']        = __('Enable?', 'wp-seopress-pro');
             $columns['seopress_404_redirect_type']          = __('Type', 'wp-seopress-pro');
             $columns['seopress_404_redirect_value']         = __('URL redirect', 'wp-seopress-pro');
             $columns['seopress_404_redirect_date_request']  = __('Last time loaded', 'wp-seopress-pro');
             $columns['seopress_404_redirect_ua']            = __('User agent', 'wp-seopress-pro');
+            $columns['seopress_404_redirect_referer']       = __('Referer', 'wp-seopress-pro');
             $columns['seopress_404_redirect_ip']            = __('IP address', 'wp-seopress-pro');
 
             return $columns;
         }
 
-        function seopress_404_count_display_column($column, $post_id) {
+        function seopress_404_count_display_column($column, $post_id)
+        {
             if ('seopress_404' == $column) {
                 echo get_post_meta($post_id, 'seopress_404_count', true);
             }
@@ -594,6 +838,9 @@ if ('1' == seopress_get_toggle_option('404')) {
             if ('seopress_404_redirect_ua' == $column) {
                 echo esc_html(get_post_meta($post_id, 'seopress_redirections_ua', true));
             }
+            if ('seopress_404_redirect_referer' == $column) {
+                echo '<a target="_blank" href="'.esc_html(get_post_meta($post_id, 'seopress_redirections_referer', true)).'">'.esc_html(get_post_meta($post_id, 'seopress_redirections_referer', true)).'</a>';
+            }
             if ('seopress_404_redirect_ip' == $column) {
                 echo esc_html(get_post_meta($post_id, '_seopress_redirections_ip', true));
             }
@@ -601,7 +848,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Sortable columns
         add_filter('manage_edit-seopress_404_sortable_columns', 'seopress_404_sortable_columns');
 
-        function seopress_404_sortable_columns($columns) {
+        function seopress_404_sortable_columns($columns)
+        {
             $columns['seopress_404']                 = 'seopress_404';
             $columns['seopress_404_redirect_enable'] = 'seopress_404_redirect_enable';
             $columns['seopress_404_redirect_type']   = 'seopress_404_redirect_type';
@@ -610,8 +858,9 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
 
         add_filter('pre_get_posts', 'seopress_404_sort_columns_by');
-        function seopress_404_sort_columns_by($query) {
-            if ( ! is_admin()) {
+        function seopress_404_sort_columns_by($query)
+        {
+            if (! is_admin()) {
                 return;
             } else {
                 $orderby = $query->get('orderby');
@@ -664,62 +913,71 @@ if ('1' == seopress_get_toggle_option('404')) {
         //Quick Edit
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         add_action('quick_edit_custom_box', 'seopress_bulk_quick_edit_301_custom_box', 10, 2);
-        function seopress_bulk_quick_edit_301_custom_box($column_name) {
+        function seopress_bulk_quick_edit_301_custom_box($column_name)
+        {
             static $printNonce = true;
             if ($printNonce) {
                 $printNonce = false;
                 wp_nonce_field(plugin_basename(__FILE__), 'seopress_301_edit_nonce');
             } ?>
-			<div class="wp-clearfix"></div>
-			<fieldset class="inline-edit-col-left">
-				<div class="inline-edit-col column-<?php echo $column_name; ?>">
+<div class="wp-clearfix"></div>
+<fieldset class="inline-edit-col-left">
+    <div class="inline-edit-col column-<?php echo $column_name; ?>">
 
-					<?php
+        <?php
                         switch ($column_name) {
                         case 'seopress_404_redirect_value':
                         ?>
-							<label class="inline-edit-group">
-								<span class="title"><?php _e('New URL', 'wp-seopress-pro'); ?></span>
-								<span class="input-text-wrap">
-									<input type="text" name="seopress_redirections_value" />
-								</span>
-							</label>
-							<?php
+        <label class="inline-edit-group">
+            <span class="title"><?php _e('New URL', 'wp-seopress-pro'); ?></span>
+            <span class="input-text-wrap">
+                <input type="text" name="seopress_redirections_value" />
+            </span>
+        </label>
+        <?php
                         break;
                         case 'seopress_404_redirect_type':
                         ?>
-							<label class="alignleft">
-								<span class="title"><?php _e('Redirection type', 'wp-seopress-pro'); ?></span>
-								<select name="seopress_redirections_type">
-									<option value="404"><?php _e('None', 'wp-seopress-pro'); ?></option>
-									<option value="301"><?php _e('301 Moved Permanently', 'wp-seopress-pro'); ?></option>
-									<option value="302"><?php _e('302 Found / Moved Temporarily', 'wp-seopress-pro'); ?></option>
-									<option value="307"><?php _e('307 Moved Temporarily', 'wp-seopress-pro'); ?></option>
-									<option value="410"><?php _e('410 Gone', 'wp-seopress-pro'); ?></option>
-									<option value="451"><?php _e('451 Unavailable For Legal Reasons', 'wp-seopress-pro'); ?></option>
-								</select>
-							</label>
-							<?php
+        <label class="alignleft">
+            <span class="title"><?php _e('Redirection type', 'wp-seopress-pro'); ?></span>
+            <select name="seopress_redirections_type">
+                <option value="404"><?php _e('None', 'wp-seopress-pro'); ?>
+                </option>
+                <option value="301"><?php _e('301 Moved Permanently', 'wp-seopress-pro'); ?>
+                </option>
+                <option value="302"><?php _e('302 Found / Moved Temporarily', 'wp-seopress-pro'); ?>
+                </option>
+                <option value="307"><?php _e('307 Moved Temporarily', 'wp-seopress-pro'); ?>
+                </option>
+                <option value="410"><?php _e('410 Gone', 'wp-seopress-pro'); ?>
+                </option>
+                <option value="451"><?php _e('451 Unavailable For Legal Reasons', 'wp-seopress-pro'); ?>
+                </option>
+            </select>
+        </label>
+        <?php
                         break;
                         case 'seopress_404_redirect_enable':
                         ?>
-							<h4><?php _e('Redirection settings', 'wp-seopress-pro'); ?></h4>
-							<label class="alignleft">
-								<input type="checkbox" name="seopress_redirections_enabled" value="yes">
-								<span class="checkbox-title"><?php _e('Enable redirection?', 'wp-seopress-pro'); ?></span>
-							</label>
-							<?php
+        <h4><?php _e('Redirection settings', 'wp-seopress-pro'); ?>
+        </h4>
+        <label class="alignleft">
+            <input type="checkbox" name="seopress_redirections_enabled" value="yes">
+            <span class="checkbox-title"><?php _e('Enable redirection?', 'wp-seopress-pro'); ?></span>
+        </label>
+        <?php
                         break;
                         default:
                         break;
                         } ?>
-				</div>
-			</fieldset>
-			<?php
+    </div>
+</fieldset>
+<?php
         }
 
         add_action('save_post', 'seopress_bulk_quick_edit_301_save_post', 10, 2);
-        function seopress_bulk_quick_edit_301_save_post($post_id) {
+        function seopress_bulk_quick_edit_301_save_post($post_id)
+        {
             // don't save if Elementor library
             if (isset($_REQUEST['post_type']) && 'elementor_library' == $_REQUEST['post_type']) {
                 return $post_id;
@@ -735,13 +993,13 @@ if ('1' == seopress_get_toggle_option('404')) {
                 return $post_id;
             }
 
-            if ( ! current_user_can('edit_redirections', $post_id)) {
+            if (! current_user_can('edit_redirections', $post_id)) {
                 return;
             }
 
             $_REQUEST += ['seopress_301_edit_nonce' => ''];
 
-            if ( ! wp_verify_nonce($_REQUEST['seopress_301_edit_nonce'], plugin_basename(__FILE__))) {
+            if (! wp_verify_nonce($_REQUEST['seopress_301_edit_nonce'], plugin_basename(__FILE__))) {
                 return;
             }
             if (isset($_REQUEST['seopress_redirections_value'])) {
@@ -756,13 +1014,38 @@ if ('1' == seopress_get_toggle_option('404')) {
                 delete_post_meta($post_id, '_seopress_redirections_enabled', '');
             }
         }
+
+        add_filter('wp_insert_post_data', 'seopress_filter_post_title', '99', 2);
+        function seopress_filter_post_title($data, $postarr)
+        {
+            if (isset($data['post_type']) && 'seopress_404' === $data['post_type'] && isset($postarr['ID'])) {
+                if ('' != get_post_meta($postarr['ID'], '_seopress_redirections_type', true)) {
+                    $title = $data['post_title'];
+
+                    if ($title) {
+                        $url = wp_parse_url($title);
+
+                        if (isset($url['path']) && ! empty($url['path'])) {
+                            $title              = $url['path'];
+                            if (isset($url['query']) && ! empty($url['query'])) {
+                                $title .= '?' . $url['query'];
+                            }
+                            $data['post_title'] =  ltrim($title, '/');
+                        }
+                    }
+                }
+            }
+
+            return $data;
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     //Get page by title
     // @since 3.8.7
     // @author Benjamin
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    function seopress_get_page_by_title($page_title, $output = OBJECT, $post_type = 'seopress_404') {
+    function seopress_get_page_by_title($page_title, $output = OBJECT, $post_type = 'seopress_404')
+    {
         global $wpdb;
 
         $sql = $wpdb->prepare(
@@ -810,8 +1093,9 @@ if ('1' == seopress_get_toggle_option('404')) {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     //Do redirect
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    function seopress_301_do_redirect() {
-        if ( ! is_admin()) {
+    function seopress_301_do_redirect()
+    {
+        if (! is_admin()) {
             global $wp;
             global $post;
 
@@ -820,6 +1104,10 @@ if ('1' == seopress_get_toggle_option('404')) {
             //WPML
             if (defined('ICL_SITEPRESS_VERSION')) {
                 $home_url = untrailingslashit(home_url($wp->request));
+            }
+
+            if (! isset($_SERVER['QUERY_STRING'])) {
+                $_SERVER['QUERY_STRING'] = '';
             }
 
             $get_init_current_url = htmlspecialchars(rawurldecode(add_query_arg($_SERVER['QUERY_STRING'], '', $home_url)));
@@ -890,14 +1178,14 @@ if ('1' == seopress_get_toggle_option('404')) {
             $uri2 = htmlspecialchars_decode($uri2);
             $uri3 = htmlspecialchars_decode($uri3);
 
-            $page_uri   = seopress_get_page_by_title(trailingslashit($uri), '',  'seopress_404');
-            $page_uri2  = seopress_get_page_by_title($uri2, '',  'seopress_404');
+            $page_uri   = seopress_get_page_by_title(trailingslashit($uri), '', 'seopress_404');
+            $page_uri2  = seopress_get_page_by_title($uri2, '', 'seopress_404');
 
             if (defined('ICL_SITEPRESS_VERSION')) {
-                $page_uri4  = seopress_get_page_by_title($uri3, '',  'seopress_404');
+                $page_uri4  = seopress_get_page_by_title($uri3, '', 'seopress_404');
             }
 
-            $page_uri3  = seopress_get_page_by_title($uri, '',  'seopress_404');
+            $page_uri3  = seopress_get_page_by_title($uri, '', 'seopress_404');
 
             //Find URL in Redirections post type --- EXACT MATCH
             /**With trailing slash**/
@@ -929,18 +1217,18 @@ if ('1' == seopress_get_toggle_option('404')) {
                 $uri2 = ltrim($uri2, '/');
                 $uri3 = ltrim($uri3, '/');
 
-                $page_uri   = seopress_get_page_by_title(trailingslashit($uri), '',  'seopress_404');
-                $page_uri2  = seopress_get_page_by_title($uri2, '',  'seopress_404');
+                $page_uri   = seopress_get_page_by_title(trailingslashit($uri), '', 'seopress_404');
+                $page_uri2  = seopress_get_page_by_title($uri2, '', 'seopress_404');
 
                 if (defined('ICL_SITEPRESS_VERSION')) {
-                    $page_uri4  = seopress_get_page_by_title($uri3, '',  'seopress_404');
+                    $page_uri4  = seopress_get_page_by_title($uri3, '', 'seopress_404');
                 }
 
-                $page_uri3  = seopress_get_page_by_title($uri, '',  'seopress_404');
+                $page_uri3  = seopress_get_page_by_title($uri, '', 'seopress_404');
 
-                $page_uri   = seopress_get_page_by_title(trailingslashit($uri), '',  'seopress_404');
-                $page_uri2  = seopress_get_page_by_title($uri2, '',  'seopress_404');
-                $page_uri3  = seopress_get_page_by_title($uri, '',  'seopress_404');
+                $page_uri   = seopress_get_page_by_title(trailingslashit($uri), '', 'seopress_404');
+                $page_uri2  = seopress_get_page_by_title($uri2, '', 'seopress_404');
+                $page_uri3  = seopress_get_page_by_title($uri, '', 'seopress_404');
 
                 /**With trailing slash**/
                 if (isset($uri) && '' != $uri && $page_uri) {
@@ -1035,9 +1323,10 @@ if ('1' == seopress_get_toggle_option('404')) {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     //404 monitoring
-    function seopress_404_enable_option() {
+    function seopress_404_enable_option()
+    {
         $seopress_404_enable_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_404_enable_option)) {
+        if (! empty($seopress_404_enable_option)) {
             foreach ($seopress_404_enable_option as $key => $seopress_404_enable_value) {
                 $options[$key] = $seopress_404_enable_value;
             }
@@ -1047,9 +1336,10 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
     }
     //Redirect to home
-    function seopress_404_redirect_home_option() {
+    function seopress_404_redirect_home_option()
+    {
         $seopress_404_redirect_home_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_404_redirect_home_option)) {
+        if (! empty($seopress_404_redirect_home_option)) {
             foreach ($seopress_404_redirect_home_option as $key => $seopress_404_redirect_home_value) {
                 $options[$key] = $seopress_404_redirect_home_value;
             }
@@ -1059,9 +1349,10 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
     }
     //Redirect to custom url
-    function seopress_404_redirect_custom_url_option() {
+    function seopress_404_redirect_custom_url_option()
+    {
         $seopress_404_redirect_custom_url_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_404_redirect_custom_url_option)) {
+        if (! empty($seopress_404_redirect_custom_url_option)) {
             foreach ($seopress_404_redirect_custom_url_option as $key => $seopress_404_redirect_custom_url_value) {
                 $options[$key] = $seopress_404_redirect_custom_url_value;
             }
@@ -1071,9 +1362,10 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
     }
     //Status code
-    function seopress_404_redirect_status_code_option() {
+    function seopress_404_redirect_status_code_option()
+    {
         $seopress_404_redirect_status_code_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_404_redirect_status_code_option)) {
+        if (! empty($seopress_404_redirect_status_code_option)) {
             foreach ($seopress_404_redirect_status_code_option as $key => $seopress_404_redirect_status_code_value) {
                 $options[$key] = $seopress_404_redirect_status_code_value;
             }
@@ -1083,9 +1375,10 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
     }
     //Enable Mail notifications
-    function seopress_404_enable_mails_option() {
+    function seopress_404_enable_mails_option()
+    {
         $seopress_404_enable_mails_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_404_enable_mails_option)) {
+        if (! empty($seopress_404_enable_mails_option)) {
             foreach ($seopress_404_enable_mails_option as $key => $seopress_404_enable_mails_value) {
                 $options[$key] = $seopress_404_enable_mails_value;
             }
@@ -1095,9 +1388,10 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
     }
     //To Mail Alert
-    function seopress_404_enable_mails_from_option() {
+    function seopress_404_enable_mails_from_option()
+    {
         $seopress_404_enable_mails_from_option = get_option('seopress_pro_option_name');
-        if ( ! empty($seopress_404_enable_mails_from_option)) {
+        if (! empty($seopress_404_enable_mails_from_option)) {
             foreach ($seopress_404_enable_mails_from_option as $key => $seopress_404_enable_mails_from_value) {
                 $options[$key] = $seopress_404_enable_mails_from_value;
             }
@@ -1106,8 +1400,23 @@ if ('1' == seopress_get_toggle_option('404')) {
             }
         }
     }
-    function seopress_404_send_alert($get_current_url) {
-        function seopress_404_send_alert_content_type() {
+    //IP logging
+    function seopress_404_ip_logging_option()
+    {
+        $seopress_404_ip_logging_option = get_option('seopress_pro_option_name');
+        if (! empty($seopress_404_ip_logging_option)) {
+            foreach ($seopress_404_ip_logging_option as $key => $seopress_404_ip_logging_value) {
+                $options[$key] = $seopress_404_ip_logging_value;
+            }
+            if (isset($seopress_404_ip_logging_option['seopress_404_ip_logging'])) {
+                return $seopress_404_ip_logging_option['seopress_404_ip_logging'];
+            }
+        }
+    }
+    function seopress_404_send_alert($get_current_url)
+    {
+        function seopress_404_send_alert_content_type()
+        {
             return 'text/html';
         }
         add_filter('wp_mail_content_type', 'seopress_404_send_alert_content_type');
@@ -1321,7 +1630,8 @@ if ('1' == seopress_get_toggle_option('404')) {
     }
 
     //Create Redirection in Post Type
-    function seopress_404_create_redirect() {
+    function seopress_404_create_redirect()
+    {
         global $wp;
         global $post;
 
@@ -1344,7 +1654,7 @@ if ('1' == seopress_get_toggle_option('404')) {
 
         //Creating 404 error in seopress_404
         if (false === $match) {
-            $seopress_get_page = seopress_get_page_by_title($get_current_url, '',  'seopress_404');
+            $seopress_get_page = seopress_get_page_by_title($get_current_url, '', 'seopress_404');
 
             //Get Title
             if ('' != $seopress_get_page) {
@@ -1355,14 +1665,30 @@ if ('1' == seopress_get_toggle_option('404')) {
 
             //Get User Agent
             $seopress_get_ua = '';
-            if ( ! empty($_SERVER['HTTP_USER_AGENT'])) {
+            if (! empty($_SERVER['HTTP_USER_AGENT'])) {
                 $seopress_get_ua = $_SERVER['HTTP_USER_AGENT'];
+            }
+
+            //Get Referer
+            $seopress_get_referer = '';
+            if (wp_get_referer()) {
+                $seopress_get_referer = wp_get_referer();
             }
 
             //Get IP Address
             $seopress_get_ip = '';
-            if (function_exists(seopress_get_ip_address()) && '' != seopress_get_ip_address()) {
-                $seopress_get_ip = seopress_get_ip_address();
+            $ip_logging = 'full';
+            if (seopress_404_ip_logging_option()) {
+                $ip_logging = seopress_404_ip_logging_option();
+            }
+            if ($ip_logging ==='full' || $ip_logging ==='anon') {
+                if (function_exists('seopress_get_ip_address') && '' != seopress_get_ip_address()) {
+                    $seopress_get_ip = seopress_get_ip_address();
+
+                    if ($ip_logging ==='anon' && function_exists('wp_privacy_anonymize_ip')) {
+                        $seopress_get_ip = wp_privacy_anonymize_ip(seopress_get_ip_address());
+                    }
+                }
             }
 
             if ($get_current_url && $seopress_get_post_title != $get_current_url) {
@@ -1371,6 +1697,7 @@ if ('1' == seopress_get_toggle_option('404')) {
                         'post_title' => $get_current_url,
                         'meta_input' => [
                             'seopress_redirections_ua'            => $seopress_get_ua,
+                            'seopress_redirections_referer'       => $seopress_get_referer,
                             '_seopress_404_redirect_date_request' => $seopress_get_current_time,
                             '_seopress_redirections_ip'           => $seopress_get_ip,
                         ],
@@ -1387,11 +1714,13 @@ if ('1' == seopress_get_toggle_option('404')) {
                 update_post_meta($seopress_get_page->ID, 'seopress_404_count', ++$seopress_404_count);
                 update_post_meta($seopress_get_page->ID, '_seopress_404_redirect_date_request', $seopress_get_current_time);
                 update_post_meta($seopress_get_page->ID, 'seopress_redirections_ua', $seopress_get_ua);
+                update_post_meta($seopress_get_page->ID, 'seopress_redirections_referer', $seopress_get_referer);
                 update_post_meta($seopress_get_page->ID, '_seopress_redirections_ip', $seopress_get_ip);
             }
         }
     }
-    function seopress_is_bot() {
+    function seopress_is_bot()
+    {
         $bot_regex = '/BotLink|bingbot|AhrefsBot|ahoy|AlkalineBOT|anthill|appie|arale|araneo|AraybOt|ariadne|arks|ATN_Worldwide|Atomz|bbot|Bjaaland|Ukonline|borg\-bot\/0\.9|boxseabot|bspider|calif|christcrawler|CMC\/0\.01|combine|confuzzledbot|CoolBot|cosmos|Internet Cruiser Robot|cusco|cyberspyder|cydralspider|desertrealm, desert realm|digger|DIIbot|grabber|downloadexpress|DragonBot|dwcp|ecollector|ebiness|elfinbot|esculapio|esther|fastcrawler|FDSE|FELIX IDE|ESI|fido|H�m�h�kki|KIT\-Fireball|fouineur|Freecrawl|gammaSpider|gazz|gcreep|golem|googlebot|griffon|Gromit|gulliver|gulper|hambot|havIndex|hotwired|htdig|iajabot|INGRID\/0\.1|Informant|InfoSpiders|inspectorwww|irobot|Iron33|JBot|jcrawler|Teoma|Jeeves|jobo|image\.kapsi\.net|KDD\-Explorer|ko_yappo_robot|label\-grabber|larbin|legs|Linkidator|linkwalker|Lockon|logo_gif_crawler|marvin|mattie|mediafox|MerzScope|NEC\-MeshExplorer|MindCrawler|udmsearch|moget|Motor|msnbot|muncher|muninn|MuscatFerret|MwdSearch|sharp\-info\-agent|WebMechanic|NetScoop|newscan\-online|ObjectsSearch|Occam|Orbsearch\/1\.0|packrat|pageboy|ParaSite|patric|pegasus|perlcrawler|phpdig|piltdownman|Pimptrain|pjspider|PlumtreeWebAccessor|PortalBSpider|psbot|Getterrobo\-Plus|Raven|RHCS|RixBot|roadrunner|Robbie|robi|RoboCrawl|robofox|Scooter|Search\-AU|searchprocess|Senrigan|Shagseeker|sift|SimBot|Site Valet|skymob|SLCrawler\/2\.0|slurp|ESI|snooper|solbot|speedy|spider_monkey|SpiderBot\/1\.0|spiderline|nil|suke|http:\/\/www\.sygol\.com|tach_bw|TechBOT|templeton|titin|topiclink|UdmSearch|urlck|Valkyrie libwww\-perl|verticrawl|Victoria|void\-bot|Voyager|VWbot_K|crawlpaper|wapspider|WebBandit\/1\.0|webcatcher|T\-H\-U\-N\-D\-E\-R\-S\-T\-O\-N\-E|WebMoose|webquest|webreaper|webs|webspider|WebWalker|wget|winona|whowhere|wlm|WOLP|WWWC|none|XGET|Nederland\.zoek|AISearchBot|woriobot|NetSeer|Nutch|YandexBot|YandexMobileBot|SemrushBot|FatBot|MJ12bot|DotBot|AddThis|baiduspider|SeznamBot|mod_pagespeed|CCBot|openstat.ru\/Bot|m2e/i';
 
         $bot_regex = apply_filters('seopress_404_bots', $bot_regex);
@@ -1404,7 +1733,8 @@ if ('1' == seopress_get_toggle_option('404')) {
         }
     }
 
-    function seopress_404_log() {
+    function seopress_404_log()
+    {
         if (is_404() && ! is_admin() && '' != seopress_404_redirect_home_option()) {
             if ('home' == seopress_404_redirect_home_option()) {
                 if ('' != seopress_404_redirect_status_code_option()) {
@@ -1449,7 +1779,8 @@ if ('1' == seopress_get_toggle_option('404')) {
 
     add_filter('auto-draft_to_publish', 'seopress_prevent_title_redirection_already_exist');
     add_filter('draft_to_publish', 'seopress_prevent_title_redirection_already_exist');
-    function seopress_prevent_title_redirection_already_exist($post) {
+    function seopress_prevent_title_redirection_already_exist($post)
+    {
         if ('seopress_404' !== $post->post_type) {
             return;
         }
@@ -1460,7 +1791,8 @@ if ('1' == seopress_get_toggle_option('404')) {
 
         global $wpdb;
 
-        $sql = $wpdb->prepare("SELECT *
+        $sql = $wpdb->prepare(
+            "SELECT *
 			FROM $wpdb->posts
 			WHERE 1=1
 			AND post_title = %s
@@ -1503,9 +1835,10 @@ if ('1' == seopress_get_toggle_option('404')) {
     }
 
     add_action('seopress_admin_notices', 'seopress_notice_prevent_create_title_redirection');
-    function seopress_notice_prevent_create_title_redirection() {
+    function seopress_notice_prevent_create_title_redirection()
+    {
         $transient = get_transient('seopress_prevent_title_redirection_already_exist');
-        if ( ! $transient) {
+        if (! $transient) {
             return;
         }
 
@@ -1536,20 +1869,21 @@ if ('1' == seopress_get_toggle_option('404')) {
             $edit_post_link,
             $transient['post_exist']->post_name
         ); ?>
-		<div class="error notice is-dismissable">
-			<?php echo $message; ?>
-		</div>
-		<?php
+<div class="error notice is-dismissable">
+    <?php echo $message; ?>
+</div>
+<?php
     }
 
     add_action('save_post_seopress_404', 'seopress_need_add_term_auto_redirect', 10, 2);
-    function seopress_need_add_term_auto_redirect($post_id, $post) {
+    function seopress_need_add_term_auto_redirect($post_id, $post)
+    {
         if ('POST' !== $_SERVER['REQUEST_METHOD']) {
             return;
         }
 
         $referer = wp_get_referer();
-        if ( ! $referer) {
+        if (! $referer) {
             return;
         }
 
@@ -1561,7 +1895,7 @@ if ('1' == seopress_get_toggle_option('404')) {
         $name_term         = 'Auto Redirect';
         $slug_term         = 'autoredirect_by_seopress';
         $term_autoredirect = get_term_by('slug', $slug_term, 'seopress_404_cat', ARRAY_A);
-        if ( ! $term_autoredirect) {
+        if (! $term_autoredirect) {
             $term_autoredirect = wp_insert_term($name_term, 'seopress_404_cat', [
                 'slug' => $slug_term,
             ]);

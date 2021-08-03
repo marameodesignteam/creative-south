@@ -1,6 +1,7 @@
 <?php
 
-function seopress_get_dyn_variables() {
+function seopress_get_dyn_variables()
+{
     return [
         '%%sep%%'                           => 'Separator',
         '%%sitetitle%%'                     => __('Site Title', 'wp-seopress'),
@@ -60,12 +61,13 @@ function seopress_get_dyn_variables() {
  *
  * @return string
  */
-function seopress_render_dyn_variables($classes) {
-    $html = sprintf('<span class="seopress-tag-single-all seopress-tag-dropdown %s"><span class="dashicons dashicons-arrow-down-alt2"></span></span>', $classes);
-    if ( ! empty(seopress_get_dyn_variables())) {
+function seopress_render_dyn_variables($classes)
+{
+    $html = sprintf('<button type="button" class="btn btnSecondary seopress-tag-single-all seopress-tag-dropdown %s"><span class="dashicons dashicons-arrow-down-alt2"></span></button>', $classes);
+    if (! empty(seopress_get_dyn_variables())) {
         $html .= '<div class="sp-wrap-tag-variables-list"><ul class="sp-tag-variables-list">';
         foreach (seopress_get_dyn_variables() as $key => $value) {
-            $html .= '<li data-value=' . $key . '><span>' . $value . '</span></li>';
+            $html .= '<li data-value=' . $key . ' tabindex="0"><span>' . $value . '</span></li>';
         }
         $html .= '</ul></div>';
     }

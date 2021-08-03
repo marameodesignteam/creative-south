@@ -131,23 +131,24 @@ if ('1' == seopress_get_toggle_option('404') && apply_filters('seopress_post_aut
             );
             $info     = __('We have %s redirections that needs your attention', 'wp-seopress-pro');
             $view_all = __('View all notices (%s)', 'wp-seopress-pro'); ?>
-         <div class="notice notice-info" style="position:relative;">
-            <p>
-                <?php
-                    echo sprintf($info, count($notices)); ?>
-            </p>
-            <div style="display:flex; padding:5px; padding-bottom:10px;">
-                <a href="#" id="js-view-all-notices" class="button" style="margin-right:20px;">
-                    <?php echo sprintf($view_all, count($notices)); ?>
-                </a>
-                <a href="<?php echo $remove_all_notices_url; ?>" class="button" >
-                    <?php _e('Remove all notices', 'wp-seopress-pro'); ?>
-                </a>
-            </div>
-        </div>
-
-
+<div class="notice notice-warning">
+    <p>
         <?php
+                    printf($info, count($notices)); ?>
+    </p>
+    <p>
+        <a href="#" id="js-view-all-notices" class="button button-secondary">
+            <?php printf($view_all, count($notices)); ?>
+        </a>
+        <a href="<?php echo $remove_all_notices_url; ?>"
+            class="button button-link">
+            <?php _e('Remove all notices', 'wp-seopress-pro'); ?>
+        </a>
+    </p>
+</div>
+
+
+<?php
         }
 
         $notices = array_reverse($notices);
@@ -165,9 +166,10 @@ if ('1' == seopress_get_toggle_option('404') && apply_filters('seopress_post_aut
                 );
             } ?>
 
-            <div class="notice notice-success <?php if ($key > 0) { ?>notice-redirect-hide<?php } ?>" style="position:relative; <?php if ($key > 0) { ?>display:none;<?php } ?>">
-                <?php
-                echo sprintf('<a href="%s" class="notice-dismiss" style="text-decoration:none;"><span class="screen-reader-text">' . __('Dismiss this notice', 'wp-seopress-pro') . '</span></a>', wp_nonce_url(
+<div class="notice notice-warning <?php if ($key > 0) { ?>notice-redirect-hide<?php } ?>"
+    style="position:relative; <?php if ($key > 0) { ?>display:none;<?php } ?>">
+    <?php
+                printf('<a href="%s" class="notice-dismiss" style="text-decoration:none;"><span class="screen-reader-text">' . __('Dismiss this notice', 'wp-seopress-pro') . '</span></a>', wp_nonce_url(
                 add_query_arg(
                         [
                             'action' => 'seopress_dismiss_notice_need_to_redirect',
@@ -177,30 +179,31 @@ if ('1' == seopress_get_toggle_option('404') && apply_filters('seopress_post_aut
                     ),
                 'seopress_dismiss_notice_need_to_redirect'
             )); ?>
-                <?php echo $notice['message']; ?>
-                <p>
-                    <a href="<?php echo esc_url($href_button); ?>" class="button">
-                        <?php _e('Create a redirection', 'wp-seopress-pro'); ?>
-                    </a>
-                </p>
-            </div>
-            <?php
+    <?php echo $notice['message']; ?>
+    <p>
+        <a href="<?php echo esc_url($href_button); ?>"
+            class="button button-secondary">
+            <?php _e('Create a redirection', 'wp-seopress-pro'); ?>
+        </a>
+    </p>
+</div>
+<?php
         }
 
         if (count($notices) > 1) {
             ?>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    const $ = jQuery
-                    $("#js-view-all-notices").on("click", function(e){
-                        e.preventDefault()
-                        $(".notice-redirect-hide").each(function(key, item){
-                            $(item).slideToggle()
-                        })
-                    })
-                })
-            </script>
-            <?php
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const $ = jQuery
+        $("#js-view-all-notices").on("click", function(e) {
+            e.preventDefault()
+            $(".notice-redirect-hide").each(function(key, item) {
+                $(item).slideToggle()
+            })
+        })
+    })
+</script>
+<?php
         }
     }
 

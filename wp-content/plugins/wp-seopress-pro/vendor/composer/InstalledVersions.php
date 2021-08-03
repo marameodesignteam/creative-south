@@ -24,51 +24,51 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '4.7.x-dev',
-    'version' => '4.7.9999999.9999999-dev',
+    'pretty_version' => '5.0.x-dev',
+    'version' => '5.0.9999999.9999999-dev',
     'aliases' => 
     array (
     ),
-    'reference' => 'c34fd0905440aeffcfb93aa7915fde5f215bc6ec',
+    'reference' => '2d4dbf1aa7af16e1b3849fc06021f0746f069cf2',
     'name' => 'wp-seopress/wp-seopress',
   ),
   'versions' => 
   array (
     'firebase/php-jwt' => 
     array (
-      'pretty_version' => 'v5.2.1',
-      'version' => '5.2.1.0',
+      'pretty_version' => 'v5.4.0',
+      'version' => '5.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f42c9110abe98dd6cfe9053c49bc86acc70b2d23',
+      'reference' => 'd2113d9b2e0e349796e72d2a63cf9319100382d2',
     ),
     'google/apiclient' => 
     array (
-      'pretty_version' => 'v2.9.1',
-      'version' => '2.9.1.0',
+      'pretty_version' => 'v2.10.1',
+      'version' => '2.10.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2fb6e702aca5d68203fa737f89f6f774022494c6',
+      'reference' => '11871e94006ce7a419bb6124d51b6f9ace3f679b',
     ),
     'google/apiclient-services' => 
     array (
-      'pretty_version' => 'v0.175.0',
-      'version' => '0.175.0.0',
+      'pretty_version' => 'v0.205.0',
+      'version' => '0.205.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '316cbf9b02c575a140d8cbeca48a3ca0070fcd5a',
+      'reference' => '75ff6a81838493bb9b5aad0458ebd4226e0c0557',
     ),
     'google/auth' => 
     array (
-      'pretty_version' => 'v1.15.1',
-      'version' => '1.15.1.0',
+      'pretty_version' => 'v1.16.0',
+      'version' => '1.16.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4e0c9367719df9703e96f5ad613041b87742471c',
+      'reference' => 'c747738d2dd450f541f09f26510198fbedd1c8a0',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -99,12 +99,12 @@ private static $installed = array (
     ),
     'monolog/monolog' => 
     array (
-      'pretty_version' => '1.26.0',
-      'version' => '1.26.0.0',
+      'pretty_version' => '1.26.1',
+      'version' => '1.26.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2209ddd84e7ef1256b7af205d0717fb62cfc9c33',
+      'reference' => 'c6b00f05152ae2c9b04a448f99c7590beb6042f5',
     ),
     'paragonie/constant_time_encoding' => 
     array (
@@ -126,12 +126,12 @@ private static $installed = array (
     ),
     'phpseclib/phpseclib' => 
     array (
-      'pretty_version' => '3.0.8',
-      'version' => '3.0.8.0',
+      'pretty_version' => '3.0.9',
+      'version' => '3.0.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd9615a6fb970d9933866ca8b4036ec3407b020b6',
+      'reference' => 'a127a5133804ff2f47ae629dd529b129da616ad7',
     ),
     'psr/cache' => 
     array (
@@ -221,12 +221,12 @@ private static $installed = array (
     ),
     'wp-seopress/wp-seopress' => 
     array (
-      'pretty_version' => '4.7.x-dev',
-      'version' => '4.7.9999999.9999999-dev',
+      'pretty_version' => '5.0.x-dev',
+      'version' => '5.0.9999999.9999999-dev',
       'aliases' => 
       array (
       ),
-      'reference' => 'c34fd0905440aeffcfb93aa7915fde5f215bc6ec',
+      'reference' => '2d4dbf1aa7af16e1b3849fc06021f0746f069cf2',
     ),
   ),
 );

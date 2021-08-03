@@ -92,17 +92,21 @@ class SettingsSectionLocalBusiness {
 
         if (empty($imgOption)) {
             ?>
-            <p class="seopress-notice error notice">
-                <?php _e('You have to set an image in Knowledge Graph settings, otherwise, your Google Local Business data will not be valid.', 'wp-seopress-pro'); ?>
-                <a href="<?php echo admin_url('admin.php?page=seopress-social'); ?>" class="button-primary">
-                    <?php _e('Fix this!', 'wp-seopress-pro'); ?>
-                </a>
-            </p>
-            <?php
-        } ?>
-        <a href="<?php echo admin_url('admin.php?page=seopress-social#tab=tab_seopress_social_knowledge'); ?>">
-            <?php _e('To edit your business name, visit this page.', 'wp-seopress-pro'); ?>
+<div class="seopress-notice is-error">
+    <p>
+        <?php _e('You have to set an image in Knowledge Graph settings, otherwise, your Google Local Business data will not be valid.', 'wp-seopress-pro'); ?>
+        <a href="<?php echo admin_url('admin.php?page=seopress-social'); ?>"
+            class="btn btnPrimary">
+            <?php _e('Fix this!', 'wp-seopress-pro'); ?>
         </a>
-        <?php
+    </p>
+</div>
+<?php
+        } ?>
+<a
+    href="<?php echo admin_url('admin.php?page=seopress-social#tab=tab_seopress_social_knowledge'); ?>">
+    <?php _e('To edit your business name, visit this page.', 'wp-seopress-pro'); ?>
+</a>
+<?php
     }
 }

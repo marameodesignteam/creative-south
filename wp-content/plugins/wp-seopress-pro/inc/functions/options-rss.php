@@ -5,9 +5,10 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //RSS
 //=================================================================================================
 //Disable comments RSS feed
-function seopress_rss_disable_comments_feed_option() {
+function seopress_rss_disable_comments_feed_option()
+{
     $seopress_rss_disable_comments_feed_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_rss_disable_comments_feed_option)) {
+    if (! empty($seopress_rss_disable_comments_feed_option)) {
         foreach ($seopress_rss_disable_comments_feed_option as $key => $seopress_rss_disable_comments_feed_value) {
             $options[$key] = $seopress_rss_disable_comments_feed_value;
         }
@@ -17,9 +18,10 @@ function seopress_rss_disable_comments_feed_option() {
     }
 }
 //Disable posts RSS feed
-function seopress_rss_disable_posts_feed_option() {
+function seopress_rss_disable_posts_feed_option()
+{
     $seopress_rss_disable_posts_feed_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_rss_disable_posts_feed_option)) {
+    if (! empty($seopress_rss_disable_posts_feed_option)) {
         foreach ($seopress_rss_disable_posts_feed_option as $key => $seopress_rss_disable_posts_feed_value) {
             $options[$key] = $seopress_rss_disable_posts_feed_value;
         }
@@ -29,9 +31,10 @@ function seopress_rss_disable_posts_feed_option() {
     }
 }
 //Disable extra RSS feed
-function seopress_rss_disable_extra_feed_option() {
+function seopress_rss_disable_extra_feed_option()
+{
     $seopress_rss_disable_extra_feed_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_rss_disable_extra_feed_option)) {
+    if (! empty($seopress_rss_disable_extra_feed_option)) {
         foreach ($seopress_rss_disable_extra_feed_option as $key => $seopress_rss_disable_extra_feed_value) {
             $options[$key] = $seopress_rss_disable_extra_feed_value;
         }
@@ -41,9 +44,10 @@ function seopress_rss_disable_extra_feed_option() {
     }
 }
 //Disable all RSS feeds
-function seopress_rss_disable_all_feeds_option() {
+function seopress_rss_disable_all_feeds_option()
+{
     $seopress_rss_disable_all_feeds_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_rss_disable_all_feeds_option)) {
+    if (! empty($seopress_rss_disable_all_feeds_option)) {
         foreach ($seopress_rss_disable_all_feeds_option as $key => $seopress_rss_disable_all_feeds_value) {
             $options[$key] = $seopress_rss_disable_all_feeds_value;
         }
@@ -63,7 +67,8 @@ if ('' != seopress_rss_disable_extra_feed_option()) {
     remove_action('wp_head', 'feed_links_extra', 3);
 }
 if ('' != seopress_rss_disable_all_feeds_option()) {
-    function seopress_rss_disable_feed() {
+    function seopress_rss_disable_feed()
+    {
         wp_die(__('No feed available.', 'wp-seopress-pro'));
     }
 
@@ -77,9 +82,10 @@ if ('' != seopress_rss_disable_all_feeds_option()) {
 }
 
 //RSS HTML before post
-function seopress_rss_before_html_option() {
+function seopress_rss_before_html_option()
+{
     $seopress_rss_before_html_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_rss_before_html_option)) {
+    if (! empty($seopress_rss_before_html_option)) {
         foreach ($seopress_rss_before_html_option as $key => $seopress_rss_before_html_value) {
             $options[$key] = $seopress_rss_before_html_value;
         }
@@ -90,9 +96,10 @@ function seopress_rss_before_html_option() {
 }
 
 //RSS HTML after post
-function seopress_rss_after_html_option() {
+function seopress_rss_after_html_option()
+{
     $seopress_rss_after_html_option = get_option('seopress_pro_option_name');
-    if ( ! empty($seopress_rss_after_html_option)) {
+    if (! empty($seopress_rss_after_html_option)) {
         foreach ($seopress_rss_after_html_option as $key => $seopress_rss_after_html_value) {
             $options[$key] = $seopress_rss_after_html_value;
         }
@@ -102,7 +109,8 @@ function seopress_rss_after_html_option() {
     }
 }
 
-function seopress_rss_html_display($content) {
+function seopress_rss_html_display($content)
+{
     $content_before = null;
     $content_after  = null;
 

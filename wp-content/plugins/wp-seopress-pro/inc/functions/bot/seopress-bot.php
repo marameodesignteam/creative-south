@@ -87,14 +87,8 @@ class SEOPress_Bot_batch {
         } ?>
         <div class="seopress-option">
             <?php
-            if (isset($_GET['settings-updated']) && 'true' === $_GET['settings-updated']) {
-                echo '<div class="sp-components-snackbar-list"><div class="sp-components-snackbar"><div class="sp-components-snackbar__content"><span class="dashicons dashicons-yes"></span>' . __('Your settings have been saved.', 'wp-seopress-pro') . '</div></div></div>';
-            }
-        global $wp_version, $title;
-        $current_tab = '';
-        $tag         = version_compare($wp_version, '4.4') >= 0 ? 'h1' : 'h2';
-        echo '<' . $tag . '><span class="dashicons dashicons-admin-generic"></span>' . $title . '</' . $tag . '>'; ?>
-
+                //echo seopress_feature_title(null);
+        $current_tab = ''; ?>
             <div id="seopress-tabs" class="wrap">
                 <?php
                     $plugin_settings_tabs = [
@@ -113,38 +107,40 @@ class SEOPress_Bot_batch {
             echo 'active';
         } ?>" id="tab_seopress_scan">
                     <?php do_settings_sections('seopress-settings-admin-bot'); ?>
-                    <br>
-                    <br>
-                    <hr>
-                    <br>
+
                     <?php if ('' != get_option('seopress-bot-log')) { ?>
-                            <strong><?php _e('Latest scan: ', 'wp-seopress-pro'); ?></strong>
+                        <p>
+                            <strong>
+                                <?php _e('Latest scan: ', 'wp-seopress-pro'); ?>
+                            </strong>
                             <?php echo get_option('seopress-bot-log'); ?>
-                            <br><br>
-                            <strong><?php _e('Links found: ', 'wp-seopress-pro'); ?></strong>
+                        </p>
+
+                        <p>
+                            <strong>
+                                <?php _e('Links found: ', 'wp-seopress-pro'); ?>
+                            </strong>
                             <?php echo wp_count_posts('seopress_bot')->publish; ?>
-                            <br>
+                        </p>
+
                         <form method="post">
                             <input type="hidden" name="seopress_action" value="export_csv_links_settings" />
                             <p>
                                 <?php wp_nonce_field('seopress_export_csv_links_nonce', 'seopress_export_csv_links_nonce'); ?>
-                                <?php submit_button(__('Export CSV', 'wp-seopress-pro'), 'secondary', '', false); ?>
-                                <br>
-                                <br>
+                                <input type="submit" class="btn btnSecondary" value="<?php _e('Export CSV', 'wp-seopress-pro'); ?>">
                             </p>
                         </form>
                     <?php } else {
             _e('No scan', 'wp-seopress-pro');
         } ?>
-                    <hr>
-                    <div class="wrap-bot-form">
-                        <div id="seopress_launch_bot" class="button">
+                    <p>
+                        <div id="seopress_launch_bot" class="btn btnPrimary">
                             <?php _e('Launch the bot!', 'wp-seopress-pro'); ?>
                         </div>
+
                         <span class="spinner"></span>
-                        <br>
-                        <textarea id="seopress_bot_log" rows="10" width="100%" readonly style="display:none"><?php _e('---Scan in progress (don\'t close this window)---', 'wp-seopress-pro'); ?></textarea>
-                    </div>
+                    </p>
+                    <textarea id="seopress_bot_log" rows="10" width="100%" readonly style="display:none"><?php _e('---Scan in progress (don\'t close this window)---', 'wp-seopress-pro'); ?></textarea>
                 </div><!--end .wrap-bot-form-->
 
                 <!-- Settings -->
@@ -154,7 +150,8 @@ class SEOPress_Bot_batch {
                     <form method="post" action="<?php echo admin_url('options.php'); ?>">
                         <?php settings_fields('seopress_bot_option_group'); ?>
                         <?php do_settings_sections('seopress-settings-admin-bot-settings'); ?>
-                        <?php submit_button(); ?>
+                        <?php //echo seopress_feature_save();?>
+                        <?php sp_submit_button(__('Save changes', 'wp-seopress-pro')); ?>
                     </form>
                 </div>
 

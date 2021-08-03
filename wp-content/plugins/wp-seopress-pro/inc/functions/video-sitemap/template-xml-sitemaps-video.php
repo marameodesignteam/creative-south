@@ -137,8 +137,8 @@ function seopress_xml_sitemap_video() {
                     if ('' != $thumbnail) {//Video Thumbnail
                         $seopress_sitemaps .= '<video:thumbnail_loc>' . htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($thumbnail)))) . '</video:thumbnail_loc>';
                         $seopress_sitemaps .= "\n";
-                    } elseif ('' != get_the_post_thumbnail_url($post->ID)) {//Post Thumbnail
-                        $seopress_sitemaps .= '<video:thumbnail_loc>' . htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses(get_the_post_thumbnail_url($post->ID))))) . '</video:thumbnail_loc>';
+                    } elseif ('' != get_the_post_thumbnail_url($post->ID, 'full')) {//Post Thumbnail
+                        $seopress_sitemaps .= '<video:thumbnail_loc>' . htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses(get_the_post_thumbnail_url($post->ID, 'full'))))) . '</video:thumbnail_loc>';
                         $seopress_sitemaps .= "\n";
                     }
 

@@ -2,205 +2,204 @@
 
 namespace Action_Scheduler\Migration;
 
-use Action_Scheduler\WP_CLI\Migration_Command;
 use Action_Scheduler\WP_CLI\ProgressBar;
 
 /**
- * Class Controller
+ * Class Controller.
  *
  * The main plugin/initialization class for migration to custom tables.
- *
- * @package Action_Scheduler\Migration
  *
  * @since 3.0.0
  *
  * @codeCoverageIgnore
  */
 class Controller {
-	private static $instance;
+    private static $instance;
 
-	/** @var Action_Scheduler\Migration\Scheduler */
-	private $migration_scheduler;
+    /** @var Action_Scheduler\Migration\Scheduler */
+    private $migration_scheduler;
 
-	/** @var string */
-	private $store_classname;
+    /** @var string */
+    private $store_classname;
 
-	/** @var string */
-	private $logger_classname;
+    /** @var string */
+    private $logger_classname;
 
-	/** @var bool */
-	private $migrate_custom_store;
+    /** @var bool */
+    private $migrate_custom_store;
 
-	/**
-	 * Controller constructor.
-	 *
-	 * @param Scheduler $migration_scheduler Migration scheduler object.
-	 */
-	protected function __construct( Scheduler $migration_scheduler ) {
-		$this->migration_scheduler = $migration_scheduler;
-		$this->store_classname     = '';
-	}
+    /**
+     * Controller constructor.
+     *
+     * @param Scheduler $migration_scheduler migration scheduler object
+     */
+    protected function __construct(Scheduler $migration_scheduler) {
+        $this->migration_scheduler = $migration_scheduler;
+        $this->store_classname     = '';
+    }
 
-	/**
-	 * Set the action store class name.
-	 *
-	 * @param string $class Classname of the store class.
-	 *
-	 * @return string
-	 */
-	public function get_store_class( $class ) {
-		if ( \ActionScheduler_DataController::is_migration_complete() ) {
-			return \ActionScheduler_DataController::DATASTORE_CLASS;
-		} elseif ( \ActionScheduler_Store::DEFAULT_CLASS !== $class ) {
-			$this->store_classname = $class;
-			return $class;
-		} else {
-			return 'ActionScheduler_HybridStore';
-		}
-	}
+    /**
+     * Set the action store class name.
+     *
+     * @param string $class classname of the store class
+     *
+     * @return string
+     */
+    public function get_store_class($class) {
+        if (\ActionScheduler_DataController::is_migration_complete()) {
+            return \ActionScheduler_DataController::DATASTORE_CLASS;
+        } elseif (\ActionScheduler_Store::DEFAULT_CLASS !== $class) {
+            $this->store_classname = $class;
 
-	/**
-	 * Set the action logger class name.
-	 *
-	 * @param string $class Classname of the logger class.
-	 *
-	 * @return string
-	 */
-	public function get_logger_class( $class ) {
-		\ActionScheduler_Store::instance();
+            return $class;
+        } else {
+            return 'ActionScheduler_HybridStore';
+        }
+    }
 
-		if ( $this->has_custom_datastore() ) {
-			$this->logger_classname = $class;
-			return $class;
-		} else {
-			return \ActionScheduler_DataController::LOGGER_CLASS;
-		}
-	}
+    /**
+     * Set the action logger class name.
+     *
+     * @param string $class classname of the logger class
+     *
+     * @return string
+     */
+    public function get_logger_class($class) {
+        \ActionScheduler_Store::instance();
 
-	/**
-	 * Get flag indicating whether a custom datastore is in use.
-	 *
-	 * @return bool
-	 */
-	public function has_custom_datastore() {
-		return (bool) $this->store_classname;
-	}
+        if ($this->has_custom_datastore()) {
+            $this->logger_classname = $class;
 
-	/**
-	 * Set up the background migration process
-	 *
-	 * @return void
-	 */
-	public function schedule_migration() {
-		if ( \ActionScheduler_DataController::is_migration_complete() || $this->migration_scheduler->is_migration_scheduled() ) {
-			return;
-		}
+            return $class;
+        } else {
+            return \ActionScheduler_DataController::LOGGER_CLASS;
+        }
+    }
 
-		$this->migration_scheduler->schedule_migration();
-	}
+    /**
+     * Get flag indicating whether a custom datastore is in use.
+     *
+     * @return bool
+     */
+    public function has_custom_datastore() {
+        return (bool) $this->store_classname;
+    }
 
-	/**
-	 * Get the default migration config object
-	 *
-	 * @return ActionScheduler\Migration\Config
-	 */
-	public function get_migration_config_object() {
-		static $config = null;
+    /**
+     * Set up the background migration process.
+     *
+     * @return void
+     */
+    public function schedule_migration() {
+        if (\ActionScheduler_DataController::is_migration_complete() || $this->migration_scheduler->is_migration_scheduled()) {
+            return;
+        }
 
-		if ( ! $config ) {
-			$source_store  = $this->store_classname ? new $this->store_classname() : new \ActionScheduler_wpPostStore();
-			$source_logger = $this->logger_classname ? new $this->logger_classname() : new \ActionScheduler_wpCommentLogger();
+        $this->migration_scheduler->schedule_migration();
+    }
 
-			$config = new Config();
-			$config->set_source_store( $source_store );
-			$config->set_source_logger( $source_logger );
-			$config->set_destination_store( new \ActionScheduler_DBStoreMigrator() );
-			$config->set_destination_logger( new \ActionScheduler_DBLogger() );
+    /**
+     * Get the default migration config object.
+     *
+     * @return ActionScheduler\Migration\Config
+     */
+    public function get_migration_config_object() {
+        static $config = null;
 
-			if ( defined( 'WP_CLI' ) && WP_CLI ) {
-				$config->set_progress_bar( new ProgressBar( '', 0 ) );
-			}
-		}
+        if ( ! $config) {
+            $source_store  = $this->store_classname ? new $this->store_classname() : new \ActionScheduler_wpPostStore();
+            $source_logger = $this->logger_classname ? new $this->logger_classname() : new \ActionScheduler_wpCommentLogger();
 
-		return apply_filters( 'action_scheduler/migration_config', $config );
-	}
+            $config = new Config();
+            $config->set_source_store($source_store);
+            $config->set_source_logger($source_logger);
+            $config->set_destination_store(new \ActionScheduler_DBStoreMigrator());
+            $config->set_destination_logger(new \ActionScheduler_DBLogger());
 
-	/**
-	 * Hook dashboard migration notice.
-	 */
-	public function hook_admin_notices() {
-		if ( ! $this->allow_migration() || \ActionScheduler_DataController::is_migration_complete() ) {
-			return;
-		}
-		add_action( 'admin_notices', array( $this, 'display_migration_notice' ), 10, 0 );
-	}
+            if (defined('WP_CLI') && WP_CLI) {
+                $config->set_progress_bar(new ProgressBar('', 0));
+            }
+        }
 
-	/**
-	 * Show a dashboard notice that migration is in progress.
-	 */
-	public function display_migration_notice() {
-		printf( '<div class="notice notice-warning"><p>%s</p></div>', __( 'Action Scheduler migration in progress. The list of scheduled actions may be incomplete.', 'action-scheduler' ) );
-	}
+        return apply_filters('action_scheduler/migration_config', $config);
+    }
 
-	/**
-	 * Add store classes. Hook migration.
-	 */
-	private function hook() {
-		add_filter( 'action_scheduler_store_class', array( $this, 'get_store_class' ), 100, 1 );
-		add_filter( 'action_scheduler_logger_class', array( $this, 'get_logger_class' ), 100, 1 );
-		add_action( 'init', array( $this, 'maybe_hook_migration' ) );
-		add_action( 'wp_loaded', array( $this, 'schedule_migration' ) );
+    /**
+     * Hook dashboard migration notice.
+     */
+    public function hook_admin_notices() {
+        if ( ! $this->allow_migration() || \ActionScheduler_DataController::is_migration_complete()) {
+            return;
+        }
+        add_action('admin_notices', [$this, 'display_migration_notice'], 10, 0);
+    }
 
-		// Action Scheduler may be displayed as a Tools screen or WooCommerce > Status administration screen
-		add_action( 'load-tools_page_action-scheduler', array( $this, 'hook_admin_notices' ), 10, 0 );
-		add_action( 'load-woocommerce_page_wc-status', array( $this, 'hook_admin_notices' ), 10, 0 );
-	}
+    /**
+     * Show a dashboard notice that migration is in progress.
+     */
+    public function display_migration_notice() {
+        printf('<div class="seopress-notice is-warning"><p>%s</p></div>', __('Action Scheduler migration in progress. The list of scheduled actions may be incomplete.', 'action-scheduler'));
+    }
 
-	/**
-	 * Possibly hook the migration scheduler action.
-	 *
-	 * @author Jeremy Pry
-	 */
-	public function maybe_hook_migration() {
-		if ( ! $this->allow_migration() || \ActionScheduler_DataController::is_migration_complete() ) {
-			return;
-		}
+    /**
+     * Add store classes. Hook migration.
+     */
+    private function hook() {
+        add_filter('action_scheduler_store_class', [$this, 'get_store_class'], 100, 1);
+        add_filter('action_scheduler_logger_class', [$this, 'get_logger_class'], 100, 1);
+        add_action('init', [$this, 'maybe_hook_migration']);
+        add_action('wp_loaded', [$this, 'schedule_migration']);
 
-		$this->migration_scheduler->hook();
-	}
+        // Action Scheduler may be displayed as a Tools screen or WooCommerce > Status administration screen
+        add_action('load-tools_page_action-scheduler', [$this, 'hook_admin_notices'], 10, 0);
+        add_action('load-woocommerce_page_wc-status', [$this, 'hook_admin_notices'], 10, 0);
+    }
 
-	/**
-	 * Allow datastores to enable migration to AS tables.
-	 */
-	public function allow_migration() {
-		if ( ! \ActionScheduler_DataController::dependencies_met() ) {
-			return false;
-		}
+    /**
+     * Possibly hook the migration scheduler action.
+     *
+     * @author Jeremy Pry
+     */
+    public function maybe_hook_migration() {
+        if ( ! $this->allow_migration() || \ActionScheduler_DataController::is_migration_complete()) {
+            return;
+        }
 
-		if ( null === $this->migrate_custom_store ) {
-			$this->migrate_custom_store = apply_filters( 'action_scheduler_migrate_data_store', false );
-		}
+        $this->migration_scheduler->hook();
+    }
 
-		return ( ! $this->has_custom_datastore() ) || $this->migrate_custom_store;
-	}
+    /**
+     * Allow datastores to enable migration to AS tables.
+     */
+    public function allow_migration() {
+        if ( ! \ActionScheduler_DataController::dependencies_met()) {
+            return false;
+        }
 
-	/**
-	 * Proceed with the migration if the dependencies have been met.
-	 */
-	public static function init() {
-		if ( \ActionScheduler_DataController::dependencies_met() ) {
-			self::instance()->hook();
-		}
-	}
+        if (null === $this->migrate_custom_store) {
+            $this->migrate_custom_store = apply_filters('action_scheduler_migrate_data_store', false);
+        }
 
-	/**
-	 * Singleton factory.
-	 */
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new static( new Scheduler() );
-		}
+        return ( ! $this->has_custom_datastore()) || $this->migrate_custom_store;
+    }
 
-		return self::$instance;
-	}
+    /**
+     * Proceed with the migration if the dependencies have been met.
+     */
+    public static function init() {
+        if (\ActionScheduler_DataController::dependencies_met()) {
+            self::instance()->hook();
+        }
+    }
+
+    /**
+     * Singleton factory.
+     */
+    public static function instance() {
+        if ( ! isset(self::$instance)) {
+            self::$instance = new static(new Scheduler());
+        }
+
+        return self::$instance;
+    }
 }

@@ -18,3 +18,14 @@ use SEOPressPro\Core\Kernel;
 function seopress_pro_get_service($service) {
     return Kernel::getContainer()->getServiceByName($service);
 }
+
+/**
+ * Enable Google Suggestions
+ *
+ * @since 5.0
+ *
+ * @param boolean true
+ *
+ * @return boolean
+ */
+add_filter('seopress_ui_metabox_google_suggest', '__return_true');

@@ -33,6 +33,9 @@ class Service extends JsonSchemaValue implements GetJsonData {
                 'value'   => '_seopress_pro_rich_snippets_service_name',
                 'default' => '%%post_title%%',
             ],
+            'id' => [
+                'default' => '%%schema_article_canonical%%',
+            ],
             'serviceType'                  => '_seopress_pro_rich_snippets_service_type',
             'description'                  => [
                 'value'   => '_seopress_pro_rich_snippets_service_description',

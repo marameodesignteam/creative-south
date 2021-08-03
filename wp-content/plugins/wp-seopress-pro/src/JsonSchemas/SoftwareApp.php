@@ -2,7 +2,7 @@
 
 namespace SEOPressPro\JsonSchemas;
 
-if ( ! defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
@@ -10,10 +10,12 @@ use SEOPress\Helpers\RichSnippetType;
 use SEOPress\Models\GetJsonData;
 use SEOPressPro\Models\JsonSchemaValue;
 
-class SoftwareApp extends JsonSchemaValue implements GetJsonData {
+class SoftwareApp extends JsonSchemaValue implements GetJsonData
+{
     const NAME = 'softwareapp';
 
-    protected function getName() {
+    protected function getName()
+    {
         return self::NAME;
     }
 
@@ -24,7 +26,8 @@ class SoftwareApp extends JsonSchemaValue implements GetJsonData {
      *
      * @param array $schemaManual
      */
-    protected function getVariablesForManualSnippet($schemaManual) {
+    protected function getVariablesForManualSnippet($schemaManual)
+    {
         $keys = [
             'type'                          => '_seopress_pro_rich_snippets_type',
             'name'                          => '_seopress_pro_rich_snippets_softwareapp_name',
@@ -33,6 +36,7 @@ class SoftwareApp extends JsonSchemaValue implements GetJsonData {
             'price'                         => '_seopress_pro_rich_snippets_softwareapp_price',
             'priceCurrency'                 => '_seopress_pro_rich_snippets_softwareapp_currency',
             'ratingValue'                   => '_seopress_pro_rich_snippets_softwareapp_rating',
+            'bestRating'                    => '_seopress_pro_rich_snippets_softwareapp_max_rating',
         ];
         $variables = [];
 
@@ -50,7 +54,8 @@ class SoftwareApp extends JsonSchemaValue implements GetJsonData {
      *
      * @return array
      */
-    public function getJsonData($context = null) {
+    public function getJsonData($context = null)
+    {
         $data = $this->getArrayJson();
 
         $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::MANUAL;
@@ -73,6 +78,8 @@ class SoftwareApp extends JsonSchemaValue implements GetJsonData {
             $contextWithVariables              = $context;
             $contextWithVariables['variables'] = [
                 'ratingValue'  => $variables['ratingValue'],
+                'bestRating'  => $variables['bestRating'],
+                'worstRating'  => empty($variables['bestRating']) ? '' : 1,
                 'ratingAuthor' => '%%post_author%%',
             ];
             $contextWithVariables['type']      = RichSnippetType::SUB_TYPE;
@@ -107,7 +114,8 @@ class SoftwareApp extends JsonSchemaValue implements GetJsonData {
      *
      * @return array
      */
-    public function cleanValues($data) {
+    public function cleanValues($data)
+    {
         if (isset($data['review']) && isset($data['review']['@context'])) {
             unset($data['review']['@context']);
         }
