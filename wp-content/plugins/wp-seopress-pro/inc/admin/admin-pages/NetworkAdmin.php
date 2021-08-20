@@ -22,7 +22,6 @@ if (is_plugin_active('wp-seopress/seopress.php')) {
         </div>
     </div>
     <?php }
-    echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
 
     global $wp_version, $title;
     $current_tab = '';

@@ -116,7 +116,7 @@ function seopress_white_label_admin_bar_icon_callback() {
 <input type="text" name="seopress_pro_mu_option_name[seopress_mu_white_label_admin_bar_icon]"
     placeholder="<?php esc_html_e('default value: <span class="ab-icon icon-seopress-seopress"></span> SEO', 'wp-seopress-pro'); ?>"
     aria-label="<?php _e('Enter the label of the link for admin bar', 'wp-seopress-pro'); ?>"
-    value="<?php echo $check; ?>" />';
+    value="<?php echo $check; ?>" />
 <?php
     } else {
         $options = get_option('seopress_pro_option_name');

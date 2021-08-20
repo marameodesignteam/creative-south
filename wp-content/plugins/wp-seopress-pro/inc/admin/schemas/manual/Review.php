@@ -3,13 +3,6 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_get_schema_metaboxe_review($seopress_pro_rich_snippets_data, $key_schema = 0) {
-    //Classic Editor compatibility
-    if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-        $btn_classes_secondary = 'components-button is-secondary';
-    } else {
-        $btn_classes_secondary = 'button button-secondary';
-    }
-
     $seopress_pro_rich_snippets_review_item                         = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_item']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_item'] : '';
     $seopress_pro_rich_snippets_review_item_type                    = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_item_type']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_item_type'] : '';
     $seopress_pro_rich_snippets_review_img                          = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_img']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_review_img'] : '';
@@ -73,7 +66,7 @@ function seopress_get_schema_metaboxe_review($seopress_pro_rich_snippets_data, $
             placeholder="<?php echo esc_html__('Select your image', 'wp-seopress-pro'); ?>"
             aria-label="<?php _e('Review item name', 'wp-seopress-pro'); ?>"
             value="<?php echo $seopress_pro_rich_snippets_review_img; ?>" />
-        <input id="seopress_pro_rich_snippets_review_img" class="<?php echo $btn_classes_secondary; ?> seopress_media_upload"
+        <input id="seopress_pro_rich_snippets_review_img" class="<?php echo seopress_btn_secondary_classes(); ?> seopress_media_upload"
             type="button"
             value="<?php _e('Upload an Image', 'wp-seopress-pro'); ?>" />
     </p>

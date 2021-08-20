@@ -70,13 +70,6 @@ function seopress_get_schema_metaboxe_article($seopress_pro_rich_snippets_data, 
         ],
     ];
 
-    //Classic Editor compatibility
-    if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-        $btn_classes_secondary = 'components-button is-secondary';
-    } else {
-        $btn_classes_secondary = 'button button-secondary';
-    }
-
     $seopress_pro_rich_snippets_article_type                        = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_type']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_type'] : '';
     $seopress_pro_rich_snippets_article_title                       = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_title']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_title'] : '';
     $seopress_pro_rich_snippets_article_author                      = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_author']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_article_author'] : '';
@@ -170,7 +163,7 @@ function seopress_get_schema_metaboxe_article($seopress_pro_rich_snippets_data, 
             name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_article_img_height]"
             value="<?php echo $seopress_pro_rich_snippets_article_img_height; ?>" />
         <span class="description"><?php _e('Minimum size: 696px wide, JPG, PNG or GIF, crawlable and indexable (default: post thumbnail if available)', 'wp-seopress-pro'); ?></span>
-        <input id="seopress_pro_rich_snippets_article_img" class="<?php echo $btn_classes_secondary; ?> seopress_media_upload"
+        <input id="seopress_pro_rich_snippets_article_img" class="<?php echo seopress_btn_secondary_classes(); ?> seopress_media_upload"
             type="button"
             value="<?php _e('Upload an Image', 'wp-seopress-pro'); ?>" />
     </p>

@@ -91,7 +91,7 @@ class Review extends JsonSchemaValue implements GetJsonData {
             $contextWithVariables              = $context;
             $contextWithVariables['variables'] = [
                 'ratingValue'  => $variables['ratingValue'],
-                'bestRating'  => $variables['bestRating'],
+                'bestRating'  => isset($variables['bestRating']) ? $variables['bestRating'] : '',
                 'worstRating'  => empty($variables['bestRating']) ? '' : 1
             ];
             $contextWithVariables['type']      = RichSnippetType::SUB_TYPE;

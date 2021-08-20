@@ -3,13 +3,6 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_get_schema_metaboxe_jobs($seopress_pro_rich_snippets_data, $key_schema = 0) {
-    //Classic Editor compatibility
-    if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-        $btn_classes_secondary = 'components-button is-secondary';
-    } else {
-        $btn_classes_secondary = 'button button-secondary';
-    }
-
     $seopress_pro_rich_snippets_jobs_name                           = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_jobs_name']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_jobs_name'] : '';
     $seopress_pro_rich_snippets_jobs_desc                           = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_jobs_desc']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_jobs_desc'] : '';
     $seopress_pro_rich_snippets_jobs_date_posted                    = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_jobs_date_posted']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_jobs_date_posted'] : '';
@@ -167,7 +160,7 @@ function seopress_get_schema_metaboxe_jobs($seopress_pro_rich_snippets_data, $ke
             name="seopress_pro_rich_snippets_data[<?php echo $key_schema; ?>][seopress_pro_rich_snippets_jobs_hiring_logo_height]"
             value="<?php ?>" />
         <input id="seopress_pro_rich_snippets_jobs_hiring_logo"
-            class="<?php echo $btn_classes_secondary; ?> seopress_media_upload" type="button"
+            class="<?php echo seopress_btn_secondary_classes(); ?> seopress_media_upload" type="button"
             value="<?php _e('Upload an Image', 'wp-seopress-pro'); ?>" />
     </p>
     <p>

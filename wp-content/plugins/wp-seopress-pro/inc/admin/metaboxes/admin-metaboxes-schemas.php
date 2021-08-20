@@ -5,13 +5,6 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Requests schemas using WP Query
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Classic Editor compatibility
-if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-    $btn_classes_secondary = 'components-button is-secondary';
-} else {
-    $btn_classes_secondary = 'button button-secondary';
-}
-
 global $post;
 $tmp = $post;
 
@@ -1908,16 +1901,17 @@ if (! empty($sp_schemas_ids)) {
         }
     }
 } else { ?>
-<div class="notice notice-info">
-    <p><?php _e('No automatic schema created for this content.', 'wp-seopress-pro'); ?>
-    </p>
+    <div class="seopress-notice">
+        <p>
+            <?php _e('No automatic schema created for this content.', 'wp-seopress-pro'); ?>
+        </p>
 
-    <p>
-        <a class="<?php echo $btn_classes_secondary; ?>"
-            href="<?php echo admin_url('post-new.php?post_type=seopress_schemas'); ?>">
-            <?php _e('Add a schema', 'wp-seopress-pro'); ?>
-        </a>
-    </p>
-</div>
-<?php
+        <p>
+            <a class="<?php echo seopress_btn_secondary_classes(); ?>"
+                href="<?php echo admin_url('post-new.php?post_type=seopress_schemas'); ?>">
+                <?php _e('Add a schema', 'wp-seopress-pro'); ?>
+            </a>
+        </p>
+    </div>
+    <?php
 }

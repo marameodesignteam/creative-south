@@ -131,6 +131,7 @@ class seopress_pro_options
     public function add_network_plugin_page()
     {
         if (has_filter('seopress_seo_admin_menu')) {
+            $sp_seo_admin_menu['icon'] = '';
             $sp_seo_admin_menu['icon'] = apply_filters('seopress_seo_admin_menu', $sp_seo_admin_menu['icon']);
         } else {
             $sp_seo_admin_menu['icon'] = 'dashicons-admin-seopress';

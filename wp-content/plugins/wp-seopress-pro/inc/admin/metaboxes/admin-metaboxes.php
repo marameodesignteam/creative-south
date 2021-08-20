@@ -1546,10 +1546,8 @@ function seopress_pro_admin_std_metaboxe_display()
 
         //Classic Editor compatibility
         if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-            $btn_classes_secondary = 'components-button is-secondary';
             $btn_classes_tertiary = 'components-button is-tertiary';
         } else {
-            $btn_classes_secondary = 'button button-secondary';
             $btn_classes_tertiary = 'submitdelete deletion';
         }
 ?>
@@ -1661,7 +1659,7 @@ function seopress_pro_admin_std_metaboxe_display()
         <div class="box-left">
             <div class="schemas-bar-new">
                 <p>
-                    <a href="#" id="js-add-schema-manual" class="<?php echo $btn_classes_secondary; ?>">
+                    <a href="#" id="js-add-schema-manual" class="<?php echo seopress_btn_secondary_classes(); ?>">
                         <?php _e('Add a schema', 'wp-seopress-pro'); ?>
                     </a>
                 </p>
@@ -1791,7 +1789,7 @@ function seopress_pro_admin_std_metaboxe_display()
             </div>
             <p>
                 <a href="https://search.google.com/test/rich-results?url=<?php echo get_permalink(); ?>"
-                    target="_blank" class="<?php echo $btn_classes_secondary; ?>">
+                    target="_blank" class="<?php echo seopress_btn_secondary_classes(); ?>">
                     <?php _e('Validate my schema', 'wp-seopress-pro'); ?>
                 </a>
             </p>

@@ -3,13 +3,6 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_get_schema_metaboxe_product($seopress_pro_rich_snippets_data, $key_schema = 0) {
-    //Classic Editor compatibility
-    if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-        $btn_classes_secondary = 'components-button is-secondary';
-    } else {
-        $btn_classes_secondary = 'button button-secondary';
-    }
-
     $options_currencies = seopress_get_options_schema_currencies();
 
     $seopress_pro_rich_snippets_product_name                        = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_product_name']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_product_name'] : '';
@@ -71,7 +64,7 @@ function seopress_get_schema_metaboxe_product($seopress_pro_rich_snippets_data, 
             placeholder="<?php echo esc_html__('Select your image', 'wp-seopress-pro'); ?>"
             aria-label="<?php _e('Thumbnail', 'wp-seopress-pro'); ?>"
             value="<?php echo $seopress_pro_rich_snippets_product_img; ?>" />
-        <input id="seopress_pro_rich_snippets_product_img" class="<?php echo $btn_classes_secondary; ?> seopress_media_upload"
+        <input id="seopress_pro_rich_snippets_product_img" class="<?php echo seopress_btn_secondary_classes(); ?> seopress_media_upload"
             type="button"
             value="<?php _e('Upload an Image', 'wp-seopress-pro'); ?>" />
         <span class="description"><?php _e('Default: product image', 'wp-seopress-pro'); ?></span>

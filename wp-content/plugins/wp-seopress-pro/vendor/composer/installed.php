@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '2d4dbf1aa7af16e1b3849fc06021f0746f069cf2',
+    'reference' => '3f323cd18c0f791f944ff4ec8798f6e13cb9e10e',
     'name' => 'wp-seopress/wp-seopress',
   ),
   'versions' => 
@@ -31,12 +31,12 @@
     ),
     'google/apiclient-services' => 
     array (
-      'pretty_version' => 'v0.205.0',
-      'version' => '0.205.0.0',
+      'pretty_version' => 'v0.206.0',
+      'version' => '0.206.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '75ff6a81838493bb9b5aad0458ebd4226e0c0557',
+      'reference' => '8ac3f4a7c201bbf794801b215e63f75f15cd0208',
     ),
     'google/auth' => 
     array (
@@ -203,7 +203,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '2d4dbf1aa7af16e1b3849fc06021f0746f069cf2',
+      'reference' => '3f323cd18c0f791f944ff4ec8798f6e13cb9e10e',
     ),
   ),
 );

@@ -3,13 +3,6 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_get_schema_metaboxe_faq($seopress_pro_rich_snippets_data, $key_schema = 0) {
-    //Classic Editor compatibility
-    if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-        $btn_classes_secondary = 'components-button is-secondary';
-    } else {
-        $btn_classes_secondary = 'button button-secondary';
-    }
-
     $seopress_pro_rich_snippets_faq  = isset($seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_faq']) ? $seopress_pro_rich_snippets_data['_seopress_pro_rich_snippets_faq'] : [];
 
     // SEOPress < 3.9
@@ -124,7 +117,7 @@ function seopress_get_schema_metaboxe_faq($seopress_pro_rich_snippets_data, $key
         </div>
     </div>
     <?php } ?>
-    <p><a href="#" id="add-faq" class="add-faq <?php echo $btn_classes_secondary; ?>"><?php _e('Add question', 'wp-seopress-pro'); ?></a>
+    <p><a href="#" id="add-faq" class="add-faq <?php echo seopress_btn_secondary_classes(); ?>"><?php _e('Add question', 'wp-seopress-pro'); ?></a>
     </p>
 </div>
 <?php
